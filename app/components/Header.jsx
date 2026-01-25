@@ -40,30 +40,38 @@ export function HeaderMenu({
 }) {
   const className = `header-menu-${viewport}`;
   const {close} = useAside();
+  const items = (menu || FALLBACK_HEADER_MENU).items;
+  const normalizedItems = items.map((item) => {
+    if (!item.url) return {...item, normalizedUrl: null};
+    const normalizedUrl =
+      item.url.includes('myshopify.com') ||
+      item.url.includes(publicStoreDomain) ||
+      item.url.includes(primaryDomainUrl)
+        ? new URL(item.url).pathname
+        : item.url;
+    return {...item, normalizedUrl};
+  });
+  const hasHome = normalizedItems.some(
+    (item) =>
+      item.normalizedUrl === '/' ||
+      item.normalizedUrl === '' ||
+      item.title?.toLowerCase() === 'home',
+  );
+  const menuItems = hasHome
+    ? normalizedItems
+    : [
+        {
+          id: 'home',
+          title: 'Home',
+          normalizedUrl: '/',
+        },
+        ...normalizedItems,
+      ];
 
   return (
     <nav className={className} role="navigation">
-      {viewport === 'mobile' && (
-        <NavLink
-          end
-          onClick={close}
-          prefetch="intent"
-          style={activeLinkStyle}
-          to="/"
-        >
-          Home
-        </NavLink>
-      )}
-      {(menu || FALLBACK_HEADER_MENU).items.map((item) => {
-        if (!item.url) return null;
-
-        // if the url is internal, we strip the domain
-        const url =
-          item.url.includes('myshopify.com') ||
-          item.url.includes(publicStoreDomain) ||
-          item.url.includes(primaryDomainUrl)
-            ? new URL(item.url).pathname
-            : item.url;
+      {menuItems.map((item) => {
+        if (!item.normalizedUrl) return null;
         return (
           <NavLink
             className="header-menu-item"
@@ -72,7 +80,7 @@ export function HeaderMenu({
             onClick={close}
             prefetch="intent"
             style={activeLinkStyle}
-            to={url}
+            to={item.normalizedUrl}
           >
             {item.title}
           </NavLink>
