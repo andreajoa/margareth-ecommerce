@@ -1,5 +1,5 @@
 import {Suspense} from 'react';
-import {Await, NavLink, useAsyncValue} from 'react-router';
+import {Await, NavLink, useAsyncValue, useLocation} from 'react-router';
 import {useAnalytics, useOptimisticCart} from '@shopify/hydrogen';
 import {useAside} from '~/components/Aside';
 
@@ -40,6 +40,11 @@ export function HeaderMenu({
 }) {
   const className = `header-menu-${viewport}`;
   const {close} = useAside();
+  const {pathname} = useLocation();
+  const pathSegments = pathname.split('/').filter(Boolean);
+  const isHomepage =
+    pathSegments.length === 0 ||
+    (pathSegments.length === 1 && pathSegments[0].length <= 5);
   const items = (menu || FALLBACK_HEADER_MENU).items;
   const normalizeUrl = (url) => {
     if (!url) return null;
@@ -92,7 +97,7 @@ export function HeaderMenu({
   return (
     <nav className={className} role="navigation">
       {viewport === 'desktop' && megaMenuGroups.length ? (
-        <div className="mega-menu">
+        <div className={`mega-menu${isHomepage ? ' mega-menu--open' : ''}`}>
           <NavLink
             className="header-menu-item mega-menu-trigger"
             end

@@ -244,6 +244,13 @@ button.reset:hover:not(:has(> *)) {
   pointer-events: auto;
 }
 
+.mega-menu--open .mega-menu-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
 .mega-menu-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 300px;
