@@ -18,10 +18,10 @@
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
     "isbot": "^5.1.20",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-router": "^6.20.0",
-    "react-router-dom": "^6.20.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router": "^7.1.0",
+    "react-router-dom": "^7.1.0",
     "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
@@ -29,18 +29,16 @@
     "@eslint/eslintrc": "^2.0.0",
     "@eslint/js": "^8.50.0",
     "@graphql-codegen/cli": "^5.0.2",
-    "@react-router/dev": "^6.20.0",
-    "@react-router/fs-routes": "^6.20.0",
+    "@react-router/dev": "^7.1.0",
     "@shopify/cli": "^3.80.0",
     "@shopify/hydrogen-codegen": "^0.2.0",
     "@shopify/mini-oxygen": "^3.2.0",
     "@shopify/oxygen-workers-types": "^4.0.0",
     "@shopify/prettier-config": "^1.0.0",
-    "@tailwindcss/vite": "^3.4.0",
     "@total-typescript/ts-reset": "^0.5.0",
     "@types/eslint": "^8.40.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^8.50.0",
@@ -58,7 +56,7 @@
     "vite": "^5.0.0"
   },
   "engines": {
-    "node": ">=16.14.0 <17.0.0"
+    "node": ">=18.0.0"
   },
   "browserslist": [
     "defaults"
