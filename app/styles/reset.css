@@ -1,5 +1,8 @@
 body {
   font-family:
+    'Inter',
+    'Poppins',
+    'Nunito',
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
@@ -134,7 +137,7 @@ dl {
 }
 
 code {
-  background: rgba(15, 23, 42, 0.08);
+  background: #e0f2fe;
   border-radius: 4px;
   font-family: monospace;
   padding: 0.25rem;

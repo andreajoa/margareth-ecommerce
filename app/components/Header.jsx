@@ -41,22 +41,40 @@ export function HeaderMenu({
   const className = `header-menu-${viewport}`;
   const {close} = useAside();
   const items = (menu || FALLBACK_HEADER_MENU).items;
-  const normalizedItems = items.map((item) => {
-    if (!item.url) return {...item, normalizedUrl: null};
-    const normalizedUrl =
-      item.url.includes('myshopify.com') ||
-      item.url.includes(publicStoreDomain) ||
-      item.url.includes(primaryDomainUrl)
-        ? new URL(item.url).pathname
-        : item.url;
-    return {...item, normalizedUrl};
-  });
+  const normalizeUrl = (url) => {
+    if (!url) return null;
+    return url.includes('myshopify.com') ||
+      url.includes(publicStoreDomain) ||
+      url.includes(primaryDomainUrl)
+      ? new URL(url).pathname
+      : url;
+  };
+  const normalizedItems = items.map((item) => ({
+    ...item,
+    normalizedUrl: normalizeUrl(item.url),
+    items: (item.items || []).map((child) => ({
+      ...child,
+      normalizedUrl: normalizeUrl(child.url),
+    })),
+  }));
   const hasHome = normalizedItems.some(
     (item) =>
       item.normalizedUrl === '/' ||
       item.normalizedUrl === '' ||
       item.title?.toLowerCase() === 'home',
   );
+  const megaMenuGroups = buildMegaMenuGroups(normalizedItems);
+  const megaMenuTrigger = megaMenuGroups[0]?.title || 'Explorar';
+  const megaMenuTriggerUrl =
+    megaMenuGroups[0]?.cta?.to ||
+    megaMenuGroups[0]?.items?.[0]?.to ||
+    '/collections';
+  const megaMenuFeatureLink =
+    megaMenuGroups
+      .flatMap((group) => group.items)
+      .find((item) => item.label?.toLowerCase().includes('sensorial'))?.to ||
+    megaMenuGroups[0]?.cta?.to ||
+    '/collections';
   const menuItems = hasHome
     ? normalizedItems
     : [
@@ -70,6 +88,75 @@ export function HeaderMenu({
 
   return (
     <nav className={className} role="navigation">
+      {viewport === 'desktop' && megaMenuGroups.length ? (
+        <div className="mega-menu">
+          <NavLink
+            className="header-menu-item mega-menu-trigger"
+            end
+            onClick={close}
+            prefetch="intent"
+            style={activeLinkStyle}
+            to={megaMenuTriggerUrl}
+          >
+            {megaMenuTrigger}
+          </NavLink>
+          <div className="mega-menu-panel">
+            <div className="mega-menu-grid">
+              <div className="mega-menu-columns">
+                {megaMenuGroups.map((group) => (
+                  <div className="mega-menu-column" key={group.title}>
+                    <h4 className="mega-menu-title">{group.title}</h4>
+                    <div className="mega-menu-list">
+                      {group.items.map((item) => (
+                        <NavLink
+                          key={item.label}
+                          className="mega-menu-link"
+                          end
+                          onClick={close}
+                          prefetch="intent"
+                          to={item.to}
+                        >
+                          {item.label}
+                        </NavLink>
+                      ))}
+                    </div>
+                    <NavLink
+                      className="mega-menu-cta"
+                      end
+                      onClick={close}
+                      prefetch="intent"
+                      to={group.cta.to}
+                    >
+                      {group.cta.label}
+                    </NavLink>
+                  </div>
+                ))}
+              </div>
+              <div className="mega-menu-feature">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0778/2921/0327/files/1.jpg?v=1765938975"
+                  alt="Criança brincando com brinquedos sensoriais"
+                  className="mega-menu-feature-image"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <p className="mega-menu-feature-text">
+                  “Brincar também é uma forma de cuidar.”
+                </p>
+                <NavLink
+                  className="mega-menu-feature-button"
+                  end
+                  onClick={close}
+                  prefetch="intent"
+                  to={megaMenuFeatureLink}
+                >
+                  Descobrir coleção sensorial
+                </NavLink>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
       {menuItems.map((item) => {
         if (!item.normalizedUrl) return null;
         return (
@@ -216,6 +303,52 @@ const FALLBACK_HEADER_MENU = {
       items: [],
     },
   ],
+};
+const MEGA_MENU_ORDER = [
+  'Brinquedos Terapêuticos',
+  'Por Necessidade',
+  'Por Idade',
+  'Ambiente & Rotina',
+  'Apoio aos Pais',
+];
+
+const MEGA_MENU_CTA_LABELS = {
+  'Brinquedos Terapêuticos': 'Ver todos os brinquedos',
+  'Por Necessidade': 'Encontrar soluções',
+  'Por Idade': 'Ver por idade',
+  'Ambiente & Rotina': 'Montar rotina',
+  'Apoio aos Pais': 'Aprender com a gente',
+};
+
+const buildMegaMenuGroups = (menuItems) => {
+  const menuGroups = menuItems.filter(
+    (item) => item.items && item.items.length,
+  );
+  const orderedGroups = MEGA_MENU_ORDER.map((title) =>
+    menuGroups.find((item) => item.title?.toLowerCase() === title.toLowerCase()),
+  ).filter(Boolean);
+  const remainingGroups = menuGroups.filter(
+    (item) => !orderedGroups.includes(item),
+  );
+  return [...orderedGroups, ...remainingGroups]
+    .map((item) => {
+      const children = (item.items || [])
+        .map((child) => ({
+          label: child.title,
+          to: child.normalizedUrl,
+        }))
+        .filter((child) => child.to);
+      const ctaUrl = item.normalizedUrl || children[0]?.to || '/collections';
+      return {
+        title: item.title,
+        items: children,
+        cta: {
+          label: MEGA_MENU_CTA_LABELS[item.title] || 'Ver todos',
+          to: ctaUrl,
+        },
+      };
+    })
+    .filter((group) => group.items.length);
 };
 
 /**
