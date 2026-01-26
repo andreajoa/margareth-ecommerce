@@ -4,13 +4,28 @@
   --cart-aside-summary-height: 250px;
   --grid-item-width: 355px;
   --header-height: 64px;
-  --color-dark: #2c5f7d;
-  --color-light: #ffffff;
-  --color-primary: #2b88d9;
-  --color-secondary: #4dd4e8;
-  --color-background: #f8f9fa;
-  --color-accent: #ffb84d;
+
+  /* TEA & TDAH Color Palette - Autism Awareness Colors */
+  --color-dark: #2C3E50;
+  --color-light: #FFFFFF;
+  --color-primary: #87CEEB; /* Sky Blue - calming main color */
+  --color-secondary: #4A90E2; /* Bright Blue - action color */
+  --color-background: #FEFDF8; /* Off-white cream */
+  --color-accent: #FFD93D; /* Yellow - ribbon color */
   --color-muted: #6b7280;
+
+  /* Additional TEA/TDAH Colors */
+  --tea-sky-blue: #87CEEB;
+  --tea-bright-blue: #4A90E2;
+  --tea-deep-blue: #2B88D9;
+  --tea-coral: #FF6B6B;
+  --tea-yellow: #FFD93D;
+  --tea-green: #6BCF7F;
+  --tea-orange: #FF9F43;
+  --tea-cream: #FFF9ED;
+  --tea-light-gray: #F8F9FA;
+  --tea-medium-gray: #E9ECEF;
+  --tea-dark-text: #2C3E50;
 }
 
 img {
