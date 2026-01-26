@@ -12,7 +12,7 @@ import {Aside, useAside} from '~/components/Aside';
 import {CartMain} from '~/components/CartMain';
 import {Suspense} from 'react';
 import {Await} from 'react-router';
-import {NavigationMenuTEA} from '~/components/NavigationMenuTEA';
+import {NavigationMenu} from '~/components/NavigationMenu';
 
 function CartFormContents({
   fetcher,
@@ -879,7 +879,7 @@ export default function Product() {
         </div>
       </div>
 
-      <NavigationMenuTEA rootData={rootData} />
+      <NavigationMenu rootData={rootData} />
       <div className="text-white py-3" style={{background: 'linear-gradient(135deg, #6BCF7F 0%, #4CAF50 100%)'}}>
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-sm font-medium tracking-wider">🎁 FRETE GRÁTIS São Vicente, Santos e Praia Grande • PARCELAMENTO 12x SEM JUROS • TROCAS FÁCEIS 🧩</p>
