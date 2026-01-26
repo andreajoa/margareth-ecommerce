@@ -5,27 +5,53 @@
   --grid-item-width: 355px;
   --header-height: 64px;
 
-  /* TEA & TDAH Color Palette - Autism Awareness Colors */
-  --color-dark: #2C3E50;
-  --color-light: #FFFFFF;
-  --color-primary: #87CEEB; /* Sky Blue - calming main color */
-  --color-secondary: #4A90E2; /* Bright Blue - action color */
-  --color-background: #FEFDF8; /* Off-white cream */
-  --color-accent: #FFD93D; /* Yellow - ribbon color */
-  --color-muted: #6b7280;
+  /* ═══════════════════════════════════════════════════════════════
+     TEA & TDAH Color Palette - Autism Awareness Puzzle Pieces
+     Main Blue: #87CEEB (Sky Blue) - DOMINANT COLOR
+     ═══════════════════════════════════════════════════════════════ */
 
-  /* Additional TEA/TDAH Colors */
-  --tea-sky-blue: #87CEEB;
-  --tea-bright-blue: #4A90E2;
-  --tea-deep-blue: #2B88D9;
-  --tea-coral: #FF6B6B;
-  --tea-yellow: #FFD93D;
-  --tea-green: #6BCF7F;
-  --tea-orange: #FF9F43;
-  --tea-cream: #FFF9ED;
-  --tea-light-gray: #F8F9FA;
-  --tea-medium-gray: #E9ECEF;
-  --tea-dark-text: #2C3E50;
+  /* Primary Colors */
+  --color-primary: #87CEEB;          /* Sky Blue - MAIN BACKGROUND COLOR */
+  --color-primary-dark: #4A90E2;     /* Bright Blue - Primary actions */
+  --color-primary-deep: #2B88D9;     /* Deep Blue - Hover states */
+  --color-primary-darkest: #1A5F7A;  /* Darkest Blue - Text */
+
+  /* Puzzle Piece Ribbon Colors */
+  --tea-red: #FF6B6B;                /* Puzzle piece Red */
+  --tea-yellow: #FFD93D;             /* Puzzle piece Yellow */
+  --tea-blue: #5DADE2;               /* Puzzle piece Blue (lighter) */
+
+  /* Accent Colors */
+  --tea-green: #6BCF7F;              /* Success/Positive */
+  --tea-orange: #FF9F43;             /* Additional warm accent */
+
+  /* Neutral Colors */
+  --color-dark: #2C3E50;             /* Primary text */
+  --color-muted: #6B7280;            /* Secondary text */
+  --color-light: #FFFFFF;            /* White */
+  --color-background: #FEFDF8;       /* Off-white cream */
+  --tea-cream: #FFF9ED;              /* Soft warm background */
+  --tea-light-gray: #F8F9FA;         /* Light neutral */
+  --tea-medium-gray: #E9ECEF;        /* Medium neutral */
+
+  /* Semantic Colors */
+  --color-success: #6BCF7F;
+  --color-warning: #FFD93D;
+  --color-error: #FF6B6B;
+  --color-info: #4A90E2;
+
+  /* Gradients */
+  --tea-sky-gradient: linear-gradient(135deg, #87CEEB 0%, #4A90E2 100%);
+  --tea-blue-gradient: linear-gradient(135deg, #4A90E2 0%, #2B88D9 100%);
+  --tea-puzzle-gradient: linear-gradient(135deg, #FF6B6B 0%, #FFD93D 50%, #4A90E2 100%);
+  --tea-warm-gradient: linear-gradient(135deg, #FFD93D 0%, #FF6B6B 100%);
+  --tea-success-gradient: linear-gradient(135deg, #6BCF7F 0%, #4CAF50 100%);
+  --tea-calming-gradient: linear-gradient(135deg, #87CEEB 0%, #6BCF7F 100%);
+
+  /* Shadows & Effects */
+  --tea-puzzle-shadow: rgba(135, 206, 235, 0.3);
+  --tea-puzzle-shadow-dark: rgba(74, 144, 226, 0.2);
+  --tea-glow: 0 0 20px rgba(135, 206, 235, 0.5);
 }
 
 img {

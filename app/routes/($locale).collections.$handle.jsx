@@ -238,23 +238,42 @@ return (
         </div>
       </section>
 
-      {/* ============ BANNERS PROMOCIONAIS - 4 BOXES TEA/TDAH ============ */}
+      {/* ============ BANNERS PROMOCIONAIS - PUZZLE COLORS ============ */}
       <section className="bg-white py-12 px-6 mb-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="bg-gradient-to-br from-[#FF6B6B] to-[#E53E3E] text-white p-6 rounded-2xl text-center shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+            {/* Red - Puzzle Piece */}
+            <div
+              className="text-white p-6 rounded-2xl text-center shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1"
+              style={{background: 'linear-gradient(135deg, #FF6B6B 0%, #E53E3E 100%)'}}
+            >
               <p className="text-xs tracking-widest uppercase font-bold text-yellow-300 mb-2">🎁 Selecionados</p>
               <p className="text-sm">Por terapeutas</p>
             </div>
-            <div className="bg-gradient-to-br from-[#4A90E2] to-[#2B88D9] text-white p-6 rounded-2xl text-center shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+            {/* Blue - Puzzle Piece */}
+            <div
+              className="text-white p-6 rounded-2xl text-center shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1"
+              style={{background: 'linear-gradient(135deg, #4A90E2 0%, #2B88D9 100%)'}}
+            >
               <p className="text-xs tracking-widest uppercase font-bold text-yellow-300 mb-2">✨ Qualidade</p>
               <p className="text-sm">Materiais seguros</p>
             </div>
-            <div className="bg-gradient-to-br from-[#FFD93D] to-[#FF9F43] text-[#2C3E50] p-6 rounded-2xl text-center shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+            {/* Yellow - Puzzle Piece */}
+            <div
+              className="p-6 rounded-2xl text-center shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1"
+              style={{
+                background: 'linear-gradient(135deg, #FFD93D 0%, #FF9F43 100%)',
+                color: '#2C3E50'
+              }}
+            >
               <p className="text-xs tracking-widest uppercase font-bold mb-2">🚚 Frete Grátis</p>
               <p className="text-sm">São Vicente, Santos e Praia Grande</p>
             </div>
-            <div className="bg-gradient-to-br from-[#6BCF7F] to-[#4CAF50] text-white p-6 rounded-2xl text-center shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+            {/* Green - Accent */}
+            <div
+              className="text-white p-6 rounded-2xl text-center shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1"
+              style={{background: 'linear-gradient(135deg, #6BCF7F 0%, #4CAF50 100%)'}}
+            >
               <p className="text-xs tracking-widest uppercase font-bold text-yellow-300 mb-2">💚 Parcelamento</p>
               <p className="text-sm">Em até 12x sem juros</p>
             </div>
@@ -547,11 +566,14 @@ function generateSmartDescription(product) {
   return "Produto especializado desenvolvido com foco nas necessidades de crianças com TEA, TDAH e neurodiversidade. Materiais seguros, design inclusivo e eficácia comprovada por profissionais da área. Frete grátis para São Vicente, Santos e Praia Grande.";
 }
 
-// Componente Footer com tema TEA/TDAH
+// Componente Footer com tema TEA/TDAH - Puzzle Colors
 function VastaraFooter({ menu }) {
   const menuItems = menu?.items || [];
   return (
-    <footer className="relative text-white overflow-hidden" style={{background: 'linear-gradient(135deg, #4A90E2 0%, #2B88D9 100%)'}}>
+    <footer
+      className="relative text-white overflow-hidden"
+      style={{background: 'linear-gradient(135deg, #87CEEB 0%, #4A90E2 100%)'}}  // Sky Blue dominant
+    >
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
           backgroundImage: `radial-gradient(circle at 2px 2px, #FFD93D 1px, transparent 0)`,
@@ -578,7 +600,7 @@ function VastaraFooter({ menu }) {
               />
               <button
                 className="px-6 py-3 rounded-lg font-bold text-white hover:shadow-xl transition-all transform hover:scale-105"
-                style={{background: 'linear-gradient(135deg, #FFD93D 0%, #FF9F43 100%)'}}
+                style={{background: 'linear-gradient(135deg, #FF6B6B 0%, #FFD93D 100%)'}}  // Puzzle gradient
               >
                 Inscrever
               </button>

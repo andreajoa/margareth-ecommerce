@@ -15,7 +15,7 @@ export function NavigationMenu({rootData}) {
     tea: {
       title: 'TEA (Autismo)',
       icon: '🧩',
-      color: teaColors.brightBlue,
+      color: teaColors.brightBlue,  // #4A90E2 - Main blue action color
       subcategories: [
         {name: 'Brinquedos Sensoriais', link: '/search?q=sensorial%20autismo', desc: 'Texturas, luzes e estímulos'},
         {name: 'Comunicação Alternativa', link: '/search?q=comunica%C3%A7%C3%A3o%20autismo', desc: 'CAA, pictogramas e expressão'},
@@ -26,7 +26,7 @@ export function NavigationMenu({rootData}) {
     tdah: {
       title: 'TDAH',
       icon: '⚡',
-      color: teaColors.yellow,
+      color: teaColors.brightYellow,  // #FFD93D - Puzzle piece yellow
       subcategories: [
         {name: 'Fidget Toys', link: '/search?q=fidget%20tdah', desc: 'Foco e atenção'},
         {name: 'Foco e Concentração', link: '/search?q=foco%20tdah', desc: 'Jogos de atenção'},
@@ -37,7 +37,7 @@ export function NavigationMenu({rootData}) {
     habilidades: {
       title: 'Habilidades',
       icon: '🎯',
-      color: teaColors.green,
+      color: teaColors.green,  // #6BCF7F - Success accent
       subcategories: [
         {name: 'Coordenação Motora', link: '/search?q=coordena%C3%A7%C3%A3o%20motora', desc: 'Motricidade fina e ampla'},
         {name: 'Habilidades Sociais', link: '/search?q=habilidades%20sociais', desc: 'Interação e empatia'},
@@ -48,7 +48,7 @@ export function NavigationMenu({rootData}) {
     idade: {
       title: 'Por Idade',
       icon: '📚',
-      color: teaColors.coral,
+      color: teaColors.coralRed,  // #FF6B6B - Puzzle piece red
       subcategories: [
         {name: '2-4 anos', link: '/search?q=2-4%20anos', desc: 'Primeiros passos'},
         {name: '5-7 anos', link: '/search?q=5-7%20anos', desc: 'Pré-escolar'},
@@ -59,7 +59,7 @@ export function NavigationMenu({rootData}) {
     ambiente: {
       title: 'Ambiente',
       icon: '🏠',
-      color: teaColors.orange,
+      color: teaColors.skyBlue,  // #87CEEB - Main background blue
       subcategories: [
         {name: 'Para Escola', link: '/search?q=escola', desc: 'Sala de aula'},
         {name: 'Para Casa', link: '/search?q=casa', desc: 'Ambiente doméstico'},
@@ -71,13 +71,15 @@ export function NavigationMenu({rootData}) {
 
   return (
     <>
-      {/* ============ BARRA SUPERIOR - PROMOÇÃO E FRETE GRÁTIS ============ */}
+      {/* ============ BARRA SUPERIOR - PUZZLE GRADIENT ============ */}
       <div
         className="py-2 text-center"
-        style={{backgroundColor: teaColors.yellow}}
+        style={{
+          background: teaColors.puzzleGradient  // Red → Yellow → Blue gradient
+        }}
       >
-        <p className="text-xs md:text-sm font-bold" style={{color: teaColors.darkText}}>
-          🎉 FRETE GRÁTIS para São Vicente, Praia Grande e Santos acima de R$150 | Parcelamento em até 12x SEM JUROS 🎁
+        <p className="text-xs md:text-sm font-bold text-white drop-shadow-sm">
+          🧩 FRETE GRÁTIS São Vicente, Praia Grande e Santos | Parcelamento 12x SEM JUROS 🎁
         </p>
       </div>
 
@@ -91,15 +93,18 @@ export function NavigationMenu({rootData}) {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition">
               <div
-                className="w-12 h-12 rounded-full flex items-center justify-center text-2xl"
-                style={{background: teaColors.primaryGradient}}
+                className="w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow-lg"
+                style={{
+                  background: teaColors.skyGradient,  // Sky Blue gradient
+                  boxShadow: teaColors.glow
+                }}
               >
                 🧩
               </div>
               <div>
                 <h1
                   className="text-xl md:text-2xl font-bold"
-                  style={{color: teaColors.brightBlue}}
+                  style={{color: teaColors.skyBlue}}  // Main sky blue color
                 >
                   BrinqueTEAndo
                 </h1>
@@ -294,8 +299,13 @@ export function NavigationMenu({rootData}) {
         )}
       </nav>
 
-      {/* ============ BARRA DE CONFIANÇA ============ */}
-      <div style={{backgroundColor: teaColors.green}} className="py-2">
+      {/* ============ BARRA DE CONFIANÇA - CALMING GRADIENT ============ */}
+      <div
+        style={{
+          background: teaColors.calmingGradient  // Sky Blue → Green gradient
+        }}
+        className="py-2"
+      >
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-center gap-4 md:gap-8 text-white text-[10px] md:text-xs font-semibold flex-wrap">
             <div className="flex items-center gap-1">

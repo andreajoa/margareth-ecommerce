@@ -51,8 +51,8 @@ export const meta = () => {
     {name: 'mobile-web-app-capable', content: 'yes'},
     {name: 'apple-mobile-web-app-capable', content: 'yes'},
     
-    // THEME COLOR
-    {name: 'theme-color', content: '#2B88D9'},
+    // THEME COLOR - Sky Blue as main color
+    {name: 'theme-color', content: '#87CEEB'},  // Main sky blue color
     
     // CANONICAL URL
     {tagName: 'link', rel: 'canonical', href: 'https://brinqueteando.online'},
@@ -528,8 +528,13 @@ export default function Homepage() {
           <span className="floating-icon" style={{top: '78%', left: '50%'}}>🦖</span>
         </div>
         <div className="flex-grow w-full relative z-10">
-          {/* Top Bar with Countdown */}
-          <div className="bg-[#2B88D9] text-white py-3 text-center w-full">
+          {/* Top Bar with Countdown - PUZZLE GRADIENT */}
+          <div
+            className="text-white py-3 text-center w-full"
+            style={{
+              background: 'linear-gradient(135deg, #FF6B6B 0%, #FFD93D 50%, #87CEEB 100%)'  // Puzzle gradient with sky blue
+            }}
+          >
             <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-4 flex-wrap">
               <span className="text-sm md:text-base font-bold tracking-wide">
                 {currentHoliday?.emoji} {currentHoliday?.message} {currentHoliday?.emoji}
@@ -547,8 +552,14 @@ export default function Homepage() {
             </div>
           </div>
 
-          {/* --- CHRISTMAS SCROLL BAR (NEW) --- */}
-          <div className="w-full bg-[#4DD4E8] border-y-2 border-[#B8E6D5] overflow-hidden py-3 relative z-20 shadow-lg">
+          {/* --- PUZZLE SCROLL BAR --- */}
+          <div
+            className="w-full overflow-hidden py-3 relative z-20 shadow-lg"
+            style={{
+              background: 'linear-gradient(135deg, #87CEEB 0%, #4A90E2 100%)',  // Sky blue dominant
+              borderBottom: '2px solid #FFD93D'
+            }}
+          >
             {/* Subtle Texture Overlay */}
             <div className="absolute inset-0 pointer-events-none opacity-10" style={{backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '15px 15px'}}></div>
             <div className="animate-marquee-christmas flex items-center">
@@ -1289,11 +1300,16 @@ const PRODUCTS_UNDER_100_QUERY = '#graphql' + String.raw`
 
 function BrinqueTEAndoFooter() {
   return (
-    <footer className="relative bg-gradient-to-b from-[#2C5F7D] via-[#374151] to-[#2C5F7D] text-white overflow-hidden w-full">
+    <footer
+      className="relative text-white overflow-hidden w-full"
+      style={{
+        background: 'linear-gradient(135deg, #87CEEB 0%, #4A90E2 100%)'  // Sky blue dominant gradient
+      }}
+    >
       {/* Decorative Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, #F4A261 1px, transparent 0)`,
+          backgroundImage: `radial-gradient(circle at 2px 2px, #FFD93D 1px, transparent 0)`,  // Yellow dots for puzzle theme
           backgroundSize: '40px 40px'
         }}></div>
       </div>

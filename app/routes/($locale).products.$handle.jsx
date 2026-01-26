@@ -824,7 +824,7 @@ export default function Product() {
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center justify-center gap-6 flex-wrap text-center">
               <div>
-                <h3 className="text-4xl font-bold mb-1" style={{color: '#4A90E2'}}>Produtos</h3>
+                <h3 className="text-4xl font-bold mb-1" style={{color: '#87CEEB'}}>Produtos</h3>
                 <p className="text-sm" style={{color: '#6b7280'}}>Especializados</p>
               </div>
               <span className="text-5xl" style={{color: '#FFD93D'}}>&</span>
@@ -842,7 +842,10 @@ export default function Product() {
         </div>
       </div>
 
-      <div className="text-white py-3 text-center" style={{background: 'linear-gradient(135deg, #6BCF7F 0%, #4CAF50 100%)'}}>
+      <div
+        className="text-white py-3 text-center"
+        style={{background: 'linear-gradient(135deg, #FF6B6B 0%, #FFD93D 50%, #4A90E2 100%)'}}  // Puzzle gradient
+      >
         <p className="text-sm md:text-base font-semibold tracking-wide">
           🧩 Newsletter - Receba novidades e dicas sobre TEA, TDAH e neurodiversidade!
         </p>
