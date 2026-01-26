@@ -1,4 +1,3 @@
-import {FooterNewsletterForm} from '~/components/FooterNewsletterForm';
 import {useLoaderData, Link, useRouteLoaderData} from 'react-router';
 import {useState, useEffect, useRef} from 'react';
 import {Image, Money, CartForm} from '@shopify/hydrogen';
@@ -13,15 +12,12 @@ import {Aside, useAside} from '~/components/Aside';
 import {CartMain} from '~/components/CartMain';
 import {Suspense} from 'react';
 import {Await} from 'react-router';
-import {fetchJudgeMeReviews} from '~/lib/judgeme.server';
-import {WatchTryOnModal} from '~/components/TryItOn/WatchTryOnModal';
 import {NavigationMenu} from '~/components/NavigationMenu';
 
 function CartFormContents({
   fetcher,
   open,
   selectedVariant,
-  setTryItOnOpen,
   urgencyNumber,
   fadeClass,
   currentMessageIndex,
@@ -454,21 +450,6 @@ export async function loader({context, params, request}) {
 
     const selectedVariant = product.selectedOrFirstAvailableVariant;
 
-    let judgeMeReviews = {reviews: [], rating: 0, reviewCount: 0};
-    try {
-      globalThis.JUDGEME_API_TOKEN = context.env?.JUDGEME_API_TOKEN;
-      globalThis.JUDGEME_SHOP_DOMAIN = context.env?.JUDGEME_SHOP_DOMAIN;
-      const judgeMeData = await fetchJudgeMeReviews(product.id, {
-        perPage: 20,
-        productHandle: handle,
-      });
-      if (judgeMeData && Array.isArray(judgeMeData.reviews)) {
-        judgeMeReviews = judgeMeData;
-      }
-    } catch (error) {
-      console.error('Judge.me reviews fetch error:', error);
-    }
-
     return {
       product,
       footerMenu,
@@ -504,7 +485,6 @@ export default function Product() {
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [fadeClass, setFadeClass] = useState('opacity-100');
   const [urgencyNumber, setUrgencyNumber] = useState(13);
-  const [tryItOnOpen, setTryItOnOpen] = useState(false);
 
   const selectedVariant = useOptimisticVariant(
     product.selectedOrFirstAvailableVariant,
@@ -1159,7 +1139,6 @@ export default function Product() {
                   fetcher={fetcher}
                   open={open}
                   selectedVariant={selectedVariant}
-                  setTryItOnOpen={setTryItOnOpen}
                   urgencyNumber={urgencyNumber}
                   fadeClass={fadeClass}
                   currentMessageIndex={currentMessageIndex}
@@ -1423,47 +1402,6 @@ export default function Product() {
               data-product-id={productNumericId}
             ></div>
 
-            {/* Judge.me Widget Container */}
-            {product.metafields?.find(m => m?.key === 'widget')?.value ? (
-              <div 
-                id="judgeme_product_reviews"
-                className="jdgm-widget jdgm-review-widget"
-                data-shop-domain="kp0zf4-m0.myshopify.com"
-                data-product-title={product.title}
-                data-id={productNumericId}
-                data-product-id={productNumericId}
-                dangerouslySetInnerHTML={{
-                  __html: product.metafields.find(m => m?.key === 'widget').value
-                }}
-              />
-            ) : (
-              <div
-                id="judgeme_product_reviews"
-                className="jdgm-widget jdgm-review-widget jdgm-outside-widget"
-                data-shop-domain="kp0zf4-m0.myshopify.com"
-                data-product-title={product.title}
-                data-id={productNumericId}
-                data-product-id={productNumericId}
-                data-widget="review"
-                data-auto-install="false"
-                data-entry-point="review_widget.js"
-                data-entry-key="review-widget/main.js"
-              >
-              </div>
-            )}
-            
-            {/* Inject Widget Data if available */}
-            {product.metafields?.find(m => m?.key === 'review_widget_data')?.value && (
-              <script dangerouslySetInnerHTML={{
-                __html: `
-                  if (window.jdgm) {
-                    window.jdgm.data = window.jdgm.data || {}; 
-                    window.jdgm.data.reviewWidget = window.jdgm.data.reviewWidget || {}; 
-                    window.jdgm.data.reviewWidget[${productNumericId}] = ${product.metafields.find(m => m?.key === 'review_widget_data').value};
-                  }
-                `
-              }} />
-            )}
           </div>
 
         </div>
@@ -1781,11 +1719,6 @@ export default function Product() {
       </footer>
 
       <StickyCTA product={product} selectedVariant={selectedVariant} openCart={open} />
-      <WatchTryOnModal
-        product={product}
-        isOpen={tryItOnOpen}
-        onClose={() => setTryItOnOpen(false)}
-      />
     </div>
   </Aside.Provider>
   );
@@ -1839,10 +1772,6 @@ const PRODUCT_FRAGMENT = `#graphql
     productType
     encodedVariantAvailability
     encodedVariantExistence
-    metafields(identifiers: [{namespace: "judgeme", key: "widget"}, {namespace: "judgeme", key: "review_widget_data"}]) {
-      key
-      value
-    }
     images(first: 20) {
       edges {
         node {

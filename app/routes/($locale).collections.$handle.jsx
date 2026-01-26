@@ -1,7 +1,6 @@
 import {useLoaderData, Link, useRouteLoaderData} from 'react-router';
 import {useState, useMemo} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
-import {FooterNewsletterForm} from '~/components/FooterNewsletterForm';
 import {getProductHandle} from '~/lib/utils';
 import {NavigationMenu} from '~/components/NavigationMenu';
 
@@ -571,7 +570,19 @@ function VastaraFooter({ menu }) {
                 Receba novidades, dicas e ofertas especiais sobre TEA, TDAH e neurodiversidade.
               </p>
             </div>
-            <FooterNewsletterForm />
+            <div className="flex gap-2 max-w-md">
+              <input
+                type="email"
+                placeholder="Seu melhor e-mail"
+                className="flex-1 px-4 py-3 rounded-lg text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-300"
+              />
+              <button
+                className="px-6 py-3 rounded-lg font-bold text-white hover:shadow-xl transition-all transform hover:scale-105"
+                style={{background: 'linear-gradient(135deg, #FFD93D 0%, #FF9F43 100%)'}}
+              >
+                Inscrever
+              </button>
+            </div>
           </div>
         </div>
       </div>
