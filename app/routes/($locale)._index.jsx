@@ -29,7 +29,7 @@ export const meta = () => {
     {property: 'og:title', content: 'BrinqueTEAndo | Loja TEA, TDAH e Autismo'},
     {property: 'og:description', content: 'Brinquedos sensoriais e recursos terapêuticos. Frete grátis para São Vicente, Santos e Praia Grande.'},
     {property: 'og:type', content: 'website'},
-    {property: 'og:url', content: 'https://brinqueteando.com.br'},
+    {property: 'og:url', content: 'https://brinqueteando.online'},
     {property: 'og:image', content: 'https://cdn.shopify.com/s/files/1/0778/2921/0327/files/5.avif?v=1765596668'},
     {property: 'og:image:width', content: '1200'},
     {property: 'og:image:height', content: '630'},
@@ -55,11 +55,11 @@ export const meta = () => {
     {name: 'theme-color', content: '#1B998B'},
     
     // CANONICAL URL
-    {tagName: 'link', rel: 'canonical', href: 'https://brinqueteando.com.br'},
+    {tagName: 'link', rel: 'canonical', href: 'https://brinqueteando.online'},
     
     // HREFLANG FOR GEO-TARGETING
-    {tagName: 'link', rel: 'alternate', hreflang: 'pt-br', href: 'https://brinqueteando.com.br'},
-    {tagName: 'link', rel: 'alternate', hreflang: 'x-default', href: 'https://brinqueteando.com.br'},
+    {tagName: 'link', rel: 'alternate', hreflang: 'pt-br', href: 'https://brinqueteando.online'},
+    {tagName: 'link', rel: 'alternate', hreflang: 'x-default', href: 'https://brinqueteando.online'},
     
     // PRECONNECT & DNS-PREFETCH
     {tagName: 'link', rel: 'preconnect', href: 'https://cdn.shopify.com'},
@@ -68,7 +68,7 @@ export const meta = () => {
     // PRELOAD CRITICAL RESOURCES
     // ✅ FIX: Preload LCP Image (Hero Poster) with high priority
     {tagName: 'link', rel: 'preload', as: 'image', href: 'https://cdn.shopify.com/s/files/1/0778/2921/0327/files/5.avif?v=1765596668', attributes: {fetchpriority: 'high'}},
-    {tagName: 'link', rel: 'preload', as: 'video', href: 'https://cdn.shopify.com/videos/c/o/v/9788927ebacf4e3ca19449cafd11fc55.mp4'},
+    {tagName: 'link', rel: 'preload', as: 'video', href: 'https://cdn.shopify.com/videos/c/o/v/288d4004873043ffb9ba58d24ba5a38c.mp4'},
   ];
 };
 
@@ -142,7 +142,7 @@ export default function Homepage() {
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "BrinqueTEAndo",
-      "url": "https://brinqueteando.com.br",
+      "url": "https://brinqueteando.online",
       "logo": "https://cdn.shopify.com/s/files/1/0778/2921/0327/files/5.avif?v=1765596668",
       "description": "Loja especializada em brinquedos e recursos terapêuticos para TEA, TDAH e autismo. Curadoria sensorial, foco, comunicação e autonomia.",
       "foundingDate": "2026",
@@ -726,11 +726,20 @@ export default function Homepage() {
                   className="absolute inset-0 w-full h-full object-cover"
                   poster="https://cdn.shopify.com/s/files/1/0778/2921/0327/files/5.avif?v=1765596668"
                 >
-                  <source src="https://cdn.shopify.com/videos/c/o/v/9788927ebacf4e3ca19449cafd11fc55.mp4" type="video/mp4" />
+                  <source src="https://cdn.shopify.com/videos/c/o/v/288d4004873043ffb9ba58d24ba5a38c.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#0F172A]/70 via-[#0F172A]/40 to-transparent z-10"></div>
                 <div className="absolute inset-0 z-20 flex flex-col justify-center px-6 sm:px-8 md:px-16">
+                  <div className="mb-4 w-28 sm:w-36 md:w-44">
+                    <img
+                      src="https://cdn.shopify.com/s/files/1/0778/2921/0327/files/5.avif?v=1765596668"
+                      alt="BrinqueTEAndo"
+                      className="w-full h-auto drop-shadow-lg"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
                   <p className="text-white/80 text-xs sm:text-sm uppercase tracking-[0.4em] mb-3">BrinqueTEAndo</p>
                   <h1 className="text-white text-2xl sm:text-4xl md:text-6xl font-light tracking-widest mb-2 sm:mb-4">
                     Brinquedos para TEA, TDAH e autismo
