@@ -574,9 +574,9 @@ export default function Homepage() {
                    
                    {/* Elegant Separator */}
                    <div className="ml-8 flex items-center gap-2 opacity-70">
-                     <span className="text-[#B8E6D5] text-xs">✦</span>
-                     <span className="w-16 h-[1px] bg-[#B8E6D5]"></span>
-                     <span className="text-[#B8E6D5] text-xs">✦</span>
+                     <span className="text-[#87CEEB] text-xs">✦</span>
+                     <span className="w-16 h-[1px] bg-[#87CEEB]"></span>
+                     <span className="text-[#87CEEB] text-xs">✦</span>
                    </div>
                 </div>
               ))}
@@ -600,7 +600,7 @@ export default function Homepage() {
             </div>
 
             {/* Benefits Bar */}
-            <div className="bg-white border-l-2 border-[#B8E6D5] py-8 px-4 sm:px-6">
+            <div className="bg-white border-l-2 border-[#87CEEB] py-8 px-4 sm:px-6">
               <div className="max-w-4xl mx-auto">
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-center">
                   <div className="w-full sm:w-auto">
@@ -636,7 +636,7 @@ export default function Homepage() {
           </div>
 
           {/* Trust Indicators */}
-          <div className="bg-[#F8F9FA] border-b border-[#B8E6D5] w-full">
+          <div className="bg-[#F8F9FA] border-b border-[#87CEEB] w-full">
             <div className="max-w-7xl mx-auto px-6 py-4">
               <div className="flex items-center justify-center gap-2 mb-3">
                 <span className="text-xl font-serif text-[#2B88D9]">🧩 COMPRE COM CONFIANÇA:</span>
@@ -665,7 +665,7 @@ export default function Homepage() {
           </div>
 
           {/* Main Navigation */}
-          <nav className="bg-white/95 backdrop-blur border-y border-[#E0F2FE] w-full">
+          <nav className="bg-white/95 backdrop-blur border-y border-[#87CEEB] w-full">
             <div className="max-w-7xl mx-auto px-6 py-6">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
                 <div>
@@ -678,7 +678,7 @@ export default function Homepage() {
                 </div>
               </div>
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="bg-[#F8F9FA] rounded-2xl p-5 border border-[#E0F2FE]">
+                <div className="bg-[#F8F9FA] rounded-2xl p-5 border border-[#87CEEB]">
                   <h4 className="text-[#2B88D9] font-semibold mb-3">Sensorial e Calma</h4>
                   <ul className="space-y-2 text-sm text-[#374151]">
                     <li><Link to="/search?q=brinquedo%20sensorial" className="hover:text-[#FF8C42]">Texturas e tato</Link></li>
@@ -687,7 +687,7 @@ export default function Homepage() {
                     <li><Link to="/search?q=pressao%20profunda" className="hover:text-[#FF8C42]">Pressão profunda</Link></li>
                   </ul>
                 </div>
-                <div className="bg-[#F8F9FA] rounded-2xl p-5 border border-[#E0F2FE]">
+                <div className="bg-[#F8F9FA] rounded-2xl p-5 border border-[#87CEEB]">
                   <h4 className="text-[#2B88D9] font-semibold mb-3">Foco e Atenção</h4>
                   <ul className="space-y-2 text-sm text-[#374151]">
                     <li><Link to="/search?q=jogos%20de%20concentracao" className="hover:text-[#FF8C42]">Jogos de concentração</Link></li>
@@ -696,7 +696,7 @@ export default function Homepage() {
                     <li><Link to="/search?q=tempo%20e%20rotina" className="hover:text-[#FF8C42]">Tempo e rotina</Link></li>
                   </ul>
                 </div>
-                <div className="bg-[#F8F9FA] rounded-2xl p-5 border border-[#E0F2FE]">
+                <div className="bg-[#F8F9FA] rounded-2xl p-5 border border-[#87CEEB]">
                   <h4 className="text-[#2B88D9] font-semibold mb-3">Comunicação</h4>
                   <ul className="space-y-2 text-sm text-[#374151]">
                     <li><Link to="/search?q=CAA" className="hover:text-[#FF8C42]">CAA e comunicação alternativa</Link></li>
@@ -705,7 +705,7 @@ export default function Homepage() {
                     <li><Link to="/search?q=emocional%20e%20sentimentos" className="hover:text-[#FF8C42]">Emoções e sentimentos</Link></li>
                   </ul>
                 </div>
-                <div className="bg-[#F8F9FA] rounded-2xl p-5 border border-[#E0F2FE]">
+                <div className="bg-[#F8F9FA] rounded-2xl p-5 border border-[#87CEEB]">
                   <h4 className="text-[#2B88D9] font-semibold mb-3">Autonomia e Social</h4>
                   <ul className="space-y-2 text-sm text-[#374151]">
                     <li><Link to="/search?q=habilidades%20sociais" className="hover:text-[#FF8C42]">Habilidades sociais</Link></li>
@@ -860,7 +860,7 @@ export default function Homepage() {
                   {title: 'R$ 200', subtitle: 'E MENOS', url: '/search?q=pre%C3%A7o%3A%3C200'}
                 ].map((item) => (
                   <Link key={item.title} to={item.url} className="group">
-                    <div className="relative bg-gradient-to-br from-[#2B88D9] to-[#4DD4E8] text-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl text-center transition-all duration-300 hover:scale-110 hover:shadow-2xl" 
+                    <div className="relative bg-gradient-to-br from-[#2B88D9] to-[#87CEEB] text-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl text-center transition-all duration-300 hover:scale-110 hover:shadow-2xl" 
                          style={{
                            clipPath: 'polygon(15% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0% 85%, 0% 15%)',
                            boxShadow: '0 8px 25px rgba(43, 136, 217, 0.35)',
@@ -891,8 +891,8 @@ export default function Homepage() {
             <div className="bg-gradient-to-r from-[#2C5F7D] to-[#2B88D9] rounded-[10px] shadow-2xl overflow-hidden">
               <div className="grid md:grid-cols-2 gap-0">
                 <div className="bg-gradient-to-br from-[#2C5F7D] to-[#374151] p-8 sm:p-12 flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FFB84D] via-[#E0F2FE] to-[#4DD4E8]"></div>
-                  <div className="absolute bottom-0 right-0 w-full h-1 bg-gradient-to-l from-[#FFB84D] via-[#E0F2FE] to-[#4DD4E8]"></div>
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FFB84D] via-[#87CEEB] to-[#87CEEB]"></div>
+                  <div className="absolute bottom-0 right-0 w-full h-1 bg-gradient-to-l from-[#FFB84D] via-[#87CEEB] to-[#87CEEB]"></div>
                   <div className="relative z-10 transform -rotate-6 hover:rotate-0 transition-transform duration-500 w-full max-w-[340px] sm:max-w-[400px]">
                     <div className="bg-gradient-to-br from-[#2B88D9] to-[#2C5F7D] rounded-xl p-5 sm:p-6 shadow-2xl border-2 border-[#FFB84D] w-full aspect-[1.586/1] flex flex-col justify-between">
                       <div className="flex items-center gap-2 sm:gap-3">
@@ -919,14 +919,14 @@ export default function Homepage() {
                 <div className="p-8 sm:p-12 flex flex-col justify-center bg-gradient-to-br from-[#2C5F7D] to-[#374151]">
                   <div className="inline-block bg-[#FFB84D] text-[#2C5F7D] px-4 py-1 rounded-full text-xs font-bold mb-4 w-fit">Economize até R$ 100!</div>
                   <h2 className="text-white text-3xl sm:text-4xl md:text-5xl font-light mb-4 sm:mb-6 tracking-wide">Ganhe <span className="text-[#FFB84D] font-semibold">15% OFF</span></h2>
-                  <p className="text-[#E0F2FE] text-lg sm:text-xl mb-4 sm:mb-6">em itens sensoriais e de foco selecionados</p>
+                  <p className="text-[#87CEEB] text-lg sm:text-xl mb-4 sm:mb-6">em itens sensoriais e de foco selecionados</p>
                   <div className="bg-[#FFB84D] text-[#2C5F7D] px-4 sm:px-6 py-3 rounded-lg inline-block mb-4 sm:mb-6 w-fit">
                     <p className="text-xs sm:text-sm mb-1 font-semibold">Use o cupom:</p>
                     <p className="text-2xl sm:text-3xl font-bold tracking-wider">TEA15</p>
                   </div>
-                  <p className="text-[#B8E6D5] text-sm mb-4 sm:mb-6">Ao entrar no BrinqueTEAndo Club. Desconto aplicado no checkout.</p>
+                  <p className="text-[#87CEEB] text-sm mb-4 sm:mb-6">Ao entrar no BrinqueTEAndo Club. Desconto aplicado no checkout.</p>
                   <Link to="/rewards" className="bg-[#FFB84D] text-[#2C5F7D] px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-[#F4A261] hover:scale-105 transition-all text-center w-fit text-sm sm:text-base">Quero participar</Link>
-                  <p className="text-xs text-[#B8E6D5] mt-3">Mais vantagens para sua família.</p>
+                  <p className="text-xs text-[#87CEEB] mt-3">Mais vantagens para sua família.</p>
                 </div>
               </div>
             </div>
@@ -940,7 +940,7 @@ export default function Homepage() {
               <div className="relative h-auto min-h-[250px] sm:min-h-[280px]">
                 {testimonials.map((testimonial, idx) => (
                   <div key={testimonial.name} className={`absolute inset-0 transition-all duration-1000 ${idx === currentTestimonial ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-                    <div className="bg-white rounded-[10px] shadow-xl p-6 sm:p-8 max-w-3xl mx-auto border border-[#E0F2FE]">
+                    <div className="bg-white rounded-[10px] shadow-xl p-6 sm:p-8 max-w-3xl mx-auto border border-[#87CEEB]">
                       <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
                         <img 
                             src={testimonial.image} 
@@ -967,7 +967,7 @@ export default function Homepage() {
               </div>
               <div className="flex justify-center gap-2 mt-6 sm:mt-8">
                 {testimonials.map((testimonial, idx) => (
-                  <button key={testimonial.name} onClick={() => setCurrentTestimonial(idx)} className={`h-2 rounded-full transition-all ${idx === currentTestimonial ? 'bg-[#2B88D9] w-8' : 'bg-[#B8E6D5]/40 w-2'}`} aria-label={`View testimonial ${idx + 1}`}/>
+                  <button key={testimonial.name} onClick={() => setCurrentTestimonial(idx)} className={`h-2 rounded-full transition-all ${idx === currentTestimonial ? 'bg-[#2B88D9] w-8' : 'bg-[#87CEEB]/40 w-2'}`} aria-label={`View testimonial ${idx + 1}`}/>
                 ))}
               </div>
             </div>
@@ -975,7 +975,7 @@ export default function Homepage() {
 
           
           {/* NEW: LOCATION-SPECIFIC SHIPPING SECTION */}
-          <section className="bg-gradient-to-b from-white to-[#E0F2FE] py-16 sm:py-20 mb-20 w-full">
+          <section className="bg-gradient-to-b from-white to-[#87CEEB] py-16 sm:py-20 mb-20 w-full">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
               <h2 className="text-[#2C5F7D] text-2xl sm:text-3xl md:text-4xl font-light text-center mb-4 tracking-wide">
                 Frete grátis na Baixada Santista
@@ -1096,14 +1096,14 @@ export default function Homepage() {
 
           {quizCompleted && quizResult && (
             <div className="fixed bottom-24 right-6 z-40 max-w-xs w-full">
-              <div className="bg-white border border-[#B8E6D5] shadow-xl rounded-2xl p-4">
+              <div className="bg-white border border-[#87CEEB] shadow-xl rounded-2xl p-4">
                 <p className="text-xs uppercase tracking-widest text-[#FF8C42] mb-1">Seu perfil</p>
                 <p className="text-[#2C5F7D] font-semibold mb-2">{quizResult.label}</p>
                 <div className="flex gap-2">
                   <Link to={quizResult.link} className="flex-1 text-center bg-[#2B88D9] text-white text-sm font-semibold px-3 py-2 rounded-lg hover:bg-[#2C5F7D] transition-colors">
                     Ver indicação
                   </Link>
-                  <button onClick={handleQuizReset} className="text-sm text-[#FF8C42] font-semibold px-3 py-2 rounded-lg border border-[#B8E6D5] hover:bg-[#E0F2FE] transition-colors">
+                  <button onClick={handleQuizReset} className="text-sm text-[#FF8C42] font-semibold px-3 py-2 rounded-lg border border-[#87CEEB] hover:bg-[#87CEEB] transition-colors">
                     Refazer
                   </button>
                 </div>
@@ -1126,7 +1126,7 @@ export default function Homepage() {
                 <p className="text-sm text-[#6B7280] mb-6">Escolha uma opção para receber recomendações personalizadas para TEA, TDAH e autismo.</p>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {quizOptions.map((option) => (
-                    <button key={option.id} onClick={() => handleQuizSelect(option)} className="text-left border border-[#E0F2FE] rounded-xl p-4 hover:border-[#FF8C42] hover:shadow-md transition-all">
+                    <button key={option.id} onClick={() => handleQuizSelect(option)} className="text-left border border-[#87CEEB] rounded-xl p-4 hover:border-[#FF8C42] hover:shadow-md transition-all">
                       <p className="text-[#2B88D9] font-semibold mb-1">{option.label}</p>
                       <p className="text-sm text-[#6B7280]">{option.description}</p>
                     </button>
@@ -1138,7 +1138,7 @@ export default function Homepage() {
 
           {chatOpen && (
             <div className="fixed bottom-24 right-6 z-40 w-80 max-w-[90vw]">
-              <div className="bg-white border border-[#B8E6D5] shadow-2xl rounded-2xl overflow-hidden">
+              <div className="bg-white border border-[#87CEEB] shadow-2xl rounded-2xl overflow-hidden">
                 <div className="bg-[#2B88D9] text-white px-4 py-3 flex items-center justify-between">
                   <div>
                     <p className="text-sm font-semibold">Chat especialista TEA/TDAH</p>
