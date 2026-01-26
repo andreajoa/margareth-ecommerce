@@ -358,6 +358,54 @@ button.reset:hover:not(:has(> *)) {
   text-decoration: none;
 }
 
+.mega-menu-mobile {
+  margin-top: 1rem;
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+}
+
+.mega-menu-mobile-group {
+  background: #ffffff;
+  border: 1px solid rgba(44, 95, 125, 0.1);
+  border-radius: 16px;
+  padding: 0.85rem;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.mega-menu-mobile-title {
+  color: #2c5f7d;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.mega-menu-mobile-links {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.mega-menu-mobile-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(77, 212, 232, 0.2);
+  color: #2b88d9;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 0.5rem 0.75rem;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.mega-menu-mobile-cta:hover {
+  background: rgba(77, 212, 232, 0.3);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
 @media (max-width: 80em) {
   .mega-menu-grid {
     grid-template-columns: minmax(0, 1fr) 260px;

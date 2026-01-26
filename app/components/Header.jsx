@@ -63,7 +63,10 @@ export function HeaderMenu({
       item.normalizedUrl === '' ||
       item.title?.toLowerCase() === 'home',
   );
-  const megaMenuGroups = buildMegaMenuGroups(normalizedItems);
+  const megaMenuGroups = buildMegaMenuGroups(
+    normalizedItems,
+    MEGA_MENU_FALLBACK,
+  );
   const megaMenuTrigger = megaMenuGroups[0]?.title || 'Explorar';
   const megaMenuTriggerUrl =
     megaMenuGroups[0]?.cta?.to ||
@@ -173,6 +176,38 @@ export function HeaderMenu({
           </NavLink>
         );
       })}
+      {viewport === 'mobile' && megaMenuGroups.length ? (
+        <div className="mega-menu-mobile">
+          {megaMenuGroups.map((group) => (
+            <div className="mega-menu-mobile-group" key={group.title}>
+              <h4 className="mega-menu-mobile-title">{group.title}</h4>
+              <div className="mega-menu-mobile-links">
+                {group.items.map((item) => (
+                  <NavLink
+                    key={item.label}
+                    className="mega-menu-link"
+                    end
+                    onClick={close}
+                    prefetch="intent"
+                    to={item.to}
+                  >
+                    {item.label}
+                  </NavLink>
+                ))}
+              </div>
+              <NavLink
+                className="mega-menu-mobile-cta"
+                end
+                onClick={close}
+                prefetch="intent"
+                to={group.cta.to}
+              >
+                {group.cta.label}
+              </NavLink>
+            </div>
+          ))}
+        </div>
+      ) : null}
     </nav>
   );
 }
@@ -320,7 +355,71 @@ const MEGA_MENU_CTA_LABELS = {
   'Apoio aos Pais': 'Aprender com a gente',
 };
 
-const buildMegaMenuGroups = (menuItems) => {
+const MEGA_MENU_FALLBACK = [
+  {
+    title: 'Brinquedos Terapêuticos',
+    items: [
+      {label: '🧠 Atenção & Foco', to: '/search?q=aten%C3%A7%C3%A3o%20foco'},
+      {label: '💬 Comunicação', to: '/search?q=comunica%C3%A7%C3%A3o'},
+      {label: '🖐 Coordenação Motora', to: '/search?q=coordena%C3%A7%C3%A3o%20motora'},
+      {label: '😌 Autorregulação Emocional', to: '/search?q=autorregula%C3%A7%C3%A3o%20emocional'},
+      {label: '🎯 Funções Executivas', to: '/search?q=fun%C3%A7%C3%B5es%20executivas'},
+      {label: '🧩 Sensorial', to: '/search?q=sensorial'},
+    ],
+    cta: {
+      label: 'Ver todos os brinquedos',
+      to: '/search?q=brinquedos%20terap%C3%AAuticos',
+    },
+  },
+  {
+    title: 'Por Necessidade',
+    items: [
+      {label: 'Crianças com TDAH', to: '/search?q=tdah'},
+      {label: 'Crianças com TEA', to: '/search?q=tea'},
+      {label: 'Ansiedade infantil', to: '/search?q=ansiedade%20infantil'},
+      {label: 'Dificuldade de socialização', to: '/search?q=socializa%C3%A7%C3%A3o'},
+      {label: 'Hipersensibilidade sensorial', to: '/search?q=hipersensibilidade%20sensorial'},
+      {label: 'Desenvolvimento cognitivo', to: '/search?q=desenvolvimento%20cognitivo'},
+    ],
+    cta: {label: 'Encontrar soluções', to: '/search?q=necessidades%20infantis'},
+  },
+  {
+    title: 'Por Idade',
+    items: [
+      {label: '2–4 anos', to: '/search?q=2-4%20anos'},
+      {label: '5–7 anos', to: '/search?q=5-7%20anos'},
+      {label: '8–10 anos', to: '/search?q=8-10%20anos'},
+      {label: '11+ anos', to: '/search?q=11%2B%20anos'},
+    ],
+    cta: {label: 'Ver por idade', to: '/search?q=idade'},
+  },
+  {
+    title: 'Ambiente & Rotina',
+    items: [
+      {label: 'Para escola', to: '/search?q=escola'},
+      {label: 'Para casa', to: '/search?q=casa'},
+      {label: 'Para terapias', to: '/search?q=terapia'},
+      {label: 'Para viagens', to: '/search?q=viagem'},
+      {label: 'Para momentos de calma', to: '/search?q=calma'},
+      {label: 'Para interação social', to: '/search?q=intera%C3%A7%C3%A3o%20social'},
+    ],
+    cta: {label: 'Montar rotina', to: '/search?q=rotina'},
+  },
+  {
+    title: 'Apoio aos Pais',
+    items: [
+      {label: 'Guias práticos', to: '/blogs/news'},
+      {label: 'Como escolher brinquedos', to: '/blogs/news'},
+      {label: 'Dicas para TDAH e TEA', to: '/blogs/news'},
+      {label: 'Conteúdo de especialistas', to: '/blogs/news'},
+      {label: 'Histórias reais', to: '/blogs/news'},
+      {label: 'Blog', to: '/blogs/news'},
+    ],
+    cta: {label: 'Aprender com a gente', to: '/blogs/news'},
+  },
+];
+
+const buildMegaMenuGroups = (menuItems, fallbackGroups) => {
   const menuGroups = menuItems.filter(
     (item) => item.items && item.items.length,
   );
@@ -330,7 +429,7 @@ const buildMegaMenuGroups = (menuItems) => {
   const remainingGroups = menuGroups.filter(
     (item) => !orderedGroups.includes(item),
   );
-  return [...orderedGroups, ...remainingGroups]
+  const builtGroups = [...orderedGroups, ...remainingGroups]
     .map((item) => {
       const children = (item.items || [])
         .map((child) => ({
@@ -349,6 +448,7 @@ const buildMegaMenuGroups = (menuItems) => {
       };
     })
     .filter((group) => group.items.length);
+  return builtGroups.length ? builtGroups : fallbackGroups;
 };
 
 /**
