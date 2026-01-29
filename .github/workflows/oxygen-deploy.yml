@@ -1,0 +1,46 @@
+name: Oxygen Deployment
+
+on:
+  push:
+    branches:
+      - main
+      - "*"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          npm ci
+
+      - name: Build
+        env:
+          PUBLIC_STOREFRONT_API_TOKEN: ${{ secrets.PUBLIC_STOREFRONT_API_TOKEN }}
+          PUBLIC_STORE_DOMAIN: ${{ secrets.PUBLIC_STORE_DOMAIN }}
+        run: |
+          npm run build
+
+      - name: Deploy to Oxygen
+        uses: shopify/oxygenctl-action@v3
+        with:
+          deployment_token: ${{ secrets.OXYGEN_DEPLOYMENT_TOKEN }}
+          oxygen_deployment_flags: --metadata=branch=${{ github.ref_name }}
+
+      - name: Create GitHub Deployment
+        if: always()
+        uses: shopify/github-deployment-action@v1
+        with:
+          token: ${{ github.token }}
+          environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'preview' }}
+          description: ${{ github.event.head_commit.message }}
