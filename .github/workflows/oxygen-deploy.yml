@@ -1,4 +1,4 @@
-name: Build
+name: Build and Deploy
 
 on:
   push:
@@ -25,3 +25,9 @@ jobs:
 
       - name: Build project
         run: npm run build
+
+      - name: Deploy to Oxygen
+        uses: shopify/oxygenctl-action@v4
+        with:
+          oxygen_deployment_token: ${{ secrets.OXYGEN_DEPLOYMENT_TOKEN }}
+        timeout-minutes: 5
