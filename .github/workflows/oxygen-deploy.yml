@@ -38,5 +38,5 @@ jobs:
       - name: Deploy to Oxygen
         uses: shopify/oxygenctl-action@v4
         with:
-          deployment_token: ${{ secrets.OXYGEN_DEPLOYMENT_TOKEN }}
+          oxygen_deployment_token: ${{ secrets.OXYGEN_DEPLOYMENT_TOKEN }}
         timeout-minutes: 5
