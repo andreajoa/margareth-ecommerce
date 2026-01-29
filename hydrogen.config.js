@@ -1,6 +1,4 @@
-import {defineConfig} from '@shopify/hydrogen/config';
-
-export default defineConfig({
+export default {
   shopify: {
     defaultCountryCode: 'BR',
     defaultLanguageCode: 'PT',
@@ -8,4 +6,4 @@ export default defineConfig({
     storefrontToken: process.env.PUBLIC_STOREFRONT_API_TOKEN || '',
     storefrontApiVersion: '2024-10',
   },
-});
+};

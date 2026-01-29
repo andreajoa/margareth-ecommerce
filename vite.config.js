@@ -1,14 +1,9 @@
 import {defineConfig} from 'vite';
-import {hydrogen} from '@shopify/hydrogen/vite';
-import {oxygen} from '@shopify/mini-oxygen/vite';
-import {vitePlugin as remix} from '@remix-run/dev';
+import {vitePlugin as remix} from '@shopify/cli-hydrogen/remix';
 
 export default defineConfig({
   plugins: [
-    hydrogen(),
-    oxygen(),
     remix({
-      presets: [hydrogen.preset()],
       future: {
         v3_fetcherPersist: true,
         v3_relativeSplatPath: true,
@@ -16,12 +11,4 @@ export default defineConfig({
       },
     }),
   ],
-  build: {
-    assetsInlineLimit: 0,
-  },
-  ssr: {
-    optimizeDeps: {
-      include: [],
-    },
-  },
 });
