@@ -1,0 +1,8 @@
+name = "brinqueteando"
+handle = "brinqueteando"
+scopes = ""
+
+[app_proxy]
+url = ""
+subpath = ""
+prefix = ""
