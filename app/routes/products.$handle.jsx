@@ -2,7 +2,7 @@ import { Link, useLoaderData } from '@remix-run/react';
 import { json } from '@remix-run/node';
 import { fetchShopify } from '../lib/shopify.js';
 import { PRODUCT_QUERY, PRODUCT_RECOMMENDATIONS_QUERY } from '../lib/queries.js';
-import { useCart } from '@shopify/hydrogen-react';
+import { useCart } from 'react';
 
 export const meta = ({ data }) => ([
   { title: `${data?.product?.title || 'Produto'} - BrinqueTEAndo` },
