@@ -1,5 +1,5 @@
 import {defineConfig} from 'vite';
-import {vitePlugin as remix} from '@shopify/cli-hydrogen/remix';
+import {vitePlugin as remix} from '@remix-run/dev';
 
 export default defineConfig({
   plugins: [
