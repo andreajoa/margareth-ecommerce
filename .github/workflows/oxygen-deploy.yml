@@ -26,11 +26,12 @@ jobs:
 
       - name: Build
         env:
-          PUBLIC_STOREFRONT_API_TOKEN: ${{ secrets.PUBLIC_STOREFRONT_API_TOKEN }}
-          PUBLIC_STORE_DOMAIN: ${{ secrets.PUBLIC_STORE_DOMAIN }}
+          PUBLIC_STOREFRONT_API_TOKEN: ${{ secrets.PUBLIC_STOREFRONT_API_TOKEN || 'shpat_placeholder' }}
+          PUBLIC_STORE_DOMAIN: ${{ secrets.PUBLIC_STORE_DOMAIN || 'uxst0j-qe.myshopify.com' }}
         run: npm run build
 
       - name: Deploy to Oxygen
+        if: vars.OXYGEN_ENABLED == 'true'
         uses: shopify/oxygenctl-action@v4
         with:
           deployment_token: ${{ secrets.OXYGEN_DEPLOYMENT_TOKEN }}
