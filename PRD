@@ -1,0 +1,1319 @@
+PRD: BrinqueTEAndo - Headless E-commerce for ADHD/Autism/ASD Educational Toys
+Project Overview
+Product Name: BrinqueTEAndo
+Technology Stack: Hydrogen (Shopify) + Oxygen Deploy + Shopify Backend
+Target Market: São Paulo Coast (Santos, São Vicente, Praia Grande, and surrounding coastal cities)
+Primary Language: Brazilian Portuguese
+Color Scheme:
+
+Primary: Light Blue (Background) #8ECAE7
+Secondary Colors: Red #CF111A, Yellow #DEC91F, Bright Blue #3292D8, Dark Blue #21388D, Brown/Maroon #7C3D36, Gray Blue #7D8FA4, Beige/Tan #EAD9B9
+
+
+1. PRODUCT PAGE (Priority 1)
+1.1 Visual Design Elements
+Autism-Themed Decorative Elements:
+
+Floating puzzle pieces (animated, subtle movement)
+Dragon illustrations/icons (friendly, playful style)
+Autism awareness ribbon motifs
+Sensory-friendly visual patterns
+Location: Decorative elements throughout product page
+
+1.2 Product Information Section
+Components:
+
+High-quality product image gallery (min 5 images)
+360° view option where applicable
+Product title (H1, optimized for SEO)
+Price display (prominent, accessible)
+SKU and availability status
+Detailed product description focusing on:
+
+Educational benefits for ADHD/Autism/ASD
+Age appropriateness
+Developmental skills targeted
+Safety certifications
+Materials used
+
+
+
+1.3 Educational Value Section
+Content Blocks:
+
+"Benefits for Development" accordion
+Therapist recommendations (if applicable)
+Age-appropriate skill development chart
+Video demonstrations (embedded YouTube/Vimeo)
+
+1.4 Add to Cart Functionality
+Features:
+
+Quantity selector
+Size/variant selector (if applicable)
+Primary CTA button: "ADICIONAR AO CARRINHO" (Light Blue #8ECAE7 background, Dark Blue #21388D text)
+Secondary CTA: "COMPRAR AGORA" (bypasses cart, direct to checkout)
+Stock indicator
+Estimated delivery time for São Paulo Coast region
+
+1.5 Trust Signals
+Elements:
+
+Free shipping badge (if applicable)
+Secure payment icons
+Return policy summary
+Customer reviews section (star rating + written reviews)
+"Recommended by Therapists" badge
+
+1.6 Related Products
+Smart Recommendation Logic:
+IF product_category = "sensory_toys" THEN
+  RECOMMEND other sensory toys + fidget items
+ELSE IF product_category = "educational_games" THEN
+  RECOMMEND similar age_range educational products
+ELSE IF product_age_range = "3-5" THEN
+  RECOMMEND products in same age_range
+END IF
+
+ALSO RECOMMEND:
+- Frequently bought together (based on order history)
+- Products viewed by others who purchased this item
+1.7 SEO Optimization
+Meta Elements:
+
+Title: "[Product Name] - Brinquedos Educativos para Autismo/TDAH | BrinqueTEAndo Santos"
+Description: Focus on educational benefits + location keywords
+Schema markup: Product, Review, Offer, Organization
+Alt text for all images: descriptive + keyword-rich
+Breadcrumb navigation
+
+Target Keywords:
+
+"brinquedos para autismo [city name]"
+"brinquedos educativos TDAH [region]"
+"brinquedos TEA Santos"
+"jogos pedagógicos autismo litoral SP"
+Long-tail variations
+
+
+2. COLLECTION PAGE (Priority 2)
+2.1 Dynamic Collection Fetching
+Technical Implementation:
+javascript// Fetch collections from Shopify Admin API
+const fetchCollections = async () => {
+  const collections = await shopify.collection.fetchAll();
+  return collections.map(collection => ({
+    handle: collection.handle,
+    title: collection.title,
+    description: collection.description,
+    image: collection.image,
+    products_count: collection.products.length
+  }));
+};
+2.2 Collection Categories
+Main Collections:
+
+Brinquedos Sensoriais
+Jogos Educativos
+Fidgets e Ansiedade
+Por Idade (3-5 anos, 6-8 anos, 9-12 anos, 13+)
+Por Habilidade (Motora Fina, Comunicação, Social, Cognitiva)
+Novidades
+Mais Vendidos
+Recomendados por Terapeutas
+
+2.3 Filter & Sort System
+Filters:
+
+Price range (slider)
+Age range (checkboxes)
+Skill development (checkboxes)
+Product type (checkboxes)
+Brand (checkboxes)
+In stock only (toggle)
+
+Sort Options:
+
+Relevância
+Menor Preço
+Maior Preço
+Mais Vendidos
+Novidades
+Melhor Avaliação
+
+2.4 Product Grid
+Layout:
+
+Responsive grid: 4 columns (desktop), 3 columns (tablet), 2 columns (mobile)
+Product card components:
+
+Product image (hover shows second image)
+Product title
+Price (with discount badge if applicable)
+Quick view button (modal popup)
+Add to cart button
+Wishlist icon
+"Novo" or "Recomendado" badges
+
+
+
+2.5 Collection Header
+Elements:
+
+Collection title (H1)
+Collection description (educational content about category)
+Benefit icons (visual representation of skills developed)
+Product count
+Active filters display
+
+2.6 SEO Optimization
+Per Collection:
+
+Title: "[Collection Name] - Brinquedos Educativos para Autismo/TDAH | BrinqueTEAndo Litoral SP"
+Meta description: Unique for each collection, location-focused
+Collection schema markup
+Canonical URLs
+Pagination handling (rel="next", rel="prev")
+
+
+3. HOMEPAGE (Priority 3)
+3.1 Hero Section
+Design:
+
+Full-width banner with hero image/video
+Animated floating puzzle pieces (CSS animations, subtle movement)
+Dragon illustration integrated into design (corner or background element)
+Headline: "Brinquedos que Transformam o Aprendizado" or similar
+Subheadline: Focus on ADHD/Autism benefits
+Primary CTA: "EXPLORAR BRINQUEDOS"
+Secondary CTA: "SOBRE NÓS"
+
+Autism-Themed Elements:
+
+Puzzle pieces: 5-7 pieces floating across hero section
+Dragon: Friendly dragon mascot in corner or as watermark
+Color blocks using brand colors as accent elements
+Sensory-friendly patterns in background
+
+3.2 Featured Collections Section
+Layout:
+
+3-4 collection cards displayed prominently
+Each card includes:
+
+Collection image
+Collection title
+Brief description (1-2 sentences)
+CTA button: "VER COLEÇÃO"
+
+
+Fetched dynamically from Shopify collections
+
+Technical Implementation:
+javascript// Fetch featured collections
+const featuredCollections = await fetchCollectionsByTag('featured');
+// or specify by handle
+const featuredHandles = ['sensory-toys', 'educational-games', 'fidgets', 'new-arrivals'];
+3.3 Best Sellers Section
+Components:
+
+Section title: "Mais Amados pelas Famílias"
+Product carousel/grid (8-12 products)
+Fetched from Shopify based on sales data
+Each product displays: image, title, price, rating, quick add button
+
+3.4 Educational Value Proposition
+Content Blocks (3-4 sections):
+
+Icon + Headline + Description format
+Topics:
+
+"Desenvolvimento Através da Brincadeira"
+"Recomendados por Terapeutas"
+"Segurança e Qualidade Garantidas"
+"Entrega Rápida no Litoral de SP"
+
+
+
+3.5 Knowledge/Blog Section
+Elements:
+
+Section title: "Aprenda Conosco"
+3-4 featured blog posts/articles
+Topics: ADHD strategies, autism support, developmental milestones
+Each card: featured image, title, excerpt, "Leia Mais" button
+Links to full blog (if integrated) or external resources
+
+3.6 Social Proof Section
+Components:
+
+Customer testimonials carousel
+Video testimonials (if available)
+Instagram feed integration (optional)
+Trust badges: secure payment, therapist-approved, safe toys
+
+3.7 Newsletter Signup Section
+Design:
+
+Background: Light Blue #8ECAE7
+Headline: "Receba Dicas e Novidades"
+Description: "Cadastre-se e receba conteúdo exclusivo sobre desenvolvimento infantil"
+Form fields: Nome, Email, WhatsApp
+CTA button: "CADASTRAR"
+Privacy statement link
+
+3.8 SEO Optimization
+Homepage Specific:
+
+Title: "BrinqueTEAndo - Brinquedos Educativos para Autismo, TDAH e TEA | Santos, São Vicente, Praia Grande"
+Meta description: Comprehensive description including location keywords and product benefits
+Schema markup: Organization, LocalBusiness, WebSite with SearchAction
+Structured data for featured products
+Internal linking strategy to all main collections
+Location-specific content blocks
+
+
+4. CART DRAWER (Essential Component)
+4.1 Drawer UI Design
+Visual Elements:
+
+Slide-in from right side
+Overlay backdrop (semi-transparent)
+Close button (X icon, top-right)
+Header: "SEU CARRINHO" with item count badge
+
+4.2 Cart Items Display
+Per Item:
+
+Product thumbnail (clickable to product page)
+Product title (clickable)
+Variant info (size, color, etc.)
+Quantity selector (+/- buttons)
+Unit price
+Line total
+Remove item icon (trash)
+
+4.3 Scarcity Timer
+Implementation:
+javascript// Start 10-minute countdown when item added to cart
+const CART_TIMER_DURATION = 10 * 60 * 1000; // 10 minutes
+
+const CartTimer = () => {
+  const [timeRemaining, setTimeRemaining] = useState(CART_TIMER_DURATION);
+  
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeRemaining(prev => {
+        if (prev <= 0) {
+          // Show urgency message
+          return 0;
+        }
+        return prev - 1000;
+      });
+    }, 1000);
+    
+    return () => clearInterval(timer);
+  }, []);
+  
+  return (
+    <div className="cart-timer">
+      <Icon name="clock" />
+      <span>Seu carrinho expira em: {formatTime(timeRemaining)}</span>
+      <ProgressBar percentage={(timeRemaining / CART_TIMER_DURATION) * 100} />
+    </div>
+  );
+};
+Visual Design:
+
+Red #CF111A color for urgency
+Clock icon
+Progress bar showing time remaining
+Message: "Complete sua compra em [MM:SS] para garantir disponibilidade"
+
+4.4 Smart Product Recommendations
+Recommendation Logic:
+javascriptconst getCartRecommendations = (cartItems) => {
+  // Logic 1: Frequently Bought Together
+  const productIds = cartItems.map(item => item.product.id);
+  const fbtProducts = await fetchFrequentlyBoughtTogether(productIds);
+  
+  // Logic 2: Complementary Products
+  const categories = cartItems.map(item => item.product.product_type);
+  const complementary = await fetchComplementaryProducts(categories);
+  
+  // Logic 3: Same Age Range
+  const ageRanges = cartItems.flatMap(item => item.product.tags.filter(tag => tag.includes('age-')));
+  const sameAge = await fetchProductsByAgeTags(ageRanges);
+  
+  // Combine and deduplicate
+  const recommendations = [...new Set([...fbtProducts, ...complementary, ...sameAge])]
+    .filter(product => !productIds.includes(product.id))
+    .slice(0, 4); // Limit to 4 recommendations
+  
+  return recommendations;
+};
+Display:
+
+Section title: "Complete sua Experiência"
+Horizontal scrollable carousel (4 products visible)
+Mini product cards: image, title, price, "+Adicionar" button
+Below cart items, above subtotal
+
+4.5 Cart Summary
+Components:
+
+Subtotal
+Shipping calculation (based on ZIP code input)
+Discount code field (if applicable)
+Estimated total
+Taxes included statement
+
+4.6 Checkout CTA
+Design:
+
+Full-width button
+Background: Bright Blue #3292D8
+Text: "FINALIZAR COMPRA" (white, bold)
+Secondary link: "Continuar Comprando" (text link, closes drawer)
+
+4.7 Checkout Integration
+Technical Implementation:
+javascriptconst handleCheckout = async () => {
+  // Ensure all cart data is synced with Shopify
+  const checkoutUrl = await createCheckout(cartItems);
+  
+  // Redirect to Shopify checkout
+  window.location.href = checkoutUrl;
+};
+Checkout Page:
+
+Uses Shopify native checkout
+Brand colors applied where possible (via Shopify theme settings)
+Return to store link after purchase
+
+4.8 Empty Cart State
+Display:
+
+Icon: Empty cart illustration
+Message: "Seu carrinho está vazio"
+CTA button: "DESCOBRIR BRINQUEDOS"
+Featured collections links
+
+
+5. POP-UP SYSTEM
+5.1 Email & WhatsApp Collection Pop-up
+Trigger Logic:
+javascriptconst EmailPopupManager = {
+  COOKIE_NAME: 'brinqueteando_email_popup',
+  MAX_VIEWS: 2,
+  COOLDOWN_DAYS: 10,
+  
+  shouldShow: () => {
+    const cookie = getCookie(COOKIE_NAME);
+    if (!cookie) return true;
+    
+    const { views, lastShown, subscribed } = JSON.parse(cookie);
+    
+    if (subscribed) return false;
+    
+    const daysSinceLastShown = (Date.now() - lastShown) / (1000 * 60 * 60 * 24);
+    
+    if (views >= MAX_VIEWS && daysSinceLastShown < COOLDOWN_DAYS) {
+      return false;
+    }
+    
+    if (daysSinceLastShown >= COOLDOWN_DAYS) {
+      // Reset counter after cooldown
+      return true;
+    }
+    
+    return views < MAX_VIEWS;
+  },
+  
+  recordView: () => {
+    const cookie = getCookie(COOKIE_NAME);
+    let data = cookie ? JSON.parse(cookie) : { views: 0, lastShown: Date.now(), subscribed: false };
+    
+    data.views += 1;
+    data.lastShown = Date.now();
+    
+    setCookie(COOKIE_NAME, JSON.stringify(data), 365); // 1 year expiry
+  },
+  
+  recordSubscription: () => {
+    const data = { views: MAX_VIEWS, lastShown: Date.now(), subscribed: true };
+    setCookie(COOKIE_NAME, JSON.stringify(data), 365);
+  }
+};
+Display Timing:
+
+Shows after 15 seconds on site (first visit)
+OR after scrolling 50% down the page
+Checks shouldShow() before displaying
+
+Design:
+
+Modal overlay (semi-transparent backdrop)
+Pop-up box: Light Blue #8ECAE7 background
+Puzzle piece decorative elements
+Close button (X, top-right)
+
+Content:
+
+Headline: "Junte-se à Comunidade BrinqueTEAndo! 🧩"
+Subheadline: "Receba dicas exclusivas, novidades e promoções especiais"
+Form fields:
+
+Nome (text input)
+Email (email input, required)
+WhatsApp (tel input with BR format mask, required)
+
+
+Checkbox: "Aceito receber comunicações" (required)
+CTA button: "CADASTRAR" (Dark Blue #21388D)
+Privacy link: "Política de Privacidade"
+
+Post-Submission:
+
+Success message: "Obrigado! Você está cadastrado 🎉"
+Auto-close after 3 seconds
+Call recordSubscription() to prevent future displays
+
+5.2 Exit Intent Pop-up (Discount)
+Trigger Logic:
+javascriptconst ExitPopupManager = {
+  COOKIE_NAME: 'brinqueteando_exit_popup',
+  MAX_VIEWS: 2,
+  COOLDOWN_DAYS: 10,
+  
+  shouldShow: () => {
+    // Same logic as EmailPopupManager
+    const cookie = getCookie(COOKIE_NAME);
+    if (!cookie) return true;
+    
+    const { views, lastShown, converted } = JSON.parse(cookie);
+    
+    if (converted) return false;
+    
+    const daysSinceLastShown = (Date.now() - lastShown) / (1000 * 60 * 60 * 24);
+    
+    if (views >= MAX_VIEWS && daysSinceLastShown < COOLDOWN_DAYS) {
+      return false;
+    }
+    
+    if (daysSinceLastShown >= COOLDOWN_DAYS) {
+      return true;
+    }
+    
+    return views < MAX_VIEWS;
+  },
+  
+  recordView: () => {
+    const cookie = getCookie(COOKIE_NAME);
+    let data = cookie ? JSON.parse(cookie) : { views: 0, lastShown: Date.now(), converted: false };
+    
+    data.views += 1;
+    data.lastShown = Date.now();
+    
+    setCookie(COOKIE_NAME, JSON.stringify(data), 365);
+  },
+  
+  recordConversion: () => {
+    const data = { views: MAX_VIEWS, lastShown: Date.now(), converted: true };
+    setCookie(COOKIE_NAME, JSON.stringify(data), 365);
+  }
+};
+Exit Intent Detection:
+javascriptdocument.addEventListener('mouseout', (e) => {
+  if (e.clientY <= 0 && ExitPopupManager.shouldShow()) {
+    showExitPopup();
+    ExitPopupManager.recordView();
+  }
+});
+
+// Mobile: detect back button or scroll to top aggressively
+let lastScrollTop = 0;
+window.addEventListener('scroll', () => {
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  if (scrollTop < lastScrollTop && scrollTop < 50 && ExitPopupManager.shouldShow()) {
+    showExitPopup();
+    ExitPopupManager.recordView();
+  }
+  lastScrollTop = scrollTop;
+}, false);
+Design:
+
+Modal overlay (darker, more prominent)
+Pop-up box: Red #CF111A accent with Light Blue #8ECAE7 background
+Dragon mascot illustration
+Close button (X, top-right)
+
+Content:
+
+Headline: "ESPERE! Não Vá Embora Ainda! 🐉"
+Subheadline: "Ganhe até 20% de desconto na sua primeira compra"
+Discount code display: Large, prominent code
+Discount tiers:
+
+10% OFF: Compras acima de R$ 100 - Código: PRIMEIRA10
+15% OFF: Compras acima de R$ 200 - Código: PRIMEIRA15
+20% OFF: Compras acima de R$ 300 - Código: PRIMEIRA20
+
+
+Expiry statement: "Válido por 24 horas"
+CTA button: "USAR MEU DESCONTO" (applies code to cart, closes popup)
+Secondary link: "Não, obrigado" (closes popup)
+
+Post-Use:
+
+If user clicks CTA, call recordConversion() to prevent future displays
+Apply discount code to cart automatically
+Show confirmation toast: "Desconto aplicado! 🎉"
+
+
+6. HEADER & NAVIGATION
+6.1 Main Menu Fetching
+Technical Implementation:
+javascript// Fetch main navigation from Shopify menu
+const fetchMainMenu = async () => {
+  const menu = await shopify.menu.fetchByHandle('main-menu');
+  return menu.items.map(item => ({
+    title: item.title,
+    url: item.url,
+    items: item.items // Sub-menu items
+  }));
+};
+Menu Structure:
+
+Logo (left, links to homepage)
+Main navigation (center):
+
+INÍCIO
+COLEÇÕES (dropdown with all collections)
+POR IDADE (dropdown)
+POR HABILIDADE (dropdown)
+SOBRE NÓS
+BLOG / APRENDA
+CONTATO
+
+
+Icons (right):
+
+Search icon (opens search modal)
+User account icon
+Cart icon with item count badge
+
+
+
+6.2 Mobile Navigation
+Design:
+
+Hamburger menu icon (left)
+Logo (center)
+Cart icon (right)
+Drawer menu slides in from left
+Full-screen overlay
+
+
+7. FOOTER
+7.1 Footer Menu Fetching
+Technical Implementation:
+javascript// Fetch footer navigation from Shopify
+const fetchFooterMenu = async () => {
+  const footerMenu = await shopify.menu.fetchByHandle('footer-menu');
+  return footerMenu.items;
+};
+```
+
+**Footer Structure:**
+
+**Column 1: Sobre BrinqueTEAndo**
+- About us link
+- Our mission
+- Therapist partnerships
+- Contact us
+
+**Column 2: Atendimento**
+- Shipping & delivery
+- Returns & exchanges
+- Payment methods
+- FAQ
+- Privacy policy
+- Terms of service
+
+**Column 3: Coleções**
+- Dynamically fetched collection links (top 6-8 collections)
+
+**Column 4: Fale Conosco**
+- Email: contato@brinqueteando.com.br
+- WhatsApp: (13) 9XXXX-XXXX
+- Address: Santos, SP (if physical store)
+- Business hours
+
+**Bottom Row:**
+- Social media icons (Facebook, Instagram, YouTube, Pinterest)
+- Payment method icons
+- Security badges
+- Copyright notice: "© 2026 BrinqueTEAndo. Todos os direitos reservados."
+
+---
+
+## 8. SEO STRATEGY (Cutting-Edge)
+
+### 8.1 Target Location Keywords
+**Primary Locations:**
+- Santos
+- São Vicente
+- Praia Grande
+- Guarujá
+- Bertioga
+- Cubatão
+- Mongaguá
+- Itanhaém
+- Peruíbe
+- Generic: "litoral de São Paulo", "litoral paulista", "baixada santista"
+
+### 8.2 Keyword Strategy
+**Primary Keywords:**
+- brinquedos para autismo [location]
+- brinquedos educativos TDAH [location]
+- brinquedos TEA [location]
+- jogos pedagógicos autismo [location]
+- brinquedos sensoriais [location]
+
+**Long-Tail Keywords:**
+- onde comprar brinquedos para autismo em [location]
+- melhores brinquedos educativos para TDAH [location]
+- loja de brinquedos para TEA [location]
+- brinquedos recomendados para autismo [location]
+- jogos para crianças com TDAH [location]
+
+### 8.3 On-Page SEO Elements
+**Every Page:**
+- Unique, keyword-rich title tags (55-60 characters)
+- Compelling meta descriptions (150-160 characters)
+- H1 tag (one per page, keyword-focused)
+- H2-H6 hierarchy maintained
+- Image alt text (descriptive, includes keywords where natural)
+- Internal linking strategy
+- Breadcrumb navigation
+- Clean URL structure: /collections/brinquedos-sensoriais
+
+### 8.4 Technical SEO
+**Implementation:**
+- XML sitemap generated and submitted
+- Robots.txt configured
+- Canonical URLs on all pages
+- Structured data (Schema.org):
+  - Organization
+  - LocalBusiness
+  - Product
+  - BreadcrumbList
+  - Review / AggregateRating
+  - WebSite with SearchAction
+  - FAQPage (on relevant pages)
+- Mobile-first indexing compliant
+- Core Web Vitals optimized:
+  - LCP < 2.5s
+  - FID < 100ms
+  - CLS < 0.1
+- HTTPS enabled
+- Lazy loading for images below fold
+- Optimized image formats (WebP with fallbacks)
+
+### 8.5 Content SEO
+**Blog/Knowledge Base:**
+- Educational articles targeting informational keywords:
+  - "Como escolher brinquedos para crianças autistas"
+  - "Melhores atividades para crianças com TDAH"
+  - "Desenvolvimento sensorial em crianças TEA"
+  - "Guia de presentes para crianças autistas"
+- Location-specific content:
+  - "Onde encontrar brinquedos educativos em Santos"
+  - "Eventos de conscientização sobre autismo no litoral de SP"
+- Expert content (therapist interviews, case studies)
+
+### 8.6 Local SEO
+**Google Business Profile:**
+- Complete profile setup
+- Accurate business information
+- Location: Santos or primary city
+- Categories: Toy store, Educational supply store
+- Service area: All coastal cities listed
+- Posts and updates regularly
+- Customer reviews encouraged
+
+**Local Citations:**
+- Consistent NAP (Name, Address, Phone) across web
+- Listed in relevant directories
+- Local backlinks (partnerships, sponsorships)
+
+### 8.7 Link Building Strategy
+**Focus:**
+- Autism/ADHD parent blogs and forums
+- Educational resource sites
+- Therapist and special education blogs
+- Local São Paulo parenting sites
+- Partnerships with therapy centers
+- Guest posting on relevant blogs
+
+---
+
+## 9. TECHNICAL SPECIFICATIONS
+
+### 9.1 Hydrogen Framework
+**Technology Stack:**
+- Shopify Hydrogen (React-based framework)
+- Oxygen deployment
+- Shopify Storefront API for data fetching
+- Shopify Admin API for backend operations
+
+### 9.2 Performance Requirements
+**Targets:**
+- Page load time: < 2 seconds
+- Time to Interactive: < 3.5 seconds
+- Lighthouse score: 90+ on all metrics
+- Mobile-optimized (responsive design)
+
+### 9.3 Accessibility (WCAG 2.1 AA)
+**Compliance:**
+- Semantic HTML
+- ARIA labels where appropriate
+- Keyboard navigation support
+- Color contrast ratios meet standards
+- Alt text for all images
+- Focus indicators visible
+- Skip to content links
+
+### 9.4 Browser Support
+**Compatibility:**
+- Chrome (latest 2 versions)
+- Firefox (latest 2 versions)
+- Safari (latest 2 versions)
+- Edge (latest 2 versions)
+- Mobile: iOS Safari, Chrome Android
+
+### 9.5 Analytics & Tracking
+**Implementation:**
+- Google Analytics 4
+- Google Tag Manager
+- Facebook Pixel (optional, for ads)
+- Hotjar or similar (heatmaps, user recordings)
+- Shopify Analytics
+
+**Key Events to Track:**
+- Page views
+- Product views
+- Add to cart
+- Checkout initiated
+- Purchase completed
+- Pop-up views / conversions
+- Newsletter signups
+- Exit intent triggered
+- Search queries
+- Collection/category views
+
+---
+
+## 10. CONTENT REQUIREMENTS (Brazilian Portuguese)
+
+### 10.1 Tone of Voice
+**Brand Voice:**
+- Warm and empathetic
+- Educational but not condescending
+- Supportive of parents/caregivers
+- Celebrating neurodiversity
+- Professional yet approachable
+- Action-oriented
+
+**Example Phrases:**
+- "Transformando brincadeira em aprendizado"
+- "Cada criança é única, cada brinquedo uma oportunidade"
+- "Desenvolvendo potenciais, celebrando conquistas"
+- "Apoiando famílias, fortalecendo habilidades"
+
+### 10.2 Product Descriptions Template
+**Structure:**
+```
+[Product Name]
+
+[Opening Hook - emotional benefit]
+
+[What it is - 2-3 sentences describing the toy]
+
+[Educational Benefits - bullet points]
+- Desenvolvimento de [skill]
+- Estimula [area]
+- Ajuda com [challenge]
+
+[How to Use - brief instructions]
+
+[Specifications]
+- Idade recomendada:
+- Materiais:
+- Dimensões:
+- Certificações:
+
+[Trust Signal]
+"Recomendado por terapeutas ocupacionais" ou similar
+10.3 Collection Descriptions
+Format:
+
+Opening paragraph (why this collection matters)
+Benefits of products in this category
+How to choose the right product
+Call to action to explore
+
+10.4 Educational Content Topics
+Blog Post Ideas:
+
+Guia definitivo de brinquedos sensoriais
+Como criar um espaço sensorial em casa
+Atividades de regulação emocional para crianças
+Dicas de organização para famílias com crianças TDAH
+Marcos de desenvolvimento: o que esperar
+Como usar brinquedos educativos efetivamente
+
+
+11. DESIGN SYSTEM
+11.1 Typography
+Primary Font: Modern sans-serif (e.g., Inter, Poppins, or similar)
+
+Headings: Bold, large scale
+Body: Regular weight, comfortable reading size (16px base)
+Captions: Smaller, lighter weight
+
+11.2 Color Usage Guidelines
+Primary (Light Blue #8ECAE7):
+
+Backgrounds (sections, cards)
+Hover states
+Accent elements
+
+Secondary (Bright Blue #3292D8):
+
+Primary CTA buttons
+Links
+Active states
+
+Accent Colors:
+
+Red #CF111A: Urgency (timers, low stock, exit pop-ups)
+Yellow #DEC91F: Highlights, new badges, special offers
+Dark Blue #21388D: Secondary buttons, text on light backgrounds
+Brown/Maroon #7C3D36: Footer, alternative text color
+Gray Blue #7D8FA4: Disabled states, secondary text
+Beige/Tan #EAD9B9: Alternative background, card backgrounds
+
+11.3 Spacing System
+
+Base unit: 8px
+Spacing scale: 8px, 16px, 24px, 32px, 48px, 64px, 96px
+
+11.4 Component Library
+Reusable Components:
+
+Button (primary, secondary, text)
+Card (product, collection, blog)
+Modal / Pop-up
+Drawer (cart, menu)
+Input fields (text, email, tel, select)
+Checkbox / Radio
+Badge (new, sale, low stock)
+Icon system (consistent set)
+Carousel / Slider
+Accordion
+Tabs
+Progress bar
+Toast notifications
+
+
+12. AUTISM-SPECIFIC DESIGN CONSIDERATIONS
+12.1 Sensory-Friendly Design
+Principles:
+
+No autoplay videos with sound (unless user initiates)
+No flashing or strobing animations
+Subtle, gentle animations (puzzle pieces float slowly)
+High contrast for readability
+Option to reduce motion (respect prefers-reduced-motion)
+Clear, simple navigation
+Minimal distractions
+
+12.2 Inclusive Language
+Guidelines:
+
+Person-first and identity-first language both acceptable
+"Crianças autistas" OR "crianças com autismo"
+Focus on strengths and abilities
+Avoid infantilizing language
+Celebrate neurodiversity
+Acknowledge challenges without negativity
+
+12.3 Visual Elements
+Autism Symbolism:
+
+Puzzle pieces: Traditionally associated with autism awareness
+Rainbow infinity symbol: Neurodiversity symbol (consider including)
+Dragon: Friendly, playful mascot representing strength and uniqueness
+Use diverse, inclusive imagery of children
+
+
+13. CONVERSION OPTIMIZATION
+13.1 Trust Signals Throughout Site
+Elements:
+
+Security badges (SSL, secure payment)
+Money-back guarantee
+Free shipping threshold clearly stated
+Return policy prominently displayed
+Customer reviews visible on every product page
+Therapist endorsements / testimonials
+"As seen in" media mentions (if applicable)
+Certified safe toys badges
+
+13.2 Urgency & Scarcity Tactics
+Ethical Implementation:
+
+Low stock indicators (when genuinely low)
+Limited-time offers (real deadlines)
+Cart timer (as specified)
+"X people viewing this" (if tracking implemented)
+Seasonal collections
+No fake scarcity - build real trust
+
+13.3 Social Proof
+Display:
+
+Review count + average rating on product cards
+Recent purchases notification (e.g., "Maria from Santos purchased this 2 hours ago")
+User-generated content (photos, videos)
+Testimonial section on homepage
+Case studies / success stories
+
+13.4 Friction Reduction
+Checkout:
+
+Guest checkout option
+Auto-fill address via ZIP code
+Multiple payment options (PIX, credit card, boleto)
+Clear progress indicators
+No surprise costs (shipping shown early)
+Save cart for later functionality
+Wishlist feature
+
+
+14. CUSTOMER SUPPORT INTEGRATION
+14.1 WhatsApp Integration
+Implementation:
+
+Floating WhatsApp button (bottom-right corner)
+Click opens WhatsApp chat with pre-filled message:
+"Olá! Gostaria de saber mais sobre os produtos BrinqueTEAndo."
+WhatsApp number collected in pop-up stored for follow-ups
+
+14.2 Live Chat (Optional)
+Features:
+
+Chatbot for common questions (operating hours, shipping, returns)
+Escalation to human support during business hours
+Collect email if offline for follow-up
+
+14.3 FAQ Page
+Categories:
+
+Shipping & Delivery
+Returns & Exchanges
+Product Information
+Payment Methods
+About Autism/ADHD/ASD
+Account Management
+
+14.4 Contact Methods
+Display on Contact Page:
+
+Email: contato@brinqueteando.com.br
+WhatsApp: (13) 9XXXX-XXXX
+Phone (if applicable)
+Contact form
+Business hours clearly stated
+Address (if physical location)
+
+
+15. IMPLEMENTATION PHASES
+Phase 1: Foundation (Weeks 1-2)
+
+Shopify store setup
+Hydrogen project initialization
+Design system implementation
+Color scheme & typography applied
+Basic routing structure
+
+Phase 2: Product Page (Weeks 3-4)
+
+Product template design & development
+Image gallery implementation
+Add to cart functionality
+Related products recommendation system
+SEO optimization for product pages
+
+Phase 3: Collection Page (Weeks 5-6)
+
+Collection template design & development
+Filter & sort functionality
+Dynamic collection fetching from Shopify
+Pagination implementation
+SEO optimization for collections
+
+Phase 4: Homepage (Weeks 7-8)
+
+Hero section with autism-themed elements
+Featured collections integration
+Best sellers section
+Educational content blocks
+Newsletter signup
+SEO optimization
+
+Phase 5: Cart Drawer (Week 9)
+
+Drawer UI development
+Scarcity timer implementation
+Smart recommendation logic
+Checkout integration
+
+Phase 6: Pop-up System (Week 10)
+
+Email/WhatsApp collection pop-up
+Exit intent pop-up with discount
+Cookie management for view limits
+A/B testing setup
+
+Phase 7: Header & Footer (Week 11)
+
+Dynamic menu fetching
+Mobile navigation
+Footer structure with dynamic links
+Search functionality
+
+Phase 8: Testing & Optimization (Weeks 12-13)
+
+Cross-browser testing
+Mobile responsiveness testing
+Performance optimization
+Accessibility audit
+SEO audit
+User testing
+
+Phase 9: Launch Preparation (Week 14)
+
+Content population
+Product uploads
+Final QA
+Analytics setup
+Google Business Profile setup
+Pre-launch marketing
+
+Phase 10: Launch & Post-Launch (Week 15+)
+
+Soft launch
+Monitor analytics
+Gather user feedback
+Iterate on conversion optimization
+Content marketing initiation
+
+
+16. SUCCESS METRICS (KPIs)
+16.1 Traffic Metrics
+
+Organic search traffic (target: 60%+ from organic)
+Direct traffic
+Referral traffic
+Geographic distribution (focus on São Paulo coast)
+
+16.2 Engagement Metrics
+
+Bounce rate (target: <50%)
+Average session duration (target: >2 minutes)
+Pages per session (target: >3)
+Scroll depth
+
+16.3 Conversion Metrics
+
+Conversion rate (target: 2-3%)
+Average order value (establish baseline, then optimize)
+Cart abandonment rate (target: <70%)
+Email signup rate (target: 3-5% of visitors)
+Exit pop-up conversion rate (target: 5-10%)
+
+16.4 SEO Metrics
+
+Organic keyword rankings (track top 20 keywords)
+Organic traffic growth month-over-month
+Backlink growth
+Domain authority improvement
+Local pack appearances
+
+16.5 Customer Metrics
+
+Customer acquisition cost (CAC)
+Customer lifetime value (CLV)
+Repeat purchase rate
+Net Promoter Score (NPS)
+Review quantity and average rating
+
+
+17. RISK MITIGATION
+17.1 Technical Risks
+Risk: Hydrogen framework learning curve
+Mitigation: Allocate time for team training, use Shopify documentation, consider Shopify partners for consultation
+Risk: Performance issues with large product catalogs
+Mitigation: Implement lazy loading, optimize images, use CDN, monitor Core Web Vitals
+Risk: Pop-up blocking by browsers
+Mitigation: Ensure pop-ups comply with browser standards, test across browsers, provide alternative signup paths
+17.2 Business Risks
+Risk: Low initial traffic
+Mitigation: Invest in SEO from launch, consider paid ads for quick wins, leverage social media, partner with local organizations
+Risk: High cart abandonment
+Mitigation: Optimize checkout flow, offer multiple payment methods, implement retargeting emails, reduce shipping costs
+Risk: Competition from established stores
+Mitigation: Focus on niche positioning (ADHD/Autism specific), excellent customer service, educational content, community building
+
+18. FUTURE ENHANCEMENTS (Post-Launch)
+18.1 Phase 2 Features
+
+Customer account dashboard with order history
+Wishlist functionality
+Product comparison tool
+Advanced search with filters
+Personalized product recommendations based on browsing history
+
+18.2 Phase 3 Features
+
+Subscription service for recurring toy deliveries
+Gift registry for birthdays/holidays
+Loyalty program / rewards points
+Referral program
+Virtual consultations with therapists
+
+18.3 Phase 4 Features
+
+AR/VR try-before-you-buy for select products
+Community forum for parents
+Video library of product demonstrations
+Mobile app (iOS/Android)
+Multi-language support (if expanding beyond Brazil)
+
+
+19. CONTENT CALENDAR (First 3 Months)
+Month 1: Launch Focus
+Blog Posts:
+
+"Bem-vindo à BrinqueTEAndo: Nossa Missão"
+"Guia Completo de Brinquedos Sensoriais"
+"Como Escolher Brinquedos Educativos para Autismo"
+
+Social Media:
+
+Product spotlights (3x/week)
+Educational tips (2x/week)
+Behind-the-scenes content
+Customer testimonials
+
+Email:
+
+Welcome series (3 emails)
+New product announcements
+Educational content digest
+
+Month 2: Engagement Building
+Blog Posts:
+
+"Atividades de Regulação Emocional para Crianças"
+"Dicas de Organização para Famílias com TDAH"
+"Entrevista com Terapeuta Ocupacional"
+
+Social Media:
+
+User-generated content
+Polls and questions
+Educational infographics
+Video product demonstrations
+
+Email:
+
+Abandoned cart series
+Product recommendation based on browsing
+Educational content
+
+Month 3: Conversion Optimization
+Blog Posts:
+
+"Guia de Presentes para Crianças Autistas"
+"Marcos de Desenvolvimento: O Que Esperar"
+"Como Criar um Espaço Sensorial em Casa"
+
+Social Media:
+
+Seasonal campaigns
+Limited-time offers
+Customer success stories
+Live Q&A sessions
+
+Email:
+
+Segmented campaigns based on purchase history
+Win-back campaigns for inactive subscribers
+Referral program launch
+
+
+20. LEGAL & COMPLIANCE
+20.1 Privacy Policy (LGPD Compliance)
+Requirements:
+
+Clear privacy policy in Brazilian Portuguese
+Explain data collection practices
+State purpose of data usage
+Provide contact for data requests
+Cookie consent banner
+Right to deletion process
+
+20.2 Terms of Service
+Include:
+
+Product descriptions accuracy
+Pricing policies
+Shipping and delivery terms
+Return and refund policies
+Limitation of liability
+Dispute resolution
+
+20.3 Product Safety
+Compliance:
+
+INMETRO certification for toys (Brazil)
+Age warnings on products
+Choking hazard warnings
+Material safety information
+Proper labeling in Portuguese
+
+20.4 Accessibility Statement
+Publish:
+
+Commitment to WCAG 2.1 AA standards
+Known limitations
+Feedback mechanism for accessibility issues
+Contact information for assistance
+
+
+CONCLUSION
+This PRD outlines a comprehensive, cutting-edge e-commerce solution for BrinqueTEAndo, specifically designed to serve families with ADHD, Autism, and ASD children in the São Paulo coastal region. The headless architecture using Hydrogen and Oxygen provides flexibility, performance, and scalability, while the thoughtful autism-specific design elements and educational focus differentiate the brand in the market.
+Key success factors:
+
+Niche Focus: Specialized for ADHD/Autism/ASD educational toys
+Local SEO: Hyper-targeted to São Paulo coast cities
+Educational Content: Positions brand as trusted resource, not just retailer
+Conversion Optimization: Smart pop-ups, cart drawer features, and scarcity tactics
+Sensory-Friendly Design: Respectful of neurodivergent users' needs
+Technical Excellence: Fast, accessible, SEO-optimized platform
+
+By following this PRD and executing on the phased implementation plan, BrinqueTEAndo will be positioned to capture the underserved market of families seeking quality educational toys for neurodivergent children in the São Paulo coastal region.

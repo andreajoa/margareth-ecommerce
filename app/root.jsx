@@ -1,219 +1,89 @@
-import {Analytics, getShopAnalytics, useNonce} from '@shopify/hydrogen';
+import { json } from '@remix-run/node';
 import {
-  Outlet,
-  useRouteError,
-  isRouteErrorResponse,
   Links,
   Meta,
+  Outlet,
   Scripts,
   ScrollRestoration,
-  useRouteLoaderData,
-} from 'react-router';
-import favicon from '~/assets/favicon.svg';
-import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
-import resetStyles from '~/styles/reset.css?url';
-import appStyles from '~/styles/app.css?url';
-import tailwindCss from './styles/tailwind.css?url';
-import {PageLayout} from './components/PageLayout';
+  useLoaderData,
+} from '@remix-run/react';
+import { ShopifyProvider, CartProvider } from '@shopify/hydrogen-react';
+import Header from './components/Header.jsx';
+import Footer from './components/Footer.jsx';
+import { fetchShopify } from './lib/shopify.js';
+import { MENU_QUERY } from './lib/queries.js';
 
-/**
- * This is important to avoid re-fetching root queries on sub-navigations
- * @type {ShouldRevalidateFunction}
- */
-export const shouldRevalidate = ({formMethod, currentUrl, nextUrl}) => {
-  // revalidate when a mutation is performed e.g add to cart, login...
-  if (formMethod && formMethod !== 'GET') return true;
+export const meta = () => [{ title: 'BrinqueTEAndo' }];
 
-  // revalidate when manually revalidating via useRevalidator
-  if (currentUrl.toString() === nextUrl.toString()) return true;
+export const links = () => [
+  { rel: 'stylesheet', href: '/app.css' },
+];
 
-  // Defaulting to no revalidation for root loader data to improve performance.
-  // When using this feature, you risk your UI getting out of sync with your server.
-  // Use with caution. If you are uncomfortable with this optimization, update the
-  // line below to `return defaultShouldRevalidate` instead.
-  // For more details see: https://remix.run/docs/en/main/route/should-revalidate
-  return false;
-};
+export async function loader() {
+  // Fetch dynamic menus from Shopify (if env is configured)
+  let header = null;
+  let footer = null;
+  try {
+    header = (await fetchShopify(MENU_QUERY, { handle: 'main-menu' }))?.menu || null;
+    footer = (await fetchShopify(MENU_QUERY, { handle: 'footer-menu' }))?.menu || null;
+  } catch (_) {
+    // Keep static navigation if fetching fails
+  }
 
-/**
- * The main and reset stylesheets are added in the Layout component
- * to prevent a bug in development HMR updates.
- *
- * This avoids the "failed to execute 'insertBefore' on 'Node'" error
- * that occurs after editing and navigating to another page.
- *
- * It's a temporary fix until the issue is resolved.
- * https://github.com/remix-run/remix/issues/9242
- */
-export function links() {
-  return [
-    {
-      rel: 'preconnect',
-      href: 'https://cdn.shopify.com',
+  return json({
+    shop: {
+      storeDomain: process.env.PUBLIC_STORE_DOMAIN || '',
+      storefrontToken: process.env.PUBLIC_STOREFRONT_API_TOKEN || '',
+      apiVersion: '2024-10',
+      country: 'BR',
+      language: 'PT_BR',
     },
-    {
-      rel: 'preconnect',
-      href: 'https://shop.app',
-    },
-    {rel: 'icon', type: 'image/svg+xml', href: favicon},
-  ];
+    menus: { header, footer },
+  });
 }
 
-/**
- * @param {Route.LoaderArgs} args
- */
-export async function loader(args) {
-  // Start fetching non-critical data without blocking time to first byte
-  const deferredData = loadDeferredData(args);
-
-  // Await the critical data required to render initial state of the page
-  const criticalData = await loadCriticalData(args);
-
-  const {storefront, env} = args.context;
-
-  return {
-    ...deferredData,
-    ...criticalData,
-    publicStoreDomain: env.PUBLIC_STORE_DOMAIN,
-    shop: getShopAnalytics({
-      storefront,
-      publicStorefrontId: env.PUBLIC_STOREFRONT_ID,
-    }),
-    consent: {
-      checkoutDomain: env.PUBLIC_CHECKOUT_DOMAIN,
-      storefrontAccessToken: env.PUBLIC_STOREFRONT_API_TOKEN,
-      withPrivacyBanner: false,
-      // localize the privacy banner
-      country: args.context.storefront.i18n.country,
-      language: args.context.storefront.i18n.language,
-    },
-  };
-}
-
-/**
- * Load data necessary for rendering content above the fold. This is the critical data
- * needed to render the page. If it's unavailable, the whole page should 400 or 500 error.
- * @param {Route.LoaderArgs}
- */
-async function loadCriticalData({context}) {
-  const {storefront} = context;
-
-  const [header] = await Promise.all([
-    storefront.query(HEADER_QUERY, {
-      cache: storefront.CacheLong(),
-      variables: {
-        headerMenuHandle: 'main-menu', // Adjust to your header menu handle
-      },
-    }),
-    // Add other queries here, so that they are loaded in parallel
-  ]);
-
-  return {header};
-}
-
-/**
- * Load data for rendering content below the fold. This data is deferred and will be
- * fetched after the initial page load. If it's unavailable, the page should still 200.
- * Make sure to not throw any errors here, as it will cause the page to 500.
- * @param {Route.LoaderArgs}
- */
-function loadDeferredData({context}) {
-  const {storefront, customerAccount, cart} = context;
-
-  // defer the footer query (below the fold)
-  const footer = storefront
-    .query(FOOTER_QUERY, {
-      cache: storefront.CacheLong(),
-      variables: {
-        footerMenuHandle: 'footer', // Adjust to your footer menu handle
-      },
-    })
-    .catch((error) => {
-      // Log query errors, but don't throw them so the page can still render
-      console.error(error);
-      return null;
-    });
-  return {
-    cart: cart.get(),
-    isLoggedIn: customerAccount.isLoggedIn(),
-    footer,
-  };
-}
-
-/**
- * @param {{children?: React.ReactNode}}
- */
-export function Layout({children}) {
-  const nonce = useNonce();
-
+export default function App() {
+  const data = useLoaderData();
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <link rel="stylesheet" href={tailwindCss}></link>
-        <link rel="stylesheet" href={resetStyles}></link>
-        <link rel="stylesheet" href={appStyles}></link>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        <style>{`
+          :root {
+            --brand-blue-light: #8ECAE7;
+            --brand-blue-dark: #21388D;
+            --brand-blue: #3292D8;
+            --brand-red: #CF111A;
+            --brand-yellow: #DEC91F;
+            --brand-gray-blue: #7D8FA4;
+            --brand-beige: #EAD9B9;
+          }
+          body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, 'Noto Sans', sans-serif; background: #fff; color: #111; }
+          a { color: var(--brand-blue); text-decoration: none; }
+          .container { max-width: 1200px; margin: 0 auto; padding: 16px; }
+          .btn-primary { background: var(--brand-blue-light); color: var(--brand-blue-dark); padding: 12px 20px; border-radius: 8px; font-weight: 700; border: none; cursor: pointer; }
+          .btn-secondary { background: var(--brand-blue); color: #fff; padding: 12px 20px; border-radius: 8px; font-weight: 700; border: none; cursor: pointer; }
+          header { padding: 12px 16px; border-bottom: 1px solid #eee; }
+          header .brand { font-weight: 800; color: var(--brand-blue-dark); }
+          footer { margin-top: 48px; padding: 24px 16px; background: #f8fafc; border-top: 1px solid #eee; }
+        `}</style>
       </head>
       <body>
-        {children}
-        <ScrollRestoration nonce={nonce} />
-        <Scripts nonce={nonce} />
+        <ShopifyProvider storefrontApiVersion={data.shop.apiVersion} storeDomain={`https://${data.shop.storeDomain}`} storefrontToken={data.shop.storefrontToken} country={data.shop.country} language={data.shop.language}>
+          <CartProvider>
+            <Header menu={data.menus.header} />
+            <main className="container">
+              <Outlet />
+            </main>
+            <Footer menu={data.menus.footer} />
+          </CartProvider>
+        </ShopifyProvider>
+        <ScrollRestoration />
+        <Scripts />
       </body>
     </html>
   );
 }
-
-export default function App() {
-  /** @type {RootLoader} */
-  const data = useRouteLoaderData('root');
-
-  if (!data) {
-    return <Outlet />;
-  }
-
-  return (
-    <Analytics.Provider
-      cart={data.cart}
-      shop={data.shop}
-      consent={data.consent}
-    >
-      <PageLayout {...data}>
-        <Outlet />
-      </PageLayout>
-    </Analytics.Provider>
-  );
-}
-
-export function ErrorBoundary() {
-  const error = useRouteError();
-  let errorMessage = 'Unknown error';
-  let errorStatus = 500;
-
-  if (isRouteErrorResponse(error)) {
-    errorMessage = error?.data?.message ?? error.data;
-    errorStatus = error.status;
-  } else if (error instanceof Error) {
-    errorMessage = error.message;
-  }
-
-  return (
-    <div className="route-error">
-      <h1>Oops</h1>
-      <h2>{errorStatus}</h2>
-      {errorMessage && (
-        <fieldset>
-          <pre>{errorMessage}</pre>
-        </fieldset>
-      )}
-    </div>
-  );
-}
-
-/** @typedef {LoaderReturnData} RootLoader */
-
-/** @typedef {import('react-router').ShouldRevalidateFunction} ShouldRevalidateFunction */
-/** @typedef {import('./+types/root').Route} Route */
-/** @typedef {import('@shopify/remix-oxygen').SerializeFrom<typeof loader>} LoaderReturnData */
