@@ -4,29 +4,33 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "remix vite:dev",
-    "build": "remix vite:build",
-    "preview": "npm run build && vite preview",
-    "hydrogen": "shopify hydrogen"
+    "dev": "shopify hydrogen dev",
+    "build": "shopify hydrogen build --codegen",
+    "preview": "shopify hydrogen preview",
+    "lint": "eslint --no-eslintrc --cache --cache-location ./node_modules/.cache/eslint .",
+    "typecheck": "tsc --noEmit",
+    "codegen": "shopify hydrogen codegen"
   },
   "dependencies": {
-    "@remix-run/cloudflare": "^2.17.4",
-    "@remix-run/cloudflare-workers": "^2.17.4",
-    "@remix-run/react": "^2.17.0",
-    "@remix-run/server-runtime": "^2.17.0",
-    "@shopify/hydrogen": "^2024.10.0",
+    "@shopify/hydrogen": "^2025.7.0",
     "@shopify/hydrogen-react": "^2024.10.0",
     "graphql": "^16.8.1",
+    "isbot": "^5.1.17",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router": "^7.9.2",
+    "react-router-dom": "^7.9.2"
   },
   "devDependencies": {
-    "@remix-run/dev": "^2.17.0",
-    "@shopify/oxygen-workers-types": "^4.1.0",
+    "@graphql-codegen/cli": "^6.1.1",
+    "@react-router/dev": "^7.9.2",
+    "@react-router/fs-routes": "^7.9.2",
+    "@shopify/mini-oxygen": "^4.0.0",
+    "@shopify/oxygen-workers-types": "^4.2.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
-    "vite": "^5.4.21",
-    "vite-tsconfig-paths": "^5.0.1"
+    "vite": "^6.2.4",
+    "vite-tsconfig-paths": "^4.3.1"
   },
   "engines": {
     "node": ">=18.0.0"

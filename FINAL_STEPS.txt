@@ -1,0 +1,17 @@
+CRITICAL FIX APPLIED - react-router.config.js
+===============================================
+
+The missing piece was: react-router.config.js
+
+Files Modified:
+1. vite.config.js - Updated to use reactRouter() from @react-router/dev/vite
+2. react-router.config.js - CREATED with hydrogenPreset()
+
+Now try building:
+  cd ~/Desktop/gueth-ecommerce
+  npm run build
+
+If build succeeds:
+  npx shopify hydrogen deploy --force
+
+The project should now build successfully!

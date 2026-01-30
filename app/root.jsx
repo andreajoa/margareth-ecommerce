@@ -1,4 +1,3 @@
-import { json } from '@remix-run/node';
 import {
   Links,
   Meta,
@@ -6,44 +5,25 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
-} from '@remix-run/react';
-import { ShopifyProvider, CartProvider } from '@shopify/hydrogen-react';
-import Header from './components/Header.jsx';
-import Footer from './components/Footer.jsx';
-import { fetchShopify } from './lib/shopify.js';
-import { MENU_QUERY } from './lib/queries.js';
+} from 'react-router';
+import {ShopifyProvider} from '@shopify/hydrogen-react';
 
-export const meta = () => [{ title: 'BrinqueTEAndo' }];
-
-export const links = () => [
-  { rel: 'stylesheet', href: '/app.css' },
-];
-
-export async function loader() {
-  // Fetch dynamic menus from Shopify (if env is configured)
-  let header = null;
-  let footer = null;
-  try {
-    header = (await fetchShopify(MENU_QUERY, { handle: 'main-menu' }))?.menu || null;
-    footer = (await fetchShopify(MENU_QUERY, { handle: 'footer-menu' }))?.menu || null;
-  } catch (_) {
-    // Keep static navigation if fetching fails
-  }
-
-  return json({
+export async function loader({context}) {
+  const {storefront, env} = context;
+  
+  return {
     shop: {
-      storeDomain: process.env.PUBLIC_STORE_DOMAIN || '',
-      storefrontToken: process.env.PUBLIC_STOREFRONT_API_TOKEN || '',
-      apiVersion: '2024-10',
-      country: 'BR',
-      language: 'PT_BR',
+      name: 'Brinqueteando',
+      storeDomain: env.PUBLIC_STORE_DOMAIN,
+      storefrontToken: env.PUBLIC_STOREFRONT_API_TOKEN,
+      apiVersion: storefront.apiVersion,
     },
-    menus: { header, footer },
-  });
+  };
 }
 
 export default function App() {
   const data = useLoaderData();
+
   return (
     <html lang="pt-BR">
       <head>
@@ -51,38 +31,95 @@ export default function App() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
-        <style>{`
+        <style dangerouslySetInnerHTML={{__html: `
           :root {
-            --brand-blue-light: #8ECAE7;
-            --brand-blue-dark: #21388D;
-            --brand-blue: #3292D8;
-            --brand-red: #CF111A;
-            --brand-yellow: #DEC91F;
-            --brand-gray-blue: #7D8FA4;
-            --brand-beige: #EAD9B9;
+            --brand-blue: #0046be;
+            --brand-blue-light: #e6f0ff;
+            --brand-blue-dark: #003399;
           }
-          body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, 'Noto Sans', sans-serif; background: #fff; color: #111; }
-          a { color: var(--brand-blue); text-decoration: none; }
-          .container { max-width: 1200px; margin: 0 auto; padding: 16px; }
-          .btn-primary { background: var(--brand-blue-light); color: var(--brand-blue-dark); padding: 12px 20px; border-radius: 8px; font-weight: 700; border: none; cursor: pointer; }
-          .btn-secondary { background: var(--brand-blue); color: #fff; padding: 12px 20px; border-radius: 8px; font-weight: 700; border: none; cursor: pointer; }
-          header { padding: 12px 16px; border-bottom: 1px solid #eee; }
-          header .brand { font-weight: 800; color: var(--brand-blue-dark); }
-          footer { margin-top: 48px; padding: 24px 16px; background: #f8fafc; border-top: 1px solid #eee; }
-        `}</style>
+          * { box-sizing: border-box; }
+          body { 
+            margin: 0; 
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+          }
+          a { color: inherit; text-decoration: none; }
+          img { max-width: 100%; height: auto; }
+          .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+        `}} />
       </head>
       <body>
-        <ShopifyProvider storefrontApiVersion={data.shop.apiVersion} storeDomain={`https://${data.shop.storeDomain}`} storefrontToken={data.shop.storefrontToken} country={data.shop.country} language={data.shop.language}>
-          <CartProvider>
-            <Header menu={data.menus.header} />
-            <main className="container">
-              <Outlet />
-            </main>
-            <Footer menu={data.menus.footer} />
-          </CartProvider>
+        <ShopifyProvider
+          storeDomain={`https://${data.shop.storeDomain}`}
+          storefrontToken={data.shop.storefrontToken}
+          storefrontApiVersion={data.shop.apiVersion}
+          countryIsoCode="BR"
+          languageIsoCode="PT"
+        >
+          <Header shopName={data.shop.name} />
+          <main style={{minHeight: '60vh'}}>
+            <Outlet />
+          </main>
+          <Footer />
         </ShopifyProvider>
         <ScrollRestoration />
         <Scripts />
+      </body>
+    </html>
+  );
+}
+
+function Header({shopName}) {
+  return (
+    <header style={{
+      background: 'var(--brand-blue)',
+      color: 'white',
+      padding: '16px',
+    }}>
+      <div className="container" style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      }}>
+        <a href="/" style={{fontSize: '1.5rem', fontWeight: 'bold'}}>
+          {shopName}
+        </a>
+        <nav style={{display: 'flex', gap: '24px'}}>
+          <a href="/collections/all">Produtos</a>
+          <a href="/cart">Carrinho</a>
+        </nav>
+      </div>
+    </header>
+  );
+}
+
+function Footer() {
+  return (
+    <footer style={{
+      background: '#f8fafc',
+      padding: '32px 16px',
+      marginTop: '48px',
+      textAlign: 'center',
+    }}>
+      <p>© 2025 Brinqueteando. Todos os direitos reservados.</p>
+    </footer>
+  );
+}
+
+export function ErrorBoundary() {
+  return (
+    <html lang="pt-BR">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Erro</title>
+      </head>
+      <body>
+        <div style={{padding: '40px', textAlign: 'center'}}>
+          <h1>Ops! Algo deu errado</h1>
+          <p>Por favor, tente novamente mais tarde.</p>
+          <a href="/">Voltar para a home</a>
+        </div>
       </body>
     </html>
   );

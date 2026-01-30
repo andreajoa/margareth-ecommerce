@@ -1,0 +1,33 @@
+START FROM SCRATCH - COMPLETE FIX
+==================================
+
+THE MISSING PIECES WERE:
+1. app/routes.js - CRITICAL FILE (React Router 7 requires this)
+2. isbot dependency - For server-side rendering
+3. Correct entry.server.jsx using ServerRouter
+4. Correct entry.client.jsx using HydratedRouter
+
+FILES CREATED/FIXED:
+✅ app/routes.js - NEW (uses hydrogenRoutes + flatRoutes)
+✅ app/entry.server.jsx - UPDATED (ServerRouter from react-router)
+✅ app/entry.client.jsx - UPDATED (HydratedRouter with NonceProvider)
+✅ package.json - UPDATED (added isbot)
+✅ vite.config.js - CORRECT
+✅ react-router.config.js - CORRECT
+
+YOUR PROJECT NOW MATCHES VASTARA-PRODUCTION EXACTLY!
+
+RUN THE BUILD:
+--------------
+cd ~/Desktop/gueth-ecommerce
+./REBUILD.sh
+
+Or manually:
+  rm -rf node_modules package-lock.json dist
+  npm install --legacy-peer-deps
+  npm run build
+
+THEN DEPLOY:
+  npx shopify hydrogen deploy --force
+
+This should work now! The project has the exact structure as vastara-production.

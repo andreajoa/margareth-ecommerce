@@ -1,31 +1,1 @@
-import { Link } from '@remix-run/react';
-
-export default function Header({ menu }) {
-  return (
-    <header>
-      <div className="container" style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
-        <a href="/" className="brand" aria-label="Página inicial" style={{display:'inline-flex', alignItems:'center'}}>
-          <img src="/logo.svg" alt="BrinqueTEAndo" style={{height:'40px'}} />
-        </a>
-        <nav style={{display:'flex', gap:'16px', flexWrap:'wrap'}}>
-          {menu?.items?.length ? (
-            menu.items.map((item) => (
-              item.url?.startsWith('http') ? (
-                <a key={item.id} href={item.url} rel="noopener" style={{color:'var(--brand-blue)'}}>{item.title}</a>
-              ) : (
-                <Link key={item.id} to={item.url || '/'} style={{color:'var(--brand-blue)'}}>{item.title}</Link>
-              )
-            ))
-          ) : (
-            <>
-              <Link to="/">Início</Link>
-              <Link to="/collections/sensory-toys">Coleções</Link>
-              <Link to="/collections/by-age">Por Idade</Link>
-              <Link to="/collections/by-skill">Por Habilidade</Link>
-            </>
-          )}
-        </nav>
-      </div>
-    </header>
-  );
-}
+import { Link } from 'react-router';export default function Header({ menu }) {  return (    <header>      <div className="container" style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>        <a href="/" className="brand" aria-label="Página inicial" style={{display:'inline-flex', alignItems:'center'}}>          <img src="/logo.svg" alt="BrinqueTEAndo" style={{height:'40px'}} />        </a>        <nav style={{display:'flex', gap:'16px', flexWrap:'wrap'}}>          {menu?.items?.length ? (            menu.items.map((item) => (              item.url?.startsWith('http') ? (                <a key={item.id} href={item.url} rel="noopener" style={{color:'var(--brand-blue)'}}>{item.title}</a>              ) : (                <Link key={item.id} to={item.url || '/'} style={{color:'var(--brand-blue)'}}>{item.title}</Link>              )            ))          ) : (            <>              <Link to="/">Início</Link>              <Link to="/collections/sensory-toys">Coleções</Link>              <Link to="/collections/by-age">Por Idade</Link>              <Link to="/collections/by-skill">Por Habilidade</Link>            </>          )}        </nav>      </div>    </header>  );}
