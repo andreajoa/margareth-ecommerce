@@ -3,8 +3,7 @@ import {useLoaderData, Link, useRouteLoaderData} from 'react-router';
 import {useState, useEffect} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
 import {getProductHandle} from '~/lib/utils';
-import {useAside} from '~/components/Aside';
-import {NavigationMenu} from '~/components/NavigationMenu';
+ 
 
 
 
@@ -97,7 +96,6 @@ export async function loader({context}) {
 export default function Homepage() {
   const {collections, products, footerMenu, headerMenu} = useLoaderData();
   const rootData = useRouteLoaderData('root');
-  const {open} = useAside();
   const [currentHero, setCurrentHero] = useState(0);
   const [currentPromo, setCurrentPromo] = useState(0);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
