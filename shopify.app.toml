@@ -1,0 +1,13 @@
+name = "BrinqueTEAndo"
+type = "headless"
+
+[paths]
+  # Configure the subpath for your app
+  subpath = ""
+
+[build]
+  # Automatically build when deploying
+  automerge = true
+
+[access.scopes]
+  scopes = "unauthenticated_read_product_listings,unauthenticated_read_product_inventory"
