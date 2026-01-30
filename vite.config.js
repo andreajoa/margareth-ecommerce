@@ -17,16 +17,12 @@ export default defineConfig({
     tsconfigPaths(),
   ],
   ssr: {
-    external: ['undici'],
+    target: 'webworker',
+    external: ['@remix-run/node'],
     noExternal: true,
     resolve: {
-      conditions: ['workerd', 'worker', 'browser'],
-      externalConditions: ['workerd', 'worker'],
-    },
-  },
-  resolve: {
-    alias: {
-      'undici': false,
+      conditions: ['worker', 'browser'],
+      externalConditions: ['worker'],
     },
   },
   build: {
