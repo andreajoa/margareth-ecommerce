@@ -3,7 +3,6 @@ import {useLoaderData, Link, useRouteLoaderData} from 'react-router';
 import {useState, useEffect} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
 import {getProductHandle} from '~/lib/utils';
-import {ProductsUnder100} from '~/components/ProductsUnder100';
 import {useAside} from '~/components/Aside';
 import {NavigationMenu} from '~/components/NavigationMenu';
 
@@ -80,7 +79,6 @@ export async function loader({context}) {
   const {storefront} = context;
   const {collections} = await storefront.query(FEATURED_COLLECTIONS_QUERY);
   const {products} = await storefront.query(FEATURED_PRODUCTS_QUERY);
-  const {products: under100Products} = await storefront.query(PRODUCTS_UNDER_100_QUERY);
   const {menu: footerMenu} = await storefront.query(FOOTER_MENU_QUERY, {
     variables: { footerMenuHandle: 'footer' }
   });
@@ -89,16 +87,15 @@ export async function loader({context}) {
   });
 
   return {
-    collections, 
-    products, 
-    under100Products: under100Products.nodes,
+    collections,
+    products,
     footerMenu,
     headerMenu
   };
 }
 
 export default function Homepage() {
-  const {collections, products, under100Products, footerMenu, headerMenu} = useLoaderData();
+  const {collections, products, footerMenu, headerMenu} = useLoaderData();
   const rootData = useRouteLoaderData('root');
   const {open} = useAside();
   const [currentHero, setCurrentHero] = useState(0);
@@ -684,8 +681,34 @@ export default function Homepage() {
             </div>
           </section>
 
-          {/* Seção Produtos Abaixo de R$100 */}
-          <ProductsUnder100 products={under100Products} />
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 mb-20 w-full">
+            <h2 className="text-[#21388D] text-2xl sm:text-3xl md:text-4xl font-light text-center mb-8 sm:mb-12 tracking-wide">Coleções</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {(collections?.nodes || []).map((c) => (
+                <Link
+                  key={c.id}
+                  to={`/collections/${c.handle}`}
+                  className="group relative h-64 overflow-hidden rounded-[10px] shadow-lg hover:shadow-2xl transition-shadow"
+                >
+                  {c.image ? (
+                    <img
+                      src={c.image.url}
+                      alt={c.image.altText || c.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-[#EAD9B9]" />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                  <div className="absolute bottom-4 left-4 right-4 text-white">
+                    <h3 className="text-lg sm:text-xl font-light tracking-wide">{c.title}</h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
 
           {/* Cards de Orçamento para Presente */}
           <section className="bg-white py-12 sm:py-20 mb-20 w-full">
@@ -971,7 +994,7 @@ const FEATURED_COLLECTIONS_QUERY = '#graphql' + String.raw`
     $country: CountryCode
     $language: LanguageCode
   ) @inContext(country: $country, language: $language) {
-    collections(first: 4, sortKey: UPDATED_AT, reverse: true) {
+    collections(first: 12, sortKey: UPDATED_AT, reverse: true) {
       nodes {
         ...Collection
       }
@@ -1060,41 +1083,6 @@ const HEADER_MENU_QUERY = `#graphql
   }
 `;
 
-const PRODUCTS_UNDER_100_QUERY = '#graphql' + String.raw`
-  fragment ProductUnder100 on Product {
-    id
-    handle
-    title
-    vendor
-    featuredImage {
-      id
-      altText
-      url
-      width
-      height
-    }
-    priceRange {
-      minVariantPrice {
-        amount
-        currencyCode
-      }
-    }
-  }
-  query ProductsUnder100(
-    $country: CountryCode
-    $language: LanguageCode
-  ) @inContext(country: $country, language: $language) {
-    products(
-      first: 12, 
-      sortKey: BEST_SELLING,
-      query: "variants.price:<100"
-    ) {
-      nodes {
-        ...ProductUnder100
-      }
-    }
-  }
-`;
 
 function BrinqueTEAndoNavigation({ menu }) {
   const menuItems = menu?.items || [];
@@ -1235,15 +1223,47 @@ function BrinqueTEAndoFooter({ menu }) {
                 </div>
                 <span className="text-gray-300">Checkout Seguro</span>
               </div>
-            </div>
-          </div>
+        </div>
+      </div>
 
-          {/* Links de Compras */}
-          <div>
-            <h4 className="text-[#DEC91F] text-sm font-bold mb-6 uppercase tracking-widest relative inline-block">
-              Explorar Brinquedos
-              <div className="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-[#DEC91F] to-transparent"></div>
-            </h4>
+      {menuItems.map((group) => (
+        <div key={group.id}>
+          <h4 className="text-[#DEC91F] text-sm font-bold mb-6 uppercase tracking-widest relative inline-block">
+            {group.title}
+            <div className="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-[#DEC91F] to-transparent"></div>
+          </h4>
+          <ul className="space-y-3">
+            {(group.items || []).length > 0 ? (
+              group.items.map((item) => (
+                <li key={item.id}>
+                  <Link
+                    to={(item.url || '/').replace('https://briqueteando.com.br', '').replace('https://briqueteando.myshopify.com', '')}
+                    className="text-gray-300 hover:text-[#DEC91F] text-sm transition-all duration-200 hover:translate-x-1 inline-block"
+                  >
+                    {item.title}
+                  </Link>
+                </li>
+              ))
+            ) : (
+              <li>
+                <Link
+                  to={(group.url || '/').replace('https://briqueteando.com.br', '').replace('https://briqueteando.myshopify.com', '')}
+                  className="text-gray-300 hover:text-[#DEC91F] text-sm transition-all duration-200 hover:translate-x-1 inline-block"
+                >
+                  {group.title}
+                </Link>
+              </li>
+            )}
+          </ul>
+        </div>
+      ))}
+
+      {/* Links de Compras */}
+      <div>
+        <h4 className="text-[#DEC91F] text-sm font-bold mb-6 uppercase tracking-widest relative inline-block">
+          Explorar Brinquedos
+          <div className="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-[#DEC91F] to-transparent"></div>
+        </h4>
             <ul className="space-y-3">
               <li>
                 <Link to="/collections/lancamentos" className="text-gray-300 hover:text-[#DEC91F] text-sm transition-all duration-200 hover:translate-x-1 inline-block">
