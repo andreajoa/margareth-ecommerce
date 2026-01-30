@@ -1,8 +1,11 @@
-name = "brinqueteando"
-handle = "brinqueteando"
-scopes = ""
+name = "BrinqueTEAndo"
+type = "headless"
 
-[app_proxy]
-url = ""
+[paths]
 subpath = ""
-prefix = ""
+
+[build]
+automerge = true
+
+[access.scopes]
+scopes = "unauthenticated_read_product_listings,unauthenticated_read_product_inventory"
