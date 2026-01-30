@@ -14,6 +14,14 @@ export default defineConfig({
     }),
   ],
   ssr: {
-    noExternal: ['react', 'react-dom', 'react/jsx-runtime'],
+    noExternal: [
+      'react',
+      'react-dom',
+      'react/jsx-runtime',
+      '@remix-run/react',
+      '@remix-run/node',
+      '@remix-run/router',
+      '@remix-run/server-runtime',
+    ],
   },
 });
