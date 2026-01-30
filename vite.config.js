@@ -20,7 +20,7 @@ export default defineConfig({
     optimizeDeps: {
       include: [],
     },
-    noExternal: true, // Bundle ALL dependencies for Oxygen
+    noExternal: true,
     resolve: {
       conditions: ['workerd', 'worker', 'browser'],
       externalConditions: ['workerd', 'worker'],
@@ -30,7 +30,13 @@ export default defineConfig({
     alias: {
       'stream': 'stream-browserify',
       'buffer': 'buffer/',
+      'assert': 'assert/',
+      'util': 'util/',
+      'process': 'process/browser',
     },
+  },
+  define: {
+    'process.env.NODE_DEBUG': 'false',
   },
   build: {
     assetsInlineLimit: 0,
