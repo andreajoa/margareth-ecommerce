@@ -1,11 +1,14 @@
-import { defineConfig } from 'vite';
-import { vitePlugin as remix } from '@remix-run/dev';
-import { hydrogen } from '@shopify/hydrogen/vite';
+import {defineConfig} from 'vite';
+import {hydrogen} from '@shopify/hydrogen/vite';
+import {oxygen} from '@shopify/mini-oxygen/vite';
+import {vitePlugin as remix} from '@remix-run/dev';
 
 export default defineConfig({
   plugins: [
     hydrogen(),
+    oxygen(),
     remix({
+      presets: [hydrogen.preset()],
       future: {
         v3_fetcherPersist: true,
         v3_relativeSplatPath: true,
@@ -14,35 +17,22 @@ export default defineConfig({
     }),
   ],
   ssr: {
+    optimizeDeps: {
+      include: [],
+    },
     noExternal: [
-      // React & ReactDOM
-      'react',
-      'react-dom',
-      'react-dom/client',
-      'react/jsx-dev-runtime',
-      'react/jsx-runtime',
-
-      // Remix
-      '@remix-run/react',
-      '@remix-run/node',
-      '@remix-run/router',
-      '@remix-run/server-runtime',
-      '@remix-run/server-runtime/dist',
-
-      // Shopify
-      '@shopify/hydrogen',
-      '@shopify/hydrogen-react',
-      '@shopify/hydrogen-react/dist',
-
-      // GraphQL
-      'graphql',
-      'graphql-tag',
-      'graphql/validation',
-      'graphql/utilities',
-
-      // Outros
-      '@xstate/react',
-      '@xstate/react/family',
+      // This is critical - bundle everything for Oxygen
+      /^(?!node:)/,
     ],
+  },
+  resolve: {
+    alias: {
+      // Provide browser-compatible alternatives
+      'stream': 'stream-browserify',
+      'buffer': 'buffer/',
+    },
+  },
+  build: {
+    assetsInlineLimit: 0,
   },
 });
