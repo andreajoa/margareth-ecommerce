@@ -5,7 +5,7 @@ import {Image, Money} from '@shopify/hydrogen';
 import {getProductHandle} from '~/lib/utils';
 import {ProductsUnder100} from '~/components/ProductsUnder100';
 import {useAside} from '~/components/Aside';
-import {NavigationMenu} from '~/components/NavigationMenu';
+
 
 
 
@@ -611,8 +611,52 @@ export default function Homepage() {
             </div>
           </div>
 
-          {/* Main Navigation */}
-          <NavigationMenu rootData={rootData} />
+          <nav className="py-4" style={{background:'#E9E2D2', borderTop:'1px solid #D4AF69', borderBottom:'1px solid #D4AF69'}}>
+            <div className="max-w-7xl mx-auto px-4">
+              <div className="flex items-center justify-between">
+                <Link to="/" className="text-2xl sm:text-3xl font-bold tracking-wider" style={{color:'#0A3D2F'}}>
+                  BRIQUETEANDO
+                </Link>
+                <div className="flex items-center gap-4">
+                  <Link to="/search" className="text-[#0A3D2F] hover:text-[#b87333] transition-colors">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                  </Link>
+                  <Link to="/account" className="text-[#0A3D2F] hover:text-[#b87333] transition-colors">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                  </Link>
+                  <Link to="/cart" className="text-[#0A3D2F] hover:text-[#b87333] transition-colors relative">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l1.5 6m6-6v6m-3-6v6m6-6l1.5 6" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+              <div className="hidden lg:flex items-center justify-center gap-3 mt-4">
+                <div className="flex items-center gap-3">
+                  <a href="https://brinqueteando.online/collections/brinquedos-terapeuticos" className="font-medium text-xs tracking-widest transition-colors whitespace-nowrap" style={{color:'#0A3D2F', textTransform:'uppercase'}}>🧸 Brinquedos Terapêuticos</a>
+                  <span style={{color:'#9d8b7c'}}>•</span>
+                  <a href="https://brinqueteando.online/collections/por-necessidade" className="font-medium text-xs tracking-widest transition-colors whitespace-nowrap" style={{color:'#0A3D2F', textTransform:'uppercase'}}>🌈 Por Necessidade</a>
+                  <span style={{color:'#9d8b7c'}}>•</span>
+                  <a href="https://brinqueteando.online/collections/por-idade" className="font-medium text-xs tracking-widest transition-colors whitespace-nowrap" style={{color:'#0A3D2F', textTransform:'uppercase'}}>🎒 Por Idade</a>
+                  <span style={{color:'#9d8b7c'}}>•</span>
+                  <a href="https://brinqueteando.online/collections/ambiente-rotina" className="font-medium text-xs tracking-widest transition-colors whitespace-nowrap" style={{color:'#0A3D2F', textTransform:'uppercase'}}>💡 Ambiente & Rotina</a>
+                  <span style={{color:'#9d8b7c'}}>•</span>
+                  <a href="https://brinqueteando.online/collections/apoio-aos-pais" className="font-medium text-xs tracking-widest transition-colors whitespace-nowrap" style={{color:'#0A3D2F', textTransform:'uppercase'}}>💙 Apoio aos Pais</a>
+                </div>
+              </div>
+              <div className="lg:hidden mt-4 flex flex-wrap gap-2 justify-center">
+                <a href="https://brinqueteando.online/collections/brinquedos-terapeuticos" className="font-medium text-xs tracking-widest transition-colors px-3 py-2 rounded-full" style={{color:'#0A3D2F', background:'rgba(255,255,255,0.6)'}}>🧸 Brinquedos Terapêuticos</a>
+                <a href="https://brinqueteando.online/collections/por-necessidade" className="font-medium text-xs tracking-widest transition-colors px-3 py-2 rounded-full" style={{color:'#0A3D2F', background:'rgba(255,255,255,0.6)'}}>🌈 Por Necessidade</a>
+                <a href="https://brinqueteando.online/collections/por-idade" className="font-medium text-xs tracking-widest transition-colors px-3 py-2 rounded-full" style={{color:'#0A3D2F', background:'rgba(255,255,255,0.6)'}}>🎒 Por Idade</a>
+                <a href="https://brinqueteando.online/collections/ambiente-rotina" className="font-medium text-xs tracking-widest transition-colors px-3 py-2 rounded-full" style={{color:'#0A3D2F', background:'rgba(255,255,255,0.6)'}}>💡 Ambiente & Rotina</a>
+                <a href="https://brinqueteando.online/collections/apoio-aos-pais" className="font-medium text-xs tracking-widest transition-colors px-3 py-2 rounded-full" style={{color:'#0A3D2F', background:'rgba(255,255,255,0.6)'}}>💙 Apoio aos Pais</a>
+              </div>
+            </div>
+          </nav>
           <div className="bg-[#0A3D2F] text-white py-3 w-full">
             <div className="max-w-7xl mx-auto px-4 text-center">
               <p className="text-sm font-medium tracking-wider">🎄 FREE SHIPPING (USA/UK/CA/AU) • 1-YEAR WARRANTY • EASY RETURNS 🎁</p>
