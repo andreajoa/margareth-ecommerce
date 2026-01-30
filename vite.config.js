@@ -5,6 +5,11 @@ import {reactRouter} from '@react-router/dev/vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      '~': new URL('./app', import.meta.url).pathname,
+    },
+  },
   plugins: [
     hydrogen(),
     oxygen(),
