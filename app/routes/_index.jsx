@@ -277,6 +277,135 @@ export default function Homepage() {
           -webkit-text-fill-color: transparent;
           background-clip: text;
         }
+        .min-h-screen { min-height: 100vh; }
+        .overflow-x-hidden { overflow-x: hidden; }
+        .fixed { position: fixed; }
+        .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+        .pointer-events-none { pointer-events: none; }
+        .relative { position: relative; }
+        .absolute { position: absolute; }
+        .z-0 { z-index: 0; }
+        .z-10 { z-index: 10; }
+        .z-40 { z-index: 40; }
+        .z-50 { z-index: 50; }
+        .sticky { position: sticky; }
+        .top-0 { top: 0; }
+        .max-w-7xl { max-width: 1280px; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .px-4 { padding-left: 16px; padding-right: 16px; }
+        .py-2\.5 { padding-top: 10px; padding-bottom: 10px; }
+        .h-6 { height: 24px; }
+        .h-16 { height: 64px; }
+        .text-center { text-align: center; }
+        .text-white { color: #ffffff; }
+        .text-white\/90 { color: rgba(255,255,255,0.9); }
+        .text-gray-300 { color: #d1d5db; }
+        .text-gray-400 { color: #9ca3af; }
+        .text-2xl { font-size: 24px; line-height: 1.2; }
+        .text-3xl { font-size: 30px; line-height: 1.2; }
+        .text-4xl { font-size: 36px; line-height: 1.2; }
+        .text-5xl { font-size: 48px; line-height: 1.2; }
+        .text-6xl { font-size: 60px; line-height: 1.2; }
+        .text-8xl { font-size: 96px; line-height: 1; }
+        .text-lg { font-size: 18px; }
+        .text-sm { font-size: 14px; }
+        .font-bold { font-weight: 700; }
+        .font-medium { font-weight: 500; }
+        .italic { font-style: italic; }
+        .mb-4 { margin-bottom: 16px; }
+        .mb-6 { margin-bottom: 24px; }
+        .mb-12 { margin-bottom: 48px; }
+        .mt-8 { margin-top: 32px; }
+        .mt-10 { margin-top: 40px; }
+        .p-2 { padding: 8px; }
+        .p-4 { padding: 16px; }
+        .p-6 { padding: 24px; }
+        .p-8 { padding: 32px; }
+        .px-6 { padding-left: 24px; padding-right: 24px; }
+        .px-8 { padding-left: 32px; padding-right: 32px; }
+        .py-4 { padding-top: 16px; padding-bottom: 16px; }
+        .w-6 { width: 24px; }
+        .h-6 { height: 24px; }
+        .w-10 { width: 40px; }
+        .h-10 { height: 40px; }
+        .inline-block { display: inline-block; }
+        .block { display: block; }
+        .w-full { width: 100%; }
+        .h-full { height: 100%; }
+        .overflow-hidden { overflow: hidden; }
+        .rounded-full { border-radius: 9999px; }
+        .rounded-2xl { border-radius: 16px; }
+        .rounded-3xl { border-radius: 24px; }
+        .shadow-sm { box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+        .shadow-md { box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .shadow-lg { box-shadow: 0 10px 15px rgba(0,0,0,0.12); }
+        .shadow-xl { box-shadow: 0 12px 20px rgba(0,0,0,0.16); }
+        .shadow-2xl { box-shadow: 0 25px 50px rgba(0,0,0,0.2); }
+        .aspect-square { aspect-ratio: 1 / 1; }
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .justify-center { justify-content: center; }
+        .flex-wrap { flex-wrap: wrap; }
+        .gap-2 { gap: 8px; }
+        .gap-4 { gap: 16px; }
+        .gap-6 { gap: 24px; }
+        .gap-8 { gap: 32px; }
+        .space-y-3 > * + * { margin-top: 12px; }
+        .hidden { display: none; }
+        .grid { display: grid; }
+        .grid-cols-1 { grid-template-columns: 1fr; }
+        .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .border-b { border-bottom-width: 1px; }
+        .border-2 { border-width: 2px; }
+        .bg-white { background-color: #ffffff; }
+        .bg-white\/10 { background-color: rgba(255,255,255,0.1); }
+        .bg-white\/20 { background-color: rgba(255,255,255,0.2); }
+        .bg-white\/80 { background-color: rgba(255,255,255,0.8); }
+        .backdrop-blur-md { backdrop-filter: blur(12px); }
+        .text-\[\#21388D\] { color: #21388D; }
+        .text-\[\#3292D8\] { color: #3292D8; }
+        .text-\[\#CF111A\] { color: #CF111A; }
+        .text-\[\#DEC91F\] { color: #DEC91F; }
+        .text-\[\#7D8FA4\] { color: #7D8FA4; }
+        .border-\[\#8ECAE7\]\/30 { border-color: rgba(142,202,231,0.3); }
+        .border-white\/10 { border-color: rgba(255,255,255,0.1); }
+        .bg-\[\#8ECAE7\]\/20 { background-color: rgba(142,202,231,0.2); }
+        .top-2 { top: 8px; }
+        .right-2 { right: 8px; }
+        .top-4 { top: 16px; }
+        .left-4 { left: 16px; }
+        .bottom-4 { bottom: 16px; }
+        .right-4 { right: 16px; }
+        .\-top-4 { top: -16px; }
+        .\-right-4 { right: -16px; }
+        .\-bottom-4 { bottom: -16px; }
+        .\-left-4 { left: -16px; }
+        @media (min-width: 640px) {
+          .sm\:flex-row { flex-direction: row; }
+        }
+        @media (min-width: 768px) {
+          .md\:h-20 { height: 80px; }
+          .md\:py-20 { padding-top: 80px; padding-bottom: 80px; }
+          .md\:text-base { font-size: 16px; }
+          .md\:text-xl { font-size: 20px; }
+          .md\:text-3xl { font-size: 30px; }
+          .md\:flex { display: flex; }
+          .md\:hidden { display: none; }
+          .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+          .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+          .md\:gap-6 { gap: 24px; }
+          .md\:gap-12 { gap: 48px; }
+          .md\:justify-start { justify-content: flex-start; }
+          .md\:p-10 { padding: 40px; }
+          .md\:p-12 { padding: 48px; }
+          .md\:text-left { text-align: left; }
+        }
+        @media (min-width: 1024px) {
+          .lg\:text-6xl { font-size: 60px; }
+          .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+          .lg\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+        }
       `}</style>
 
       <main className="bg-[#FEFDF8] min-h-screen overflow-x-hidden">
@@ -311,7 +440,7 @@ export default function Homepage() {
         </div>
 
         {/* TOP PROMO BAR */}
-        <div className="bg-gradient-to-r from-[#21388D] via-[#3292D8] to-[#21388D] text-white py-2.5 relative z-50">
+        <div className="text-white py-2.5 relative z-50" style={{backgroundImage:'linear-gradient(to right, #21388D, #3292D8, #21388D)'}}>
           <div className="max-w-7xl mx-auto px-4">
             <div className="relative h-6 flex items-center justify-center overflow-hidden">
               {promoMessages.map((msg, idx) => (
@@ -329,7 +458,7 @@ export default function Homepage() {
         </div>
 
         {/* HEADER / NAVIGATION */}
-        <header className="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-40 border-b border-[#8ECAE7]/30">
+        <header className="bg-white/95 backdrop-blur-md shadow-sm sticky top-0 z-40 border-b border-[#8ECAE7]/30" style={{backgroundColor:'rgba(255,255,255,0.95)', borderColor:'rgba(142,202,231,0.3)'}}>
           <div className="max-w-7xl mx-auto px-4">
             <div className="flex items-center justify-between h-16 md:h-20">
               
@@ -469,13 +598,15 @@ export default function Homepage() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                   <Link 
                     to="/collections/todos-produtos"
-                    className="bg-gradient-to-r from-[#21388D] to-[#3292D8] text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
+                    className="text-white px-8 py-4 rounded-full font-bold text-lg flex items-center justify-center gap-2"
+                    style={{backgroundImage:'linear-gradient(to right, #21388D, #3292D8)'}}
                   >
                     🛒 Ver Produtos
                   </Link>
                   <Link 
                     to="/collections/mais-vendidos"
-                    className="bg-white text-[#21388D] border-2 border-[#21388D] px-8 py-4 rounded-full font-bold text-lg hover:bg-[#21388D] hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
+                    className="px-8 py-4 rounded-full font-bold text-lg flex items-center justify-center gap-2"
+                    style={{backgroundColor:'#ffffff', color:'#21388D', border:'2px solid #21388D'}}
                   >
                     ⭐ Mais Vendidos
                   </Link>
@@ -492,7 +623,7 @@ export default function Homepage() {
 
               {/* Hero Image/Visual */}
               <div className="relative">
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-[#8ECAE7] to-[#3292D8] p-8">
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl p-8" style={{backgroundImage:'linear-gradient(to bottom right, #8ECAE7, #3292D8)'}}>
                   <div className="absolute inset-0 opacity-20">
                     <div className="absolute top-4 left-4 text-6xl animate-float">🧩</div>
                     <div className="absolute bottom-4 right-4 text-5xl animate-float-reverse">🦕</div>
@@ -551,7 +682,8 @@ export default function Homepage() {
                 <Link 
                   key={idx}
                   to={cat.link}
-                  className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${cat.color} p-6 md:p-8 text-white shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300`}
+                  className={`group relative overflow-hidden rounded-2xl p-6 md:p-8 text-white shadow-lg transition-all duration-300`}
+                  style={(() => { const m = cat.color.match(/#([0-9A-Fa-f]{6})/g); const a = m?.[0] || '#21388D'; const b = m?.[1] || '#3292D8'; return {backgroundImage:`linear-gradient(to bottom right, ${a}, ${b})`}; })()}
                 >
                   <div className="text-4xl md:text-5xl mb-3">{cat.emoji}</div>
                   <h3 className="font-bold text-lg md:text-xl">{cat.name}</h3>
@@ -641,7 +773,8 @@ export default function Homepage() {
             <div className="text-center mt-10">
               <Link 
                 to="/collections/all"
-                className="inline-block bg-gradient-to-r from-[#21388D] to-[#3292D8] text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                className="inline-block text-white px-8 py-4 rounded-full font-bold text-lg"
+                style={{backgroundImage:'linear-gradient(to right, #21388D, #3292D8)'}}
               >
                 Ver Todos os Produtos →
               </Link>
@@ -650,7 +783,7 @@ export default function Homepage() {
         </section>
 
         {/* FREE SHIPPING SECTION */}
-        <section className="py-16 md:py-20 bg-gradient-to-r from-[#21388D] via-[#3292D8] to-[#21388D] text-white relative z-10 overflow-hidden">
+        <section className="py-16 md:py-20 text-white relative z-10 overflow-hidden" style={{backgroundImage:'linear-gradient(to right, #21388D, #3292D8, #21388D)'}}>
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-10 left-10 text-8xl animate-float">🚚</div>
             <div className="absolute bottom-10 right-10 text-7xl animate-float-reverse">📦</div>
@@ -773,7 +906,8 @@ export default function Homepage() {
                 />
                 <button 
                   type="submit"
-                  className="bg-gradient-to-r from-[#CF111A] to-[#7C3D36] text-white px-8 py-4 rounded-full font-bold hover:shadow-xl hover:scale-105 transition-all duration-300"
+                  className="text-white px-8 py-4 rounded-full font-bold"
+                  style={{backgroundImage:'linear-gradient(to right, #CF111A, #7C3D36)'}}
                 >
                   Inscrever
                 </button>
