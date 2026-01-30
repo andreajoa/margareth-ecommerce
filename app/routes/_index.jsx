@@ -464,27 +464,36 @@ export default function Homepage() {
               
               {/* Logo */}
               <Link to="/" className="flex items-center gap-2 group">
-                <span className="text-3xl">🧩</span>
-                <div>
-                  <span className="text-2xl md:text-3xl font-bold">
-                    <span className="text-[#3292D8]">Brinque</span>
-                    <span className="text-[#CF111A]">TEA</span>
-                    <span className="text-[#DEC91F]">ndo</span>
-                  </span>
-                </div>
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0898/4213/9629/files/logo-brinqueteando.png"
+                  alt="BrinqueTEAndo"
+                  style={{height: '48px'}}
+                />
               </Link>
 
               {/* Desktop Navigation */}
               <nav className="hidden md:flex items-center gap-8">
                 {headerMenu?.items?.map((item) => (
-                  <Link 
-                    key={item.id}
-                    to={new URL(item.url).pathname}
-                    className="text-[#21388D] font-medium hover:text-[#3292D8] transition-colors relative group"
-                  >
-                    {item.title}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#3292D8] transition-all group-hover:w-full"></span>
-                  </Link>
+                  item?.url?.startsWith('http') ? (
+                    <a
+                      key={item.id}
+                      href={item.url}
+                      rel="noopener"
+                      className="text-[#21388D] font-medium hover:text-[#3292D8] transition-colors relative group"
+                    >
+                      {item.title}
+                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#3292D8] transition-all group-hover:w-full"></span>
+                    </a>
+                  ) : (
+                    <Link 
+                      key={item.id}
+                      to={new URL(item.url).pathname}
+                      className="text-[#21388D] font-medium hover:text-[#3292D8] transition-colors relative group"
+                    >
+                      {item.title}
+                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#3292D8] transition-all group-hover:w-full"></span>
+                    </Link>
+                  )
                 ))}
               </nav>
 
@@ -531,14 +540,26 @@ export default function Homepage() {
             {isMenuOpen && (
               <nav className="md:hidden py-4 border-t border-[#8ECAE7]/30">
                 {headerMenu?.items?.map((item) => (
-                  <Link 
-                    key={item.id}
-                    to={new URL(item.url).pathname}
-                    className="block py-3 text-[#21388D] font-medium hover:text-[#3292D8] transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.title}
-                  </Link>
+                  item?.url?.startsWith('http') ? (
+                    <a
+                      key={item.id}
+                      href={item.url}
+                      rel="noopener"
+                      className="block py-3 text-[#21388D] font-medium hover:text-[#3292D8] transition-colors"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.title}
+                    </a>
+                  ) : (
+                    <Link 
+                      key={item.id}
+                      to={new URL(item.url).pathname}
+                      className="block py-3 text-[#21388D] font-medium hover:text-[#3292D8] transition-colors"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.title}
+                    </Link>
+                  )
                 ))}
               </nav>
             )}
@@ -929,11 +950,11 @@ export default function Homepage() {
               {/* Brand */}
               <div className="lg:col-span-1">
                 <Link to="/" className="inline-block mb-6">
-                  <span className="text-3xl font-bold">
-                    <span className="text-[#3292D8]">Brinque</span>
-                    <span className="text-[#CF111A]">TEA</span>
-                    <span className="text-[#DEC91F]">ndo</span>
-                  </span>
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0898/4213/9629/files/logo-brinqueteando.png"
+                    alt="BrinqueTEAndo"
+                    style={{height:'56px'}}
+                  />
                 </Link>
                 <p className="text-gray-300 text-sm leading-relaxed mb-6">
                   Brinquedos educativos e terapêuticos para crianças com TEA, Autismo e TDAH. 
@@ -958,12 +979,22 @@ export default function Homepage() {
                 <ul className="space-y-3">
                   {footerMenu?.items?.map((item) => (
                     <li key={item.id}>
-                      <Link 
-                        to={new URL(item.url).pathname}
-                        className="text-gray-300 hover:text-white transition-colors"
-                      >
-                        {item.title}
-                      </Link>
+                      {item?.url?.startsWith('http') ? (
+                        <a 
+                          href={item.url}
+                          rel="noopener"
+                          className="text-gray-300 hover:text-white transition-colors"
+                        >
+                          {item.title}
+                        </a>
+                      ) : (
+                        <Link 
+                          to={new URL(item.url).pathname}
+                          className="text-gray-300 hover:text-white transition-colors"
+                        >
+                          {item.title}
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>
