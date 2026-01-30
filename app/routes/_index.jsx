@@ -855,6 +855,7 @@ export default function Homepage() {
               Ver Todos os Produtos →
             </Link>
           </div>
+          </div>
         </section>
 
         {/* CTA CARD */}
