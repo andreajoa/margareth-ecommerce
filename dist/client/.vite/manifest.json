@@ -1,0 +1,51 @@
+{
+  "_components-DIzj77dM.js": {
+    "file": "assets/components-DIzj77dM.js",
+    "name": "components"
+  },
+  "app/entry.client.jsx": {
+    "file": "assets/entry.client-BkZeBuxB.js",
+    "name": "entry.client",
+    "src": "app/entry.client.jsx",
+    "isEntry": true,
+    "imports": [
+      "_components-DIzj77dM.js"
+    ]
+  },
+  "app/root.jsx?__remix-build-client-route": {
+    "file": "assets/root-DYC9Ya5C.js",
+    "name": "root",
+    "src": "app/root.jsx?__remix-build-client-route",
+    "isEntry": true,
+    "imports": [
+      "_components-DIzj77dM.js"
+    ]
+  },
+  "app/routes/collections.$handle.jsx?__remix-build-client-route": {
+    "file": "assets/collections._handle-B_gzQrho.js",
+    "name": "collections._handle",
+    "src": "app/routes/collections.$handle.jsx?__remix-build-client-route",
+    "isEntry": true,
+    "imports": [
+      "_components-DIzj77dM.js"
+    ]
+  },
+  "app/routes/index.jsx?__remix-build-client-route": {
+    "file": "assets/index-CWMI_MAs.js",
+    "name": "index",
+    "src": "app/routes/index.jsx?__remix-build-client-route",
+    "isEntry": true,
+    "imports": [
+      "_components-DIzj77dM.js"
+    ]
+  },
+  "app/routes/products.$handle.jsx?__remix-build-client-route": {
+    "file": "assets/products._handle-BSO0ueyC.js",
+    "name": "products._handle",
+    "src": "app/routes/products.$handle.jsx?__remix-build-client-route",
+    "isEntry": true,
+    "imports": [
+      "_components-DIzj77dM.js"
+    ]
+  }
+}

@@ -17,10 +17,16 @@ export default defineConfig({
     tsconfigPaths(),
   ],
   ssr: {
+    external: ['undici'],
     noExternal: true,
     resolve: {
       conditions: ['workerd', 'worker', 'browser'],
       externalConditions: ['workerd', 'worker'],
+    },
+  },
+  resolve: {
+    alias: {
+      'undici': false,
     },
   },
   build: {
