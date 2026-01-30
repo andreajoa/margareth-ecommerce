@@ -229,6 +229,16 @@ export default function Homepage() {
       />
       
       <style>{`
+        :root {
+          --tea-red: #CF111A;
+          --tea-yellow: #DEC91F;
+          --tea-bright-blue: #3292D8;
+          --tea-dark-blue: #21388D;
+          --tea-maroon: #7C3D36;
+          --tea-light-blue: #8ECAE7;
+          --tea-gray-blue: #7D8FA4;
+          --tea-beige: #EAD9B9;
+        }
         @keyframes float {
           0%, 100% { transform: translateY(0) rotate(0deg); }
           50% { transform: translateY(-20px) rotate(5deg); }
@@ -677,6 +687,51 @@ export default function Homepage() {
           </div>
         </section>
 
+        {/* QUICK CATEGORIES CHIPS */}
+        <section className="bg-white">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="flex flex-wrap gap-3 justify-center py-6">
+              {[
+                { label: 'Sensoriais', link: '/collections/sensoriais', bg: 'var(--tea-red)' },
+                { label: 'Educativos', link: '/collections/educativos', bg: 'var(--tea-dark-blue)' },
+                { label: 'Montessori', link: '/collections/montessori', bg: 'var(--tea-yellow)' },
+                { label: 'Fidget Toys', link: '/collections/fidget-toys', bg: 'var(--tea-bright-blue)' },
+                { label: 'Coordenação Motora', link: '/collections/coordenacao-motora', bg: 'var(--tea-maroon)' },
+                { label: 'Comunicação', link: '/collections/comunicacao', bg: 'var(--tea-beige)' },
+              ].map((c, i) => (
+                <Link
+                  key={i}
+                  to={c.link}
+                  className="rounded-full px-5 py-2 font-bold"
+                  style={{backgroundColor: c.bg, color: '#fff'}}
+                >
+                  {c.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* DOUBLE BANNERS */}
+        <section className="py-10 bg-white">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid md:grid-cols-2 gap-6">
+              <Link to="/collections/sensoriais" className="relative rounded-2xl overflow-hidden shadow-md">
+                <div className="p-8" style={{backgroundImage:'linear-gradient(to right, var(--tea-dark-blue), var(--tea-bright-blue))', color:'#fff'}}>
+                  <div className="text-3xl font-bold mb-2">Brinquedos Sensoriais</div>
+                  <div className="text-lg">Explorar</div>
+                </div>
+              </Link>
+              <Link to="/collections/educativos" className="relative rounded-2xl overflow-hidden shadow-md">
+                <div className="p-8" style={{backgroundImage:'linear-gradient(to right, var(--tea-yellow), var(--tea-red))', color:'#21388D'}}>
+                  <div className="text-3xl font-bold mb-2">Educativos</div>
+                  <div className="text-lg">Ver mais</div>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* CATEGORIES SECTION */}
         <section className="py-16 md:py-20 bg-white relative z-10">
           <div className="max-w-7xl mx-auto px-4">
@@ -791,14 +846,29 @@ export default function Homepage() {
               ))}
             </div>
 
-            <div className="text-center mt-10">
-              <Link 
-                to="/collections/all"
-                className="inline-block text-white px-8 py-4 rounded-full font-bold text-lg"
-                style={{backgroundImage:'linear-gradient(to right, #21388D, #3292D8)'}}
-              >
-                Ver Todos os Produtos →
-              </Link>
+          <div className="text-center mt-10">
+            <Link 
+              to="/collections/all"
+              className="inline-block text-white px-8 py-4 rounded-full font-bold text-lg"
+              style={{backgroundImage:'linear-gradient(to right, #21388D, #3292D8)'}}
+            >
+              Ver Todos os Produtos →
+            </Link>
+          </div>
+        </section>
+
+        {/* CTA CARD */}
+        <section className="py-12 bg-white">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="rounded-3xl shadow-xl overflow-hidden">
+              <div className="p-10" style={{backgroundImage:'linear-gradient(to right, var(--tea-dark-blue), var(--tea-bright-blue))', color:'#fff'}}>
+                <div className="text-2xl font-bold mb-3">Descubra Brinquedos que Desenvolvem</div>
+                <div className="text-white/90 mb-6">Seleção especial para TEA, Autismo e TDAH</div>
+                <div className="flex gap-4">
+                  <Link to="/collections/mais-vendidos" className="rounded-full px-6 py-3 font-bold" style={{backgroundColor:'#fff', color:'#21388D'}}>Mais Vendidos</Link>
+                  <Link to="/collections/sensoriais" className="rounded-full px-6 py-3 font-bold" style={{backgroundColor:'#CF111A', color:'#fff'}}>Sensoriais</Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>
