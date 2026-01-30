@@ -1,12 +1,11 @@
 import {defineConfig} from 'vite';
 import {hydrogen} from '@shopify/hydrogen/vite';
-import {oxygen} from '@shopify/mini-oxygen/vite';
 import {vitePlugin as remix} from '@remix-run/dev';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   plugins: [
     hydrogen(),
-    oxygen(),
     remix({
       presets: [hydrogen.preset()],
       future: {
@@ -15,19 +14,20 @@ export default defineConfig({
         v3_throwAbortReason: true,
       },
     }),
+    tsconfigPaths(),
   ],
   ssr: {
     optimizeDeps: {
       include: [],
     },
-    noExternal: [
-      // This is critical - bundle everything for Oxygen
-      /^(?!node:)/,
-    ],
+    noExternal: true, // Bundle ALL dependencies for Oxygen
+    resolve: {
+      conditions: ['workerd', 'worker', 'browser'],
+      externalConditions: ['workerd', 'worker'],
+    },
   },
   resolve: {
     alias: {
-      // Provide browser-compatible alternatives
       'stream': 'stream-browserify',
       'buffer': 'buffer/',
     },
