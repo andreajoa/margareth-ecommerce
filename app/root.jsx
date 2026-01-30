@@ -63,6 +63,96 @@ export default function App() {
           a { color: inherit; text-decoration: none; }
           img { max-width: 100%; height: auto; }
           .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
+          .max-w-7xl { max-width: 80rem; }
+          .mx-auto { margin-left: auto; margin-right: auto; }
+          .px-4 { padding-left: 1rem; padding-right: 1rem; }
+          .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+          .px-8 { padding-left: 2rem; padding-right: 2rem; }
+          .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+          .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+          .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+          .mb-6 { margin-bottom: 1.5rem; }
+          .mb-8 { margin-bottom: 2rem; }
+          .mb-12 { margin-bottom: 3rem; }
+          .mb-16 { margin-bottom: 4rem; }
+          .mt-2 { margin-top: .5rem; }
+          .mt-4 { margin-top: 1rem; }
+
+          .grid { display: grid; }
+          .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+          .gap-2 { gap: .5rem; }
+          .gap-3 { gap: .75rem; }
+          .gap-4 { gap: 1rem; }
+          .gap-6 { gap: 1.5rem; }
+          .gap-8 { gap: 2rem; }
+          .gap-12 { gap: 3rem; }
+
+          .flex { display: flex; }
+          .items-center { align-items: center; }
+          .justify-between { justify-content: space-between; }
+          .justify-center { justify-content: center; }
+          .flex-wrap { flex-wrap: wrap; }
+
+          .text-center { text-align: center; }
+          .text-xs { font-size: .75rem; line-height: 1rem; }
+          .text-sm { font-size: .875rem; line-height: 1.25rem; }
+          .text-base { font-size: 1rem; line-height: 1.5rem; }
+          .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+          .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+          .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+          .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+          .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+          .font-light { font-weight: 300; }
+          .font-medium { font-weight: 500; }
+          .font-semibold { font-weight: 600; }
+          .font-bold { font-weight: 700; }
+          .tracking-wide { letter-spacing: .05em; }
+          .tracking-widest { letter-spacing: .2em; }
+
+          .rounded-\\[10px\\] { border-radius: 10px; }
+          .rounded-xl { border-radius: .75rem; }
+          .rounded-2xl { border-radius: 1rem; }
+          .rounded-3xl { border-radius: 1.5rem; }
+          .rounded-full { border-radius: 9999px; }
+
+          .relative { position: relative; }
+          .absolute { position: absolute; }
+          .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+          .w-full { width: 100%; }
+          .h-full { height: 100%; }
+          .w-5 { width: 1.25rem; }
+          .h-5 { height: 1.25rem; }
+          .w-11 { width: 2.75rem; }
+          .h-11 { height: 2.75rem; }
+          .object-cover { object-fit: cover; }
+          .z-10 { z-index: 10; }
+          .z-20 { z-index: 20; }
+          .hidden { display: none; }
+
+          .h-64 { height: 16rem; }
+
+          @media (min-width: 640px) {
+            .sm\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .sm\\:text-base { font-size: 1rem; line-height: 1.5rem; }
+            .sm\\:text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+            .sm\\:h-72 { height: 18rem; }
+            .sm\\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+          }
+
+          @media (min-width: 768px) {
+            .md\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .md\\:text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+            .md\\:h-80 { height: 20rem; }
+            .md\\:px-12 { padding-left: 3rem; padding-right: 3rem; }
+          }
+
+          @media (min-width: 1024px) {
+            .lg\\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .lg\\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+            .lg\\:flex { display: flex; }
+            .lg\\:col-span-2 { grid-column: span 2 / span 2; }
+          }
         `}} />
       </head>
       <body>
