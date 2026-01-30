@@ -34,5 +34,16 @@ export default defineConfig({
       'graphql',
       'graphql-tag',
     ],
+    // Allow Node.js built-in modules
+    external: [
+      'stream',
+      'stream/web',
+      'string_decoder',
+      'util',
+      'url',
+      'events',
+      'buffer',
+      'process',
+    ],
   },
 });
