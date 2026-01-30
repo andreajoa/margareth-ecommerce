@@ -13,4 +13,7 @@ export default defineConfig({
       },
     }),
   ],
+  ssr: {
+    noExternal: ['react', 'react-dom', 'react/jsx-runtime'],
+  },
 });
