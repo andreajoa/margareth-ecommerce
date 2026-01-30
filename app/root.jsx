@@ -9,20 +9,23 @@ import {
 import {ShopifyProvider} from '@shopify/hydrogen-react';
 
 export async function loader({context}) {
-  const {storefront, env} = context;
+  const {env, storefront} = context;
+  
+  // Buscar informações da loja
+  const layout = await storefront.query(LAYOUT_QUERY);
   
   return {
-    shop: {
-      name: 'Brinqueteando',
-      storeDomain: env.PUBLIC_STORE_DOMAIN,
-      storefrontToken: env.PUBLIC_STOREFRONT_API_TOKEN,
-      apiVersion: storefront.apiVersion,
+    shop: layout.shop,
+    env: {
+      PUBLIC_STORE_DOMAIN: env.PUBLIC_STORE_DOMAIN,
+      PUBLIC_STOREFRONT_API_TOKEN: env.PUBLIC_STOREFRONT_API_TOKEN,
     },
+    apiVersion: storefront.apiVersion || '2024-01',
   };
 }
 
 export default function App() {
-  const data = useLoaderData();
+  const {shop, env, apiVersion} = useLoaderData();
 
   return (
     <html lang="pt-BR">
@@ -50,13 +53,13 @@ export default function App() {
       </head>
       <body>
         <ShopifyProvider
-          storeDomain={`https://${data.shop.storeDomain}`}
-          storefrontToken={data.shop.storefrontToken}
-          storefrontApiVersion={data.shop.apiVersion}
+          storeDomain={`https://${env.PUBLIC_STORE_DOMAIN}`}
+          storefrontToken={env.PUBLIC_STOREFRONT_API_TOKEN}
+          storefrontApiVersion={apiVersion}
           countryIsoCode="BR"
-          languageIsoCode="PT"
+          languageIsoCode="PT_BR"
         >
-          <Header shopName={data.shop.name} />
+          <Header shopName={shop?.name || 'BrinqueTEAndo'} />
           <main style={{minHeight: '60vh'}}>
             <Outlet />
           </main>
@@ -101,7 +104,7 @@ function Footer() {
       marginTop: '48px',
       textAlign: 'center',
     }}>
-      <p>© 2025 Brinqueteando. Todos os direitos reservados.</p>
+      <p>© 2025 BrinqueTEAndo. Todos os direitos reservados.</p>
     </footer>
   );
 }
@@ -124,3 +127,13 @@ export function ErrorBoundary() {
     </html>
   );
 }
+
+const LAYOUT_QUERY = `#graphql
+  query Layout {
+    shop {
+      id
+      name
+      description
+    }
+  }
+`;
