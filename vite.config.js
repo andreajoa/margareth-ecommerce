@@ -15,13 +15,25 @@ export default defineConfig({
   ],
   ssr: {
     noExternal: [
+      // React
       'react',
       'react-dom',
       'react/jsx-runtime',
+
+      // Remix
       '@remix-run/react',
       '@remix-run/node',
       '@remix-run/router',
       '@remix-run/server-runtime',
+
+      // Shopify
+      '@shopify/hydrogen',
+      '@shopify/hydrogen-react',
+
+      // Outros
+      'isbot',
+      'graphql',
+      'graphql-tag',
     ],
   },
 });
