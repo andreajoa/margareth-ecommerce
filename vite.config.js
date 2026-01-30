@@ -13,37 +13,4 @@ export default defineConfig({
       },
     }),
   ],
-  ssr: {
-    noExternal: [
-      // React
-      'react',
-      'react-dom',
-      'react/jsx-runtime',
-
-      // Remix
-      '@remix-run/react',
-      '@remix-run/node',
-      '@remix-run/router',
-      '@remix-run/server-runtime',
-
-      // Shopify
-      '@shopify/hydrogen',
-      '@shopify/hydrogen-react',
-
-      // GraphQL
-      'graphql',
-      'graphql-tag',
-    ],
-    // Allow Node.js built-in modules
-    external: [
-      'stream',
-      'stream/web',
-      'string_decoder',
-      'util',
-      'url',
-      'events',
-      'buffer',
-      'process',
-    ],
-  },
 });
