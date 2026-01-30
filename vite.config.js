@@ -30,8 +30,7 @@ export default defineConfig({
       '@shopify/hydrogen',
       '@shopify/hydrogen-react',
 
-      // Outros
-      'isbot',
+      // GraphQL
       'graphql',
       'graphql-tag',
     ],
