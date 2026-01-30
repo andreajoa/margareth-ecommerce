@@ -7,7 +7,7 @@ import {
   useLoaderData,
 } from 'react-router';
 import {ShopifyProvider} from '@shopify/hydrogen-react';
-import Header from '~/components/Header.jsx';
+import Header from './components/Header.jsx';
 
 export async function loader({context}) {
   const {env, storefront} = context;
