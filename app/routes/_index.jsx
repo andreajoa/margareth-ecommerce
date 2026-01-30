@@ -473,12 +473,9 @@ export default function Homepage() {
 
       <main role="main" aria-label="BrinqueTEAndo Brinquedos Terapêuticos - Conteúdo Principal" className="bg-[#EAD9B9] flex flex-col min-h-screen w-full overflow-x-hidden">
         <div className="flex-grow w-full">
-          {/* Barra Superior com Contagem Regressiva */}
-          <div className="bg-[#21388D] text-white py-3 text-center w-full">
+          <div className="text-white py-3 text-center w-full" style={{background:'#0B0B0B'}}>
             <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-4 flex-wrap">
-              <span className="text-sm md:text-base font-bold tracking-wide">
-                {currentHoliday?.emoji} {currentHoliday?.message} {currentHoliday?.emoji}
-              </span>
+              <span className="text-sm md:text-base font-bold tracking-wide">{currentHoliday?.emoji} {currentHoliday?.message} {currentHoliday?.emoji}</span>
               <div className="flex items-center gap-2 border-2 border-white px-4 py-1 bg-white/10">
                 <span className="text-2xl font-bold">{String(timeLeft.days).padStart(2, '0')}</span>
                 <span className="text-xs">D</span>
@@ -556,8 +553,8 @@ export default function Homepage() {
             </div>
           </div>
 
-          {/* Ticker Promocional */}
-          <div className="bg-[#CF111A] text-white py-3 overflow-hidden relative w-full">
+          {/* Faixa de Promoção / Mensagens (vermelha) */}
+          <div className="text-white py-3 overflow-hidden relative w-full" style={{background:'#B2202A'}}>
             <div className="max-w-7xl mx-auto px-6">
               <div className="relative h-6 flex items-center justify-center">
                 {promoMessages.map((msg, idx) => (
@@ -569,28 +566,28 @@ export default function Homepage() {
             </div>
           </div>
 
-          {/* Indicadores de Confiança */}
-          <div className="bg-[#8ECAE7] border-b border-[#DEC91F] w-full">
+          {/* Indicadores de Confiança (bege claro) */}
+          <div className="border-b w-full" style={{background:'#F5EFE1', borderColor:'#DEC91F'}}>
             <div className="max-w-7xl mx-auto px-6 py-4">
               <div className="flex items-center justify-center gap-2 mb-3">
-                <span className="text-xl font-serif text-[#21388D]">🎁 COMPRE BRINQUEDOS COM CONFIANÇA:</span>
+                <span className="text-xl font-serif" style={{color:'#21388D'}}>🎁 COMPRE BRINQUEDOS COM CONFIANÇA:</span>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
                 <div className="flex items-start justify-center md:justify-start gap-3">
                   <div>
-                    <p className="text-[#21388D] font-semibold mb-1"><span className="text-[#CF111A]">Garantido</span> Entrega no Dia das Crianças</p>
+                    <p className="font-semibold mb-1" style={{color:'#21388D'}}><span style={{color:'#CF111A'}}>Garantido</span> Entrega no Dia das Crianças</p>
                     <p className="text-[#7D8FA4] text-sm">🧸 Peça até 10/10 às 17h (Brasil). <span className="underline cursor-pointer">Detalhes</span></p>
                   </div>
                 </div>
                 <div className="flex items-start justify-center gap-3">
                   <div>
-                    <p className="text-[#21388D] font-semibold mb-1"><span className="text-[#CF111A]">Melhor</span> Garantia de Preço</p>
+                    <p className="font-semibold mb-1" style={{color:'#21388D'}}><span style={{color:'#CF111A'}}>Melhor</span> Garantia de Preço</p>
                     <p className="text-[#7D8FA4] text-sm">Igualamos o preço em 30 dias. <span className="underline cursor-pointer">Detalhes</span></p>
                   </div>
                 </div>
                 <div className="flex items-start justify-center md:justify-end gap-3">
                   <div>
-                    <p className="text-[#21388D] font-semibold mb-1"><span className="text-[#CF111A]">Fácil</span> Devolução</p>
+                    <p className="font-semibold mb-1" style={{color:'#21388D'}}><span style={{color:'#CF111A'}}>Fácil</span> Devolução</p>
                     <p className="text-[#7D8FA4] text-sm">Devoluções grátis até 31/10. <span className="underline cursor-pointer">Detalhes</span></p>
                   </div>
                 </div>
@@ -598,11 +595,11 @@ export default function Homepage() {
             </div>
           </div>
 
-          {/* Navegação Principal */}
+          {/* Navegação Principal (estilo Vastara) */}
           <BrinqueTEAndoNavigation menu={headerMenu} />
-          <div className="bg-[#21388D] text-white py-3 w-full">
+          <div className="text-white py-3 w-full" style={{background:'#21388D'}}>
             <div className="max-w-7xl mx-auto px-4 text-center">
-              <p className="text-sm font-medium tracking-wider">🧸 FRETE GRÁTIS BRASIL • GARANTIA 1 ANO • DEVOLUÇÕES FÁCEIS 🎁</p>
+              <p className="text-sm font-medium tracking-wider">🧸 FRETE GRÁTIS BRASIL • 1 ANO DE GARANTIA • DEVOLUÇÕES FÁCEIS 🎁</p>
             </div>
           </div>
 
@@ -1084,8 +1081,6 @@ const HEADER_MENU_QUERY = `#graphql
 
 function BrinqueTEAndoNavigation({ menu }) {
   const menuItems = menu?.items || [];
-  
-  // Menu padrão caso não tenha menu da Shopify
   const defaultMenuItems = [
     { title: 'Início', url: '/' },
     { title: '🧸 Brinquedos Terapêuticos', url: '/collections/brinquedos-terapeuticos' },
@@ -1094,32 +1089,14 @@ function BrinqueTEAndoNavigation({ menu }) {
     { title: '💡 Ambiente & Rotina', url: '/collections/ambiente-rotina' },
     { title: '💙 Apoio aos Pais', url: '/pages/apoio-aos-pais' }
   ];
-
   const navItems = menuItems.length > 0 ? menuItems : defaultMenuItems;
-
   return (
-    <nav className="bg-[#EAD9B9] border-y border-[#DEC91F] py-4">
+    <nav className="py-4" style={{background:'#E9E2D2', borderTop:'1px solid #DEC91F', borderBottom:'1px solid #DEC91F'}}>
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="text-2xl sm:text-3xl font-bold text-[#21388D] tracking-wider hover:text-[#3292D8] transition-colors">
-            BrinqueTEAndo
+          <Link to="/" className="text-2xl sm:text-3xl font-bold tracking-wider" style={{color:'#21388D'}}>
+            BRIQUETEANDO
           </Link>
-          
-          {/* Menu Desktop */}
-          <div className="hidden lg:flex items-center gap-6">
-            {navItems.map((item, idx) => (
-              <Link
-                key={item.id || idx}
-                to={item.url?.replace('https://briqueteando.com.br', '').replace('https://briqueteando.myshopify.com', '') || '/'}
-                className="text-[#21388D] hover:text-[#CF111A] font-medium text-sm tracking-wide transition-colors whitespace-nowrap"
-              >
-                {item.title}
-              </Link>
-            ))}
-          </div>
-
-          {/* Ícones */}
           <div className="flex items-center gap-4">
             <Link to="/search" className="text-[#21388D] hover:text-[#CF111A] transition-colors">
               <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1138,14 +1115,27 @@ function BrinqueTEAndoNavigation({ menu }) {
             </Link>
           </div>
         </div>
-
-        {/* Menu Mobile */}
+        <div className="hidden lg:flex items-center justify-center gap-3 mt-4">
+          {navItems.map((item, idx) => (
+            <div className="flex items-center gap-3" key={item.id || idx}>
+              <Link
+                to={item.url?.replace('https://briqueteando.com.br', '').replace('https://briqueteando.myshopify.com', '') || '/'}
+                className="font-medium text-xs tracking-widest transition-colors whitespace-nowrap"
+                style={{color:'#21388D', textTransform:'uppercase'}}
+              >
+                {item.title}
+              </Link>
+              {idx < navItems.length - 1 && <span style={{color:'#7D8FA4'}}>•</span>}
+            </div>
+          ))}
+        </div>
         <div className="lg:hidden mt-4 flex flex-wrap gap-2 justify-center">
           {navItems.map((item, idx) => (
             <Link
               key={item.id || idx}
               to={item.url?.replace('https://briqueteando.com.br', '').replace('https://briqueteando.myshopify.com', '') || '/'}
-              className="text-[#21388D] hover:text-[#CF111A] font-medium text-xs tracking-wide transition-colors bg-white/50 px-3 py-2 rounded-full"
+              className="font-medium text-xs tracking-widest transition-colors px-3 py-2 rounded-full"
+              style={{color:'#21388D', background:'rgba(255,255,255,0.6)'}}
             >
               {item.title}
             </Link>
