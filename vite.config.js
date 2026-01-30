@@ -13,4 +13,36 @@ export default defineConfig({
       },
     }),
   ],
+  ssr: {
+    noExternal: [
+      // React & ReactDOM
+      'react',
+      'react-dom',
+      'react-dom/client',
+      'react/jsx-dev-runtime',
+      'react/jsx-runtime',
+
+      // Remix
+      '@remix-run/react',
+      '@remix-run/node',
+      '@remix-run/router',
+      '@remix-run/server-runtime',
+      '@remix-run/server-runtime/dist',
+
+      // Shopify
+      '@shopify/hydrogen',
+      '@shopify/hydrogen-react',
+      '@shopify/hydrogen-react/dist',
+
+      // GraphQL
+      'graphql',
+      'graphql-tag',
+      'graphql/validation',
+      'graphql/utilities',
+
+      // Outros
+      '@xstate/react',
+      '@xstate/react/family',
+    ],
+  },
 });
