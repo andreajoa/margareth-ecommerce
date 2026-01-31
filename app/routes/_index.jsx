@@ -669,25 +669,25 @@ export default function Homepage() {
             </div>
           </section>
 
-          {/* Men's/Women's Collection */}
+          {/* 🧸 Brinquedos Terapêuticos */}
           <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 mb-20 w-full">
             <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
               <div className="relative h-72 sm:h-80 md:h-96 overflow-hidden rounded-[10px] shadow-xl group">
                 <img src="https://cdn.shopify.com/s/files/1/0778/2921/0327/files/men_s_collection_dc5c97d6-952f-43c1-9f24-8eadb0693f74.avif?v=1765592942" alt="Men's Luxury Watches USA, UK, Canada & Australia - Shop Online" className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" width="800" height="600"/>
                 <div className="absolute inset-0 bg-gradient-to-t from-[#b91c1c]/80 via-transparent to-transparent"></div>
                 <div className="absolute bottom-6 sm:bottom-8 left-6 sm:left-8 right-6 sm:right-8 text-white">
-                  <h2 className="text-2xl sm:text-3xl font-light mb-2 tracking-wide">MEN'S COLLECTION</h2>
-                  <p className="text-[#D4AF69] mb-4 text-sm sm:text-base">Sophisticated timepieces for the modern gentleman</p>
-                  <Link to="/collections/mens-watches" className="inline-block bg-white text-[#b91c1c] px-6 sm:px-8 py-2 sm:py-3 rounded-full font-semibold hover:bg-[#D4AF69] hover:text-white transition-all text-sm sm:text-base">SHOP NOW</Link>
+                  <h2 className="text-2xl sm:text-3xl font-light mb-2 tracking-wide">🧸 Brinquedos Terapêuticos</h2>
+                  <p className="text-[#D4AF69] mb-4 text-sm sm:text-base">Estimule brincando</p>
+                  <Link to="/collections/brinquedos-terapeuticos" className="inline-block bg-white text-[#b91c1c] px-6 sm:px-8 py-2 sm:py-3 rounded-full font-semibold hover:bg-[#D4AF69] hover:text-white transition-all text-sm sm:text-base">SHOP NOW</Link>
                 </div>
               </div>
               <div className="relative h-72 sm:h-80 md:h-96 overflow-hidden rounded-[10px] shadow-xl group">
                 <img src="https://cdn.shopify.com/s/files/1/0778/2921/0327/files/7.avif?v=1765596667" alt="Women's Luxury Watches USA, UK, Canada & Australia - Shop Online" className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" width="800" height="600"/>
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A3D2F]/80 via-transparent to-transparent"></div>
                 <div className="absolute bottom-6 sm:bottom-8 left-6 sm:left-8 right-6 sm:right-8 text-white">
-                  <h2 className="text-2xl sm:text-3xl font-light mb-2 tracking-wide">WOMEN'S COLLECTION</h2>
-                  <p className="text-[#D4AF69] mb-4 text-sm sm:text-base">Elegant designs that capture timeless beauty</p>
-                  <Link to="/collections/womens-watches" className="inline-block bg-white text-[#0A3D2F] px-6 sm:px-8 py-2 sm:py-3 rounded-full font-semibold hover:bg-[#D4AF69] hover:text-white transition-all text-sm sm:text-base">SHOP NOW</Link>
+                  <h2 className="text-2xl sm:text-3xl font-light mb-2 tracking-wide">💡 Ambiente & Rotina</h2>
+                  <p className="text-[#D4AF69] mb-4 text-sm sm:text-base">Onde a rotina vira apoio</p>
+                  <Link to="/collections/ambiente-rotina" className="inline-block bg-white text-[#0A3D2F] px-6 sm:px-8 py-2 sm:py-3 rounded-full font-semibold hover:bg-[#D4AF69] hover:text-white transition-all text-sm sm:text-base">SHOP NOW</Link>
                 </div>
               </div>
             </div>
