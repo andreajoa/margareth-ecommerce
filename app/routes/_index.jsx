@@ -277,22 +277,18 @@ export default function Homepage() {
     const now = new Date();
     const currentYear = now.getFullYear();
     const holidays = [
-      // TEA/Autismo/TDAH Events in Brazil
-      {name: 'III Jornada sobre Aprendizagem e Autismo - Baixada Santista', month: 2, day: 29, emoji: '🧩', message: 'III JORNADA AUTISMO BAIXADA SANTISTA - 29/03'},
-      {name: 'ExpoTEA 2025 - Maior Feira de Autismo do Mundo', month: 10, day: 28, emoji: '🎪', message: 'EXPOTEA 2025 - MAIOR FEIRA DE AUTISMO DO MUNDO!'},
+      // TEA/Autismo/TDAH Events in Brazil - Main focus
+      {name: 'III Jornada sobre Aprendizagem e Autismo - Baixada Santista', month: 2, day: 29, emoji: '🧩', message: 'III JORNADA AUTISMO BAIXADA SANTISTA - 29/03'}, // March 29
+      {name: 'ExpoTEA 2025 - Maior Feira de Autismo do Mundo', month: 10, day: 28, emoji: '🎪', message: 'EXPOTEA 2025 - MAIOR FEIRA DE AUTISMO DO MUNDO!'}, // November 28
       
-      // Traditional Brazilian Holidays
-      {name: 'Véspera de Natal', month: 11, day: 24, emoji: '🎄', message: 'O PAPAI NOEL ESTÁ CHEGANDO!'},
-      {name: 'Véspera de Ano Novo', month: 11, day: 31, emoji: '🎉', message: '🎊 CELEBRE O ANO NOVO — PEÇA ATÉ 27/12'},
-      {name: 'Dia dos Namorados', month: 5, day: 12, emoji: '❤️', message: 'CONTAGEM REGRESSIVA DIA DOS NAMORADOS!'}, // Brazil Valentine's Day
-      {name: 'Carnaval', month: 1, day: 28, emoji: '🎭', message: 'CONTAGEM REGRESSIVA CARNAVAL!'}, // Approximate
-      {name: 'Páscoa', month: 3, day: 20, emoji: '🐣', message: 'CONTAGEM REGRESSIVA PÁSCOA!'},
-      {name: 'Dia das Mães', month: 4, day: 11, emoji: '👩', message: 'CONTAGEM REGRESSIVA DIA DAS MÃES!'}, // 2nd Sunday of May
-      {name: 'Dia dos Pais', month: 7, day: 9, emoji: '👨', message: 'CONTAGEM REGRESSIVA DIA DOS PAIS!'}, // 2nd Sunday of Aug
-      {name: 'Independência do Brasil', month: 8, day: 7, emoji: '🇧🇷', message: 'CONTAGEM REGRESSIVA INDEPENDÊNCIA!'},
-      {name: 'Dia do Trabalho', month: 4, day: 1, emoji: '💼', message: 'CONTAGEM REGRESSIVA DIA DO TRABALHO!'},
-      {name: 'Halloween', month: 9, day: 31, emoji: '🎃', message: 'CONTAGEM REGRESSIVA HALLOWEEN!'},
-      {name: 'Black Friday', month: 10, day: 28, emoji: '🛍️', message: 'CONTAGEM REGRESSIVA BLACK FRIDAY!'}
+      // Additional TDAH/Autism/TEA Events
+      {name: 'Congresso Brasileiro de TDAH', month: 4, day: 15, emoji: '🧠', message: 'CONGRESSO BRASILEIRO TDAH - 15/05'},
+      {name: 'Semana Nacional de Conscientização do Autismo', month: 3, day: 2, emoji: '🌈', message: 'SEMANA AUTISMO BRASIL - 02/04'},
+      {name: 'Dia Mundial do Autismo', month: 3, day: 2, emoji: '💙', message: 'DIA MUNDIAL DO AUTISMO - 02/04'},
+      {name: 'Feira de Tecnologias Assistivas', month: 6, day: 10, emoji: '🤖', message: 'FEIRA TECNOLOGIAS ASSISTIVAS - 10/07'},
+      {name: 'Encontro Nacional de Pais de Autistas', month: 8, day: 25, emoji: '👨‍👩‍👧‍👦', message: 'ENCONTRO PAIS AUTISTAS - 25/09'},
+      {name: 'Workshop Terapias Alternativas TDAH', month: 9, day: 5, emoji: '🧘', message: 'WORKSHOP TERAPIAS TDAH - 05/10'},
+      {name: 'Feira de Brinquedos Terapêuticos', month: 11, day: 12, emoji: '🧸', message: 'FEIRA BRINQUEDOS TERAPÊUTICOS - 12/12'}
     ];
 
     // 1. Cria objetos de data para todos os feriados
@@ -459,11 +455,11 @@ export default function Homepage() {
               {/* Repetimos o conteúdo várias vezes para garantir o loop infinito em telas grandes */}
               {[...Array(12)].map((_, i) => (
                 <div key={i} className="flex items-center mx-8 whitespace-nowrap">
-                   <span className="text-2xl mr-3 filter drop-shadow-md">🎄</span>
+                   <span className="text-2xl mr-3 filter drop-shadow-md">🎭</span>
                    <span className="text-[#FEFDF8] font-serif italic text-xl tracking-widest font-medium uppercase drop-shadow-md" style={{textShadow: '0 1px 2px rgba(0,0,0,0.5)'}}>
                      🧩 III Jornada Autismo Baixada Santista - 29/03 em Santos! 🎪 ExpoTEA 2025 em Novembro - SP!
                    </span>
-                   <span className="text-2xl ml-3 filter drop-shadow-md">🎅</span>
+                   <span className="text-2xl ml-3 filter drop-shadow-md">🎪</span>
                    
                    {/* Elegant Separator */}
                    <div className="ml-8 flex items-center gap-2 opacity-70">
@@ -566,13 +562,11 @@ export default function Homepage() {
                 <div className="hidden lg:flex items-center gap-3 xl:gap-4 flex-1 justify-center overflow-x-auto">
                   {[
                     {name: 'INÍCIO', href: '/'},
-                    {name: 'LANÇAMENTOS', href: '/collections/new-arrivals'},
-                    {name: 'MASCULINO', href: '/collections/mens-watches'},
-                    {name: 'FEMININO', href: '/collections/womens-watches'},
-                    {name: 'ESPORTIVO', href: '/collections/sport-watches'},
-                    {name: 'FOSSIL', href: '/collections/fossil-watch'},
-                    {name: 'AUTOMÁTICO', href: '/collections/automatic-watches'},
-                    {name: 'QUARTZ', href: '/collections/quartz-watches'},
+                    {name: 'Brinquedos Terapêuticos', href: '/collections/brinquedos-terapeuticos'},
+                    {name: 'Por Necessidade', href: '/collections/por-necessidade'},
+                    {name: 'Por Idade', href: '/collections/por-idade'},
+                    {name: 'Ambiente & Rotina', href: '/collections/ambiente-rotina'},
+                    {name: 'Apoio aos Pais', href: '/collections/apoio-aos-pais'},
                     {name: 'RECOMPENSAS', href: '/rewards'},
                     {name: 'CONTATO', href: '/pages/contact'}
                   ].map(item => (
