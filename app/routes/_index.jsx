@@ -487,49 +487,22 @@ export default function Homepage() {
       <main role="main" aria-label="VASTARA Luxury Watches - Main Content" className="bg-[#FEFDF8] flex flex-col min-h-screen w-full overflow-x-hidden">
         <div className="flex-grow w-full">
           {/* Top Bar with Countdown */}
-          <div className="bg-black text-white py-3 text-center w-full">
-            <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-4 flex-wrap">
-              <span className="text-sm md:text-base font-bold tracking-wide">
-                {currentHoliday?.emoji} {currentHoliday?.message} {currentHoliday?.emoji}
-              </span>
-              <div className="flex items-center gap-2 border-2 border-white px-4 py-1 bg-white/10">
-                <span className="text-2xl font-bold">{String(timeLeft.days).padStart(2, '0')}</span>
-                <span className="text-xs">D</span>
-                <span className="text-2xl font-bold">{String(timeLeft.hours).padStart(2, '0')}</span>
-                <span className="text-xs">H</span>
-                <span className="text-2xl font-bold">{String(timeLeft.minutes).padStart(2, '0')}</span>
-                <span className="text-xs">M</span>
-                <span className="text-2xl font-bold">{String(timeLeft.seconds).padStart(2, '0')}</span>
-                <span className="text-xs">S</span>
+          <div className="text-white w-full" style={{background:'#000', padding:'12px 0'}}>
+            <div className="max-w-7xl mx-auto" style={{display:'flex', alignItems:'center', justifyContent:'space-between', padding:'0 16px'}}>
+              <div style={{display:'flex', alignItems:'center', gap:'8px', fontWeight:700}}>
+                <span>❤️ VALENTINES DAY COUNTDOWN! ❤️</span>
+              </div>
+              <div style={{background:'#fff', color:'#000', padding:'8px 12px', borderRadius:'6px', fontFamily:'monospace', fontSize:'13px', fontWeight:700, letterSpacing:'0.08em'}}>
+                <span>
+                  {String(timeLeft.days).padStart(2,'0')}ᴰ {String(timeLeft.hours).padStart(2,'0')}ʰ {String(timeLeft.minutes).padStart(2,'0')}ᵐ {String(timeLeft.seconds).padStart(2,'0')}ˢ
+                </span>
               </div>
             </div>
           </div>
 
-          {/* --- CHRISTMAS SCROLL BAR (NEW) --- */}
-          <div className="w-full bg-[#8B0000] border-y-2 border-[#D4AF69] overflow-hidden py-3 relative z-20 shadow-lg">
-            {/* Subtle Texture Overlay */}
-            <div className="absolute inset-0 pointer-events-none opacity-10" style={{backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '15px 15px'}}></div>
-            <div className="animate-marquee-christmas flex items-center">
-              {/* Repetimos o conteúdo várias vezes para garantir o loop infinito em telas grandes */}
-              {[...Array(12)].map((_, i) => (
-                <div key={i} className="flex items-center mx-8 whitespace-nowrap">
-                   <span className="text-2xl mr-3 filter drop-shadow-md">💋</span>
-                   <span className="text-[#FEFDF8] font-serif italic text-xl tracking-widest font-medium uppercase drop-shadow-md" style={{textShadow: '0 1px 2px rgba(0,0,0,0.5)'}}>
-                     ❤️ This Valentines Day, Gift a Watch They Will Treasure Forever
-                   </span>
-                   <span className="text-2xl ml-3 filter drop-shadow-md">💝</span>
-                   
-                   {/* Elegant Separator */}
-                   <div className="ml-8 flex items-center gap-2 opacity-70">
-                     <span className="text-[#D4AF69] text-xs">✦</span>
-                     <span className="w-16 h-[1px] bg-[#D4AF69]"></span>
-                     <span className="text-[#D4AF69] text-xs">✦</span>
-                   </div>
-                </div>
-              ))}
-            </div>
+          <div className="text-white text-center" style={{background:'#b91c1c', padding:'12px 16px', fontStyle:'italic', letterSpacing:'0.06em'}}>
+            💝 GIFT A WATCH THEY WILL TREASURE FOREVER 💝 ✦ ———— ✦ 💝 ❤️ THIS VALENTINES DAY, GIFT A WATCH THEY WILL
           </div>
-          {/* --- END CHRISTMAS SCROLL BAR --- */}
 
           {/* Intro Section */}
           <div className="grid md:grid-cols-2 gap-0 w-full">
@@ -611,10 +584,10 @@ export default function Homepage() {
             </div>
           </div>
 
-          <nav className="py-4" style={{background:'#E9E2D2', borderTop:'1px solid #D4AF69', borderBottom:'1px solid #D4AF69'}}>
+          <nav className="py-4 sticky top-0 z-50" style={{background:'#ffffff', borderTop:'1px solid #e5e7eb', borderBottom:'1px solid #e5e7eb'}}>
             <div className="max-w-7xl mx-auto px-4">
               <div className="flex items-center justify-between">
-                <Link to="/" className="text-2xl sm:text-3xl font-bold tracking-wider" style={{color:'#0A3D2F'}}>
+                <Link to="/" className="text-2xl sm:text-3xl font-bold tracking-widest" style={{color:'#1f2937'}}>
                   BRIQUETEANDO
                 </Link>
                 <div className="flex items-center gap-4">
@@ -638,18 +611,12 @@ export default function Homepage() {
                   </Link>
                 </div>
               </div>
-              <div className="hidden lg:flex items-center justify-center gap-3 mt-4">
-                <div className="flex items-center gap-3">
-                  <a href="https://brinqueteando.online/collections/brinquedos-terapeuticos" className="font-medium text-xs tracking-widest transition-colors whitespace-nowrap" style={{color:'#0A3D2F', textTransform:'uppercase'}}>🧸 Brinquedos Terapêuticos</a>
-                  <span style={{color:'#9d8b7c'}}>•</span>
-                  <a href="https://brinqueteando.online/collections/por-necessidade" className="font-medium text-xs tracking-widest transition-colors whitespace-nowrap" style={{color:'#0A3D2F', textTransform:'uppercase'}}>🌈 Por Necessidade</a>
-                  <span style={{color:'#9d8b7c'}}>•</span>
-                  <a href="https://brinqueteando.online/collections/por-idade" className="font-medium text-xs tracking-widest transition-colors whitespace-nowrap" style={{color:'#0A3D2F', textTransform:'uppercase'}}>🎒 Por Idade</a>
-                  <span style={{color:'#9d8b7c'}}>•</span>
-                  <a href="https://brinqueteando.online/collections/ambiente-rotina" className="font-medium text-xs tracking-widest transition-colors whitespace-nowrap" style={{color:'#0A3D2F', textTransform:'uppercase'}}>💡 Ambiente & Rotina</a>
-                  <span style={{color:'#9d8b7c'}}>•</span>
-                  <a href="https://brinqueteando.online/collections/apoio-aos-pais" className="font-medium text-xs tracking-widest transition-colors whitespace-nowrap" style={{color:'#0A3D2F', textTransform:'uppercase'}}>💙 Apoio aos Pais</a>
-                </div>
+              <div className="hidden lg:flex items-center justify-center gap-6 mt-4">
+                <a href="https://brinqueteando.online/collections/brinquedos-terapeuticos" className="font-semibold text-sm tracking-wide whitespace-nowrap hover:text-gray-900" style={{color:'#374151'}}>🧸 Brinquedos Terapêuticos</a>
+                <a href="https://brinqueteando.online/collections/por-necessidade" className="font-semibold text-sm tracking-wide whitespace-nowrap hover:text-gray-900" style={{color:'#374151'}}>🌈 Por Necessidade</a>
+                <a href="https://brinqueteando.online/collections/por-idade" className="font-semibold text-sm tracking-wide whitespace-nowrap hover:text-gray-900" style={{color:'#374151'}}>🎒 Por Idade</a>
+                <a href="https://brinqueteando.online/collections/ambiente-rotina" className="font-semibold text-sm tracking-wide whitespace-nowrap hover:text-gray-900" style={{color:'#374151'}}>💡 Ambiente & Rotina</a>
+                <a href="https://brinqueteando.online/collections/apoio-aos-pais" className="font-semibold text-sm tracking-wide whitespace-nowrap hover:text-gray-900" style={{color:'#374151'}}>💙 Apoio aos Pais</a>
               </div>
               <div className="lg:hidden mt-4 flex flex-wrap gap-2 justify-center">
                 <a href="https://brinqueteando.online/collections/brinquedos-terapeuticos" className="font-medium text-xs tracking-widest transition-colors px-3 py-2 rounded-full" style={{color:'#0A3D2F', background:'rgba(255,255,255,0.6)'}}>🧸 Brinquedos Terapêuticos</a>
@@ -661,7 +628,7 @@ export default function Homepage() {
             </div>
           </nav>
           <Aside />
-          <div className="bg-[#0A3D2F] text-white py-3 w-full">
+          <div className="text-white py-3 w-full" style={{background:'#1f2937'}}>
             <div className="max-w-7xl mx-auto px-4 text-center">
               <p className="text-sm font-medium tracking-wider">🎄 FREE SHIPPING (USA/UK/CA/AU) • 1-YEAR WARRANTY • EASY RETURNS 🎁</p>
             </div>
