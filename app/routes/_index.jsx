@@ -9,14 +9,62 @@ import {NavigationMenu} from '~/components/NavigationMenu';
 
 export const meta = () => {
   return [
+    // PRIMARY META TAGS
     {title: 'Brinquedos Educativos TDAH e Autismo | BrinqueTEAndo'},
     {name: 'description', content: 'Brinquedos educativos especializados para crianças com TDAH e autismo. Desenvolvimento cognitivo e sensorial. Frete grátis para todo Brasil.'},
-    {name: 'keywords', content: 'brinquedos educativos, tdah, autismo, brinquedos sensoriais, desenvolvimento infantil, terapia ocupacional, inclusão, neurodiversidade'},
+    
+    // GEO-TARGETING META TAGS
+    {name: 'geo.region', content: 'BR'},
+    {name: 'geo.placename', content: 'São Paulo;Santos;Praia Grande'},
+    
+    // ENHANCED KEYWORDS (Location-based & Long-tail)
+    {name: 'keywords', content: 'brinquedos educativos, tdah, autismo, brinquedos sensoriais, desenvolvimento infantil, terapia ocupacional, inclusão, neurodiversidade, brinquedos adaptados, brinquedos praia grande, brinquedos santos, brinquedos são vicente, brinquedos litoral sp, brinquedos autismo brasil'},
+    
+    // LANGUAGE TARGETING
+    {httpEquiv: 'content-language', content: 'pt-BR'},
+    
+    // ENHANCED OPEN GRAPH TAGS
     {property: 'og:title', content: 'BrinqueTEAndo - Brinquedos Educativos para TDAH e Autismo'},
     {property: 'og:description', content: 'Descubra brinquedos especializados que ajudam no desenvolvimento de crianças com neurodiversidade. Frete grátis para todo Brasil.'},
+    {property: 'og:type', content: 'website'},
+    {property: 'og:url', content: 'https://brinqueteando.online'},
     {property: 'og:image', content: 'https://cdn.shopify.com/s/files/1/0778/2921/0327/files/5.avif?v=1765596668'},
+    {property: 'og:image:width', content: '1200'},
+    {property: 'og:image:height', content: '630'},
+    {property: 'og:site_name', content: 'BrinqueTEAndo'},
+    {property: 'og:locale', content: 'pt_BR'},
+    
+    // TWITTER CARDS
     {name: 'twitter:card', content: 'summary_large_image'},
+    {name: 'twitter:title', content: 'BrinqueTEAndo | Brinquedos Educativos para TDAH e Autismo'},
+    {name: 'twitter:description', content: 'Brinquedos educativos especializados para crianças com TDAH e autismo. Frete grátis para todo Brasil.'},
+    {name: 'twitter:image', content: 'https://cdn.shopify.com/s/files/1/0778/2921/0327/files/5.avif?v=1765596668'},
+    
+    // ENHANCED ROBOTS & INDEXING
+    {name: 'robots', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'},
+    {name: 'googlebot', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'},
+    
+    // MOBILE OPTIMIZATION
+    {name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=5'},
+    {name: 'mobile-web-app-capable', content: 'yes'},
+    {name: 'apple-mobile-web-app-capable', content: 'yes'},
+    
+    // THEME COLOR
     {name: 'theme-color', content: '#0A3D2F'},
+    
+    // CANONICAL URL
+    {tagName: 'link', rel: 'canonical', href: 'https://brinqueteando.online'},
+    
+    // HREFLANG FOR GEO-TARGETING
+    {tagName: 'link', rel: 'alternate', hreflang: 'pt-br', href: 'https://brinqueteando.online'},
+    {tagName: 'link', rel: 'alternate', hreflang: 'x-default', href: 'https://brinqueteando.online'},
+    
+    // PRECONNECT & DNS-PREFETCH
+    {tagName: 'link', rel: 'preconnect', href: 'https://cdn.shopify.com'},
+    {tagName: 'link', rel: 'dns-prefetch', href: 'https://cdn.shopify.com'},
+    
+    // PRELOAD CRITICAL RESOURCES
+    {tagName: 'link', rel: 'preload', as: 'image', href: 'https://cdn.shopify.com/s/files/1/0778/2921/0327/files/5.avif?v=1765596668', attributes: {fetchpriority: 'high'}},
   ];
 };
 
@@ -41,10 +89,66 @@ export default function Homepage() {
   const {collections, products, under100Products, footerMenu} = useLoaderData();
   const rootData = useRouteLoaderData('root');
   const {open} = useAside();
+  const [currentHero, setCurrentHero] = useState(0);
   const [currentPromo, setCurrentPromo] = useState(0);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [timeLeft, setTimeLeft] = useState({days: 0, hours: 0, minutes: 0, seconds: 0});
-  const [currentHoliday, setCurrentHoliday] = useState({name: 'Holiday', emoji: '🎉', message: 'CONTAGEM REGRESSIVA'});
+  const [currentHoliday, setCurrentHoliday] = useState({name: 'Feriado', emoji: '🎉', message: 'CONTAGEM REGRESSIVA'});
+
+  // Analytics Script (adapted for BrinqueTEAndo)
+  useEffect(() => {
+    // Add any analytics scripts here if needed
+    return () => {};
+  }, []);
+
+  const schemaOrgJSON = [
+    // Organization Schema
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "BrinqueTEAndo",
+      "url": "https://brinqueteando.online",
+      "logo": "https://cdn.shopify.com/s/files/1/0778/2921/0327/files/5.avif?v=1765596668",
+      "description": "Especializada em brinquedos educativos para crianças com TDAH, Autismo e TEA. Desenvolvimento cognitivo e sensorial.",
+      "foundingDate": "2024",
+      "areaServed": [
+        {"@type": "Country", "name": "Brazil"}
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+55-13-99999-9999",
+        "contactType": "Customer Service",
+        "areaServed": "BR",
+        "availableLanguage": ["Portuguese"]
+      }
+    },
+    // WebSite Schema with Search Action
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "BrinqueTEAndo",
+      "url": "https://brinqueteando.online",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://brinqueteando.online/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    // Store/LocalBusiness Schema
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "BrinqueTEAndo - Loja Online",
+      "image": "https://cdn.shopify.com/s/files/1/0778/2921/0327/files/5.avif?v=1765596668",
+      "url": "https://brinqueteando.online",
+      "priceRange": "$-$$",
+      "currenciesAccepted": "BRL",
+      "paymentAccepted": "Credit Card, PIX, Boleto, PayPal",
+      "areaServed": [
+        {"@type": "Country", "name": "BR"}
+      ]
+    }
+  ];
 
   const promoMessages = [
     "🚚 FRETE GRÁTIS para todo Brasil!",
@@ -75,6 +179,7 @@ export default function Homepage() {
 
     const upcomingHolidays = holidays.map(holiday => {
       let holidayDate = new Date(currentYear, holiday.month, holiday.day, 23, 59, 59);
+
       if (holidayDate.getTime() < now.getTime()) {
         holidayDate = new Date(currentYear + 1, holiday.month, holiday.day, 23, 59, 59);
       }
@@ -84,9 +189,12 @@ export default function Homepage() {
     upcomingHolidays.sort((a, b) => a.date - b.date);
     const nextHoliday = upcomingHolidays[0];
 
-    if (!nextHoliday) return {days: 0, hours: 0, minutes: 0, seconds: 0};
+    if (!nextHoliday) {
+      return {days: 0, hours: 0, minutes: 0, seconds: 0};
+    }
 
     const difference = nextHoliday.date.getTime() - now.getTime();
+
     if (difference > 0) {
       setCurrentHoliday({
         name: nextHoliday.name,
@@ -122,42 +230,396 @@ export default function Homepage() {
   }, []);
 
   return (
-    <main role="main" className="bg-[#FEFDF8] flex flex-col min-h-screen w-full">
-      <style>{\`
-        header { display: none !important; }
-        [class*="Header"] { display: none !important; }
-        div[data-testid="header"] { display: none !important; }
-        nav[data-testid="header-nav"] { display: none !important; }
-      \`}</style>
+    <div className="w-full overflow-x-hidden">
+      <style dangerouslySetInnerHTML={{__html: `
+        * {
+          box-sizing: border-box;
+        }
 
-      {/* Top Countdown Bar */}
-      <div className="bg-[#0A3D2F] text-white py-3 text-center w-full">
-        <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-4 flex-wrap">
-          <span className="text-sm md:text-base font-bold tracking-wide">
-            {currentHoliday?.emoji} {currentHoliday?.message} {currentHoliday?.emoji}
-          </span>
-          <div className="flex items-center gap-2 border-2 border-white px-4 py-1 bg-white/10">
-            <span className="text-2xl font-bold">{String(timeLeft.days).padStart(2, '0')}</span>
-            <span className="text-xs">D</span>
-            <span className="text-2xl font-bold">{String(timeLeft.hours).padStart(2, '0')}</span>
-            <span className="text-xs">H</span>
-            <span className="text-2xl font-bold">{String(timeLeft.minutes).padStart(2, '0')}</span>
-            <span className="text-xs">M</span>
-            <span className="text-2xl font-bold">{String(timeLeft.seconds).padStart(2, '0')}</span>
-            <span className="text-xs">S</span>
+        @keyframes marquee-scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          display: flex;
+          width: fit-content;
+          animation: marquee-scroll 40s linear infinite;
+        }
+        .animate-marquee:hover {
+          animation-play-state: paused;
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fade-in-up {
+          animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.05); }
+        }
+        .animate-pulse-slow {
+          animation: pulse 3s ease-in-out infinite;
+        }
+      `}} />
+
+      {/* Inject structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(schemaOrgJSON),
+        }}
+      />
+
+      <div className="bg-[#FEFDF8] w-full">
+        {/* TOP COUNTDOWN BAR */}
+        <div className="bg-[#0A3D2F] text-white py-3 text-center w-full">
+          <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-4 flex-wrap">
+            <span className="text-sm md:text-base font-bold tracking-wide">
+              {currentHoliday?.emoji} {currentHoliday?.message} {currentHoliday?.emoji}
+            </span>
+            <div className="flex items-center gap-2 border-2 border-white px-4 py-1 bg-white/10">
+              <span className="text-2xl font-bold">{String(timeLeft.days).padStart(2, '0')}</span>
+              <span className="text-xs">D</span>
+              <span className="text-2xl font-bold">{String(timeLeft.hours).padStart(2, '0')}</span>
+              <span className="text-xs">H</span>
+              <span className="text-2xl font-bold">{String(timeLeft.minutes).padStart(2, '0')}</span>
+              <span className="text-xs">M</span>
+              <span className="text-2xl font-bold">{String(timeLeft.seconds).padStart(2, '0')}</span>
+              <span className="text-xs">S</span>
+            </div>
+          </div>
+        </div>
+
+        {/* PROMOTIONAL SCROLL BAR */}
+        <div className="w-full bg-gradient-to-r from-[#D4AF69] via-[#F4D03F] to-[#D4AF69] border-y-2 border-[#0A3D2F] overflow-hidden py-3 relative z-20">
+          <div className="absolute inset-0 pointer-events-none opacity-10" style={{backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)', backgroundSize: '15px 15px'}}></div>
+          <div className="animate-marquee flex items-center">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="flex items-center mx-8 whitespace-nowrap">
+                <span className="text-2xl mr-3">💝</span>
+                <span className="text-[#0A3D2F] font-serif italic text-xl tracking-widest font-medium uppercase drop-shadow-md">
+                  {promoMessages[currentPromo]}
+                </span>
+                <span className="text-2xl ml-3">🎁</span>
+                
+                <div className="ml-8 flex items-center gap-2 opacity-70">
+                  <span className="text-[#0A3D2F] text-xs">✦</span>
+                  <span className="w-16 h-[1px] bg-[#0A3D2F]"></span>
+                  <span className="text-[#0A3D2F] text-xs">✦</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* HERO SECTION WITH VIDEO BACKGROUND */}
+        <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+          {/* Video Background */}
+          <div className="absolute inset-0 z-0">
+            <div className="w-full h-full bg-gradient-to-br from-[#0A3D2F] via-[#1a5757] to-[#0A3D2F] opacity-90"></div>
+          </div>
+          
+          <div className="relative z-10 max-w-7xl mx-auto px-4 py-20 md:py-32 text-center">
+            <h1 className="text-5xl md:text-7xl font-light text-white mb-8 leading-tight animate-fade-in-up">
+              Descubra o <span className="font-serif italic text-[#D4AF69] animate-pulse-slow">Poder</span> do Brincar
+            </h1>
+            <p className="text-2xl md:text-3xl text-[#D4AF69] font-medium mb-10 animate-fade-in-up" style={{animationDelay: '0.2s'}}>
+              Especializados em Desenvolvimento Infantil Neurodivergente
+            </p>
+            <p className="text-xl text-gray-200 max-w-3xl mx-auto mb-12 animate-fade-in-up" style={{animationDelay: '0.4s'}}>
+              Brinquedos educativos projetados por especialistas para estimular o crescimento cognitivo, sensorial e emocional de crianças com TDAH, Autismo e TEA.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up" style={{animationDelay: '0.6s'}}>
+              <Link to="/collections/all" className="bg-[#D4AF69] hover:bg-[#c49f59] text-[#0A3D2F] font-bold py-5 px-10 rounded-lg transition-all duration-300 transform hover:scale-105 text-center text-lg">
+                Explorar Coleções Completas
+              </Link>
+              <button className="border-2 border-white text-white hover:bg-white hover:text-[#0A3D2F] font-bold py-5 px-10 rounded-lg transition-all duration-300 text-center text-lg">
+                Ver Depoimentos Reais
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* BENEFITS SECTION */}
+        <div className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-light text-[#0A3D2F] mb-6">Por Que Escolher a BrinqueTEAndo?</h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Cada brinquedo é cuidadosamente selecionado e desenvolvido para promover o desenvolvimento saudável de crianças neurodivergentes.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-12">
+              <div className="text-center group">
+                <div className="w-24 h-24 bg-[#0A3D2F] rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-4xl">🧠</span>
+                </div>
+                <h3 className="text-2xl font-semibold text-[#0A3D2F] mb-4">Desenvolvimento Cognitivo</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Brinquedos que estimulam memória, atenção, resolução de problemas e pensamento lógico. Cada produto é escolhido por terapeutas ocupacionais especializados.
+                </p>
+              </div>
+
+              <div className="text-center group">
+                <div className="w-24 h-24 bg-[#0A3D2F] rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-4xl">🎨</span>
+                </div>
+                <h3 className="text-2xl font-semibold text-[#0A3D2F] mb-4">Estimulação Sensorial</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Texturas, cores, sons e materiais cuidadosamente selecionados para cada fase do desenvolvimento sensorial e motor fino.
+                </p>
+              </div>
+
+              <div className="text-center group">
+                <div className="w-24 h-24 bg-[#0A3D2F] rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-4xl">💝</span>
+                </div>
+                <h3 className="text-2xl font-semibold text-[#0A3D2F] mb-4">Inclusão e Empatia</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Produtos que promovem a integração social, valorizam a diversidade e ajudam a construir um mundo mais empático e inclusivo.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* FEATURED COLLECTIONS */}
+        <div className="py-20 bg-[#FEFDF8]">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-light text-[#0A3D2F] mb-4">Nossas Coleções Especiais</h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Cada coleção foi desenvolvida por especialistas para atender necessidades específicas do desenvolvimento infantil neurodivergente.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {collections.nodes.slice(0, 8).map((collection, index) => (
+                <Link 
+                  key={collection.id} 
+                  to={`/collections/${collection.handle}`}
+                  className="group block animate-fade-in-up"
+                  style={{animationDelay: `${index * 0.1}s`}}
+                >
+                  <div className="relative overflow-hidden rounded-xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                    {collection.image && (
+                      <div className="aspect-square overflow-hidden">
+                        <Image
+                          data={collection.image}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                          sizes="(max-width: 768px) 50vw, 25vw"
+                          aspectRatio="1/1"
+                          alt={collection.image.altText || collection.title}
+                        />
+                      </div>
+                    )}
+                    <div className="p-6">
+                      <h3 className="text-xl font-semibold text-[#0A3D2F] mb-2 group-hover:text-[#1a5757] transition-colors">
+                        {collection.title}
+                      </h3>
+                      <div className="flex items-center text-[#D4AF69] font-medium">
+                        <span>Explorar coleção</span>
+                        <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* TESTIMONIALS SECTION */}
+        <div className="py-20 bg-[#0A3D2F]">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-light text-white mb-4">O Que Nossas Famílias Dizem</h2>
+              <p className="text-xl text-gray-200 max-w-3xl mx-auto">
+                Histórias reais de transformação e esperança compartilhadas por famílias que encontraram diferença através dos nossos brinquedos.
+              </p>
+            </div>
+
+            <div className="max-w-4xl mx-auto">
+              <div className="bg-white rounded-2xl p-8 md:p-12 shadow-xl">
+                <div className="text-center mb-8">
+                  <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-6 border-4 border-[#D4AF69]">
+                    <Image
+                      src={testimonials[currentTestimonial].image}
+                      alt={testimonials[currentTestimonial].name}
+                      className="w-full h-full object-cover"
+                      width={96}
+                      height={96}
+                    />
+                  </div>
+                  <div className="flex justify-center mb-4">
+                    {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
+                      <span key={i} className="text-[#D4AF69] text-3xl">★</span>
+                    ))}
+                  </div>
+                  <p className="text-gray-700 text-xl italic mb-6 leading-relaxed">
+                    "{testimonials[currentTestimonial].text}"
+                  </p>
+                  <p className="text-[#0A3D2F] font-bold text-lg">
+                    {testimonials[currentTestimonial].name}
+                  </p>
+                </div>
+                
+                <div className="flex justify-center space-x-3">
+                  {testimonials.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentTestimonial(index)}
+                      className={`w-4 h-4 rounded-full transition-all ${
+                        index === currentTestimonial 
+                          ? 'bg-[#0A3D2F] scale-125' 
+                          : 'bg-gray-300 hover:bg-gray-400'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* FEATURED PRODUCTS */}
+        <div className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-light text-[#0A3D2F] mb-4">Brinquedos em Destaque</h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Seleção especial de produtos recomendados por terapeutas ocupacionais e especialistas em desenvolvimento infantil neurodivergente.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {products.nodes.slice(0, 12).map((product, index) => (
+                <Link 
+                  key={product.id} 
+                  to={`/products/${getProductHandle(product.handle)}`}
+                  className="group block animate-fade-in-up"
+                  style={{animationDelay: `${index * 0.1}s`}}
+                >
+                  <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div className="aspect-square overflow-hidden bg-gray-100 relative">
+                      {product.featuredImage ? (
+                        <Image
+                          data={product.featuredImage}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
+                          aspectRatio="1/1"
+                          alt={product.featuredImage.altText || product.title}
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-gray-400">
+                          <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                        </div>
+                      )}
+                      <div className="absolute top-3 left-3 bg-[#D4AF69] text-[#0A3D2F] text-xs font-bold px-3 py-1 rounded-full">
+                        DESTAQUE
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <p className="text-[#D4AF69] text-xs font-semibold tracking-widest uppercase mb-1">
+                        {product.vendor || 'BrinqueTEAndo'}
+                      </p>
+                      <h3 className="text-[#0A3D2F] font-medium mb-2 line-clamp-2 group-hover:text-[#1a5757] transition-colors">
+                        {product.title}
+                      </h3>
+                      <Money 
+                        data={product.priceRange.minVariantPrice} 
+                        className="text-[#2a2a2a] font-semibold"
+                      />
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            <div className="text-center mt-12">
+              <Link 
+                to="/collections/all" 
+                className="inline-block bg-[#0A3D2F] hover:bg-[#1a5757] text-white font-bold py-5 px-10 rounded-lg transition-all duration-300 transform hover:scale-105 text-lg"
+              >
+                Ver Todos os Produtos
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* PRODUCTS UNDER R$100 */}
+        <ProductsUnder100 products={under100Products} />
+
+        {/* EDUCATIONAL VALUE SECTION */}
+        <div className="py-20 bg-gradient-to-r from-[#0A3D2F] to-[#1a5757]">
+          <div className="max-w-7xl mx-auto px-4 text-center">
+            <h2 className="text-4xl font-light text-white mb-6">Valor Educacional Comprovado</h2>
+            <p className="text-xl text-gray-200 mb-16 max-w-3xl mx-auto">
+              Nossos brinquedos são baseados em pesquisas científicas e práticas terapêuticas reconhecidas internacionalmente.
+            </p>
+            
+            <div className="grid md:grid-cols-3 gap-12">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+                <div className="text-5xl mb-4">📊</div>
+                <h3 className="text-2xl font-semibold text-white mb-4">Evidência Científica</h3>
+                <p className="text-gray-200">
+                  Todos os nossos produtos são baseados em estudos científicos sobre desenvolvimento infantil neurodivergente.
+                </p>
+              </div>
+              
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+                <div className="text-5xl mb-4">👨‍⚕️</div>
+                <h3 className="text-2xl font-semibold text-white mb-4">Aprovação Profissional</h3>
+                <p className="text-gray-200">
+                  Recomendado por terapeutas ocupacionais, psicólogos e especialistas em desenvolvimento infantil.
+                </p>
+              </div>
+              
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+                <div className="text-5xl mb-4">🏆</div>
+                <h3 className="text-2xl font-semibold text-white mb-4">Qualidade Garantida</h3>
+                <p className="text-gray-200">
+                  Certificação de segurança e qualidade em todos os materiais e processos de fabricação.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* NEWSLETTER SECTION */}
+        <div className="py-20 bg-[#0A3D2F]">
+          <div className="max-w-4xl mx-auto px-4 text-center">
+            <h2 className="text-3xl font-light text-white mb-6">Receba Novidades e Dicas Especializadas!</h2>
+            <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+              Cadastre-se e receba conteúdos exclusivos sobre desenvolvimento infantil neurodivergente, novos produtos e promoções especiais.
+            </p>
+            <div className="bg-white rounded-xl p-8 max-w-2xl mx-auto">
+              <FooterNewsletterForm />
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Rest of the homepage content would go here */}
-      
-      <BrinqueTEAndoFooter menu={footerMenu} />
-    </main>
+    </div>
   );
 }
 
 // GraphQL Queries
-const FEATURED_COLLECTIONS_QUERY = '#graphql' + String.raw\`
+const FEATURED_COLLECTIONS_QUERY = '#graphql' + String.raw`
   fragment Collection on Collection {
     id
     title
@@ -171,18 +633,18 @@ const FEATURED_COLLECTIONS_QUERY = '#graphql' + String.raw\`
     }
   }
   query FeaturedCollections(
-    \$country: CountryCode
-    \$language: LanguageCode
-  ) @inContext(country: \$country, language: \$language) {
-    collections(first: 4, sortKey: UPDATED_AT, reverse: true) {
+    $country: CountryCode
+    $language: LanguageCode
+  ) @inContext(country: $country, language: $language) {
+    collections(first: 8, sortKey: UPDATED_AT, reverse: true) {
       nodes {
         ...Collection
       }
     }
   }
-\`;
+`;
 
-const FEATURED_PRODUCTS_QUERY = '#graphql' + String.raw\`
+const FEATURED_PRODUCTS_QUERY = '#graphql' + String.raw`
   fragment MoneyProductItem on MoneyV2 {
     amount
     currencyCode
@@ -206,18 +668,18 @@ const FEATURED_PRODUCTS_QUERY = '#graphql' + String.raw\`
     }
   }
   query FeaturedProducts(
-    \$country: CountryCode
-    \$language: LanguageCode
-  ) @inContext(country: \$country, language: \$language) {
-    products(first: 8, sortKey: UPDATED_AT, reverse: true) {
+    $country: CountryCode
+    $language: LanguageCode
+  ) @inContext(country: $country, language: $language) {
+    products(first: 16, sortKey: UPDATED_AT, reverse: true) {
       nodes {
         ...ProductItem
       }
     }
   }
-\`;
+`;
 
-const PRODUCTS_UNDER_100_QUERY = '#graphql' + String.raw\`
+const PRODUCTS_UNDER_100_QUERY = '#graphql' + String.raw`
   fragment ProductUnder100 on Product {
     id
     handle
@@ -238,11 +700,11 @@ const PRODUCTS_UNDER_100_QUERY = '#graphql' + String.raw\`
     }
   }
   query ProductsUnder100(
-    \$country: CountryCode
-    \$language: LanguageCode
-  ) @inContext(country: \$country, language: \$language) {
+    $country: CountryCode
+    $language: LanguageCode
+  ) @inContext(country: $country, language: $language) {
     products(
-      first: 12,
+      first: 16,
       sortKey: BEST_SELLING,
       query: "tag:ate-100"
     ) {
@@ -251,9 +713,9 @@ const PRODUCTS_UNDER_100_QUERY = '#graphql' + String.raw\`
       }
     }
   }
-\`;
+`;
 
-const FOOTER_MENU_QUERY = \`#graphql
+const FOOTER_MENU_QUERY = `#graphql
   fragment RootFooterMenuItem on MenuItem {
     id
     title
@@ -261,238 +723,10 @@ const FOOTER_MENU_QUERY = \`#graphql
     type
     items { id title url type }
   }
-  query RootFooterMenu(\$footerMenuHandle: String!) {
-    menu(handle: \$footerMenuHandle) {
+  query RootFooterMenu($footerMenuHandle: String!) {
+    menu(handle: $footerMenuHandle) {
       id
       items { ...RootFooterMenuItem }
     }
   }
-\`;
-
-function BrinqueTEAndoFooter({ menu }) {
-  const menuItems = menu?.items || [];
-  return (
-    <footer className="relative bg-gradient-to-b from-[#0A3D2F] via-[#1a5f4a] to-[#0d2e23] text-white overflow-hidden w-full">
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: \`radial-gradient(circle at 2px 2px, #D4AF69 1px, transparent 0)\`,
-          backgroundSize: '40px 40px'
-        }}></div>
-      </div>
-      
-      <div className="relative border-b border-[#D4AF69]/20 w-full">
-        <div className="max-w-7xl mx-auto px-6 py-16">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h3 className="text-4xl font-light text-[#D4AF69] mb-3 tracking-wide">
-                Junte-se à Nossa Comunidade
-              </h3>
-              <p className="text-gray-300 text-lg">
-                Receba dicas exclusivas, novidades e promoções especiais para o desenvolvimento infantil.
-              </p>
-            </div>
-            <FooterNewsletterForm />
-          </div>
-        </div>
-      </div>
-
-      <div className="relative max-w-7xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
-          <div className="lg:col-span-2">
-            <Link to="/" className="inline-block mb-6 group">
-              <div className="text-5xl font-serif text-white tracking-[0.3em] group-hover:text-[#D4AF69] transition-colors duration-300">
-                BRINQUETEANDO
-              </div>
-              <div className="h-1 w-0 group-hover:w-full bg-gradient-to-r from-[#D4AF69] to-transparent transition-all duration-500 mt-2"></div>
-            </Link>
-            <p className="text-gray-300 text-sm leading-relaxed mb-6 max-w-xs">
-              Especializados em brinquedos educativos para TDAH, Autismo e TEA. Cada brinquedo é uma oportunidade de desenvolvimento para crianças neurodiversas em todo o Brasil.
-            </p>
-            <div className="space-y-3">
-              <div className="flex items-center gap-3 text-sm">
-                <div className="w-8 h-8 rounded-full bg-[#D4AF69]/20 flex items-center justify-center flex-shrink-0">
-                  <span className="text-[#D4AF69]">✓</span>
-                </div>
-                <span className="text-gray-300">Garantia de Satisfação</span>
-              </div>
-              <div className="flex items-center gap-3 text-sm">
-                <div className="w-8 h-8 rounded-full bg-[#D4AF69]/20 flex items-center justify-center flex-shrink-0">
-                  <span className="text-[#D4AF69]">✓</span>
-                </div>
-                <span className="text-gray-300">Frete Grátis Acima de R$150</span>
-              </div>
-              <div className="flex items-center gap-3 text-sm">
-                <div className="w-8 h-8 rounded-full bg-[#D4AF69]/20 flex items-center justify-center flex-shrink-0">
-                  <span className="text-[#D4AF69]">✓</span>
-                </div>
-                <span className="text-gray-300">Compra Segura</span>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <h4 className="text-[#D4AF69] text-sm font-bold mb-6 uppercase tracking-widest relative inline-block">
-              Categorias
-              <div className="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-[#D4AF69] to-transparent"></div>
-            </h4>
-            <ul className="space-y-3">
-              <li>
-                <Link to="/collections/novidades" className="text-gray-300 hover:text-[#D4AF69] text-sm transition-all duration-200 hover:translate-x-1 inline-block">
-                  Novidades
-                </Link>
-              </li>
-              <li>
-                <Link to="/collections/sensoriais" className="text-gray-300 hover:text-[#D4AF69] text-sm transition-all duration-200 hover:translate-x-1 inline-block">
-                  Brinquedos Sensoriais
-                </Link>
-              </li>
-              <li>
-                <Link to="/collections/educativos" className="text-gray-300 hover:text-[#D4AF69] text-sm transition-all duration-200 hover:translate-x-1 inline-block">
-                  Brinquedos Educativos
-                </Link>
-              </li>
-              <li>
-                <Link to="/collections/terapeuticos" className="text-gray-300 hover:text-[#D4AF69] text-sm transition-all duration-200 hover:translate-x-1 inline-block">
-                  Brinquedos Terapêuticos
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-[#D4AF69] text-sm font-bold mb-6 uppercase tracking-widest relative inline-block">
-              Ajuda
-              <div className="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-[#D4AF69] to-transparent"></div>
-            </h4>
-            <ul className="space-y-3">
-              <li>
-                <Link to="/pages/faq" className="text-gray-300 hover:text-[#D4AF69] text-sm transition-all duration-200 hover:translate-x-1 inline-block">
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link to="/pages/trocas-devolucoes" className="text-gray-300 hover:text-[#D4AF69] text-sm transition-all duration-200 hover:translate-x-1 inline-block">
-                  Trocas e Devoluções
-                </Link>
-              </li>
-              <li>
-                <Link to="/pages/politica-frete" className="text-gray-300 hover:text-[#D4AF69] text-sm transition-all duration-200 hover:translate-x-1 inline-block">
-                  Política de Frete
-                </Link>
-              </li>
-              <li>
-                <Link to="/pages/contato" className="text-gray-300 hover:text-[#D4AF69] text-sm transition-all duration-200 hover:translate-x-1 inline-block">
-                  Contato
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-[#D4AF69] text-sm font-bold mb-6 uppercase tracking-widest relative inline-block">
-              Institucional
-              <div className="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-[#D4AF69] to-transparent"></div>
-            </h4>
-            <ul className="space-y-3">
-              <li>
-                <Link to="/pages/quem-somos" className="text-gray-300 hover:text-[#D4AF69] text-sm transition-all duration-200 hover:translate-x-1 inline-block">
-                  Quem Somos
-                </Link>
-              </li>
-              <li>
-                <Link to="/pages/missao" className="text-gray-300 hover:text-[#D4AF69] text-sm transition-all duration-200 hover:translate-x-1 inline-block">
-                  Nossa Missão
-                </Link>
-              </li>
-              <li>
-                <Link to="/pages/parcerias" className="text-gray-300 hover:text-[#D4AF69] text-sm transition-all duration-200 hover:translate-x-1 inline-block">
-                  Parcerias com Terapeutas
-                </Link>
-              </li>
-              <li>
-                <Link to="/pages/politica-privacidade" className="text-gray-300 hover:text-[#D4AF69] text-sm transition-all duration-200 hover:translate-x-1 inline-block">
-                  Política de Privacidade
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="border-t border-[#D4AF69]/20 pt-12">
-          <div className="grid md:grid-cols-2 gap-8 items-center mb-8">
-            <div>
-              <h4 className="text-[#D4AF69] text-sm font-semibold mb-4 uppercase tracking-wider">
-                Siga Nosso Trabalho
-              </h4>
-              <div className="flex gap-3">
-                <a 
-                  href="https://www.instagram.com/brinqueteando/" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="w-11 h-11 flex items-center justify-center bg-white/5 backdrop-blur-sm border border-[#D4AF69]/30 rounded-lg hover:bg-[#D4AF69] hover:border-[#D4AF69] transition-all duration-300 hover:scale-110 group"
-                  aria-label="Instagram"
-                >
-                  <svg className="w-5 h-5 text-[#D4AF69] group-hover:text-[#0A3D2F]" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                  </svg>
-                </a>
-                <a 
-                  href="https://www.facebook.com/brinqueteando" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="w-11 h-11 flex items-center justify-center bg-white/5 backdrop-blur-sm border border-[#D4AF69]/30 rounded-lg hover:bg-[#D4AF69] hover:border-[#D4AF69] transition-all duration-300 hover:scale-110 group"
-                  aria-label="Facebook"
-                >
-                  <svg className="w-5 h-5 text-[#D4AF69] group-hover:text-[#0A3D2F]" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                  </svg>
-                </a>
-                <a 
-                  href="https://wa.me/5513999999999" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="w-11 h-11 flex items-center justify-center bg-white/5 backdrop-blur-sm border border-[#D4AF69]/30 rounded-lg hover:bg-[#D4AF69] hover:border-[#D4AF69] transition-all duration-300 hover:scale-110 group"
-                  aria-label="WhatsApp"
-                >
-                  <svg className="w-5 h-5 text-[#D4AF69] group-hover:text-[#0A3D2F]" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                  </svg>
-                </a>
-              </div>
-            </div>
-
-            <div className="text-right">
-              <h4 className="text-[#D4AF69] text-sm font-semibold mb-4 uppercase tracking-wider">
-                Pagamento Seguro
-              </h4>
-              <div className="flex justify-end gap-2 flex-wrap">
-                {['Visa', 'Mastercard', 'PIX', 'Boleto', 'PayPal'].map((method) => (
-                  <div 
-                    key={method}
-                    className="px-3 py-2 bg-white/10 backdrop-blur-sm border border-[#D4AF69]/20 rounded text-xs text-gray-300 font-medium"
-                  >
-                    {method}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="pt-8 border-t border-[#D4AF69]/20">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
-              <p>
-                © {new Date().getFullYear()} BrinqueTEAndo. Todos os direitos reservados.
-              </p>
-              <div className="flex items-center gap-4">
-                <span className="text-[#D4AF69]">★★★★★</span>
-                <span>Mais de 1.000 famílias satisfeitas</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div className="h-1 bg-gradient-to-r from-transparent via-[#D4AF69] to-transparent"></div>
-    </footer>
-  );
-}
+`;
