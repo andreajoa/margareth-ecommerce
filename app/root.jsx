@@ -11,17 +11,9 @@ import {ShopifyProvider} from '@shopify/hydrogen-react';
 export async function loader({context}) {
   const {env, storefront} = context;
   const layout = await storefront.query(LAYOUT_QUERY);
-  const {menu: headerMenu} = await storefront.query(HEADER_MENU_QUERY, {
-    variables: {headerMenuHandle: 'main-menu'},
-  });
-  const {menu: footerMenu} = await storefront.query(FOOTER_MENU_QUERY, {
-    variables: {footerMenuHandle: 'footer'},
-  });
 
   return {
     shop: layout.shop,
-    headerMenu,
-    footerMenu,
     env: {
       PUBLIC_STORE_DOMAIN: env.PUBLIC_STORE_DOMAIN,
       PUBLIC_STOREFRONT_API_TOKEN: env.PUBLIC_STOREFRONT_API_TOKEN,
@@ -31,7 +23,7 @@ export async function loader({context}) {
 }
 
 export default function App() {
-  const {shop, headerMenu, footerMenu, env, apiVersion} = useLoaderData();
+  const {shop, env, apiVersion} = useLoaderData();
 
   return (
     <html lang="pt-BR">
@@ -60,56 +52,11 @@ export default function App() {
 }
 
 const LAYOUT_QUERY = `#graphql
-  query layout {
+  query Layout {
     shop {
+      id
       name
       description
-    }
-  }
-`;
-
-const HEADER_MENU_QUERY = `#graphql
-  fragment MenuItem on MenuItem {
-    id
-    title
-    url
-    type
-    items {
-      id
-      title
-      url
-      type
-    }
-  }
-  query HeaderMenu($headerMenuHandle: String!) {
-    menu(handle: $headerMenuHandle) {
-      id
-      items {
-        ...MenuItem
-      }
-    }
-  }
-`;
-
-const FOOTER_MENU_QUERY = `#graphql
-  fragment MenuItem on MenuItem {
-    id
-    title
-    url
-    type
-    items {
-      id
-      title
-      url
-      type
-    }
-  }
-  query FooterMenu($footerMenuHandle: String!) {
-    menu(handle: $footerMenuHandle) {
-      id
-      items {
-        ...MenuItem
-      }
     }
   }
 `;
