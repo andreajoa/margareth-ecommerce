@@ -632,7 +632,7 @@ export default function Homepage() {
 
           <div className="bg-[#3A8ECD] text-white py-3 w-full">
             <div className="max-w-7xl mx-auto px-4 text-center">
-              <p className="text-sm font-medium tracking-wider">🎁 Frete grátis no Brasil • Garantia de 1 ano • Trocas fáceis 🎉</p>
+              <p className="text-sm font-medium tracking-wider">🚚 Frete grátis para Praia Grande, São Vicente e Santos • Envio rápido • Compra segura 🎉</p>
             </div>
           </div>
 
