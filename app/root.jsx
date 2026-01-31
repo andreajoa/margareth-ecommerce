@@ -36,7 +36,7 @@ export default function App() {
       </head>
       <body>
         <ShopifyProvider
-          storeDomain={env.PUBLIC_STORE_DOMAIN}
+          storeDomain={`https://${env.PUBLIC_STORE_DOMAIN}`}
           storefrontAccessToken={env.PUBLIC_STOREFRONT_API_TOKEN}
           storefrontApiVersion={apiVersion}
           countryIsoCode="BR"
