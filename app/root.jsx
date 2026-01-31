@@ -7,6 +7,7 @@ import {
   useLoaderData,
 } from 'react-router';
 import {ShopifyProvider} from '@shopify/hydrogen-react';
+import Header from './components/Header.jsx';
 
 export async function loader({context}) {
   const {env, storefront} = context;
@@ -41,6 +42,12 @@ export default function App() {
         <Meta />
         <Links />
         <script src="https://cdn.tailwindcss.com"></script>
+        <style dangerouslySetInnerHTML={{__html: `
+          * { box-sizing: border-box; margin: 0; padding: 0; }
+          body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; }
+          a { color: inherit; text-decoration: none; }
+          img { max-width: 100%; height: auto; }
+        `}} />
       </head>
       <body>
         <ShopifyProvider
