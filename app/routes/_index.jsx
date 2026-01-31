@@ -650,7 +650,7 @@ export default function Homepage() {
                   x-webkit-airplay="allow"
                   preload="auto"
                   className="absolute inset-0 w-full h-full object-cover"
-                  poster="https://cdn.shopify.com/s/files/1/0778/2921/0327/files/5.avif?v=1765596668"
+                  poster="https://cdn.shopify.com/s/files/1/0973/7116/0942/files/002.jpg?v=1769385748"
                 >
                   <source src="https://cdn.shopify.com/videos/c/o/v/288d4004873043ffb9ba58d24ba5a38c.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
@@ -673,7 +673,7 @@ export default function Homepage() {
           <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 mb-20 w-full">
             <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
               <div className="relative h-72 sm:h-80 md:h-96 overflow-hidden rounded-[10px] shadow-xl group">
-                <img src="https://cdn.shopify.com/s/files/1/0778/2921/0327/files/men_s_collection_dc5c97d6-952f-43c1-9f24-8eadb0693f74.avif?v=1765592942" alt="Men's Luxury Watches USA, UK, Canada & Australia - Shop Online" className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" width="800" height="600"/>
+                <img src="https://cdn.shopify.com/s/files/1/0973/7116/0942/files/banner_2.png?v=1769878999" alt="Brinquedos Terapêuticos BR, Praia Grande, Sao Vicente, Santos - Shop Online" className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" width="800" height="600"/>
                 <div className="absolute inset-0 bg-gradient-to-t from-[#b91c1c]/80 via-transparent to-transparent"></div>
                 <div className="absolute bottom-6 sm:bottom-8 left-6 sm:left-8 right-6 sm:right-8 text-white">
                   <h2 className="text-2xl sm:text-3xl font-light mb-2 tracking-wide">🧸 Brinquedos Terapêuticos</h2>
@@ -682,7 +682,7 @@ export default function Homepage() {
                 </div>
               </div>
               <div className="relative h-72 sm:h-80 md:h-96 overflow-hidden rounded-[10px] shadow-xl group">
-                <img src="https://cdn.shopify.com/s/files/1/0778/2921/0327/files/7.avif?v=1765596667" alt="Women's Luxury Watches USA, UK, Canada & Australia - Shop Online" className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" width="800" height="600"/>
+                <img src="https://cdn.shopify.com/s/files/1/0973/7116/0942/files/4_5e7b8939-9bcb-4cd6-836e-b928e3aa369c.jpg?v=1769805010" alt="Ambiente & Rotina Praia Grande, Sao Vicente, Santos - Shop Online" className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" width="800" height="600"/>
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A3D2F]/80 via-transparent to-transparent"></div>
                 <div className="absolute bottom-6 sm:bottom-8 left-6 sm:left-8 right-6 sm:right-8 text-white">
                   <h2 className="text-2xl sm:text-3xl font-light mb-2 tracking-wide">💡 Ambiente & Rotina</h2>
