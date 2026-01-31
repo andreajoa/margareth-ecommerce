@@ -277,6 +277,11 @@ export default function Homepage() {
     const now = new Date();
     const currentYear = now.getFullYear();
     const holidays = [
+      // TEA/Autismo/TDAH Events in Brazil
+      {name: 'III Jornada sobre Aprendizagem e Autismo - Baixada Santista', month: 2, day: 29, emoji: '🧩', message: 'III JORNADA AUTISMO BAIXADA SANTISTA - 29/03'},
+      {name: 'ExpoTEA 2025 - Maior Feira de Autismo do Mundo', month: 10, day: 28, emoji: '🎪', message: 'EXPOTEA 2025 - MAIOR FEIRA DE AUTISMO DO MUNDO!'},
+      
+      // Traditional Brazilian Holidays
       {name: 'Véspera de Natal', month: 11, day: 24, emoji: '🎄', message: 'O PAPAI NOEL ESTÁ CHEGANDO!'},
       {name: 'Véspera de Ano Novo', month: 11, day: 31, emoji: '🎉', message: '🎊 CELEBRE O ANO NOVO — PEÇA ATÉ 27/12'},
       {name: 'Dia dos Namorados', month: 5, day: 12, emoji: '❤️', message: 'CONTAGEM REGRESSIVA DIA DOS NAMORADOS!'}, // Brazil Valentine's Day
@@ -419,7 +424,7 @@ export default function Homepage() {
         .animate-marquee-christmas {
           display: flex;
           width: fit-content;
-          animation: marquee-christmas 40s linear infinite;
+          animation: marquee-christmas 60s linear infinite;
         }
         .animate-marquee-christmas:hover {
           animation-play-state: paused;
@@ -456,7 +461,7 @@ export default function Homepage() {
                 <div key={i} className="flex items-center mx-8 whitespace-nowrap">
                    <span className="text-2xl mr-3 filter drop-shadow-md">🎄</span>
                    <span className="text-[#FEFDF8] font-serif italic text-xl tracking-widest font-medium uppercase drop-shadow-md" style={{textShadow: '0 1px 2px rgba(0,0,0,0.5)'}}>
-                     Conhece seu filho melhor do que ninguém? 💙 Então escolha brinquedos que conversam com o mundo dele. 🧩
+                     🧩 III Jornada Autismo Baixada Santista - 29/03 em Santos! 🎪 ExpoTEA 2025 em Novembro - SP!
                    </span>
                    <span className="text-2xl ml-3 filter drop-shadow-md">🎅</span>
                    
@@ -605,13 +610,11 @@ export default function Homepage() {
                 <div className="flex flex-col space-y-2">
                   {[
                     {name: 'INÍCIO', href: '/'},
-                    {name: 'LANÇAMENTOS', href: '/collections/new-arrivals'},
-                    {name: 'RELÓGIOS MASCULINOS', href: '/collections/mens-watches'},
-                    {name: 'RELÓGIOS FEMININOS', href: '/collections/womens-watches'},
-                    {name: 'RELÓGIOS ESPORTIVOS', href: '/collections/sport-watches'},
-                    {name: 'RELÓGIOS FOSSIL', href: '/collections/fossil-watch'},
-                    {name: 'AUTOMÁTICO', href: '/collections/automatic-watches'},
-                    {name: 'QUARTZ', href: '/collections/quartz-watches'},
+                    {name: 'Brinquedos Terapêuticos', href: '/collections/brinquedos-terapeuticos'},
+                    {name: 'Por Necessidade', href: '/collections/por-necessidade'},
+                    {name: 'Por Idade', href: '/collections/por-idade'},
+                    {name: 'Ambiente & Rotina', href: '/collections/ambiente-rotina'},
+                    {name: 'Apoio aos Pais', href: '/collections/apoio-aos-pais'},
                     {name: 'RECOMPENSAS', href: '/rewards'},
                     {name: 'CONTATO', href: '/pages/contact'}
                   ].map(item => (
