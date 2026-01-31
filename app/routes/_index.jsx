@@ -682,7 +682,7 @@ export default function Homepage() {
                 </div>
               </div>
               <div className="relative h-72 sm:h-80 md:h-96 overflow-hidden rounded-[10px] shadow-xl group">
-                <img src="https://cdn.shopify.com/s/files/1/0973/7116/0942/files/4_5e7b8939-9bcb-4cd6-836e-b928e3aa369c.jpg?v=1769805010" alt="Ambiente & Rotina Praia Grande, Sao Vicente, Santos - Shop Online" className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" width="800" height="600"/>
+                <img src="https://cdn.shopify.com/s/files/1/0973/7116/0942/files/banner_2.png?v=1769878999" alt="Ambiente & Rotina Praia Grande, Sao Vicente, Santos - Shop Online" className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" width="800" height="600"/>
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A3D2F]/80 via-transparent to-transparent"></div>
                 <div className="absolute bottom-6 sm:bottom-8 left-6 sm:left-8 right-6 sm:right-8 text-white">
                   <h2 className="text-2xl sm:text-3xl font-light mb-2 tracking-wide">💡 Ambiente & Rotina</h2>
