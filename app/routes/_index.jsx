@@ -652,12 +652,12 @@ export default function Homepage() {
                   className="absolute inset-0 w-full h-full object-cover"
                   poster="https://cdn.shopify.com/s/files/1/0778/2921/0327/files/5.avif?v=1765596668"
                 >
-                  <source src="https://cdn.shopify.com/videos/c/o/v/9788927ebacf4e3ca19449cafd11fc55.mp4" type="video/mp4" />
+                  <source src="https://cdn.shopify.com/videos/c/o/v/288d4004873043ffb9ba58d24ba5a38c.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
                 <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/20 z-10"></div>
                 <div className="absolute inset-0 z-20 flex flex-col justify-center px-6 sm:px-8 md:px-16">
-                  <h1 className="text-white text-2xl sm:text-4xl md:text-6xl font-light tracking-widest mb-2 sm:mb-4">brinqueTEAndo - Brinquedos Educativos e Sensoriais</h1>
+                  <h1 className="text-white text-2xl sm:text-4xl md:text-6xl font-light tracking-widest mb-2 sm:mb-4"></h1>
                   <p className="text-[#FB8A38] text-sm sm:text-lg md:text-xl tracking-wider mb-2 sm:mb-4">
                     Brinquedos Educativos e Sensoriais para TEA e TDAH
                   </p>
