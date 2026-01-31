@@ -1,0 +1,269 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* BrincarEAprender - Design System
+   Loja de Brinquedos TEA/TDAH/Autismo - Litoral de São Paulo
+   Paleta: Azul acolhedor, Laranja educativo, Tons suaves
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Fredoka:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* Core Colors - Therapeutic & Welcoming */
+    --background: 210 100% 98%;
+    --foreground: 210 29% 24%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 29% 24%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 29% 24%;
+
+    /* Primary - Calming Blue */
+    --primary: 211 74% 59%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary - Warm Orange */
+    --secondary: 37 100% 65%;
+    --secondary-foreground: 210 29% 24%;
+
+    /* Muted - Soft Gray-Blue */
+    --muted: 210 20% 96%;
+    --muted-foreground: 210 18% 45%;
+
+    /* Accent - Light Sky Blue */
+    --accent: 206 82% 77%;
+    --accent-foreground: 210 29% 24%;
+
+    /* Destructive - Soft Red */
+    --destructive: 0 72% 71%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
+    --ring: 211 74% 59%;
+
+    --radius: 1rem;
+
+    /* Custom Colors */
+    --tea-blue: 211 74% 59%;
+    --tea-blue-light: 206 82% 77%;
+    --tea-blue-dark: 211 74% 45%;
+    --tea-orange: 37 100% 65%;
+    --tea-orange-light: 37 100% 75%;
+    --tea-orange-dark: 37 85% 55%;
+    --tea-coral: 0 72% 71%;
+    --tea-green: 142 71% 45%;
+    --tea-purple: 270 60% 65%;
+
+    /* Sidebar */
+    --sidebar-background: 210 100% 98%;
+    --sidebar-foreground: 210 29% 24%;
+    --sidebar-primary: 211 74% 59%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 206 82% 77%;
+    --sidebar-accent-foreground: 210 29% 24%;
+    --sidebar-border: 210 20% 90%;
+    --sidebar-ring: 211 74% 59%;
+
+    /* Typography */
+    --font-display: 'Fredoka', sans-serif;
+    --font-body: 'Nunito', sans-serif;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(211 74% 59%) 0%, hsl(206 82% 77%) 50%, hsl(37 100% 65%) 100%);
+    --gradient-cta: linear-gradient(135deg, hsl(37 100% 65%) 0%, hsl(37 85% 55%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 100% 98%) 100%);
+    --gradient-section: linear-gradient(180deg, hsl(210 100% 98%) 0%, hsl(206 82% 95%) 100%);
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(211 74% 59% / 0.15);
+    --shadow-medium: 0 8px 30px -8px hsl(211 74% 59% / 0.2);
+    --shadow-strong: 0 12px 40px -10px hsl(211 74% 59% / 0.25);
+    --shadow-glow: 0 0 30px hsl(211 74% 59% / 0.3);
+  }
+
+  .dark {
+    --background: 210 29% 12%;
+    --foreground: 210 20% 96%;
+
+    --card: 210 29% 16%;
+    --card-foreground: 210 20% 96%;
+
+    --popover: 210 29% 16%;
+    --popover-foreground: 210 20% 96%;
+
+    --primary: 211 74% 59%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 37 100% 65%;
+    --secondary-foreground: 210 29% 12%;
+
+    --muted: 210 29% 20%;
+    --muted-foreground: 210 18% 65%;
+
+    --accent: 206 82% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 29% 24%;
+    --input: 210 29% 24%;
+    --ring: 211 74% 59%;
+
+    --sidebar-background: 210 29% 12%;
+    --sidebar-foreground: 210 20% 96%;
+    --sidebar-primary: 211 74% 59%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 206 82% 45%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 210 29% 24%;
+    --sidebar-ring: 211 74% 59%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  /* Button Variants */
+  .btn-hero {
+    @apply bg-secondary text-secondary-foreground font-bold px-8 py-4 rounded-full;
+    @apply shadow-lg hover:shadow-xl transition-all duration-300;
+    @apply hover:scale-105 active:scale-95;
+    background: var(--gradient-cta);
+  }
+
+  .btn-primary {
+    @apply bg-primary text-primary-foreground font-semibold px-6 py-3 rounded-full;
+    @apply shadow-md hover:shadow-lg transition-all duration-300;
+    @apply hover:brightness-110;
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary text-primary font-semibold px-6 py-3 rounded-full;
+    @apply hover:bg-primary hover:text-primary-foreground transition-all duration-300;
+  }
+
+  /* Card Styles */
+  .card-product {
+    @apply bg-card rounded-3xl overflow-hidden;
+    @apply shadow-soft hover:shadow-medium transition-all duration-500;
+    @apply hover:-translate-y-2;
+    background: var(--gradient-card);
+  }
+
+  .card-category {
+    @apply bg-card rounded-3xl overflow-hidden relative;
+    @apply shadow-medium hover:shadow-strong transition-all duration-500;
+    @apply hover:scale-[1.02];
+  }
+
+  /* Section Styles */
+  .section-gradient {
+    background: var(--gradient-section);
+  }
+
+  /* Animations */
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  @keyframes slide-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes bounce-soft {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-soft {
+    animation: pulse-soft 2s ease-in-out infinite;
+  }
+
+  .animate-slide-in {
+    animation: slide-in 0.6s ease-out forwards;
+  }
+
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+
+  .animate-bounce-soft {
+    animation: bounce-soft 2s ease-in-out infinite;
+  }
+
+  /* Puzzle Pattern Background */
+  .bg-puzzle-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234A90E2' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+}
+
+@layer utilities {
+  .text-gradient-hero {
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .bg-gradient-cta {
+    background: var(--gradient-cta);
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-medium {
+    box-shadow: var(--shadow-medium);
+  }
+
+  .shadow-strong {
+    box-shadow: var(--shadow-strong);
+  }
+
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+}
