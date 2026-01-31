@@ -1,0 +1,89 @@
+{
+  "/Users/andrealmeida/Desktop/gueth-ecommerce/app/styles/app.css": {
+    "file": "assets/app-BaHTW5_V.css",
+    "src": "/Users/andrealmeida/Desktop/gueth-ecommerce/app/styles/app.css"
+  },
+  "_Image-C8MIwOQp.js": {
+    "file": "assets/Image-C8MIwOQp.js",
+    "name": "Image",
+    "imports": [
+      "_chunk-JZWAC4HX-l9NPZ7AV.js"
+    ]
+  },
+  "_chunk-JZWAC4HX-l9NPZ7AV.js": {
+    "file": "assets/chunk-JZWAC4HX-l9NPZ7AV.js",
+    "name": "chunk-JZWAC4HX"
+  },
+  "_index-QH3h7U3e.js": {
+    "file": "assets/index-QH3h7U3e.js",
+    "name": "index",
+    "imports": [
+      "_chunk-JZWAC4HX-l9NPZ7AV.js"
+    ],
+    "dynamicImports": [
+      "node_modules/@shopify/hydrogen/dist/production/log-seo-tags-TY72EQWZ.js"
+    ]
+  },
+  "app/entry.client.jsx": {
+    "file": "assets/entry.client-DRxMwkuW.js",
+    "name": "entry.client",
+    "src": "app/entry.client.jsx",
+    "isEntry": true,
+    "imports": [
+      "_chunk-JZWAC4HX-l9NPZ7AV.js",
+      "_index-QH3h7U3e.js"
+    ]
+  },
+  "app/root.jsx?__react-router-build-client-route": {
+    "file": "assets/root-D7B_MvRR.js",
+    "name": "root",
+    "src": "app/root.jsx?__react-router-build-client-route",
+    "isEntry": true,
+    "imports": [
+      "_chunk-JZWAC4HX-l9NPZ7AV.js"
+    ],
+    "assets": [
+      "assets/app-BaHTW5_V.css"
+    ]
+  },
+  "app/routes/_index.jsx?__react-router-build-client-route": {
+    "file": "assets/_index-CxrhP4B1.js",
+    "name": "_index",
+    "src": "app/routes/_index.jsx?__react-router-build-client-route",
+    "isEntry": true,
+    "imports": [
+      "_chunk-JZWAC4HX-l9NPZ7AV.js",
+      "_Image-C8MIwOQp.js"
+    ]
+  },
+  "app/routes/collections.$handle.jsx?__react-router-build-client-route": {
+    "file": "assets/collections._handle-CWzSNVUE.js",
+    "name": "collections._handle",
+    "src": "app/routes/collections.$handle.jsx?__react-router-build-client-route",
+    "isEntry": true,
+    "imports": [
+      "_chunk-JZWAC4HX-l9NPZ7AV.js"
+    ]
+  },
+  "app/routes/products.$handle.jsx?__react-router-build-client-route": {
+    "file": "assets/products._handle-Bv4TY4AG.js",
+    "name": "products._handle",
+    "src": "app/routes/products.$handle.jsx?__react-router-build-client-route",
+    "isEntry": true,
+    "imports": [
+      "_chunk-JZWAC4HX-l9NPZ7AV.js",
+      "_index-QH3h7U3e.js",
+      "_Image-C8MIwOQp.js"
+    ]
+  },
+  "node_modules/@shopify/hydrogen/dist/production/log-seo-tags-TY72EQWZ.js": {
+    "file": "assets/log-seo-tags-TY72EQWZ-DCHH-_Gl.js",
+    "name": "log-seo-tags-TY72EQWZ",
+    "src": "node_modules/@shopify/hydrogen/dist/production/log-seo-tags-TY72EQWZ.js",
+    "isDynamicEntry": true
+  },
+  "oxygen.json": {
+    "file": "oxygen.json",
+    "src": "oxygen.json"
+  }
+}
