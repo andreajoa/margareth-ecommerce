@@ -627,7 +627,7 @@ export default function Product() {
 
   return (
     <Aside.Provider>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(schema)}} />
+      
       
       <Aside type="cart" heading="CARRINHO">
         <Suspense fallback={<p>Carregando carrinho ...</p>}>
