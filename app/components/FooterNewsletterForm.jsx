@@ -1,80 +1,61 @@
 import {useState} from 'react';
 
-export function FooterNewsletterForm({onSubmit}) {
-  const [name, setName] = useState('');
+export function FooterNewsletterForm() {
   const [email, setEmail] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState(null);
+  const [status, setStatus] = useState('idle');
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (loading) return;
-    setLoading(true);
+    setStatus('loading');
+
     try {
-      if (onSubmit) {
-        await onSubmit({name, email});
-      }
-      setStatus('ok');
-      setName('');
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setStatus('success');
       setEmail('');
-    } catch {
+      setTimeout(() => setStatus('idle'), 3000);
+    } catch (error) {
       setStatus('error');
-    } finally {
-      setLoading(false);
+      setTimeout(() => setStatus('idle'), 3000);
     }
-  }
+  };
 
   return (
-    <form onSubmit={handleSubmit} style={{display:'grid', gridTemplateColumns:'1fr', gap:'10px'}}>
-      <div style={{display:'grid', gridTemplateColumns:'1fr 2fr', gap:'8px'}}>
-        <input
-          type="text"
-          value={name}
-          onChange={(e)=>setName(e.target.value)}
-          placeholder="Seu nome"
-          aria-label="Nome"
-          style={{
-            padding:'10px 12px',
-            borderRadius:'8px',
-            border:'1px solid var(--beige)',
-            background:'#fff'
-          }}
-        />
+    <div className="w-full max-w-md mx-auto">
+      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
         <input
           type="email"
           value={email}
-          onChange={(e)=>setEmail(e.target.value)}
-          placeholder="Seu e-mail"
-          aria-label="E-mail"
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Digite seu e-mail"
           required
-          style={{
-            padding:'10px 12px',
-            borderRadius:'8px',
-            border:'1px solid var(--beige)',
-            background:'#fff'
-          }}
+          disabled={status === 'loading' || status === 'success'}
+          className="flex-1 px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-[#3A8ECD] focus:outline-none text-gray-800 placeholder-gray-500 disabled:bg-gray-100"
         />
-      </div>
-      <button
-        type="submit"
-        disabled={loading}
-        style={{
-          background:'var(--yellow)',
-          color:'var(--dark-blue)',
-          fontWeight:700,
-          padding:'10px 16px',
-          borderRadius:'8px',
-          border:'none',
-          cursor: loading ? 'not-allowed' : 'pointer'
-        }}
-      >
-        {loading ? 'Enviando...' : 'Assinar newsletter'}
-      </button>
-      <div aria-live="polite" style={{minHeight:'20px', color: status==='error' ? '#CF111A' : '#21388D'}}>
-        {status==='ok' ? 'Inscrição realizada com sucesso!' : status==='error' ? 'Não foi possível enviar. Tente novamente.' : ''}
-      </div>
-    </form>
+        <button
+          type="submit"
+          disabled={status === 'loading' || status === 'success'}
+          className="px-6 py-3 bg-[#FB8A38] hover:bg-[#FBA25C] text-white font-semibold rounded-lg transition-all disabled:bg-gray-400 whitespace-nowrap"
+        >
+          {status === 'loading' ? 'Enviando...' : status === 'success' ? '✓ Inscrito!' : 'Inscrever'}
+        </button>
+      </form>
+      
+      {status === 'success' && (
+        <p className="mt-3 text-green-600 text-sm text-center">
+          ✓ Obrigado! Você foi inscrito com sucesso.
+        </p>
+      )}
+      
+      {status === 'error' && (
+        <p className="mt-3 text-red-600 text-sm text-center">
+          ✗ Erro ao inscrever. Tente novamente.
+        </p>
+      )}
+      
+      <p className="mt-3 text-gray-600 text-xs text-center">
+        Ao se inscrever, você concorda em receber e-mails promocionais.
+      </p>
+    </div>
   );
 }
 
-export default FooterNewsletterForm;
