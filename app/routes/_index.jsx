@@ -71,175 +71,191 @@ export default function Homepage() {
         }
       `}} />
 
-      {/* TOP COUNTDOWN BAR - BLACK BACKGROUND */}
+      {/* 1. TOP BLACK BAR - COUNTDOWN */}
       <div className="bg-black text-white py-3">
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-4 flex-wrap">
-          <div className="flex items-center gap-2">
-            <span className="text-xl">🎉</span>
-            <span className="text-sm md:text-base font-bold uppercase tracking-wide">COUNTDOWN</span>
-            <span className="text-xl">🎉</span>
-          </div>
-          <div className="flex items-center gap-2 border-2 border-white px-4 py-2">
-            <span className="text-2xl font-bold">{String(timeLeft.days).padStart(2, '0')}</span>
-            <span className="text-xs">D</span>
-            <span className="text-2xl font-bold">{String(timeLeft.hours).padStart(2, '0')}</span>
-            <span className="text-xs">H</span>
-            <span className="text-2xl font-bold">{String(timeLeft.minutes).padStart(2, '0')}</span>
-            <span className="text-xs">M</span>
-            <span className="text-2xl font-bold">{String(timeLeft.seconds).padStart(2, '0')}</span>
-            <span className="text-xs">S</span>
+          <span className="flex items-center gap-2 text-base font-bold">
+            <span>❤️</span>
+            VALENTINES DAY COUNTDOWN!
+            <span>❤️</span>
+          </span>
+          <div className="flex items-center gap-3 border-2 border-white px-5 py-2">
+            <div className="text-center">
+              <div className="text-2xl font-bold">{String(timeLeft.days).padStart(2, '0')}</div>
+              <div className="text-[10px] uppercase">D</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold">{String(timeLeft.hours).padStart(2, '0')}</div>
+              <div className="text-[10px] uppercase">H</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold">{String(timeLeft.minutes).padStart(2, '0')}</div>
+              <div className="text-[10px] uppercase">M</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold">{String(timeLeft.seconds).padStart(2, '0')}</div>
+              <div className="text-[10px] uppercase">S</div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* MARQUEE BANNER - DARK RED BACKGROUND */}
-      <div className="w-full bg-[#8B1A1A] text-white overflow-hidden py-4 border-b-2 border-[#6B0F0F]">
+      {/* 2. DARK RED MARQUEE BAR */}
+      <div className="w-full bg-[#8B2020] text-white overflow-hidden py-4">
         <div className="animate-marquee flex items-center">
-          {[...Array(10)].map((_, i) => (
+          {[...Array(8)].map((_, i) => (
             <div key={i} className="flex items-center mx-8 whitespace-nowrap">
-              <span className="text-white text-lg md:text-xl font-serif italic tracking-wider">
+              <span className="text-white text-lg font-serif italic tracking-wider">
                 THIS VALENTINES DAY, GIFT A WATCH THEY WILL TREASURE FOREVER
               </span>
-              <span className="text-2xl ml-4">💝</span>
-              <div className="ml-8 flex items-center gap-2 opacity-50">
-                <span className="text-white text-xs">✦</span>
+              <span className="text-2xl mx-4">💝</span>
+              <div className="flex items-center gap-2 opacity-40 mx-4">
+                <span className="text-xs">✦</span>
                 <span className="w-12 h-[1px] bg-white"></span>
-                <span className="text-white text-xs">✦</span>
+                <span className="text-xs">✦</span>
               </div>
-              <span className="text-2xl ml-4">❤️</span>
+              <span className="text-2xl mx-4">❤️</span>
             </div>
           ))}
         </div>
       </div>
 
-      {/* SPLIT SECTION - GOLD LEFT / WHITE RIGHT */}
-      <div className="flex flex-col md:flex-row">
-        {/* LEFT SIDE - GOLD BACKGROUND */}
-        <div className="bg-[#D4A574] py-8 px-6 md:w-1/2">
+      {/* 3. SPLIT SECTION - GOLD LEFT / LIGHT GRAY RIGHT */}
+      <div className="flex flex-col lg:flex-row">
+        {/* LEFT - GOLD */}
+        <div className="bg-[#D4A574] py-8 px-6 lg:w-1/2">
           <div className="max-w-xl mx-auto">
-            <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
+            {/* Top line */}
+            <div className="flex items-center justify-center lg:justify-start gap-3 mb-6 flex-wrap">
               <span className="text-2xl">💝</span>
               <span className="text-[#2C2C2C] font-bold text-lg">Valentine's Watch Privileges</span>
-              <span className="text-3xl font-serif text-[#8B6F47]">&</span>
+              <span className="text-3xl font-serif text-[#8B7355]">&</span>
               <span className="text-2xl">🎁</span>
               <span className="text-[#2C2C2C] font-bold text-lg">Unwrap Luxury</span>
             </div>
-            <div className="text-center md:text-left">
-              <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
+            
+            {/* Promo code section */}
+            <div className="text-center lg:text-left">
+              <div className="flex items-center justify-center lg:justify-start gap-3 mb-2 flex-wrap">
                 <span className="text-xl">💋</span>
                 <span className="text-[#2C2C2C] font-semibold">Use code:</span>
-                <span className="bg-[#1a3a3a] text-white font-bold px-4 py-1 text-base">VDAY25</span>
+                <span className="bg-[#1a3a3a] text-white font-bold px-4 py-1.5 text-base">VDAY25</span>
                 <span className="text-[#2C2C2C] font-semibold">for 25% OFF</span>
               </div>
-              <p className="text-[#2C2C2C] text-sm mt-2">
+              <p className="text-[#2C2C2C] text-sm">
                 Limited New Year's selection available now! Offer ends soon.
               </p>
             </div>
           </div>
         </div>
 
-        {/* RIGHT SIDE - WHITE BACKGROUND */}
-        <div className="bg-white py-8 px-6 md:w-1/2">
-          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
+        {/* RIGHT - LIGHT GRAY */}
+        <div className="bg-[#E8E8E8] py-8 px-6 lg:w-1/2 flex items-center justify-center">
+          <div className="flex flex-wrap items-center justify-center gap-6">
             <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-gray-900">Benefits</div>
+              <div className="text-3xl font-bold text-[#2C2C2C]">Benefits</div>
               <div className="text-gray-600 text-sm">Quality timepieces</div>
             </div>
-            <span className="text-3xl md:text-4xl font-serif text-[#D4A574]">&</span>
+            <span className="text-4xl font-serif text-[#D4A574]">&</span>
             <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-gray-900">Guaranteed</div>
+              <div className="text-3xl font-bold text-[#2C2C2C]">Guaranteed</div>
               <div className="text-gray-600 text-sm">1 Year Warranty</div>
             </div>
-            <span className="text-xl font-bold text-gray-900">Plus</span>
+            <span className="text-xl font-bold text-[#2C2C2C]">Plus</span>
             <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-gray-900">$20 Gift Card</div>
+              <div className="text-3xl font-bold text-[#2C2C2C]">$20 Gift Card</div>
               <div className="text-gray-600 text-sm">per $100 spent</div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* FREE SHIPPING BANNER - RED BACKGROUND */}
-      <div className="bg-[#C53030] text-white py-3 text-center">
+      {/* 4. RED FREE SHIPPING BAR */}
+      <div className="bg-[#C53030] text-white py-3.5 text-center">
         <div className="flex items-center justify-center gap-2">
           <span className="text-xl">🎁</span>
-          <span className="font-bold text-sm md:text-base">FREE SHIPPING to USA, UK, Canada & Australia!</span>
+          <span className="font-bold text-base">FREE SHIPPING to USA, UK, Canada & Australia!</span>
         </div>
       </div>
 
-      {/* SHOP WITH CONFIDENCE - BEIGE BACKGROUND */}
-      <div className="bg-[#F5F5DC] py-6">
+      {/* 5. BEIGE CONFIDENCE SECTION - 3 COLUMNS */}
+      <div className="bg-[#F5F5DC] py-8">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-center text-xl md:text-2xl font-serif text-gray-900 mb-6 flex items-center justify-center gap-2">
-            <span className="text-2xl">🎁</span>
+          <h2 className="text-center text-2xl font-serif text-[#2C2C2C] mb-8 flex items-center justify-center gap-2">
+            <span className="text-3xl">🎁</span>
             <span className="font-bold">SHOP WATCHES WITH CONFIDENCE:</span>
           </h2>
-          <div className="grid md:grid-cols-3 gap-6 text-sm">
+          <div className="grid md:grid-cols-3 gap-8 text-sm">
+            {/* Column 1 */}
             <div className="text-center">
               <div className="mb-2">
                 <span className="font-bold text-[#C86A3C]">Guaranteed</span>
-                <span className="text-gray-900"> in Time for Valentines Day</span>
+                <span className="text-[#2C2C2C]"> in Time for Valentines Day</span>
               </div>
               <div className="text-gray-700">
                 <span className="text-lg">💝</span> Order by 02/11 at 5PM ET (USA/UK/CAN). 
-                <a href="#" className="text-gray-900 underline">Details</a>
+                <a href="#" className="text-[#2C2C2C] underline">Details</a>
               </div>
             </div>
+            
+            {/* Column 2 */}
             <div className="text-center">
               <div className="mb-2">
                 <span className="font-bold text-[#C86A3C]">Best</span>
-                <span className="text-gray-900"> Watch Price Guarantee</span>
+                <span className="text-[#2C2C2C]"> Watch Price Guarantee</span>
               </div>
               <div className="text-gray-700">
                 Price match within 30 days. 
-                <a href="#" className="text-gray-900 underline">Details</a>
+                <a href="#" className="text-[#2C2C2C] underline">Details</a>
               </div>
             </div>
+            
+            {/* Column 3 */}
             <div className="text-center">
               <div className="mb-2">
                 <span className="font-bold text-[#C86A3C]">Easy</span>
-                <span className="text-gray-900"> Returns</span>
+                <span className="text-[#2C2C2C]"> Returns</span>
               </div>
               <div className="text-gray-700">
                 Free returns until 3/03. 
-                <a href="#" className="text-gray-900 underline">Details</a>
+                <a href="#" className="text-[#2C2C2C] underline">Details</a>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* MAIN NAVIGATION - WHITE BACKGROUND */}
+      {/* 6. WHITE NAVIGATION BAR - VASTARA */}
       <nav className="bg-white border-y border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            <Link to="/" className="text-2xl md:text-3xl font-serif font-bold text-gray-900 tracking-widest">
+            <Link to="/" className="text-3xl font-serif font-bold text-[#2C2C2C] tracking-widest">
               VASTARA
             </Link>
-            <div className="hidden lg:flex items-center space-x-6">
+            <div className="hidden lg:flex items-center space-x-7">
               {mainMenu?.items?.map((item) => (
                 <Link
                   key={item.id}
                   to={item.url || '/'}
-                  className="text-xs font-semibold text-gray-800 hover:text-gray-600 uppercase tracking-wider"
+                  className="text-xs font-semibold text-[#2C2C2C] hover:text-gray-600 uppercase tracking-wider"
                 >
                   {item.title}
                 </Link>
               ))}
             </div>
-            <div className="flex items-center gap-4">
-              <button className="flex items-center gap-1 text-gray-800 hover:text-gray-600">
+            <div className="flex items-center gap-5">
+              <button className="flex items-center gap-1.5 text-[#2C2C2C] hover:text-gray-600">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
-                <span className="text-xs">Account</span>
+                <span className="text-xs font-medium">Account</span>
               </button>
-              <button className="text-gray-800 hover:text-gray-600">
+              <button className="text-[#2C2C2C] hover:text-gray-600">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </button>
-              <button className="text-gray-800 hover:text-gray-600">
+              <button className="text-[#2C2C2C] hover:text-gray-600">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
@@ -249,7 +265,7 @@ export default function Homepage() {
         </div>
       </nav>
 
-      {/* SECONDARY NAV - DARK GREEN BACKGROUND */}
+      {/* 7. DARK GREEN BOTTOM BAR */}
       <div className="bg-[#1a5238] text-white py-3">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-center gap-6 text-xs font-semibold flex-wrap">
