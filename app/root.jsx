@@ -7,6 +7,11 @@ import {
   useLoaderData,
 } from 'react-router';
 import {ShopifyProvider} from '@shopify/hydrogen-react';
+import styles from './styles/app.css?url';
+
+export function links() {
+  return [{rel: 'stylesheet', href: styles}];
+}
 
 export async function loader({context}) {
   const {env, storefront} = context;
@@ -32,7 +37,6 @@ export default function App() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
-        <script src="https://cdn.tailwindcss.com"></script>
       </head>
       <body>
         <ShopifyProvider
