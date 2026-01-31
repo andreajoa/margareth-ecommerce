@@ -24,9 +24,6 @@ type Pages = {
       "handle": string;
     };
   };
-  "/backup": {
-    params: {};
-  };
   "/graphiql": {
     params: {};
   };
@@ -41,7 +38,7 @@ type Pages = {
 type RouteFiles = {
   "root.jsx": {
     id: "root";
-    page: "/" | "/collections/:handle" | "/products/:handle" | "/backup" | "/graphiql" | "/subrequest-profiler" | "/.well-known/appspecific/com.chrome.devtools.json";
+    page: "/" | "/collections/:handle" | "/products/:handle" | "/graphiql" | "/subrequest-profiler" | "/.well-known/appspecific/com.chrome.devtools.json";
   };
   "routes/collections.$handle.jsx": {
     id: "routes/collections.$handle";
@@ -53,11 +50,7 @@ type RouteFiles = {
   };
   "routes/_index.jsx": {
     id: "routes/_index";
-    page: "/" | "/backup";
-  };
-  "routes/_index.backup.jsx": {
-    id: "routes/_index.backup";
-    page: "/backup";
+    page: "/";
   };
   "../node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout.jsx": {
     id: "/Users/andrealmeida/Desktop/gueth-ecommerce/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout";
@@ -86,7 +79,6 @@ type RouteModules = {
   "routes/collections.$handle": typeof import("./app/routes/collections.$handle.jsx");
   "routes/products.$handle": typeof import("./app/routes/products.$handle.jsx");
   "routes/_index": typeof import("./app/routes/_index.jsx");
-  "routes/_index.backup": typeof import("./app/routes/_index.backup.jsx");
   "/Users/andrealmeida/Desktop/gueth-ecommerce/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout": unknown;
   "vite/virtual-routes/routes/graphiql": unknown;
   "vite/virtual-routes/routes/subrequest-profiler": unknown;
