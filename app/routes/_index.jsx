@@ -673,7 +673,7 @@ export default function Homepage() {
           <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 mb-20 w-full">
             <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
               <div className="relative h-72 sm:h-80 md:h-96 overflow-hidden rounded-[10px] shadow-xl group">
-                <img src="https://cdn.shopify.com/s/files/1/0973/7116/0942/files/banner_2.png?v=1769878999" alt="Brinquedos Terapêuticos BR, Praia Grande, Sao Vicente, Santos - Shop Online" className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" width="800" height="600"/>
+                <img src="https://cdn.shopify.com/s/files/1/0973/7116/0942/files/banner_1.png?v=1769878997" alt="Brinquedos Terapêuticos BR, Praia Grande, Sao Vicente, Santos - Shop Online" className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" width="800" height="600"/>
                 <div className="absolute inset-0 bg-gradient-to-t from-[#b91c1c]/80 via-transparent to-transparent"></div>
                 <div className="absolute bottom-6 sm:bottom-8 left-6 sm:left-8 right-6 sm:right-8 text-white">
                   <h2 className="text-2xl sm:text-3xl font-light mb-2 tracking-wide">🧸 Brinquedos Terapêuticos</h2>
