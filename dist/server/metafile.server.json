@@ -1820,6 +1820,16 @@
       "format": "cjs",
       "imports": []
     },
+    "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/optionValueDecoder.mjs": {
+      "bytes": 3297,
+      "format": "esm",
+      "imports": []
+    },
+    "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/cart-constants.mjs": {
+      "bytes": 489,
+      "format": "esm",
+      "imports": []
+    },
     "node_modules/react/jsx-runtime.js": {
       "bytes": 214,
       "format": "cjs",
@@ -1831,6 +1841,28 @@
         }
       ]
     },
+    "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/Money.mjs": {
+      "bytes": 1310,
+      "format": "cjs",
+      "imports": [
+        {
+          "path": "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/useMoney.mjs",
+          "kind": "import-statement",
+          "original": "./useMoney.mjs"
+        }
+      ]
+    },
+    "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/useMoney.mjs": {
+      "bytes": 5534,
+      "format": "cjs",
+      "imports": [
+        {
+          "path": "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/ShopifyProvider.mjs",
+          "kind": "import-statement",
+          "original": "./ShopifyProvider.mjs"
+        }
+      ]
+    },
     "node_modules/react/cjs/react-jsx-runtime.production.min.js": {
       "bytes": 859,
       "format": "cjs",
@@ -1839,48 +1871,6 @@
           "path": "node_modules/react/index.js",
           "kind": "import-statement",
           "original": "/Users/andrealmeida/Desktop/gueth-ecommerce/node_modules/react/index.js"
-        }
-      ]
-    },
-    "node_modules/react-router/dist/development/index.mjs": {
-      "bytes": 6552,
-      "format": "esm",
-      "imports": [
-        {
-          "path": "node_modules/react-router/dist/development/chunk-4LKRSAEJ.mjs",
-          "kind": "import-statement",
-          "original": "./chunk-4LKRSAEJ.mjs"
-        },
-        {
-          "path": "node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs",
-          "kind": "import-statement",
-          "original": "./chunk-JZWAC4HX.mjs"
-        }
-      ]
-    },
-    "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-api-constants.mjs": {
-      "bytes": 115,
-      "format": "esm",
-      "imports": []
-    },
-    "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/cart-constants.mjs": {
-      "bytes": 489,
-      "format": "esm",
-      "imports": []
-    },
-    "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/tracking-utils.mjs": {
-      "bytes": 3460,
-      "format": "esm",
-      "imports": []
-    },
-    "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-client.mjs": {
-      "bytes": 4008,
-      "format": "esm",
-      "imports": [
-        {
-          "path": "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-api-constants.mjs",
-          "kind": "import-statement",
-          "original": "./storefront-api-constants.mjs"
         }
       ]
     },
@@ -1900,138 +1890,48 @@
         }
       ]
     },
-    "node_modules/react-router/dist/development/chunk-4LKRSAEJ.mjs": {
-      "bytes": 78236,
-      "format": "cjs",
-      "imports": [
-        {
-          "path": "node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs",
-          "kind": "import-statement",
-          "original": "./chunk-JZWAC4HX.mjs"
-        }
-      ]
-    },
-    "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/optionValueDecoder.mjs": {
-      "bytes": 3297,
-      "format": "esm",
-      "imports": []
-    },
-    "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/useMoney.mjs": {
-      "bytes": 5534,
-      "format": "cjs",
-      "imports": [
-        {
-          "path": "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/ShopifyProvider.mjs",
-          "kind": "import-statement",
-          "original": "./ShopifyProvider.mjs"
-        }
-      ]
-    },
-    "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/Money.mjs": {
-      "bytes": 1310,
-      "format": "cjs",
-      "imports": [
-        {
-          "path": "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/useMoney.mjs",
-          "kind": "import-statement",
-          "original": "./useMoney.mjs"
-        }
-      ]
-    },
-    "node_modules/worktop/cookie/index.mjs": {
-      "bytes": 1234,
-      "format": "esm",
-      "imports": []
-    },
-    "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/getProductOptions.mjs": {
-      "bytes": 8651,
+    "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-client.mjs": {
+      "bytes": 4008,
       "format": "esm",
       "imports": [
         {
-          "path": "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/optionValueDecoder.mjs",
+          "path": "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-api-constants.mjs",
           "kind": "import-statement",
-          "original": "./optionValueDecoder.mjs"
+          "original": "./storefront-api-constants.mjs"
         }
       ]
     },
-    "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/load-script.mjs": {
-      "bytes": 1479,
-      "format": "cjs",
-      "imports": []
-    },
-    "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/useSelectedOptionInUrlParam.mjs": {
-      "bytes": 1069,
-      "format": "cjs",
-      "imports": [
-        {
-          "path": "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/getProductOptions.mjs",
-          "kind": "import-statement",
-          "original": "./getProductOptions.mjs"
-        }
-      ]
-    },
-    "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/Image.mjs": {
-      "bytes": 10040,
-      "format": "cjs",
-      "imports": []
-    },
-    "node_modules/@shopify/graphql-client/dist/graphql-client/constants.mjs": {
-      "bytes": 1414,
-      "format": "esm",
-      "imports": []
-    },
-    "node_modules/@shopify/graphql-client/dist/graphql-client/utilities.mjs": {
-      "bytes": 2268,
+    "app/lib/context.js": {
+      "bytes": 603,
       "format": "esm",
       "imports": [
         {
-          "path": "node_modules/@shopify/graphql-client/dist/graphql-client/constants.mjs",
+          "path": "node_modules/@shopify/hydrogen/dist/production/index.js",
           "kind": "import-statement",
-          "original": "./constants.mjs"
-        }
-      ]
-    },
-    "node_modules/@shopify/graphql-client/dist/graphql-client/http-fetch.mjs": {
-      "bytes": 2456,
-      "format": "esm",
-      "imports": [
-        {
-          "path": "node_modules/@shopify/graphql-client/dist/graphql-client/constants.mjs",
-          "kind": "import-statement",
-          "original": "./constants.mjs"
+          "original": "@shopify/hydrogen"
         },
         {
-          "path": "node_modules/@shopify/graphql-client/dist/graphql-client/utilities.mjs",
+          "path": "app/lib/session.js",
           "kind": "import-statement",
-          "original": "./utilities.mjs"
+          "original": "./session"
         }
       ]
     },
-    "node_modules/@shopify/graphql-client/dist/graphql-client/graphql-client.mjs": {
-      "bytes": 13277,
+    "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/tracking-utils.mjs": {
+      "bytes": 3460,
+      "format": "esm",
+      "imports": []
+    },
+    "app/lib/session.js": {
+      "bytes": 629,
       "format": "esm",
       "imports": [
         {
-          "path": "node_modules/@shopify/graphql-client/dist/graphql-client/http-fetch.mjs",
+          "path": "node_modules/react-router/dist/development/index.mjs",
           "kind": "import-statement",
-          "original": "./http-fetch.mjs"
-        },
-        {
-          "path": "node_modules/@shopify/graphql-client/dist/graphql-client/constants.mjs",
-          "kind": "import-statement",
-          "original": "./constants.mjs"
-        },
-        {
-          "path": "node_modules/@shopify/graphql-client/dist/graphql-client/utilities.mjs",
-          "kind": "import-statement",
-          "original": "./utilities.mjs"
+          "original": "react-router"
         }
       ]
-    },
-    "node_modules/content-security-policy-builder/esm/mod.js": {
-      "bytes": 854,
-      "format": "esm",
-      "imports": []
     },
     "node_modules/@shopify/hydrogen/dist/oxygen/index.js": {
       "bytes": 3860,
@@ -2044,74 +1944,10 @@
         }
       ]
     },
-    "node_modules/isbot/index.mjs": {
-      "bytes": 6536,
+    "node_modules/@shopify/hydrogen/dist/production/log-seo-tags-TY72EQWZ.js": {
+      "bytes": 1470,
       "format": "esm",
       "imports": []
-    },
-    "app/components/ProductPrice.jsx": {
-      "bytes": 1082,
-      "format": "cjs",
-      "imports": [
-        {
-          "path": "node_modules/@shopify/hydrogen/dist/production/index.js",
-          "kind": "import-statement",
-          "original": "@shopify/hydrogen"
-        }
-      ]
-    },
-    "app/lib/judgeme.server.js": {
-      "bytes": 8026,
-      "format": "esm",
-      "imports": []
-    },
-    "app/components/CartMain.jsx": {
-      "bytes": 26370,
-      "format": "cjs",
-      "imports": [
-        {
-          "path": "node_modules/@shopify/hydrogen/dist/production/index.js",
-          "kind": "import-statement",
-          "original": "@shopify/hydrogen"
-        },
-        {
-          "path": "app/components/Aside.jsx",
-          "kind": "import-statement",
-          "original": "~/components/Aside"
-        },
-        {
-          "path": "app/components/CartLineItem.jsx",
-          "kind": "import-statement",
-          "original": "~/components/CartLineItem"
-        }
-      ]
-    },
-    "node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-api-constants.mjs": {
-      "bytes": 115,
-      "format": "esm",
-      "imports": []
-    },
-    "node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-client.mjs": {
-      "bytes": 4008,
-      "format": "esm",
-      "imports": [
-        {
-          "path": "node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-api-constants.mjs",
-          "kind": "import-statement",
-          "original": "./storefront-api-constants.mjs"
-        }
-      ]
-    },
-    "app/lib/session.js": {
-      "bytes": 629,
-      "format": "esm",
-      "imports": [
-        {
-          "path": "node_modules/react-router/dist/development/index.mjs",
-          "kind": "import-statement",
-          "original": "react-router"
-        }
-      ]
     },
     "server.js": {
       "bytes": 1254,
@@ -2139,6 +1975,196 @@
         }
       ]
     },
+    "node_modules/isbot/index.mjs": {
+      "bytes": 6536,
+      "format": "esm",
+      "imports": []
+    },
+    "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/load-script.mjs": {
+      "bytes": 1479,
+      "format": "cjs",
+      "imports": []
+    },
+    "node_modules/react-router/dist/development/chunk-4LKRSAEJ.mjs": {
+      "bytes": 78236,
+      "format": "cjs",
+      "imports": [
+        {
+          "path": "node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs",
+          "kind": "import-statement",
+          "original": "./chunk-JZWAC4HX.mjs"
+        }
+      ]
+    },
+    "node_modules/worktop/cookie/index.mjs": {
+      "bytes": 1234,
+      "format": "esm",
+      "imports": []
+    },
+    "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-api-constants.mjs": {
+      "bytes": 115,
+      "format": "esm",
+      "imports": []
+    },
+    "node_modules/@shopify/graphql-client/dist/graphql-client/utilities.mjs": {
+      "bytes": 2268,
+      "format": "esm",
+      "imports": [
+        {
+          "path": "node_modules/@shopify/graphql-client/dist/graphql-client/constants.mjs",
+          "kind": "import-statement",
+          "original": "./constants.mjs"
+        }
+      ]
+    },
+    "app/styles/app.css?url": {
+      "bytes": 276,
+      "format": "esm",
+      "imports": []
+    },
+    "node_modules/react-router/dist/development/index.mjs": {
+      "bytes": 6552,
+      "format": "esm",
+      "imports": [
+        {
+          "path": "node_modules/react-router/dist/development/chunk-4LKRSAEJ.mjs",
+          "kind": "import-statement",
+          "original": "./chunk-4LKRSAEJ.mjs"
+        },
+        {
+          "path": "node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs",
+          "kind": "import-statement",
+          "original": "./chunk-JZWAC4HX.mjs"
+        }
+      ]
+    },
+    "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/useSelectedOptionInUrlParam.mjs": {
+      "bytes": 1069,
+      "format": "cjs",
+      "imports": [
+        {
+          "path": "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/getProductOptions.mjs",
+          "kind": "import-statement",
+          "original": "./getProductOptions.mjs"
+        }
+      ]
+    },
+    "app/components/FooterNewsletterForm.jsx": {
+      "bytes": 2020,
+      "format": "cjs",
+      "imports": []
+    },
+    "node_modules/react-dom/server.browser.js": {
+      "bytes": 658,
+      "format": "cjs",
+      "imports": [
+        {
+          "path": "node_modules/react-dom/cjs/react-dom-server-legacy.browser.production.min.js",
+          "kind": "import-statement",
+          "original": "/Users/andrealmeida/Desktop/gueth-ecommerce/node_modules/react-dom/cjs/react-dom-server-legacy.browser.production.min.js"
+        },
+        {
+          "path": "node_modules/react-dom/cjs/react-dom-server.browser.production.min.js",
+          "kind": "import-statement",
+          "original": "/Users/andrealmeida/Desktop/gueth-ecommerce/node_modules/react-dom/cjs/react-dom-server.browser.production.min.js"
+        }
+      ]
+    },
+    "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/getProductOptions.mjs": {
+      "bytes": 8651,
+      "format": "esm",
+      "imports": [
+        {
+          "path": "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/optionValueDecoder.mjs",
+          "kind": "import-statement",
+          "original": "./optionValueDecoder.mjs"
+        }
+      ]
+    },
+    "node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-client.mjs": {
+      "bytes": 4008,
+      "format": "esm",
+      "imports": [
+        {
+          "path": "node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-api-constants.mjs",
+          "kind": "import-statement",
+          "original": "./storefront-api-constants.mjs"
+        }
+      ]
+    },
+    "node_modules/@shopify/hydrogen-react/dist/node-prod/ShopifyProvider.mjs": {
+      "bytes": 3510,
+      "format": "cjs",
+      "imports": [
+        {
+          "path": "node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-api-constants.mjs",
+          "kind": "import-statement",
+          "original": "./storefront-api-constants.mjs"
+        },
+        {
+          "path": "node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-client.mjs",
+          "kind": "import-statement",
+          "original": "./storefront-client.mjs"
+        }
+      ]
+    },
+    "node_modules/scheduler/index.js": {
+      "bytes": 198,
+      "format": "cjs",
+      "imports": [
+        {
+          "path": "node_modules/scheduler/cjs/scheduler.production.min.js",
+          "kind": "import-statement",
+          "original": "/Users/andrealmeida/Desktop/gueth-ecommerce/node_modules/scheduler/cjs/scheduler.production.min.js"
+        }
+      ]
+    },
+    "app/components/Aside.jsx": {
+      "bytes": 5989,
+      "format": "cjs",
+      "imports": []
+    },
+    "node_modules/@shopify/graphql-client/dist/graphql-client/graphql-client.mjs": {
+      "bytes": 13277,
+      "format": "esm",
+      "imports": [
+        {
+          "path": "node_modules/@shopify/graphql-client/dist/graphql-client/http-fetch.mjs",
+          "kind": "import-statement",
+          "original": "./http-fetch.mjs"
+        },
+        {
+          "path": "node_modules/@shopify/graphql-client/dist/graphql-client/constants.mjs",
+          "kind": "import-statement",
+          "original": "./constants.mjs"
+        },
+        {
+          "path": "node_modules/@shopify/graphql-client/dist/graphql-client/utilities.mjs",
+          "kind": "import-statement",
+          "original": "./utilities.mjs"
+        }
+      ]
+    },
+    "node_modules/content-security-policy-builder/esm/mod.js": {
+      "bytes": 854,
+      "format": "esm",
+      "imports": []
+    },
+    "node_modules/@shopify/graphql-client/dist/graphql-client/constants.mjs": {
+      "bytes": 1414,
+      "format": "esm",
+      "imports": []
+    },
+    "node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-api-constants.mjs": {
+      "bytes": 115,
+      "format": "esm",
+      "imports": []
+    },
+    "node_modules/scheduler/cjs/scheduler.production.min.js": {
+      "bytes": 4235,
+      "format": "cjs",
+      "imports": []
+    },
     "app/root.jsx": {
       "bytes": 1450,
       "format": "cjs",
@@ -2160,6 +2186,49 @@
         }
       ]
     },
+    "node_modules/react-dom/cjs/react-dom-server.browser.production.min.js": {
+      "bytes": 35597,
+      "format": "cjs",
+      "imports": [
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "/Users/andrealmeida/Desktop/gueth-ecommerce/node_modules/react/index.js"
+        }
+      ]
+    },
+    "app/routes/collections.$handle.jsx": {
+      "bytes": 2471,
+      "format": "cjs",
+      "imports": [
+        {
+          "path": "node_modules/react-router/dist/development/index.mjs",
+          "kind": "import-statement",
+          "original": "react-router"
+        }
+      ]
+    },
+    "node_modules/@shopify/graphql-client/dist/graphql-client/http-fetch.mjs": {
+      "bytes": 2456,
+      "format": "esm",
+      "imports": [
+        {
+          "path": "node_modules/@shopify/graphql-client/dist/graphql-client/constants.mjs",
+          "kind": "import-statement",
+          "original": "./constants.mjs"
+        },
+        {
+          "path": "node_modules/@shopify/graphql-client/dist/graphql-client/utilities.mjs",
+          "kind": "import-statement",
+          "original": "./utilities.mjs"
+        }
+      ]
+    },
+    "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/Image.mjs": {
+      "bytes": 10040,
+      "format": "cjs",
+      "imports": []
+    },
     "app/entry.server.jsx": {
       "bytes": 1184,
       "format": "cjs",
@@ -2180,6 +2249,81 @@
           "original": "@shopify/hydrogen"
         }
       ]
+    },
+    "node_modules/react-dom/cjs/react-dom-server-legacy.browser.production.min.js": {
+      "bytes": 35019,
+      "format": "cjs",
+      "imports": [
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "/Users/andrealmeida/Desktop/gueth-ecommerce/node_modules/react/index.js"
+        }
+      ]
+    },
+    "app/lib/utils.js": {
+      "bytes": 1306,
+      "format": "esm",
+      "imports": []
+    },
+    "node_modules/react-dom/index.js": {
+      "bytes": 1363,
+      "format": "cjs",
+      "imports": [
+        {
+          "path": "node_modules/react-dom/cjs/react-dom.production.min.js",
+          "kind": "import-statement",
+          "original": "/Users/andrealmeida/Desktop/gueth-ecommerce/node_modules/react-dom/cjs/react-dom.production.min.js"
+        }
+      ]
+    },
+    "node_modules/react-router-dom/dist/index.js": {
+      "bytes": 1656,
+      "format": "cjs",
+      "imports": []
+    },
+    "app/lib/variants.js": {
+      "bytes": 1703,
+      "format": "cjs",
+      "imports": [
+        {
+          "path": "node_modules/react-router/dist/development/index.mjs",
+          "kind": "import-statement",
+          "original": "react-router"
+        }
+      ]
+    },
+    "app/components/ProductPrice.jsx": {
+      "bytes": 1082,
+      "format": "cjs",
+      "imports": [
+        {
+          "path": "node_modules/@shopify/hydrogen/dist/production/index.js",
+          "kind": "import-statement",
+          "original": "@shopify/hydrogen"
+        }
+      ]
+    },
+    "node_modules/react-router/dist/development/dom-export.mjs": {
+      "bytes": 32293,
+      "format": "cjs",
+      "imports": [
+        {
+          "path": "node_modules/react-router/dist/development/chunk-4LKRSAEJ.mjs",
+          "kind": "import-statement",
+          "original": "./chunk-4LKRSAEJ.mjs"
+        },
+        {
+          "path": "node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs",
+          "kind": "import-statement",
+          "original": "./chunk-JZWAC4HX.mjs"
+        }
+      ]
+    },
+    "node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs": {
+      "bytes": 355054,
+      "format": "cjs",
+      "imports": []
     },
     "app/components/CartLineItem.jsx": {
       "bytes": 8861,
@@ -2212,130 +2356,8 @@
         }
       ]
     },
-    "node_modules/@shopify/hydrogen/dist/production/log-seo-tags-TY72EQWZ.js": {
-      "bytes": 1470,
-      "format": "esm",
-      "imports": []
-    },
-    "node_modules/react-dom/server.browser.js": {
-      "bytes": 658,
-      "format": "cjs",
-      "imports": [
-        {
-          "path": "node_modules/react-dom/cjs/react-dom-server-legacy.browser.production.min.js",
-          "kind": "import-statement",
-          "original": "/Users/andrealmeida/Desktop/gueth-ecommerce/node_modules/react-dom/cjs/react-dom-server-legacy.browser.production.min.js"
-        },
-        {
-          "path": "node_modules/react-dom/cjs/react-dom-server.browser.production.min.js",
-          "kind": "import-statement",
-          "original": "/Users/andrealmeida/Desktop/gueth-ecommerce/node_modules/react-dom/cjs/react-dom-server.browser.production.min.js"
-        }
-      ]
-    },
-    "node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs": {
-      "bytes": 355054,
-      "format": "cjs",
-      "imports": []
-    },
-    "node_modules/scheduler/cjs/scheduler.production.min.js": {
-      "bytes": 4235,
-      "format": "cjs",
-      "imports": []
-    },
-    "node_modules/react-dom/cjs/react-dom-server.browser.production.min.js": {
-      "bytes": 35597,
-      "format": "cjs",
-      "imports": [
-        {
-          "path": "node_modules/react/index.js",
-          "kind": "import-statement",
-          "original": "/Users/andrealmeida/Desktop/gueth-ecommerce/node_modules/react/index.js"
-        }
-      ]
-    },
-    "app/lib/context.js": {
-      "bytes": 603,
-      "format": "esm",
-      "imports": [
-        {
-          "path": "node_modules/@shopify/hydrogen/dist/production/index.js",
-          "kind": "import-statement",
-          "original": "@shopify/hydrogen"
-        },
-        {
-          "path": "app/lib/session.js",
-          "kind": "import-statement",
-          "original": "./session"
-        }
-      ]
-    },
-    "app/styles/app.css?url": {
-      "bytes": 276,
-      "format": "esm",
-      "imports": []
-    },
-    "app/components/Aside.jsx": {
-      "bytes": 5989,
-      "format": "cjs",
-      "imports": []
-    },
-    "app/components/ProductFooter.jsx": {
-      "bytes": 9273,
-      "format": "cjs",
-      "imports": [
-        {
-          "path": "node_modules/react-router/dist/development/index.mjs",
-          "kind": "import-statement",
-          "original": "react-router"
-        }
-      ]
-    },
-    "node_modules/react-router-dom/dist/index.js": {
-      "bytes": 1656,
-      "format": "cjs",
-      "imports": []
-    },
-    "app/routes/collections.$handle.jsx": {
-      "bytes": 2471,
-      "format": "cjs",
-      "imports": [
-        {
-          "path": "node_modules/react-router/dist/development/index.mjs",
-          "kind": "import-statement",
-          "original": "react-router"
-        }
-      ]
-    },
-    "app/lib/variants.js": {
-      "bytes": 1703,
-      "format": "cjs",
-      "imports": [
-        {
-          "path": "node_modules/react-router/dist/development/index.mjs",
-          "kind": "import-statement",
-          "original": "react-router"
-        }
-      ]
-    },
-    "node_modules/@shopify/hydrogen-react/dist/node-prod/ShopifyProvider.mjs": {
-      "bytes": 3510,
-      "format": "cjs",
-      "imports": [
-        {
-          "path": "node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-api-constants.mjs",
-          "kind": "import-statement",
-          "original": "./storefront-api-constants.mjs"
-        },
-        {
-          "path": "node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-client.mjs",
-          "kind": "import-statement",
-          "original": "./storefront-client.mjs"
-        }
-      ]
-    },
     "\u0000virtual:react-router/server-build": {
-      "bytes": 1981,
+      "bytes": 1921,
       "format": "esm",
       "imports": [
         {
@@ -2370,73 +2392,10 @@
         }
       ]
     },
-    "node_modules/react-dom/cjs/react-dom-server-legacy.browser.production.min.js": {
-      "bytes": 35019,
+    "app/components/CartMain.jsx": {
+      "bytes": 26370,
       "format": "cjs",
       "imports": [
-        {
-          "path": "node_modules/react/index.js",
-          "kind": "import-statement",
-          "original": "/Users/andrealmeida/Desktop/gueth-ecommerce/node_modules/react/index.js"
-        }
-      ]
-    },
-    "\u0000virtual:react-router/server-manifest": {
-      "bytes": 3299,
-      "format": "esm",
-      "imports": []
-    },
-    "app/lib/utils.js": {
-      "bytes": 1306,
-      "format": "esm",
-      "imports": []
-    },
-    "node_modules/react-dom/index.js": {
-      "bytes": 1363,
-      "format": "cjs",
-      "imports": [
-        {
-          "path": "node_modules/react-dom/cjs/react-dom.production.min.js",
-          "kind": "import-statement",
-          "original": "/Users/andrealmeida/Desktop/gueth-ecommerce/node_modules/react-dom/cjs/react-dom.production.min.js"
-        }
-      ]
-    },
-    "app/components/FooterNewsletterForm.jsx": {
-      "bytes": 2020,
-      "format": "cjs",
-      "imports": []
-    },
-    "node_modules/react-router/dist/development/dom-export.mjs": {
-      "bytes": 32293,
-      "format": "cjs",
-      "imports": [
-        {
-          "path": "node_modules/react-router/dist/development/chunk-4LKRSAEJ.mjs",
-          "kind": "import-statement",
-          "original": "./chunk-4LKRSAEJ.mjs"
-        },
-        {
-          "path": "node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs",
-          "kind": "import-statement",
-          "original": "./chunk-JZWAC4HX.mjs"
-        }
-      ]
-    },
-    "app/routes/products.$handle.jsx": {
-      "bytes": 65826,
-      "format": "cjs",
-      "imports": [
-        {
-          "path": "node_modules/react-router/dist/development/index.mjs",
-          "kind": "import-statement",
-          "original": "react-router"
-        },
-        {
-          "path": "app/components/FooterNewsletterForm.jsx",
-          "kind": "import-statement",
-          "original": "~/components/FooterNewsletterForm"
-        },
         {
           "path": "node_modules/@shopify/hydrogen/dist/production/index.js",
           "kind": "import-statement",
@@ -2448,69 +2407,21 @@
           "original": "~/components/Aside"
         },
         {
-          "path": "app/components/CartMain.jsx",
+          "path": "app/components/CartLineItem.jsx",
           "kind": "import-statement",
-          "original": "~/components/CartMain"
-        },
-        {
-          "path": "app/lib/judgeme.server.js",
-          "kind": "import-statement",
-          "original": "~/lib/judgeme.server"
+          "original": "~/components/CartLineItem"
         }
       ]
     },
-    "node_modules/scheduler/index.js": {
-      "bytes": 198,
-      "format": "cjs",
-      "imports": [
-        {
-          "path": "node_modules/scheduler/cjs/scheduler.production.min.js",
-          "kind": "import-statement",
-          "original": "/Users/andrealmeida/Desktop/gueth-ecommerce/node_modules/scheduler/cjs/scheduler.production.min.js"
-        }
-      ]
+    "\u0000virtual:react-router/server-manifest": {
+      "bytes": 2339,
+      "format": "esm",
+      "imports": []
     },
-    "app/routes/_index.jsx": {
-      "bytes": 57035,
-      "format": "cjs",
-      "imports": [
-        {
-          "path": "node_modules/react-router/dist/development/index.mjs",
-          "kind": "import-statement",
-          "original": "react-router"
-        },
-        {
-          "path": "app/components/FooterNewsletterForm.jsx",
-          "kind": "import-statement",
-          "original": "~/components/FooterNewsletterForm"
-        },
-        {
-          "path": "app/components/ProductFooter.jsx",
-          "kind": "import-statement",
-          "original": "~/components/ProductFooter"
-        },
-        {
-          "path": "node_modules/@shopify/hydrogen/dist/production/index.js",
-          "kind": "import-statement",
-          "original": "@shopify/hydrogen"
-        }
-      ]
-    },
-    "node_modules/react-dom/cjs/react-dom.production.min.js": {
-      "bytes": 131685,
-      "format": "cjs",
-      "imports": [
-        {
-          "path": "node_modules/react/index.js",
-          "kind": "import-statement",
-          "original": "/Users/andrealmeida/Desktop/gueth-ecommerce/node_modules/react/index.js"
-        },
-        {
-          "path": "node_modules/scheduler/index.js",
-          "kind": "import-statement",
-          "original": "/Users/andrealmeida/Desktop/gueth-ecommerce/node_modules/scheduler/index.js"
-        }
-      ]
+    "app/lib/judgeme.server.js": {
+      "bytes": 8026,
+      "format": "esm",
+      "imports": []
     },
     "node_modules/@shopify/hydrogen/dist/production/index.js": {
       "bytes": 103233,
@@ -2552,6 +2463,95 @@
           "original": "/Users/andrealmeida/Desktop/gueth-ecommerce/node_modules/@shopify/hydrogen/dist/production/log-seo-tags-TY72EQWZ.js"
         }
       ]
+    },
+    "app/routes/_index.jsx": {
+      "bytes": 57035,
+      "format": "cjs",
+      "imports": [
+        {
+          "path": "node_modules/react-router/dist/development/index.mjs",
+          "kind": "import-statement",
+          "original": "react-router"
+        },
+        {
+          "path": "app/components/FooterNewsletterForm.jsx",
+          "kind": "import-statement",
+          "original": "~/components/FooterNewsletterForm"
+        },
+        {
+          "path": "app/components/ProductFooter.jsx",
+          "kind": "import-statement",
+          "original": "~/components/ProductFooter"
+        },
+        {
+          "path": "node_modules/@shopify/hydrogen/dist/production/index.js",
+          "kind": "import-statement",
+          "original": "@shopify/hydrogen"
+        }
+      ]
+    },
+    "app/components/ProductFooter.jsx": {
+      "bytes": 9273,
+      "format": "cjs",
+      "imports": [
+        {
+          "path": "node_modules/react-router/dist/development/index.mjs",
+          "kind": "import-statement",
+          "original": "react-router"
+        }
+      ]
+    },
+    "app/routes/products.$handle.jsx": {
+      "bytes": 65826,
+      "format": "cjs",
+      "imports": [
+        {
+          "path": "node_modules/react-router/dist/development/index.mjs",
+          "kind": "import-statement",
+          "original": "react-router"
+        },
+        {
+          "path": "app/components/FooterNewsletterForm.jsx",
+          "kind": "import-statement",
+          "original": "~/components/FooterNewsletterForm"
+        },
+        {
+          "path": "node_modules/@shopify/hydrogen/dist/production/index.js",
+          "kind": "import-statement",
+          "original": "@shopify/hydrogen"
+        },
+        {
+          "path": "app/components/Aside.jsx",
+          "kind": "import-statement",
+          "original": "~/components/Aside"
+        },
+        {
+          "path": "app/components/CartMain.jsx",
+          "kind": "import-statement",
+          "original": "~/components/CartMain"
+        },
+        {
+          "path": "app/lib/judgeme.server.js",
+          "kind": "import-statement",
+          "original": "~/lib/judgeme.server"
+        }
+      ]
+    },
+    "node_modules/react-dom/cjs/react-dom.production.min.js": {
+      "bytes": 131685,
+      "format": "cjs",
+      "imports": [
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "/Users/andrealmeida/Desktop/gueth-ecommerce/node_modules/react/index.js"
+        },
+        {
+          "path": "node_modules/scheduler/index.js",
+          "kind": "import-statement",
+          "original": "/Users/andrealmeida/Desktop/gueth-ecommerce/node_modules/scheduler/index.js"
+        }
+      ]
     }
   },
   "outputs": {
@@ -2561,7 +2561,7 @@
         "default"
       ],
       "entryPoint": "server.js",
-      "bytes": 636387,
+      "bytes": 635307,
       "inputs": {
         "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/analytics-constants.mjs": {
           "bytesInOutput": 0
@@ -2920,65 +2920,95 @@
         "node_modules/set-cookie-parser/lib/set-cookie.js": {
           "bytesInOutput": 2550
         },
-        "node_modules/react/jsx-runtime.js": {
-          "bytesInOutput": 190
-        },
-        "node_modules/react/cjs/react-jsx-runtime.production.min.js": {
-          "bytesInOutput": 923
-        },
-        "node_modules/react-router/dist/development/index.mjs": {
-          "bytesInOutput": 222
-        },
-        "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-api-constants.mjs": {
-          "bytesInOutput": 33
+        "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/optionValueDecoder.mjs": {
+          "bytesInOutput": 1245
         },
         "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/cart-constants.mjs": {
           "bytesInOutput": 162
         },
-        "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/tracking-utils.mjs": {
-          "bytesInOutput": 109
-        },
-        "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-client.mjs": {
-          "bytesInOutput": 2183
-        },
-        "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/ShopifyProvider.mjs": {
-          "bytesInOutput": 477
-        },
-        "node_modules/react-router/dist/development/chunk-4LKRSAEJ.mjs": {
-          "bytesInOutput": 38372
-        },
-        "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/optionValueDecoder.mjs": {
-          "bytesInOutput": 1245
-        },
-        "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/useMoney.mjs": {
-          "bytesInOutput": 2810
+        "node_modules/react/jsx-runtime.js": {
+          "bytesInOutput": 190
         },
         "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/Money.mjs": {
           "bytesInOutput": 643
         },
-        "node_modules/worktop/cookie/index.mjs": {
-          "bytesInOutput": 902
+        "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/useMoney.mjs": {
+          "bytesInOutput": 2810
         },
-        "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/getProductOptions.mjs": {
-          "bytesInOutput": 4102
+        "node_modules/react/cjs/react-jsx-runtime.production.min.js": {
+          "bytesInOutput": 923
+        },
+        "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/ShopifyProvider.mjs": {
+          "bytesInOutput": 477
+        },
+        "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-client.mjs": {
+          "bytesInOutput": 2183
+        },
+        "app/lib/context.js": {
+          "bytesInOutput": 315
+        },
+        "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/tracking-utils.mjs": {
+          "bytesInOutput": 109
+        },
+        "app/lib/session.js": {
+          "bytesInOutput": 305
+        },
+        "node_modules/@shopify/hydrogen/dist/oxygen/index.js": {
+          "bytesInOutput": 1447
+        },
+        "node_modules/@shopify/hydrogen/dist/production/log-seo-tags-TY72EQWZ.js": {
+          "bytesInOutput": 1322
+        },
+        "server.js": {
+          "bytesInOutput": 456
+        },
+        "node_modules/isbot/index.mjs": {
+          "bytesInOutput": 2262
         },
         "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/load-script.mjs": {
           "bytesInOutput": 615
         },
-        "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/useSelectedOptionInUrlParam.mjs": {
-          "bytesInOutput": 384
+        "node_modules/react-router/dist/development/chunk-4LKRSAEJ.mjs": {
+          "bytesInOutput": 38372
         },
-        "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/Image.mjs": {
-          "bytesInOutput": 4594
+        "node_modules/worktop/cookie/index.mjs": {
+          "bytesInOutput": 902
         },
-        "node_modules/@shopify/graphql-client/dist/graphql-client/constants.mjs": {
-          "bytesInOutput": 786
+        "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-api-constants.mjs": {
+          "bytesInOutput": 33
         },
         "node_modules/@shopify/graphql-client/dist/graphql-client/utilities.mjs": {
           "bytesInOutput": 1115
         },
-        "node_modules/@shopify/graphql-client/dist/graphql-client/http-fetch.mjs": {
-          "bytesInOutput": 930
+        "app/styles/app.css?url": {
+          "bytesInOutput": 193
+        },
+        "node_modules/react-router/dist/development/index.mjs": {
+          "bytesInOutput": 222
+        },
+        "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/useSelectedOptionInUrlParam.mjs": {
+          "bytesInOutput": 384
+        },
+        "app/components/FooterNewsletterForm.jsx": {
+          "bytesInOutput": 1580
+        },
+        "node_modules/react-dom/server.browser.js": {
+          "bytesInOutput": 601
+        },
+        "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/getProductOptions.mjs": {
+          "bytesInOutput": 4102
+        },
+        "node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-client.mjs": {
+          "bytesInOutput": 240
+        },
+        "node_modules/@shopify/hydrogen-react/dist/node-prod/ShopifyProvider.mjs": {
+          "bytesInOutput": 1834
+        },
+        "node_modules/scheduler/index.js": {
+          "bytesInOutput": 178
+        },
+        "app/components/Aside.jsx": {
+          "bytesInOutput": 5019
         },
         "node_modules/@shopify/graphql-client/dist/graphql-client/graphql-client.mjs": {
           "bytesInOutput": 5548
@@ -2986,89 +3016,35 @@
         "node_modules/content-security-policy-builder/esm/mod.js": {
           "bytesInOutput": 409
         },
-        "node_modules/@shopify/hydrogen/dist/oxygen/index.js": {
-          "bytesInOutput": 1447
-        },
-        "node_modules/isbot/index.mjs": {
-          "bytesInOutput": 2262
-        },
-        "app/components/ProductPrice.jsx": {
-          "bytesInOutput": 791
-        },
-        "app/lib/judgeme.server.js": {
-          "bytesInOutput": 3385
-        },
-        "app/components/CartMain.jsx": {
-          "bytesInOutput": 14493
+        "node_modules/@shopify/graphql-client/dist/graphql-client/constants.mjs": {
+          "bytesInOutput": 786
         },
         "node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-api-constants.mjs": {
           "bytesInOutput": 31
         },
-        "node_modules/@shopify/hydrogen-react/dist/node-prod/storefront-client.mjs": {
-          "bytesInOutput": 240
-        },
-        "app/lib/session.js": {
-          "bytesInOutput": 305
-        },
-        "server.js": {
-          "bytesInOutput": 456
+        "node_modules/scheduler/cjs/scheduler.production.min.js": {
+          "bytesInOutput": 4012
         },
         "app/root.jsx": {
           "bytesInOutput": 1166
         },
-        "app/entry.server.jsx": {
-          "bytesInOutput": 559
-        },
-        "app/components/CartLineItem.jsx": {
-          "bytesInOutput": 4476
-        },
-        "node_modules/@shopify/hydrogen/dist/production/log-seo-tags-TY72EQWZ.js": {
-          "bytesInOutput": 1322
-        },
-        "node_modules/react-dom/server.browser.js": {
-          "bytesInOutput": 601
-        },
-        "node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs": {
-          "bytesInOutput": 172434
-        },
-        "node_modules/scheduler/cjs/scheduler.production.min.js": {
-          "bytesInOutput": 4012
-        },
         "node_modules/react-dom/cjs/react-dom-server.browser.production.min.js": {
           "bytesInOutput": 35126
-        },
-        "app/lib/context.js": {
-          "bytesInOutput": 315
-        },
-        "app/styles/app.css?url": {
-          "bytesInOutput": 193
-        },
-        "app/components/Aside.jsx": {
-          "bytesInOutput": 5019
-        },
-        "app/components/ProductFooter.jsx": {
-          "bytesInOutput": 9210
-        },
-        "node_modules/react-router-dom/dist/index.js": {
-          "bytesInOutput": 706
         },
         "app/routes/collections.$handle.jsx": {
           "bytesInOutput": 1780
         },
-        "app/lib/variants.js": {
-          "bytesInOutput": 467
+        "node_modules/@shopify/graphql-client/dist/graphql-client/http-fetch.mjs": {
+          "bytesInOutput": 930
         },
-        "node_modules/@shopify/hydrogen-react/dist/node-prod/ShopifyProvider.mjs": {
-          "bytesInOutput": 1834
+        "node_modules/@shopify/hydrogen/node_modules/@shopify/hydrogen-react/dist/node-prod/Image.mjs": {
+          "bytesInOutput": 4594
         },
-        "\u0000virtual:react-router/server-build": {
-          "bytesInOutput": 952
+        "app/entry.server.jsx": {
+          "bytesInOutput": 559
         },
         "node_modules/react-dom/cjs/react-dom-server-legacy.browser.production.min.js": {
           "bytesInOutput": 34761
-        },
-        "\u0000virtual:react-router/server-manifest": {
-          "bytesInOutput": 2996
         },
         "app/lib/utils.js": {
           "bytesInOutput": 43
@@ -3076,26 +3052,50 @@
         "node_modules/react-dom/index.js": {
           "bytesInOutput": 394
         },
-        "app/components/FooterNewsletterForm.jsx": {
-          "bytesInOutput": 1580
+        "node_modules/react-router-dom/dist/index.js": {
+          "bytesInOutput": 706
+        },
+        "app/lib/variants.js": {
+          "bytesInOutput": 467
+        },
+        "app/components/ProductPrice.jsx": {
+          "bytesInOutput": 791
         },
         "node_modules/react-router/dist/development/dom-export.mjs": {
           "bytesInOutput": 17000
         },
-        "app/routes/products.$handle.jsx": {
-          "bytesInOutput": 50587
+        "node_modules/react-router/dist/development/chunk-JZWAC4HX.mjs": {
+          "bytesInOutput": 172434
         },
-        "node_modules/scheduler/index.js": {
-          "bytesInOutput": 178
+        "app/components/CartLineItem.jsx": {
+          "bytesInOutput": 4476
+        },
+        "\u0000virtual:react-router/server-build": {
+          "bytesInOutput": 892
+        },
+        "app/components/CartMain.jsx": {
+          "bytesInOutput": 14493
+        },
+        "\u0000virtual:react-router/server-manifest": {
+          "bytesInOutput": 2036
+        },
+        "app/lib/judgeme.server.js": {
+          "bytesInOutput": 3385
+        },
+        "node_modules/@shopify/hydrogen/dist/production/index.js": {
+          "bytesInOutput": 46897
         },
         "app/routes/_index.jsx": {
           "bytesInOutput": 48706
         },
+        "app/components/ProductFooter.jsx": {
+          "bytesInOutput": 9210
+        },
+        "app/routes/products.$handle.jsx": {
+          "bytesInOutput": 50587
+        },
         "node_modules/react-dom/cjs/react-dom.production.min.js": {
           "bytesInOutput": 130073
-        },
-        "node_modules/@shopify/hydrogen/dist/production/index.js": {
-          "bytesInOutput": 46897
         }
       }
     }
