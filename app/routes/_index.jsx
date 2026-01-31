@@ -5,7 +5,6 @@ import {Image, Money} from '@shopify/hydrogen';
 import {getProductHandle} from '~/lib/utils';
 import {ProductsUnder100} from '~/components/ProductsUnder100';
 import {useAside} from '~/components/Aside';
-import {NavigationMenu} from '~/components/NavigationMenu';
 
 
 
@@ -612,7 +611,6 @@ export default function Homepage() {
           </div>
 
           {/* Main Navigation */}
-          <NavigationMenu rootData={rootData} />
           <div className="bg-[#0A3D2F] text-white py-3 w-full">
             <div className="max-w-7xl mx-auto px-4 text-center">
               <p className="text-sm font-medium tracking-wider">🎄 FREE SHIPPING (USA/UK/CA/AU) • 1-YEAR WARRANTY • EASY RETURNS 🎁</p>
