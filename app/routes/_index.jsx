@@ -492,15 +492,15 @@ export default function Homepage() {
               </div>
                 <div className="bg-white/95 backdrop-blur-sm rounded-lg p-6 text-center shadow-lg">
                   <div className="text-4xl mb-4">⭐</div>
-                  <h3 className="text-[#FB8A38] text-xl font-bold mb-2">REWARDS</h3>
-                  <p className="text-gray-700 text-lg font-mono font-bold mb-2">TEA25</p>
-                  <p className="text-gray-600 text-sm">25% OFF para membros Rewards</p>
+                  <h3 className="text-[#FB8A38] text-xl font-bold mb-2">TEA</h3>
+                  <p className="text-gray-700 text-lg font-mono font-bold mb-2">TEA15</p>
+                  <p className="text-gray-600 text-sm">15% OFF garanta ja o seu</p>
             </div>
                 <div className="bg-white/95 backdrop-blur-sm rounded-lg p-6 text-center shadow-lg">
                   <div className="text-4xl mb-4">🚚</div>
-                  <h3 className="text-[#FBA25C] text-xl font-bold mb-2">FRETE GRÁTIS</h3>
-                  <p className="text-gray-700 text-lg font-mono font-bold mb-2">FRETE150</p>
-                  <p className="text-gray-600 text-sm">Frete grátis para Baixada Santista</p>
+                  <h3 className="text-[#FBA25C] text-xl font-bold mb-2">TDAH AUTISMO</h3>
+                  <p className="text-gray-700 text-lg font-mono font-bold mb-2">TEA20</p>
+                  <p className="text-gray-600 text-sm">Aproveite esse Desconto Imperdivel</p>
                   </div>
                   </div>
               <p className="text-white/90 text-center text-sm">Use os códigos no checkout para aplicar os descontos</p>
