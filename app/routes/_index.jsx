@@ -28,7 +28,7 @@ export const meta = () => {
     {property: 'og:title', content: 'brinqueTEAndo | Brinquedos Educativos e Sensoriais'},
     {property: 'og:description', content: 'Loja especializada em brinquedos para Autismo e TDAH. Desenvolvimento com diversão.'},
     {property: 'og:type', content: 'website'},
-    {property: 'og:url', content: 'https://brinqueteaando.com.br'},
+    {property: 'og:url', content: 'https://brinqueteaando.online'},
     {property: 'og:image', content: 'https://cdn.shopify.com/s/files/1/0778/2921/0327/files/5.avif?v=1765596668'},
     {property: 'og:image:width', content: '1200'},
     {property: 'og:image:height', content: '630'},
@@ -54,7 +54,7 @@ export const meta = () => {
     {name: 'theme-color', content: '#87CEEB'},
     
     // CANONICAL URL
-    {tagName: 'link', rel: 'canonical', href: 'https://brinqueteaando.com.br'},
+    {tagName: 'link', rel: 'canonical', href: 'https://brinqueteaando.online'},
     
     // HREFLANG FOR GEO-TARGETING
     {tagName: 'link', rel: 'alternate', hreflang: 'pt-br', href: 'https://brinqueteaando.com.br'},
@@ -104,7 +104,7 @@ export default function Homepage() {
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "brinqueTEAndo",
-      "url": "https://brinqueteaando.com.br",
+      "url": "https://brinqueteaando.online",
       "logo": "https://cdn.shopify.com/s/files/1/0778/2921/0327/files/5.avif?v=1765596668",
       "description": "Loja especializada em brinquedos sensoriais e educativos para crianças com Autismo e TDAH.",
       "foundingDate": "2024",
@@ -113,7 +113,7 @@ export default function Homepage() {
       ],
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+55-11-99999-9999",
+        "telephone": "+55-13-99189-9708",
         "contactType": "Customer Service",
         "areaServed": ["BR"],
         "availableLanguage": ["Portuguese"]
@@ -122,7 +122,6 @@ export default function Homepage() {
         "https://www.instagram.com/brinqueteaando/",
         "https://www.facebook.com/brinqueteaando",
         "https://www.tiktok.com/@brinqueteaando",
-        "https://www.youtube.com/@brinqueteaando"
       ]
     },
     // WebSite Schema with Search Action
@@ -130,10 +129,10 @@ export default function Homepage() {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "brinqueTEAndo",
-      "url": "https://brinqueteaando.com.br",
+      "url": "https://brinqueteaando.online",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://brinqueteaando.com.br/search?q={search_term_string}",
+        "target": "https://brinqueteaando.online/search?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
     },
@@ -143,7 +142,7 @@ export default function Homepage() {
       "@type": "Store",
       "name": "brinqueTEAndo - Loja Online",
       "image": "https://cdn.shopify.com/s/files/1/0778/2921/0327/files/5.avif?v=1765596668",
-      "url": "https://brinqueteaando.com.br",
+      "url": "https://brinqueteaando.online",
       "priceRange": "R$$-R$$$",
       "currenciesAccepted": "BRL",
       "paymentAccepted": "Cartão de Crédito, PIX, Boleto",
@@ -196,7 +195,7 @@ export default function Homepage() {
           "@type": "ListItem",
           "position": 1,
           "name": "Início",
-          "item": "https://brinqueteaando.com.br"
+          "item": "https://brinqueteaando.online"
         }
       ]
     },
@@ -244,7 +243,7 @@ export default function Homepage() {
       "thumbnailUrl": "https://cdn.shopify.com/s/files/1/0778/2921/0327/files/5.avif?v=1765596668",
       "uploadDate": "2024-01-01",
       "contentUrl": "https://cdn.shopify.com/videos/c/o/v/9788927ebacf4e3ca19449cafd11fc55.mp4",
-      "embedUrl": "https://brinqueteaando.com.br",
+      "embedUrl": "https://brinqueteaando.online",
       "publisher": {
         "@type": "Organization",
         "name": "brinqueTEAndo",
@@ -278,17 +277,21 @@ export default function Homepage() {
     const currentYear = now.getFullYear();
     const holidays = [
       // TEA/Autismo/TDAH Events in Brazil - Main focus
-      {name: 'III Jornada sobre Aprendizagem e Autismo - Baixada Santista', month: 2, day: 29, emoji: '🧩', message: 'III JORNADA AUTISMO BAIXADA SANTISTA - 29/03'}, // March 29
-      {name: 'ExpoTEA 2025 - Maior Feira de Autismo do Mundo', month: 10, day: 28, emoji: '🎪', message: 'EXPOTEA 2025 - MAIOR FEIRA DE AUTISMO DO MUNDO!'}, // November 28
+      {name: 'III Jornada sobre Aprendizagem e Autismo - Baixada Santista', month: 2, day: 29, emoji: '🧩', message: 'III JORNADA AUTISMO BAIXADA SANTISTA - 29/03'}, // March 29, 2026
+      {name: 'ExpoTEA 2025 - Maior Feira de Autismo do Mundo', month: 10, day: 28, emoji: '🎪', message: 'EXPOTEA 2025 - MAIOR FEIRA DE AUTISMO DO MUNDO!'}, // November 28, 2026
       
-      // Additional TDAH/Autism/TEA Events
-      {name: 'Congresso Brasileiro de TDAH', month: 4, day: 15, emoji: '🧠', message: 'CONGRESSO BRASILEIRO TDAH - 15/05'},
-      {name: 'Semana Nacional de Conscientização do Autismo', month: 3, day: 2, emoji: '🌈', message: 'SEMANA AUTISMO BRASIL - 02/04'},
-      {name: 'Dia Mundial do Autismo', month: 3, day: 2, emoji: '💙', message: 'DIA MUNDIAL DO AUTISMO - 02/04'},
-      {name: 'Feira de Tecnologias Assistivas', month: 6, day: 10, emoji: '🤖', message: 'FEIRA TECNOLOGIAS ASSISTIVAS - 10/07'},
-      {name: 'Encontro Nacional de Pais de Autistas', month: 8, day: 25, emoji: '👨‍👩‍👧‍👦', message: 'ENCONTRO PAIS AUTISTAS - 25/09'},
-      {name: 'Workshop Terapias Alternativas TDAH', month: 9, day: 5, emoji: '🧘', message: 'WORKSHOP TERAPIAS TDAH - 05/10'},
-      {name: 'Feira de Brinquedos Terapêuticos', month: 11, day: 12, emoji: '🧸', message: 'FEIRA BRINQUEDOS TERAPÊUTICOS - 12/12'}
+      // Additional TDAH/Autism/TEA Events for 2026
+      {name: 'Congresso Brasileiro de TDAH', month: 4, day: 15, emoji: '🧠', message: 'CONGRESSO BRASILEIRO TDAH - 15/05'}, // May 15, 2026
+      {name: 'Semana Nacional de Conscientização do Autismo', month: 3, day: 2, emoji: '🌈', message: 'SEMANA AUTISMO BRASIL - 02/04'}, // April 2, 2026
+      {name: 'Dia Mundial do Autismo', month: 3, day: 2, emoji: '💙', message: 'DIA MUNDIAL DO AUTISMO - 02/04'}, // April 2, 2026
+      {name: 'Feira de Tecnologias Assistivas', month: 6, day: 10, emoji: '🤖', message: 'FEIRA TECNOLOGIAS ASSISTIVAS - 10/07'}, // July 10, 2026
+      {name: 'Encontro Nacional de Pais de Autistas', month: 8, day: 25, emoji: '👨‍👩‍👧‍👦', message: 'ENCONTRO PAIS AUTISTAS - 25/09'}, // September 25, 2026
+      {name: 'Workshop Terapias Alternativas TDAH', month: 9, day: 5, emoji: '🧘', message: 'WORKSHOP TERAPIAS TDAH - 05/10'}, // October 5, 2026
+      {name: 'Feira de Brinquedos Terapêuticos', month: 11, day: 12, emoji: '🧸', message: 'FEIRA BRINQUEDOS TERAPÊUTICOS - 12/12'}, // December 12, 2026
+      
+      // UPCOMING 2026 EVENTS - Added to ensure countdown works
+      {name: 'Evento Especial TDAH Fevereiro', month: 1, day: 15, emoji: '🎯', message: 'EVENTO ESPECIAL TDAH - 15/02'}, // February 15, 2026 (closest!)
+      {name: 'Workshop Introdução ao Autismo', month: 1, day: 22, emoji: '🎓', message: 'WORKSHOP INTRODUÇÃO AUTISMO - 22/02'} // February 22, 2026
     ];
 
     // 1. Cria objetos de data para todos os feriados
@@ -567,7 +570,6 @@ export default function Homepage() {
                     {name: 'Por Idade', href: '/collections/por-idade'},
                     {name: 'Ambiente & Rotina', href: '/collections/ambiente-rotina'},
                     {name: 'Apoio aos Pais', href: '/collections/apoio-aos-pais'},
-                    {name: 'RECOMPENSAS', href: '/rewards'},
                     {name: 'CONTATO', href: '/pages/contact'}
                   ].map(item => (
                     <Link key={item.name} to={item.href} className="text-[#3A8ECD] text-[10px] xl:text-xs font-semibold tracking-wide hover:text-[#FB8A38] transition-all duration-300 relative group uppercase whitespace-nowrap flex-shrink-0">
@@ -609,7 +611,6 @@ export default function Homepage() {
                     {name: 'Por Idade', href: '/collections/por-idade'},
                     {name: 'Ambiente & Rotina', href: '/collections/ambiente-rotina'},
                     {name: 'Apoio aos Pais', href: '/collections/apoio-aos-pais'},
-                    {name: 'RECOMPENSAS', href: '/rewards'},
                     {name: 'CONTATO', href: '/pages/contact'}
                   ].map(item => (
                     <Link 
