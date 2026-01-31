@@ -57,8 +57,8 @@ export const meta = () => {
     {tagName: 'link', rel: 'canonical', href: 'https://brinqueteaando.online'},
     
     // HREFLANG FOR GEO-TARGETING
-    {tagName: 'link', rel: 'alternate', hreflang: 'pt-br', href: 'https://brinqueteaando.com.br'},
-    {tagName: 'link', rel: 'alternate', hreflang: 'x-default', href: 'https://brinqueteaando.com.br'},
+    {tagName: 'link', rel: 'alternate', hreflang: 'pt-br', href: 'https://brinqueteaando.online'},
+    {tagName: 'link', rel: 'alternate', hreflang: 'x-default', href: 'https://brinqueteaando.online'},
     
     // PRECONNECT & DNS-PREFETCH
     {tagName: 'link', rel: 'preconnect', href: 'https://cdn.shopify.com'},
@@ -242,7 +242,7 @@ export default function Homepage() {
       "description": "Loja especializada em brinquedos educativos e sensoriais para crianças com Autismo (TEA) e TDAH",
       "thumbnailUrl": "https://cdn.shopify.com/s/files/1/0778/2921/0327/files/5.avif?v=1765596668",
       "uploadDate": "2024-01-01",
-      "contentUrl": "https://cdn.shopify.com/videos/c/o/v/9788927ebacf4e3ca19449cafd11fc55.mp4",
+      "contentUrl": "https://cdn.shopify.com/videos/c/o/v/288d4004873043ffb9ba58d24ba5a38c.mp4",
       "embedUrl": "https://brinqueteaando.online",
       "publisher": {
         "@type": "Organization",
