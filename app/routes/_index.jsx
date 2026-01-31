@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
 import {getProductHandle} from '~/lib/utils';
 import {ProductsUnder100} from '~/components/ProductsUnder100';
-import {useAside} from '~/components/Aside';
+import {AsideProvider, Aside, useAside} from '~/components/Aside';
 
 
 
@@ -102,7 +102,7 @@ export async function loader({context}) {
 export default function Homepage() {
   const {collections, products, under100Products, footerMenu} = useLoaderData();
   const rootData = useRouteLoaderData('root');
-  const {open} = useAside();
+  const {open, toggle} = useAside();
   const [currentHero, setCurrentHero] = useState(0);
   const [currentPromo, setCurrentPromo] = useState(0);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
@@ -440,7 +440,7 @@ export default function Homepage() {
   }, []);
 
   return (
-    <>
+    <AsideProvider>
       <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(schemaOrgJSON)}} />
       
       {/* CORREÇÃO DO CSS: Adicionado Keyframes para o Marquee de Natal */}
@@ -618,6 +618,9 @@ export default function Homepage() {
                   BRIQUETEANDO
                 </Link>
                 <div className="flex items-center gap-4">
+                  <button className="lg:hidden" onClick={toggle} aria-label="Abrir menu lateral" style={{color:'#0A3D2F'}}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                  </button>
                   <Link to="/search" className="text-[#0A3D2F] hover:text-[#b87333] transition-colors">
                     <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -657,6 +660,7 @@ export default function Homepage() {
               </div>
             </div>
           </nav>
+          <Aside />
           <div className="bg-[#0A3D2F] text-white py-3 w-full">
             <div className="max-w-7xl mx-auto px-4 text-center">
               <p className="text-sm font-medium tracking-wider">🎄 FREE SHIPPING (USA/UK/CA/AU) • 1-YEAR WARRANTY • EASY RETURNS 🎁</p>
@@ -1000,10 +1004,8 @@ export default function Homepage() {
 
       </main>
 
-    </>
-
+    </AsideProvider>
   );
-
 }
 
 const FEATURED_COLLECTIONS_QUERY = '#graphql' + String.raw`
