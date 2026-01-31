@@ -693,39 +693,25 @@ export default function Homepage() {
             </div>
           </section>
 
-          {/* Gift Budget Cards */}
-          <section className="bg-white py-12 sm:py-20 mb-20 w-full">
+          {/* Brinquedos por Habilidade */}
+          <section className="bg-gradient-to-br from-blue-50 to-orange-50 py-16 sm:py-20 mb-20 w-full">
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
-              <h2 className="text-[#0A3D2F] text-2xl sm:text-3xl md:text-4xl font-light text-center mb-8 sm:mb-12 tracking-wide">Luxury Watch Gifts for Every Budget</h2>
-              <div className="grid grid-cols-2 md:grid-cols-6 gap-4 sm:gap-6">
+              <h2 className="text-[#0A3D2F] text-2xl sm:text-3xl md:text-4xl font-light text-center mb-4 sm:mb-6 tracking-wide">Encontre o Brinquedo Ideal por Habilidade</h2>
+              <p className="text-[#9d8b7c] text-center mb-8 sm:mb-12 text-sm sm:text-base">Desenvolvimento terapêutico através da brincadeira</p>
+              
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
                 {[
-                  {title: '$80', subtitle: 'AND UNDER', url: '/products/vastara-digital-gift-card'},
-                  {title: '$100', subtitle: 'AND UNDER', url: '/products/vastara-digital-gift-card'},
-                  {title: '$200', subtitle: 'AND UNDER', url: '/products/vastara-digital-gift-card'},
-                  {title: '$300', subtitle: 'AND UNDER', url: '/products/vastara-digital-gift-card'},
-                  {title: '$400', subtitle: 'AND UNDER', url: '/products/vastara-digital-gift-card'},
-                  {title: '$500', subtitle: 'AND UNDER', url: '/products/vastara-digital-gift-card'}
+                  {emoji: '🎯', title: 'COORDENAÇÃO', url: '/collections/all?tag=Coordenação+Motora', bgColor: 'bg-[#3A8ECD]'},
+                  {emoji: '🧩', title: 'CONCENTRAÇÃO', url: '/collections/all?tag=Concentração+e+Foco', bgColor: 'bg-[#FB8A38]'},
+                  {emoji: '🤲', title: 'SENSORIAL', url: '/collections/all?tag=Desenvolvimento+Sensorial', bgColor: 'bg-[#FBA25C]'},
+                  {emoji: '🎨', title: 'CRIATIVIDADE', url: '/collections/all?tag=Criatividade', bgColor: 'bg-[#3A8ECD]'},
+                  {emoji: '👥', title: 'SOCIAL', url: '/collections/all?tag=Habilidades+Sociais', bgColor: 'bg-[#FB8A38]'},
+                  {emoji: '💬', title: 'LINGUAGEM', url: '/collections/all?tag=Linguagem+e+Comunicação', bgColor: 'bg-[#FBA25C]'}
                 ].map((item, idx) => (
-                  <Link key={idx} to={item.url} className="group">
-                    <div className="relative bg-gradient-to-br from-[#c41e3a] to-[#8b0000] text-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl text-center transition-all duration-300 hover:scale-110 hover:shadow-2xl" 
-                         style={{
-                           clipPath: 'polygon(15% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0% 85%, 0% 15%)',
-                           boxShadow: '0 8px 25px rgba(139, 0, 0, 0.3)',
-                           height: '110px',
-                           display: 'flex',
-                           alignItems: 'center',
-                           justifyContent: 'center',
-                           flexDirection: 'column'
-                         }}>
-                      <div className="absolute top-3 sm:top-4 left-1/2 -translate-x-1/2 flex gap-2 sm:gap-3 text-xs opacity-70">
-                        <span>✦</span>
-                        <span className="text-base sm:text-lg">✦</span>
-                        <span>✦</span>
-                      </div>
-                      <div className="relative z-10 pt-3 sm:pt-4 flex-grow flex flex-col justify-center">
-                        <h3 className="text-base sm:text-lg font-semibold mb-1 leading-tight">{item.title}</h3>
-                        <p className="text-[#D4AF69] text-xs tracking-widest uppercase font-bold">{item.subtitle}</p>
-                      </div>
+                  <Link key={idx} to={item.url} className="group" aria-label={`Encontrar brinquedos para ${item.title}`}>
+                    <div className={`${item.bgColor} text-white p-8 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl flex flex-col items-center justify-center h-full text-center`}>
+                      <div className="text-4xl sm:text-5xl mb-3">{item.emoji}</div>
+                      <h3 className="text-base sm:text-lg font-bold leading-tight">{item.title}</h3>
                     </div>
                   </Link>
                 ))}
