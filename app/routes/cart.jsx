@@ -69,7 +69,7 @@ export async function action({request, context}) {
         warnings,
         analytics: {cartId},
       },
-      {status: headers},
+      {headers},
     );
 
   } catch (error) {
