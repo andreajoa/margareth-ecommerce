@@ -3,6 +3,7 @@ import {useLoaderData, Link} from 'react-router';
 import {useState, useEffect} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
 import {useAside} from '~/components/Aside'; // Adicionado para abrir carrinho
+import {useCountdown} from '~/lib/useCountdown'; // ✅ FIX: Importar hook otimizado
 
 export const meta = () => {
   return [
@@ -100,8 +101,10 @@ export default function Homepage() {
   const [currentPromo, setCurrentPromo] = useState(0);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [quickViewProduct, setQuickViewProduct] = useState(null);
-  const [timeLeft, setTimeLeft] = useState({days: 0, hours: 0, minutes: 0, seconds: 0});
-  const [currentHoliday, setCurrentHoliday] = useState({name: 'Holiday', emoji: '🎉', message: 'COUNTDOWN'});
+
+  // ✅ FIX: Usar hook useCountdown otimizado com requestAnimationFrame
+  const {timeLeft, isMounted} = useCountdown();
+
   const {open} = useAside(); // Hook para abrir o carrinho
 
   // Ahrefs Analytics Script
@@ -149,54 +152,7 @@ export default function Homepage() {
     {name: "Emily K.", text: "Produtos maravilhosos, meu sobrinho não larga o pop-it.", rating: 5, image: "https://cdn.shopify.com/s/files/1/0778/2921/0327/files/3.jpg?v=1765938975"}
   ];
 
-  const calculateHolidayCountdown = () => {
-    if (typeof window === "undefined") return {days: 0, hours: 0, minutes: 0, seconds: 0};
-    if (typeof Date === "undefined") return {days: 0, hours: 0, minutes: 0, seconds: 0};
-    const now = new Date();
-    const currentYear = now.getFullYear();
-    const holidays = [
-      {name: 'III Jornada sobre Aprendizagem e Autismo - Baixada Santista', month: 2, day: 29, emoji: '🧩', message: 'III JORNADA AUTISMO BAIXADA SANTISTA - 29/03'},
-      {name: 'ExpoTEA 2025 - Maior Feira de Autismo do Mundo', month: 10, day: 28, emoji: '🎪', message: 'EXPOTEA 2025 - MAIOR FEIRA DE AUTISMO DO MUNDO!'},
-      {name: 'Dia Mundial do Autismo', month: 3, day: 2, emoji: '💙', message: 'DIA MUNDIAL DO AUTISMO - 02/04'},
-    ];
-
-    const upcomingHolidays = holidays.map(holiday => {
-      let holidayDate = new Date(currentYear, holiday.month, holiday.day, 23, 59, 59);
-      if (holidayDate.getTime() < now.getTime()) {
-        holidayDate = new Date(currentYear + 1, holiday.month, holiday.day, 23, 59, 59);
-      }
-      return { ...holiday, date: holidayDate };
-    });
-
-    upcomingHolidays.sort((a, b) => a.date - b.date);
-    const nextHoliday = upcomingHolidays[0];
-    
-    if (!nextHoliday) return {days: 0, hours: 0, minutes: 0, seconds: 0};
-
-    const difference = nextHoliday.date.getTime() - now.getTime();
-    if (difference > 0) {
-      setCurrentHoliday({
-        name: nextHoliday.name,
-        emoji: nextHoliday.emoji,
-        message: nextHoliday.message
-      });
-      return {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60)
-      };
-    }
-    return {days: 0, hours: 0, minutes: 0, seconds: 0};
-  };
-
-  useEffect(() => {
-    setTimeLeft(calculateHolidayCountdown());
-    const countdownInterval = setInterval(() => {
-      setTimeLeft(calculateHolidayCountdown());
-    }, 1000);
-    return () => clearInterval(countdownInterval);
-  }, []);
+  // ✅ FIX: Removido calculateHolidayCountdown - usando hook useCountdown agora
 
   useEffect(() => {
     const promoTimer = setInterval(() => setCurrentPromo((p) => (p + 1) % promoMessages.length), 4000);
@@ -284,7 +240,7 @@ export default function Homepage() {
           <div className="bg-[#3A8ECD] text-white py-3 text-center w-full">
             <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-4 flex-wrap">
               <span className="text-sm md:text-base font-bold tracking-wide">
-                {currentHoliday?.emoji} {currentHoliday?.message} {currentHoliday?.emoji}
+                {timeLeft.holiday?.emoji} {timeLeft.holiday?.message} {timeLeft.holiday?.emoji}
               </span>
               <div className="flex items-center gap-2 border-2 border-white px-4 py-1 bg-white/20">
                 <span className="text-2xl font-bold">{String(timeLeft.days).padStart(2, '0')}</span><span className="text-xs">D</span>

@@ -2,6 +2,7 @@ import {useLoaderData, Link, useFetcher, data} from 'react-router';
 import {useState, useEffect} from 'react';
 import {Image, Money, getPaginationVariables, Pagination} from '@shopify/hydrogen';
 import {useAside} from '~/components/Aside';
+import {useCountdown} from '~/lib/useCountdown'; // ✅ FIX: Importar hook otimizado
 
 export async function loader({context, request}) {
   const {storefront, cart} = context;
@@ -31,10 +32,10 @@ export default function CollectionAll() {
   const isNewsletterSuccess = newsletterFetcher.data?.status === 'success';
   const newsletterMessage = newsletterFetcher.data?.message || newsletterFetcher.data?.error;
 
-  const [timeLeft, setTimeLeft] = useState({days: 0, hours: 0, minutes: 0, seconds: 0});
-  const [currentHoliday, setCurrentHoliday] = useState({name: 'Evento', emoji: '🎉', message: 'COUNTDOWN'});
+  // ✅ FIX: Usar hook useCountdown otimizado com requestAnimationFrame
+  const {timeLeft, isMounted} = useCountdown();
+
   const [currentPromo, setCurrentPromo] = useState(0);
-  const [isMounted, setIsMounted] = useState(false);
 
   const promoMessages = [
     "🚚 Frete grátis para toda Baixada Santista!",
@@ -45,55 +46,7 @@ export default function CollectionAll() {
     "🎅 Use o código BEMVINDO10 e ganhe 10% OFF"
   ];
 
-  const calculateHolidayCountdown = () => {
-    if (typeof window === "undefined") return {days: 0, hours: 0, minutes: 0, seconds: 0};
-    if (typeof Date === "undefined") return {days: 0, hours: 0, minutes: 0, seconds: 0};
-    const now = new Date();
-    const currentYear = now.getFullYear();
-    const holidays = [
-      {name: 'III Jornada sobre Aprendizagem e Autismo - Baixada Santista', month: 2, day: 29, emoji: '🧩', message: 'III JORNADA AUTISMO BAIXADA SANTISTA - 29/03'},
-      {name: 'ExpoTEA 2025 - Maior Feira de Autismo do Mundo', month: 10, day: 28, emoji: '🎪', message: 'EXPOTEA 2025 - MAIOR FEIRA DE AUTISMO DO MUNDO!'},
-      {name: 'Dia Mundial do Autismo', month: 3, day: 2, emoji: '💙', message: 'DIA MUNDIAL DO AUTISMO - 02/04'},
-    ];
-
-    const upcomingHolidays = holidays.map(holiday => {
-      let holidayDate = new Date(currentYear, holiday.month, holiday.day, 23, 59, 59);
-      if (holidayDate.getTime() < now.getTime()) {
-        holidayDate = new Date(currentYear + 1, holiday.month, holiday.day, 23, 59, 59);
-      }
-      return { ...holiday, date: holidayDate };
-    });
-
-    upcomingHolidays.sort((a, b) => a.date - b.date);
-    const nextHoliday = upcomingHolidays[0];
-
-    if (!nextHoliday) return {days: 0, hours: 0, minutes: 0, seconds: 0};
-
-    const difference = nextHoliday.date.getTime() - now.getTime();
-    if (difference > 0) {
-      setCurrentHoliday({
-        name: nextHoliday.name,
-        emoji: nextHoliday.emoji,
-        message: nextHoliday.message
-      });
-      return {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60)
-      };
-    }
-    return {days: 0, hours: 0, minutes: 0, seconds: 0};
-  };
-
-  useEffect(() => {
-    setIsMounted(true);
-    setTimeLeft(calculateHolidayCountdown());
-    const countdownInterval = setInterval(() => {
-      setTimeLeft(calculateHolidayCountdown());
-    }, 1000);
-    return () => clearInterval(countdownInterval);
-  }, []);
+  // ✅ FIX: Removido calculateHolidayCountdown - usando hook useCountdown agora
 
   useEffect(() => {
     const promoTimer = setInterval(() => setCurrentPromo((p) => (p + 1) % promoMessages.length), 4000);
@@ -120,7 +73,7 @@ export default function CollectionAll() {
       <div className="bg-[#3A8ECD] text-white py-3 text-center w-full relative z-50">
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-4 flex-wrap">
           <span className="text-sm md:text-base font-bold tracking-wide">
-            {currentHoliday?.emoji} {currentHoliday?.message} {currentHoliday?.emoji}
+            {timeLeft.holiday?.emoji} {timeLeft.holiday?.message} {timeLeft.holiday?.emoji}
           </span>
           {isMounted ? (
             <div className="flex items-center gap-2 border-2 border-white px-4 py-1 bg-white/20">
