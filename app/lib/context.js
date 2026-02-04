@@ -17,6 +17,7 @@ export async function createHydrogenRouterContext(
     AppSession.init(request, [env.SESSION_SECRET]),
   ]);
 
+  // Criar contexto Hydrogen básico
   const hydrogenContext = createHydrogenContext({
     env,
     request,
@@ -26,9 +27,12 @@ export async function createHydrogenRouterContext(
   });
 
   // ✅ FIX: Customizar cart handler com fragment completo que inclui lines
+  // getCartId deve ser uma função que retorna o cartId do cookie/session
+  const getCartId = () => session.get('cartId');
+
   const cart = createCartHandler({
     storefront: hydrogenContext.storefront,
-    getCartId: hydrogenContext.session.get,
+    getCartId,
     cartFragment: CART_FRAGMENT,
   });
 
