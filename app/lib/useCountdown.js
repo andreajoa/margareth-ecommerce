@@ -3,18 +3,48 @@ import {useState, useEffect, useRef} from 'react';
 /**
  * Hook cross-browser para countdown com correção de timezone
  * ✅ Funciona em: Chrome, Safari, Firefox, Edge, Mobile browsers
+ * ✅ Suporta SSR (Server-Side Rendering)
  */
 export function useCountdown() {
-  const [timeLeft, setTimeLeft] = useState({days: 0, hours: 0, minutes: 0, seconds: 0});
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+    holiday: {
+      name: 'III Jornada sobre Aprendizagem e Autismo - Baixada Santista',
+      month: 2,
+      day: 29,
+      emoji: '🧩',
+      message: 'III JORNADA AUTISMO BAIXADA SANTISTA - 29/03'
+    }
+  });
   const [isMounted, setIsMounted] = useState(false);
   const rafRef = useRef(null);
   const lastUpdateRef = useRef(0);
 
-  // ✅ FIX: Corrigir meses (JavaScript usa 0-11)
+  // ✅ FIX: Corrigir meses (JavaScript usa 0-11) e suporte SSR
   const calculateHolidayCountdown = () => {
+    if (typeof window === "undefined") {
+      // SSR fallback
+      return {
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+        holiday: {
+          name: 'III Jornada sobre Aprendizagem e Autismo - Baixada Santista',
+          month: 2,
+          day: 29,
+          emoji: '🧩',
+          message: 'III JORNADA AUTISMO BAIXADA SANTISTA - 29/03'
+        }
+      };
+    }
+
     const now = new Date();
     const currentYear = now.getFullYear();
-    
+
     const holidays = [
       {name: 'III Jornada sobre Aprendizagem e Autismo - Baixada Santista', month: 2, day: 29, emoji: '🧩', message: 'III JORNADA AUTISMO BAIXADA SANTISTA - 29/03'},
       {name: 'Dia Mundial do Autismo', month: 3, day: 2, emoji: '💙', message: 'DIA MUNDIAL DO AUTISMO - 02/04'},
@@ -24,11 +54,11 @@ export function useCountdown() {
     const upcomingHolidays = holidays.map(holiday => {
       // ✅ FIX: Usar mês correto (JS months: 0=Jan, 1=Fev, 2=Mar...)
       let holidayDate = new Date(currentYear, holiday.month, holiday.day, 23, 59, 59);
-      
+
       if (holidayDate.getTime() < now.getTime()) {
         holidayDate = new Date(currentYear + 1, holiday.month, holiday.day, 23, 59, 59);
       }
-      
+
       return { ...holiday, date: holidayDate };
     });
 
@@ -61,13 +91,13 @@ export function useCountdown() {
     // ✅ FIX CROSS-BROWSER: Usar requestAnimationFrame para performance
     const tick = () => {
       const now = performance.now();
-      
+
       // Atualizar apenas a cada 1 segundo
       if (now - lastUpdateRef.current >= 1000) {
         setTimeLeft(calculateHolidayCountdown());
         lastUpdateRef.current = now;
       }
-      
+
       rafRef.current = requestAnimationFrame(tick);
     };
 

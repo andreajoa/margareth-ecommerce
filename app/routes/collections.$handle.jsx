@@ -8,29 +8,75 @@ import {
 import {useState, useEffect} from 'react';
 import {useAside} from '~/components/Aside';
 import {useCountdown} from '~/lib/useCountdown'; // ✅ FIX: Importar hook otimizado
+import {AddToCartButton} from '~/components/AddToCartButton';
 
 // --- COMPONENTES AUXILIARES ---
 
 // 1. Componente Modal Quick View
 function QuickViewModal({ product, onClose }) {
+  const {open} = useAside();
+
+  // ✅ FIX: Bloquear scroll do body quando modal aberto
+  useEffect(() => {
+    if (product) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+    };
+  }, [product]);
+
+  // ✅ FIX: ESC key para fechar
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape' && product) {
+        onClose();
+      }
+    };
+
+    if (product) {
+      document.addEventListener('keydown', handleEscape);
+    }
+
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [product, onClose]);
+
   if (!product) return null;
 
+  const variantId = product.variants?.edges?.[0]?.node?.id;
+  const availableForSale = product.variants?.edges?.[0]?.node?.availableForSale ?? true;
+
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-      <div 
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" 
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="quick-view-title"
+    >
+      <div
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
         onClick={onClose}
       ></div>
 
-      <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden flex flex-col md:flex-row animate-fade-up">
-        <button 
+      <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden flex flex-col md:flex-row animate-fade-up max-h-[90vh] md:max-h-[80vh] overflow-y-auto">
+        <button
           onClick={onClose}
           className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full text-gray-500 hover:bg-[#FB8A38] hover:text-white transition-colors"
+          aria-label="Fechar"
         >
           ✕
         </button>
 
-        <div className="w-full md:w-1/2 bg-[#f4f4f4] relative">
+        <div className="w-full md:w-1/2 bg-[#f4f4f4] relative flex-shrink-0">
           {product.featuredImage && (
             <Image
               data={product.featuredImage}
@@ -43,9 +89,9 @@ function QuickViewModal({ product, onClose }) {
           </div>
         </div>
 
-        <div className="w-full md:w-1/2 p-8 flex flex-col justify-between">
+        <div className="w-full md:w-1/2 p-8 flex flex-col justify-between flex-grow">
           <div>
-            <h2 className="text-2xl font-black text-[#3A8ECD] mb-2">{product.title}</h2>
+            <h2 id="quick-view-title" className="text-2xl font-black text-[#3A8ECD] mb-2">{product.title}</h2>
             <div className="text-xl font-bold text-[#FB8A38] mb-4">
               <Money data={product.priceRange.minVariantPrice} />
             </div>
@@ -59,12 +105,26 @@ function QuickViewModal({ product, onClose }) {
                <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold">⚡ Envio Imediato</span>
             </div>
           </div>
-          <Link
-            to={`/products/${product.handle}`}
-            className="w-full block text-center bg-[#3A8ECD] text-white py-3 rounded-lg font-bold hover:bg-[#2c7bb5] hover:shadow-lg transition-all transform hover:-translate-y-1"
-          >
-            VER DETALHES COMPLETOS →
-          </Link>
+
+          {/* ✅ FIX: Adicionar botão de Adicionar ao Carrinho */}
+          <div className="flex flex-col gap-3">
+            {variantId && (
+              <AddToCartButton
+                lines={[{merchandiseId: variantId, quantity: 1}]}
+                disabled={!availableForSale}
+                className="w-full bg-[#3A8ECD] text-white py-3 rounded-lg font-bold hover:bg-[#2c7bb5] transition-colors"
+              >
+                🛒 Adicionar ao Carrinho
+              </AddToCartButton>
+            )}
+            <Link
+              to={`/products/${product.handle}`}
+              onClick={onClose}
+              className="w-full block text-center border-2 border-[#3A8ECD] text-[#3A8ECD] py-3 rounded-lg font-bold hover:bg-[#3A8ECD] hover:text-white transition-colors"
+            >
+              Ver Detalhes Completos →
+            </Link>
+          </div>
         </div>
       </div>
     </div>
@@ -73,6 +133,11 @@ function QuickViewModal({ product, onClose }) {
 
 // 2. Componente Card de Produto
 function ProductCard({product, onQuickView}) {
+  const {open} = useAside();
+
+  const variantId = product.variants?.edges?.[0]?.node?.id;
+  const availableForSale = product.variants?.edges?.[0]?.node?.availableForSale ?? true;
+
   return (
     <div className="group bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-xl hover:border-[#3A8ECD]/30 transition-all duration-300 flex flex-col">
       <div className="relative aspect-square overflow-hidden rounded-t-xl bg-gray-100">
@@ -84,10 +149,10 @@ function ProductCard({product, onQuickView}) {
             className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"
           />
         )}
-        <div 
+        <div
           className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center cursor-pointer"
           onClick={(e) => {
-            e.preventDefault(); 
+            e.preventDefault();
             onQuickView(product);
           }}
         >
@@ -107,16 +172,28 @@ function ProductCard({product, onQuickView}) {
             {product.title}
           </Link>
         </h3>
-        <div className="mt-auto pt-2 flex items-center justify-between">
+        <div className="mt-auto pt-2 flex items-center justify-between gap-2">
           <span className="text-gray-900 font-bold text-lg">
             <Money data={product.priceRange.minVariantPrice} />
           </span>
-          <Link 
-             to={`/products/${product.handle}`}
-             className="w-8 h-8 rounded-full bg-[#FB8A38] text-white flex items-center justify-center hover:bg-[#e07b30] transition-colors"
-          >
-            +
-          </Link>
+          <div className="flex items-center gap-2">
+            {/* ✅ FIX: Botão de adicionar ao carrinho */}
+            {variantId && (
+              <AddToCartButton
+                lines={[{merchandiseId: variantId, quantity: 1}]}
+                disabled={!availableForSale}
+                className="w-8 h-8 rounded-full bg-[#3A8ECD] text-white flex items-center justify-center hover:bg-[#2c7bb5] transition-colors p-0 disabled:opacity-50"
+              >
+                +
+              </AddToCartButton>
+            )}
+            <Link
+               to={`/products/${product.handle}`}
+               className="w-8 h-8 rounded-full bg-[#FB8A38] text-white flex items-center justify-center hover:bg-[#e07b30] transition-colors text-sm"
+            >
+              →
+            </Link>
+          </div>
         </div>
       </div>
     </div>
@@ -509,6 +586,8 @@ const COLLECTION_QUERY = `#graphql
     }
     variants(first: 1) {
       nodes {
+        id
+        availableForSale
         selectedOptions {
           name
           value
