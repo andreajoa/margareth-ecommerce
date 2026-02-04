@@ -1,6 +1,0 @@
-✅ CORREÇÕES APLICADAS COM SUCESSO!
-
-1. AddToCartButton.jsx - CORRIGIDO
-2. QuickView.jsx - CORRIGIDO
-3. useCountdown.js - CRIADO
-4. Aside.jsx - ATUALIZADO
