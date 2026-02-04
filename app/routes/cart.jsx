@@ -14,7 +14,7 @@ export async function action({request, context}) {
   const {action, inputs} = CartForm.getFormInput(formData);
 
   console.log('🛒 CART ACTION - Action:', action);
-  console.log('🛒 CART ACTION - Inputs:', inputs);
+  console.log('🛒 CART ACTION - Inputs:', JSON.stringify(inputs, null, 2));
 
   if (!action) {
     console.error('❌ No cart action defined');
@@ -28,7 +28,7 @@ export async function action({request, context}) {
       case CartForm.ACTIONS.LinesAdd:
         console.log('➕ Adding lines:', inputs.lines);
         result = await cart.addLines(inputs.lines);
-        console.log('✅ Lines added! Result:', result);
+        console.log('✅ Lines added! Result:', JSON.stringify(result, null, 2));
         break;
       case CartForm.ACTIONS.LinesUpdate:
         result = await cart.updateLines(inputs.lines);
@@ -58,9 +58,16 @@ export async function action({request, context}) {
     headers.set('Pragma', 'no-cache');
     headers.set('Expires', '0');
 
-    console.log('🎉 Cart action completada! Cart:', result.cart);
+    const cartResult = result?.cart;
 
-    const {cart: cartResult, errors, warnings} = result;
+    // ✅ DEBUG: Mostrar estrutura completa do cart retornado
+    console.log('🎉 Cart action completada!');
+    console.log('🎉 cartResult:', JSON.stringify(cartResult, null, 2));
+    console.log('🎉 cartResult CHAVES:', cartResult ? Object.keys(cartResult) : 'null');
+    console.log('🎉 cartResult.lines:', cartResult?.lines);
+    console.log('🎉 cartResult.merchandiseLines:', cartResult?.merchandiseLines);
+
+    const {errors, warnings} = result;
 
     return data(
       {
@@ -80,5 +87,7 @@ export async function action({request, context}) {
 
 export async function loader({context}) {
   const {cart} = context;
-  return await cart.get();
+  const cartData = await cart.get();
+  console.log('🛒 CART LOADER - cartData:', JSON.stringify(cartData, null, 2));
+  return cartData;
 }

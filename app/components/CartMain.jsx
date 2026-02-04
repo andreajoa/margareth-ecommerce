@@ -4,11 +4,14 @@ import {CartSummary} from '~/components/CartSummary';
 import {Link} from 'react-router';
 
 export function CartMain({cart, layout}) {
-  // Debug: mostra estrutura do cart
+  // Debug: mostra estrutura COMPLETA do cart
   if (typeof window !== 'undefined' && cart) {
     console.log('🛒 CartMain recebeu:', cart);
+    console.log('🛒 Cart CHAVES:', Object.keys(cart));
     console.log('🛒 Cart.lines:', cart.lines);
-    console.log('🛒 Cart.lines.nodes:', cart.lines?.nodes);
+    console.log('🛒 Cart.merchandiseLines:', cart.merchandiseLines);
+    console.log('🛒 Cart.lines?.nodes:', cart.lines?.nodes);
+    console.log('🛒 JSON:', JSON.stringify(cart, null, 2));
   }
 
   // SEGURANÇA TOTAL: Se cart for nulo/undefined, usa um objeto vazio seguro
@@ -28,8 +31,13 @@ export function CartMain({cart, layout}) {
 
   // Extrai as linhas de forma segura. Suporta diferentes estruturas:
   // - Hydrogen: lines.nodes
+  // - Hydrogen novo: merchandiseLines
   // - Resposta direta: lines (array)
-  const lines = safeCart.lines?.nodes || (Array.isArray(safeCart.lines) ? safeCart.lines : []);
+  const lines = safeCart.merchandiseLines?.edges?.map(e => e.node)
+    || safeCart.lines?.nodes
+    || (Array.isArray(safeCart.lines) ? safeCart.lines : [])
+    || (Array.isArray(safeCart.merchandiseLines) ? safeCart.merchandiseLines : []);
+
   const hasItems = lines.length > 0;
 
   console.log('🛒 Linhas extraídas:', lines, 'Has items:', hasItems);
@@ -51,9 +59,9 @@ export function CartMain({cart, layout}) {
 
           {/* CHECKOUT E RESUMO */}
           <div style={{
-            flexShrink: 0, 
-            borderTop: '4px solid #D4AF69', 
-            background: '#E9E2D2', 
+            flexShrink: 0,
+            borderTop: '4px solid #D4AF69',
+            background: '#E9E2D2',
             padding: '1.5rem',
             boxShadow: '0 -4px 20px rgba(0,0,0,0.1)'
           }}>
@@ -69,12 +77,12 @@ function CartEmpty() {
   const {close} = useAside();
   return (
     <div style={{
-      height: '100%', 
-      display: 'flex', 
-      flexDirection: 'column', 
-      alignItems: 'center', 
-      justifyContent: 'center', 
-      padding: '2rem', 
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '2rem',
       textAlign: 'center'
     }}>
       <div style={{fontSize: '4rem', marginBottom: '1rem'}}>🛒</div>
@@ -84,15 +92,15 @@ function CartEmpty() {
       <p style={{color: '#6b7280', marginBottom: '2rem'}}>
         Nenhum produto adicionado ainda.
       </p>
-      <Link 
-        to="/collections/all" 
+      <Link
+        to="/collections/all"
         onClick={close}
         style={{
-          background: '#0A3D2F', 
-          color: 'white', 
-          padding: '0.8rem 2rem', 
-          borderRadius: '50px', 
-          textDecoration: 'none', 
+          background: '#0A3D2F',
+          color: 'white',
+          padding: '0.8rem 2rem',
+          borderRadius: '50px',
+          textDecoration: 'none',
           fontWeight: 'bold',
           transition: 'all 0.3s'
         }}
