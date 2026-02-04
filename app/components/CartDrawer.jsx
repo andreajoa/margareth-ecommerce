@@ -11,9 +11,17 @@ export function CartDrawer({cart, close}) {
         </div>
       }>
         <Await resolve={cart} errorElement={<div className="p-10 text-red-500">Erro ao carregar</div>}>
-          {(resolvedCart) => (
-            <CartMain cart={resolvedCart} layout="aside" close={close} />
-          )}
+          {(resolvedCart) => {
+            // Se resolvedCart for null, busca dados atualizados
+            if (!resolvedCart || !resolvedCart.lines) {
+              return (
+                <div className="flex-1 flex items-center justify-center p-10 text-[#0A3D2F]">
+                  <p>Buscando carrinho...</p>
+                </div>
+              );
+            }
+            return <CartMain cart={resolvedCart} layout="aside" close={close} />;
+          }}
         </Await>
       </Suspense>
     </div>

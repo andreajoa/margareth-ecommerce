@@ -29,7 +29,8 @@ export function AddToCartButton({
         if (hasAdded && typeof window !== 'undefined') {
           console.log('✅ Produto adicionado! Abrindo carrinho...');
           setTimeout(() => {
-            open('cart');
+            // Passa os dados atualizados do carrinho para o drawer
+            open('cart', data.cart);
             // Force reload do cart no root
             if (window.__revalidateRoot) window.__revalidateRoot();
           }, 100);
