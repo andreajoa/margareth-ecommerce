@@ -4,6 +4,13 @@ import {CartSummary} from '~/components/CartSummary';
 import {Link} from 'react-router';
 
 export function CartMain({cart, layout}) {
+  // Debug: mostra estrutura do cart
+  if (typeof window !== 'undefined' && cart) {
+    console.log('🛒 CartMain recebeu:', cart);
+    console.log('🛒 Cart.lines:', cart.lines);
+    console.log('🛒 Cart.lines.nodes:', cart.lines?.nodes);
+  }
+
   // SEGURANÇA TOTAL: Se cart for nulo/undefined, usa um objeto vazio seguro
   // Isso evita qualquer erro de "cannot read property of undefined"
   const safeCart = cart || {
@@ -19,9 +26,13 @@ export function CartMain({cart, layout}) {
     discountCodes: [],
   };
 
-  // Extrai as linhas de forma segura. Se nodes não existir, usa array vazio.
-  const lines = safeCart.lines?.nodes || [];
+  // Extrai as linhas de forma segura. Suporta diferentes estruturas:
+  // - Hydrogen: lines.nodes
+  // - Resposta direta: lines (array)
+  const lines = safeCart.lines?.nodes || (Array.isArray(safeCart.lines) ? safeCart.lines : []);
   const hasItems = lines.length > 0;
+
+  console.log('🛒 Linhas extraídas:', lines, 'Has items:', hasItems);
 
   return (
     <div style={{height: '100%', display: 'flex', flexDirection: 'column', background: '#FEFDF8'}}>
