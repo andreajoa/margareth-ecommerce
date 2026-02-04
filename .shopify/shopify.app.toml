@@ -1,0 +1,11 @@
+name = "BrinqueTEAndo"
+type = "headless"
+
+[paths]
+subpath = ""
+
+[build]
+automerge = true
+
+[access.scopes]
+scopes = "unauthenticated_read_product_listings,unauthenticated_read_product_inventory"
