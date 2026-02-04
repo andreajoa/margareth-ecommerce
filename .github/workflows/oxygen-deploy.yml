@@ -5,6 +5,11 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      force_deploy:
+        description: 'Forçar deploy imediato'
+        required: false
+        default: 'true'
 
 jobs:
   build:
