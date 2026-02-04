@@ -9,38 +9,40 @@ export function CartMain({cart, layout}) {
     console.log('🛒 CartMain recebeu:', cart);
     console.log('🛒 Cart CHAVES:', Object.keys(cart));
     console.log('🛒 Cart.lines:', cart.lines);
-    console.log('🛒 Cart.merchandiseLines:', cart.merchandiseLines);
-    console.log('🛒 Cart.lines?.nodes:', cart.lines?.nodes);
+    console.log('🛒 Cart.lines é array?', Array.isArray(cart.lines));
     console.log('🛒 JSON:', JSON.stringify(cart, null, 2));
   }
 
-  // SEGURANÇA TOTAL: Se cart for nulo/undefined, usa um objeto vazio seguro
-  // Isso evita qualquer erro de "cannot read property of undefined"
+  // ✅ FIX: A estrutura correta do cart no Hydrogen é:
+  // - lines: Array<CartLine> (DIRETO, não .nodes!)
+  // - totalQuantity: number
+  // - cost: { subtotalAmount, totalAmount, ... }
+  // - checkoutUrl: string
+
+  // SEGURANÇA: Se cart for nulo/undefined, usa um objeto vazio seguro
   const safeCart = cart || {
     id: 'empty-cart',
-    lines: { nodes: [] },
+    lines: [],
+    totalQuantity: 0,
     cost: {
       subtotalAmount: { amount: '0', currencyCode: 'BRL' },
       totalAmount: { amount: '0', currencyCode: 'BRL' }
     },
     checkoutUrl: '',
-    totalQuantity: 0,
     note: '',
     discountCodes: [],
   };
 
-  // Extrai as linhas de forma segura. Suporta diferentes estruturas:
-  // - Hydrogen: lines.nodes
-  // - Hydrogen novo: merchandiseLines
-  // - Resposta direta: lines (array)
-  const lines = safeCart.merchandiseLines?.edges?.map(e => e.node)
-    || safeCart.lines?.nodes
-    || (Array.isArray(safeCart.lines) ? safeCart.lines : [])
-    || (Array.isArray(safeCart.merchandiseLines) ? safeCart.merchandiseLines : []);
+  // ✅ FIX CORRIGIDO: Extrai linhas diretamente de lines (array)
+  // O Hydrogen retorna lines como Array<CartLine>, não como {nodes: [...]}
+  const lines = Array.isArray(safeCart.lines) ? safeCart.lines : [];
 
-  const hasItems = lines.length > 0;
+  // Fallback: tenta merchandiseLines se lines estiver vazio
+  const finalLines = lines.length > 0 ? lines : (safeCart.merchandiseLines || []);
 
-  console.log('🛒 Linhas extraídas:', lines, 'Has items:', hasItems);
+  const hasItems = finalLines.length > 0;
+
+  console.log('🛒 Linhas extraídas:', finalLines, 'Has items:', hasItems);
 
   return (
     <div style={{height: '100%', display: 'flex', flexDirection: 'column', background: '#FEFDF8'}}>
@@ -51,7 +53,7 @@ export function CartMain({cart, layout}) {
           {/* LISTA DE PRODUTOS */}
           <div style={{flex: 1, overflowY: 'auto', padding: '0 1rem'}}>
             <ul style={{listStyle: 'none', padding: 0, margin: '1rem 0'}}>
-              {lines.map((line) => (
+              {finalLines.map((line) => (
                 <CartLineItem key={line.id} line={line} />
               ))}
             </ul>
