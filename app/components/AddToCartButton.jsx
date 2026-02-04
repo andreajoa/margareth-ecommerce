@@ -1,8 +1,11 @@
 import {CartForm} from '@shopify/hydrogen';
 import {useAside} from '~/components/Aside';
-import {useRevalidator} from 'react-router';
 import {useEffect, useRef} from 'react';
 
+/**
+ * Botão de Adicionar ao Carrinho
+ * Usa CartForm do Hydrogen para compatibilidade total
+ */
 export function AddToCartButton({
   analytics,
   children,
@@ -12,7 +15,6 @@ export function AddToCartButton({
   className,
 }) {
   const {open, setCartData} = useAside();
-  const revalidator = useRevalidator();
   const hasAddedRef = useRef(false);
 
   return (
@@ -20,37 +22,45 @@ export function AddToCartButton({
       {(fetcher) => {
         const isAdding = fetcher.state === 'submitting';
         const data = fetcher.data;
-        const hasAdded = data?.cart && fetcher.state === 'idle';
+        const hasAdded = data?.cart && fetcher.state === 'idle' && data?.cart?.totalQuantity > 0;
 
-        // ✅ FIX CROSS-BROWSER: Usar useEffect para garantir execução
+        // ✅ FIX: Atualizar carrinho quando adicionado com sucesso
         useEffect(() => {
           if (hasAdded && !hasAddedRef.current) {
             hasAddedRef.current = true;
-            
+
+            console.log('✅ Produto adicionado ao carrinho!', data.cart);
+
             // Atualiza cache do cart IMEDIATAMENTE
             if (data.cart) {
               setCartData(data.cart);
             }
-            
-            // Usa requestAnimationFrame para compatibilidade cross-browser
-            requestAnimationFrame(() => {
-              revalidator.revalidate();
+
+            // Abrir carrinho após curto delay
+            setTimeout(() => {
               open('cart', data.cart);
-            });
+            }, 300);
 
             // Reset flag após 2 segundos
             setTimeout(() => {
               hasAddedRef.current = false;
             }, 2000);
           }
-        }, [hasAdded, data]);
+        }, [hasAdded, data, open, setCartData]);
+
+        // Debug
+        useEffect(() => {
+          if (fetcher.state === 'idle' && fetcher.data) {
+            console.log('🛒 Fetcher state:', fetcher.state, 'Data:', fetcher.data);
+          }
+        }, [fetcher.state, fetcher.data]);
 
         return (
           <>
             <input
               name="analytics"
               type="hidden"
-              value={JSON.stringify(analytics)}
+              value={JSON.stringify(analytics || {})}
             />
             <button
               type="submit"
