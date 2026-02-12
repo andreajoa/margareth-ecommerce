@@ -1,0 +1,8 @@
+name = "brinqueteando"
+compatibility_date = "2025-04-01"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production]
+name = "brinqueteando-production"
+routes = [
+  { pattern = "https://brinqueteando.online/*", zone_name = "brinqueteando.online" }
