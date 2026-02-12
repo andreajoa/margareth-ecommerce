@@ -171,13 +171,24 @@ export async function loader({context, params, request}) {
   }
 
   try {
-    const [{product}, upgradeProducts] = await Promise.all([
+    const [productData, upgradeData] = await Promise.all([
       storefront.query(PRODUCT_QUERY, {
-        variables: {handle, selectedOptions: getSelectedProductOptions(request)},
+        variables: {
+          handle,
+          selectedOptions: getSelectedProductOptions(request),
+          country: 'BR',
+          language: 'PT',
+        },
       }),
-      storefront.query(UPGRADE_PRODUCTS_QUERY),
+      storefront.query(UPGRADE_PRODUCTS_QUERY, {
+        variables: {
+          country: 'BR',
+          language: 'PT',
+        },
+      }).catch(() => ({ giftWrap: null })),
     ]);
 
+    const product = productData?.product;
     if (!product?.id) {
       throw new Response(null, {status: 404});
     }
@@ -205,7 +216,7 @@ export async function loader({context, params, request}) {
 
     return {
       product,
-      upgradeProducts,
+      upgradeProducts: upgradeData,
       cart: cart.get(),
       shopUrl,
       selectedVariant,
@@ -858,7 +869,7 @@ const PRODUCT_VARIANT_FRAGMENT = `#graphql
 
 const PRODUCT_FRAGMENT = `#graphql
   fragment Product on Product {
-    id title vendor handle descriptionHtml description productType encodedVariantAvailability encodedVariantExistence
+    id title vendor handle descriptionHtml description productType
     metafields(identifiers: [{namespace: "judgeme", key: "widget"}, {namespace: "judgeme", key: "review_widget_data"}]) { key value }
     images(first: 20) { edges { node { id url altText width height } } }
     options { name optionValues { name firstSelectableVariant { ...ProductVariant } swatch { color image { previewImage { url } } } } }

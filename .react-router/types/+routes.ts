@@ -6,7 +6,6 @@ declare module "react-router" {
   interface Register {
     pages: Pages
     routeFiles: RouteFiles
-    routeModules: RouteModules
   }
 }
 
@@ -113,7 +112,7 @@ type RouteFiles = {
     page: "/cart";
   };
   "../node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout.jsx": {
-    id: "/Users/andrealmeida/Desktop/gueth-ecommerce/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout";
+    id: "/Users/andrealmeida/Downloads/margareth-ecommerce/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout";
     page: "/graphiql" | "/subrequest-profiler" | "/.well-known/appspecific/com.chrome.devtools.json" | "/";
   };
   "../node_modules/@shopify/hydrogen/dist/vite/virtual-routes/routes/graphiql.jsx": {
@@ -132,24 +131,4 @@ type RouteFiles = {
     id: "vite/virtual-routes/routes/index";
     page: "/";
   };
-};
-
-type RouteModules = {
-  "root": typeof import("./app/root.jsx");
-  "routes/api.affiliate.register": typeof import("./app/routes/api.affiliate.register.jsx");
-  "routes/collections.$handle": typeof import("./app/routes/collections.$handle.jsx");
-  "routes/collections._index": typeof import("./app/routes/collections._index.jsx");
-  "routes/account.affiliate": typeof import("./app/routes/account.affiliate.jsx");
-  "routes/policies.$handle": typeof import("./app/routes/policies.$handle.jsx");
-  "routes/products.$handle": typeof import("./app/routes/products.$handle.jsx");
-  "routes/collections.all": typeof import("./app/routes/collections.all.jsx");
-  "routes/pages.$handle": typeof import("./app/routes/pages.$handle.jsx");
-  "routes/_index": typeof import("./app/routes/_index.jsx");
-  "routes/login": typeof import("./app/routes/login.jsx");
-  "routes/cart": typeof import("./app/routes/cart.jsx");
-  "/Users/andrealmeida/Desktop/gueth-ecommerce/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout": unknown;
-  "vite/virtual-routes/routes/graphiql": unknown;
-  "vite/virtual-routes/routes/subrequest-profiler": unknown;
-  "vite/virtual-routes/routes/[.]well-known.appspecific.com[.]chrome[.]devtools[.]json": unknown;
-  "vite/virtual-routes/routes/index": unknown;
 };
