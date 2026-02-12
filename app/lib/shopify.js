@@ -1,8 +1,10 @@
-const STORE_DOMAIN = process.env.PUBLIC_STORE_DOMAIN || 'brinqueteando.myshopify.com';
-const STOREFRONT_API_TOKEN = process.env.PUBLIC_STOREFRONT_API_TOKEN || 'f4519cf3a3a10b4fccca0df4b0a464e1';
-const API_VERSION = '2024-10';
+// ✅ FIX: Removido process.env que causava CRASH no Oxygen
+export async function fetchShopify(query, variables = {}, env) {
+  // Fallback seguro se env não for passado
+  const STORE_DOMAIN = env?.PUBLIC_STORE_DOMAIN || 'brinqueteando.myshopify.com';
+  const STOREFRONT_API_TOKEN = env?.PUBLIC_STOREFRONT_API_TOKEN || 'f4519cf3a3a10b4fccca0df4b0a464e1';
+  const API_VERSION = '2024-10';
 
-export async function fetchShopify(query, variables = {}) {
   try {
     const response = await fetch(`https://${STORE_DOMAIN}/api/${API_VERSION}/graphql.json`, {
       method: 'POST',
@@ -19,6 +21,7 @@ export async function fetchShopify(query, variables = {}) {
     }
 
     const json = await response.json();
+
     if (json.errors) {
       console.error('GraphQL errors:', json.errors);
       return null;
