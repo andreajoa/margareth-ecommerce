@@ -1,65 +1,40 @@
-import {useAside} from '~/components/Aside';
 import {CartLineItem} from '~/components/CartLineItem';
 import {CartSummary} from '~/components/CartSummary';
 import {Link} from 'react-router';
+import {useAside} from '~/components/Aside';
 
-export function CartMain({cart, layout}) {
-  // Debug: mostra estrutura COMPLETA do cart
-  if (typeof window !== 'undefined' && cart) {
-    console.log('🛒 CartMain recebeu:', cart);
-    console.log('🛒 Cart CHAVES:', Object.keys(cart));
-    console.log('🛒 Cart.lines:', cart.lines);
-    console.log('🛒 Cart.lines é array?', Array.isArray(cart.lines));
-    console.log('🛒 JSON:', JSON.stringify(cart, null, 2));
-  }
-
-  // ✅ FIX: A estrutura correta do cart no Hydrogen é:
-  // - lines: Array<CartLine> (DIRETO, não .nodes!)
-  // - totalQuantity: number
-  // - cost: { subtotalAmount, totalAmount, ... }
-  // - checkoutUrl: string
-
-  // SEGURANÇA: Se cart for nulo/undefined, usa um objeto vazio seguro
+export function CartMain({cart, layout, close}) {
+  // Recebe 'close' como prop para evitar ciclo, ou usa hook apenas dentro de eventos
+  
+  // Estrutura segura do carrinho
   const safeCart = cart || {
     id: 'empty-cart',
-    lines: [],
+    lines: { nodes: [] },
     totalQuantity: 0,
     cost: {
       subtotalAmount: { amount: '0', currencyCode: 'BRL' },
       totalAmount: { amount: '0', currencyCode: 'BRL' }
     },
     checkoutUrl: '',
-    note: '',
-    discountCodes: [],
   };
 
-  // ✅ FIX CORRIGIDO: Extrai linhas diretamente de lines (array)
-  // O Hydrogen retorna lines como Array<CartLine>, não como {nodes: [...]}
-  const lines = Array.isArray(safeCart.lines) ? safeCart.lines : [];
-
-  // Fallback: tenta merchandiseLines se lines estiver vazio
-  const finalLines = lines.length > 0 ? lines : (safeCart.merchandiseLines || []);
-
-  const hasItems = finalLines.length > 0;
-
-  console.log('🛒 Linhas extraídas:', finalLines, 'Has items:', hasItems);
+  // Normaliza linhas (Hydrogen v2025 retorna .nodes para conexões)
+  const lines = safeCart.lines?.nodes || safeCart.lines || [];
+  const hasItems = lines.length > 0;
 
   return (
     <div style={{height: '100%', display: 'flex', flexDirection: 'column', background: '#FEFDF8'}}>
       {!hasItems ? (
-        <CartEmpty />
+        <CartEmpty close={close} />
       ) : (
         <>
-          {/* LISTA DE PRODUTOS */}
           <div style={{flex: 1, overflowY: 'auto', padding: '0 1rem'}}>
             <ul style={{listStyle: 'none', padding: 0, margin: '1rem 0'}}>
-              {finalLines.map((line) => (
+              {lines.map((line) => (
                 <CartLineItem key={line.id} line={line} />
               ))}
             </ul>
           </div>
-
-          {/* CHECKOUT E RESUMO */}
           <div style={{
             flexShrink: 0,
             borderTop: '4px solid #D4AF69',
@@ -75,8 +50,7 @@ export function CartMain({cart, layout}) {
   );
 }
 
-function CartEmpty() {
-  const {close} = useAside();
+function CartEmpty({close}) {
   return (
     <div style={{
       height: '100%',
@@ -91,9 +65,6 @@ function CartEmpty() {
       <h3 style={{fontSize: '1.5rem', fontWeight: '800', color: '#0A3D2F', marginBottom: '0.5rem'}}>
         Seu carrinho está vazio
       </h3>
-      <p style={{color: '#6b7280', marginBottom: '2rem'}}>
-        Nenhum produto adicionado ainda.
-      </p>
       <Link
         to="/collections/all"
         onClick={close}
@@ -104,7 +75,7 @@ function CartEmpty() {
           borderRadius: '50px',
           textDecoration: 'none',
           fontWeight: 'bold',
-          transition: 'all 0.3s'
+          marginTop: '1rem'
         }}
       >
         Ver Brinquedos

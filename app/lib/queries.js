@@ -1,70 +1,42 @@
-// GraphQL Queries for Shopify Storefront API
-
-// ✅ FIX: Adicionado tag #graphql para compatibilidade com Hydrogen v2025
+// ✅ FIX: Adicionado tag #graphql e estrutura 'nodes' para compatibilidade
 export const CART_FRAGMENT = `#graphql
   fragment CartFragment on Cart {
     id
     checkoutUrl
     totalQuantity
-    createdAt
-    updatedAt
     lines(first: 100) {
-      edges {
-        node {
-          id
-          quantity
-          merchandise {
-            ... on ProductVariant {
+      nodes {
+        id
+        quantity
+        cost {
+          totalAmount {
+            amount
+            currencyCode
+          }
+        }
+        merchandise {
+          ... on ProductVariant {
+            id
+            title
+            image {
+              id
+              url
+              altText
+              width
+              height
+            }
+            price {
+              amount
+              currencyCode
+            }
+            product {
               id
               title
-              availableForSale
-              price {
-                amount
-                currencyCode
-              }
-              compareAtPrice {
-                amount
-                currencyCode
-              }
-              product {
-                id
-                title
-                handle
-                vendor
-                productType
-                featuredImage {
-                  id
-                  url
-                  altText
-                  width
-                  height
-                }
-              }
-              image {
-                id
-                url
-                altText
-                width
-                height
-              }
-              selectedOptions {
-                name
-                value
-              }
+              handle
             }
-          }
-          attributes {
-            key
-            value
-          }
-          cost {
-            amountPerQuantity {
-              amount
-              currencyCode
-            }
-            totalAmount {
-              amount
-              currencyCode
+            selectedOptions {
+              name
+              value
             }
           }
         }
@@ -79,24 +51,6 @@ export const CART_FRAGMENT = `#graphql
         amount
         currencyCode
       }
-      totalTaxAmount {
-        amount
-        currencyCode
-      }
-    }
-    buyerIdentity {
-      email
-      phone
-      countryCode
-    }
-    discountCodes {
-      code
-      applicable
-    }
-    note
-    attributes {
-      key
-      value
     }
   }
 `;
@@ -126,44 +80,33 @@ export const PRODUCT_QUERY = `#graphql
     product(handle: $handle) {
       id
       title
-      description
       descriptionHtml
       handle
       vendor
-      tags
-      productType
       priceRange {
         minVariantPrice {
           amount
           currencyCode
         }
       }
-      images(first: 10) {
-        edges {
-          node {
-            id
-            url
-            altText
-            width
-            height
-          }
-        }
+      featuredImage {
+        id
+        url
+        altText
+        width
+        height
       }
-      variants(first: 50) {
-        edges {
-          node {
-            id
-            title
-            price {
-              amount
-              currencyCode
-            }
-            availableForSale
-            sku
-            selectedOptions {
-              name
-              value
-            }
+      variants(first: 1) {
+        nodes {
+          id
+          availableForSale
+          selectedOptions {
+            name
+            value
+          }
+          price {
+            amount
+            currencyCode
           }
         }
       }
@@ -175,44 +118,29 @@ export const PRODUCT_QUERY = `#graphql
   }
 `;
 
+// Queries simplificadas para evitar erros de fragmentos ausentes
 export const COLLECTION_QUERY = `#graphql
-  query Collection($handle: String!, $first: Int!, $sortKey: ProductCollectionSortKeys, $reverse: Boolean, $country: CountryCode, $language: LanguageCode)
+  query Collection($handle: String!, $country: CountryCode, $language: LanguageCode)
   @inContext(country: $country, language: $language) {
     collection(handle: $handle) {
       id
       title
       description
-      descriptionHtml
-      handle
-      image {
-        id
-        url
-        altText
-      }
-      products(first: $first, sortKey: $sortKey, reverse: $reverse) {
-        edges {
-          node {
-            id
-            title
-            handle
-            vendor
-            availableForSale
-            priceRange {
-              minVariantPrice {
-                amount
-                currencyCode
-              }
-            }
-            featuredImage {
-              id
-              url
-              altText
+      products(first: 8) {
+        nodes {
+          id
+          title
+          handle
+          featuredImage {
+            url
+            altText
+          }
+          priceRange {
+            minVariantPrice {
+              amount
+              currencyCode
             }
           }
-        }
-        pageInfo {
-          hasNextPage
-          hasPreviousPage
         }
       }
     }
@@ -220,41 +148,64 @@ export const COLLECTION_QUERY = `#graphql
 `;
 
 export const COLLECTIONS_QUERY = `#graphql
-  query Collections($first: Int!, $country: CountryCode, $language: LanguageCode)
+  query Collections($country: CountryCode, $language: LanguageCode)
   @inContext(country: $country, language: $language) {
-    collections(first: $first) {
-      edges {
-        node {
-          id
-          title
-          handle
-          description
-          image {
-            url
-            altText
-          }
+    collections(first: 4) {
+      nodes {
+        id
+        title
+        handle
+        image {
+          url
+          altText
         }
       }
     }
   }
 `;
 
-export const PRODUCT_RECOMMENDATIONS_QUERY = `#graphql
-  query ProductRecommendations($productId: ID!, $country: CountryCode, $language: LanguageCode)
+export const FEATURED_COLLECTIONS_QUERY = `#graphql
+  query FeaturedCollections($country: CountryCode, $language: LanguageCode) 
   @inContext(country: $country, language: $language) {
-    productRecommendations(productId: $productId) {
-      id
-      title
-      handle
-      priceRange {
-        minVariantPrice {
-          amount
-          currencyCode
+    collections(first: 4, sortKey: UPDATED_AT, reverse: true) {
+      nodes {
+        id
+        title
+        handle
+        image {
+          id
+          url
+          altText
+          width
+          height
         }
       }
-      featuredImage {
-        url
-        altText
+    }
+  }
+`;
+
+export const FEATURED_PRODUCTS_QUERY = `#graphql
+  query FeaturedProducts($country: CountryCode, $language: LanguageCode) 
+  @inContext(country: $country, language: $language) {
+    products(first: 8, sortKey: UPDATED_AT, reverse: true) {
+      nodes {
+        id
+        handle
+        title
+        vendor
+        featuredImage {
+          id
+          altText
+          url
+          width
+          height
+        }
+        priceRange {
+          minVariantPrice {
+            amount
+            currencyCode
+          }
+        }
       }
     }
   }
