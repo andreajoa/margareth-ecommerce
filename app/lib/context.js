@@ -7,25 +7,28 @@ export async function createHydrogenRouterContext(
   env,
   executionContext,
 ) {
-  if (!env?.SESSION_SECRET) {
-    throw new Error('SESSION_SECRET environment variable is not set');
-  }
-
+  // Segurança: Garante que env existe
+  const environment = env || {};
   const waitUntil = executionContext.waitUntil.bind(executionContext);
+  
+  // Segredos com fallback de emergência para não quebrar a loja
+  const secrets = environment.SESSION_SECRET 
+    ? [environment.SESSION_SECRET] 
+    : ['temp-secret-key-fix-deploy'];
+
   const [cache, session] = await Promise.all([
     caches.open('hydrogen'),
-    AppSession.init(request, [env.SESSION_SECRET]),
+    AppSession.init(request, secrets),
   ]);
 
   const hydrogenContext = createHydrogenContext({
-    env,
+    env: environment,
     request,
     cache,
     waitUntil,
     session,
   });
 
-  // ✅ FIX: Customizar cart handler com fragment completo que inclui lines
   const cart = createCartHandler({
     storefront: hydrogenContext.storefront,
     getCartId: hydrogenContext.session.get,

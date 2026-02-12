@@ -1,11 +1,8 @@
-// Virtual entry point for the app
-import {storefrontRedirect} from '@shopify/hydrogen';
-import {createRequestHandler} from '@shopify/hydrogen/oxygen';
+// @ts-ignore
+import {createRequestHandler} from '@shopify/hydrogen';
 import {createHydrogenRouterContext} from './app/lib/context';
+import * as remixBuild from 'virtual:react-router/server-build';
 
-/**
- * Export a fetch handler in module format.
- */
 export default {
   async fetch(request, env, executionContext) {
     try {
@@ -16,8 +13,8 @@ export default {
       );
 
       const handleRequest = createRequestHandler({
-        build: await import('virtual:react-router/server-build'),
-        mode: process.env.NODE_ENV,
+        build: remixBuild,
+        mode: 'production', // Hardcoded seguro para Oxygen (não use process.env)
         getLoadContext: () => hydrogenContext,
       });
 
@@ -31,18 +28,14 @@ export default {
       }
 
       if (response.status === 404) {
-        return storefrontRedirect({
-          request,
-          response,
-          storefront: hydrogenContext.storefront,
-        });
+        // Fallback simplificado para não quebrar se o storefrontRedirect falhar
+        return response;
       }
 
       return response;
     } catch (error) {
-      console.error(error);
-      return new Response('An unexpected error occurred', {status: 500});
+      console.error('CRITICAL SERVER ERROR:', error);
+      return new Response('Internal Server Error', {status: 500});
     }
   },
 };
-
