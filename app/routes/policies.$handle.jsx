@@ -4,6 +4,10 @@ export async function loader({params, context}) {
   const {handle} = params;
   const {storefront} = context;
 
+  if (!storefront) {
+    throw new Response('Erro de configuração do Storefront', {status: 500});
+  }
+
   const {shop} = await storefront.query(POLICIES_QUERY);
 
   const policy = {
@@ -98,16 +102,16 @@ export default function Policy() {
 
       {/* CONTEÚDO */}
       <div className="flex-grow w-full">
-        <div className="w-full" dangerouslySetInnerHTML={{__html: policy.body}} />
+        <div className="w-full prose max-w-none px-4 py-8" dangerouslySetInnerHTML={{__html: policy.body}} />
       </div>
 
       {/* FOOTER CLEAN E CENTRALIZADO */}
       <footer className="bg-[#FEFDF8] pt-20 pb-10 border-t-4 border-[#3A8ECD] w-full">
           {/* Grid Centralizado */}
           <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-16 text-center">
-             
-             {footerMenu.items.map((group) => (
-               <div key={group.id} className="flex flex-col items-center">
+              
+            {footerMenu.items.map((group) => (
+              <div key={group.id} className="flex flex-col items-center">
                   
                   {/* Título Elegante */}
                   <h3 className="font-bold text-[#0A3D2F] text-lg tracking-widest uppercase mb-6 border-b-2 border-transparent hover:border-[#FB8A38] transition-all duration-300 pb-2 inline-block">
@@ -127,9 +131,8 @@ export default function Policy() {
                       </li>
                     ))}
                   </ul>
-               </div>
-             ))}
-
+              </div>
+            ))}
           </div>
 
           {/* Copyright Centralizado */}

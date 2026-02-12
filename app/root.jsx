@@ -7,7 +7,6 @@ import {
   useLoaderData,
   useRouteError,
   isRouteErrorResponse,
-  Link,
 } from 'react-router';
 import {ShopifyProvider} from '@shopify/hydrogen-react';
 import {AsideProvider, Aside} from '~/components/Aside';
@@ -22,11 +21,12 @@ export const links = () => {
 };
 
 export async function loader({context}) {
-  const {env} = context;
+  // Proteção contra contexto nulo
+  const env = context?.env || {};
   return {
     env: {
-      PUBLIC_STORE_DOMAIN: env?.PUBLIC_STORE_DOMAIN || 'uxst0j-qe.myshopify.com',
-      PUBLIC_STOREFRONT_API_TOKEN: env?.PUBLIC_STOREFRONT_API_TOKEN || 'f4519cf3a3a10b4fccca0df4b0a464e1',
+      PUBLIC_STORE_DOMAIN: env.PUBLIC_STORE_DOMAIN || 'uxst0j-qe.myshopify.com',
+      PUBLIC_STOREFRONT_API_TOKEN: env.PUBLIC_STOREFRONT_API_TOKEN || 'f4519cf3a3a10b4fccca0df4b0a464e1',
     },
     apiVersion: '2024-10',
   };
@@ -34,13 +34,8 @@ export async function loader({context}) {
 
 export default function App() {
   const data = useLoaderData();
-  
-  // Fallback de segurança extremo: se o loader falhar, usa dados hardcoded
-  const env = data?.env || {
-    PUBLIC_STORE_DOMAIN: 'uxst0j-qe.myshopify.com',
-    PUBLIC_STOREFRONT_API_TOKEN: 'f4519cf3a3a10b4fccca0df4b0a464e1'
-  };
-  const apiVersion = data?.apiVersion || '2024-10';
+  const env = data?.env;
+  const apiVersion = data?.apiVersion;
 
   return (
     <html lang="pt-BR">
@@ -63,7 +58,6 @@ export default function App() {
             <Outlet />
           </ShopifyProvider>
         </AsideProvider>
-        
         <ScrollRestoration />
         <Scripts />
       </body>
