@@ -7,38 +7,19 @@ export default async function handleRequest(
   request,
   responseStatusCode,
   responseHeaders,
-  reactRouterContext,
-  context,
+  routerContext,
+  loadContext
 ) {
-  // Proteção contra erro de ambiente (undefined)
-  const env = context.env || {};
-
   const {nonce, header, NonceProvider} = createContentSecurityPolicy({
     shop: {
-      checkoutDomain: env.PUBLIC_CHECKOUT_DOMAIN || 'checkout.shopify.com',
-      storeDomain: env.PUBLIC_STORE_DOMAIN || 'brinqueteando.myshopify.com',
+      checkoutDomain: loadContext.env?.PUBLIC_CHECKOUT_DOMAIN || 'checkout.shopify.com',
+      storeDomain: loadContext.env?.PUBLIC_STORE_DOMAIN || 'brinqueteando.myshopify.com',
     },
-    // Domínios externos permitidos
-    connectSrc: [
-      "'self'",
-      'https://cdn.shopify.com',
-      'https://shop.app',
-      'https://monorail-edge.shopifysvc.com',
-      'https://judge.me',
-      'https://*.judge.me',
-      'https://*.google-analytics.com',
-      'https://*.facebook.com',
-      'https://analytics.ahrefs.com',
-    ],
   });
 
   const body = await renderToReadableStream(
     <NonceProvider>
-      <ServerRouter
-        context={reactRouterContext}
-        url={request.url}
-        nonce={nonce}
-      />
+      <ServerRouter context={routerContext} url={request.url} nonce={nonce} />
     </NonceProvider>,
     {
       nonce,
@@ -47,7 +28,7 @@ export default async function handleRequest(
         console.error(error);
         responseStatusCode = 500;
       },
-    },
+    }
   );
 
   if (isbot(request.headers.get('user-agent'))) {

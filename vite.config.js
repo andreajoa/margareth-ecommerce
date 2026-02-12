@@ -5,23 +5,19 @@ import {reactRouter} from '@react-router/dev/vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
-  resolve: {
-    alias: {
-      '~': new URL('./app', import.meta.url).pathname,
-    },
-  },
   plugins: [
     hydrogen(),
     oxygen(),
     reactRouter(),
     tsconfigPaths(),
   ],
-  build: {
-    assetsInlineLimit: 0,
-  },
-  ssr: {
-    optimizeDeps: {
-      include: ['react', 'react-dom', 'react-router'],
+  resolve: {
+    alias: {
+      '~': '/app',
     },
+  },
+  build: {
+    // Reduz o tamanho do chunk para evitar timeout no worker
+    assetsInlineLimit: 0,
   },
 });
