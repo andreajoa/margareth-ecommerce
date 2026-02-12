@@ -1,7 +1,7 @@
 // GraphQL Queries for Shopify Storefront API
 
-// ✅ FIX: Fragment completo do Cart com linhas, imagens e preços
-export const CART_FRAGMENT = `
+// ✅ FIX: Adicionado tag #graphql para compatibilidade com Hydrogen v2025
+export const CART_FRAGMENT = `#graphql
   fragment CartFragment on Cart {
     id
     checkoutUrl
@@ -38,17 +38,6 @@ export const CART_FRAGMENT = `
                   altText
                   width
                   height
-                }
-                images(first: 1) {
-                  edges {
-                    node {
-                      id
-                      url
-                      altText
-                      width
-                      height
-                    }
-                  }
                 }
               }
               image {
@@ -98,7 +87,6 @@ export const CART_FRAGMENT = `
     buyerIdentity {
       email
       phone
-      country
       countryCode
     }
     discountCodes {
@@ -113,7 +101,7 @@ export const CART_FRAGMENT = `
   }
 `;
 
-export const MENU_QUERY = `
+export const MENU_QUERY = `#graphql
   query Menu($handle: String!) {
     menu(handle: $handle) {
       id
@@ -132,8 +120,9 @@ export const MENU_QUERY = `
   }
 `;
 
-export const PRODUCT_QUERY = `
-  query Product($handle: String!) {
+export const PRODUCT_QUERY = `#graphql
+  query Product($handle: String!, $country: CountryCode, $language: LanguageCode) 
+  @inContext(country: $country, language: $language) {
     product(handle: $handle) {
       id
       title
@@ -165,7 +154,7 @@ export const PRODUCT_QUERY = `
           node {
             id
             title
-            priceV2 {
+            price {
               amount
               currencyCode
             }
@@ -186,18 +175,15 @@ export const PRODUCT_QUERY = `
   }
 `;
 
-export const COLLECTION_QUERY = `
-  query Collection($handle: String!, $first: Int!, $sortKey: ProductCollectionSortKeys, $reverse: Boolean) {
+export const COLLECTION_QUERY = `#graphql
+  query Collection($handle: String!, $first: Int!, $sortKey: ProductCollectionSortKeys, $reverse: Boolean, $country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
     collection(handle: $handle) {
       id
       title
       description
       descriptionHtml
       handle
-      seo {
-        title
-        description
-      }
       image {
         id
         url
@@ -210,23 +196,18 @@ export const COLLECTION_QUERY = `
             title
             handle
             vendor
-            tags
+            availableForSale
             priceRange {
               minVariantPrice {
                 amount
                 currencyCode
               }
             }
-            images(first: 2) {
-              edges {
-                node {
-                  id
-                  url
-                  altText
-                }
-              }
+            featuredImage {
+              id
+              url
+              altText
             }
-            availableForSale
           }
         }
         pageInfo {
@@ -238,8 +219,9 @@ export const COLLECTION_QUERY = `
   }
 `;
 
-export const COLLECTIONS_QUERY = `
-  query Collections($first: Int!) {
+export const COLLECTIONS_QUERY = `#graphql
+  query Collections($first: Int!, $country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
     collections(first: $first) {
       edges {
         node {
@@ -251,21 +233,15 @@ export const COLLECTIONS_QUERY = `
             url
             altText
           }
-          products(first: 1) {
-            edges {
-              node {
-                id
-              }
-            }
-          }
         }
       }
     }
   }
 `;
 
-export const PRODUCT_RECOMMENDATIONS_QUERY = `
-  query ProductRecommendations($productId: ID!) {
+export const PRODUCT_RECOMMENDATIONS_QUERY = `#graphql
+  query ProductRecommendations($productId: ID!, $country: CountryCode, $language: LanguageCode)
+  @inContext(country: $country, language: $language) {
     productRecommendations(productId: $productId) {
       id
       title
@@ -276,13 +252,9 @@ export const PRODUCT_RECOMMENDATIONS_QUERY = `
           currencyCode
         }
       }
-      images(first: 1) {
-        edges {
-          node {
-            url
-            altText
-          }
-        }
+      featuredImage {
+        url
+        altText
       }
     }
   }
