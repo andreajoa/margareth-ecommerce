@@ -2,7 +2,7 @@ import {Link} from 'react-router';
 import {Image, Money} from '@shopify/hydrogen';
 import {useState} from 'react';
 
-export function ProductCard({product, showBrand = true, priority = false}) {
+export function ProductCard({product, showBrand = true, priority = false, onQuickView}) {
   const [imageError, setImageError] = useState(false);
   
   if (!product) return null;
@@ -13,8 +13,18 @@ export function ProductCard({product, showBrand = true, priority = false}) {
     handle,
     vendor,
     featuredImage,
-    priceRange
+    priceRange,
+    description
   } = product;
+
+  // Função para abrir quick view
+  const handleQuickView = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (onQuickView) {
+      onQuickView(product);
+    }
+  };
 
   return (
     <Link 
@@ -43,12 +53,14 @@ export function ProductCard({product, showBrand = true, priority = false}) {
             </div>
           )}
           
-          {/* Quick View Overlay */}
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
-            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#FB8A38] text-white px-6 py-2 rounded-full font-semibold text-sm">
-              Ver Detalhes
-            </span>
-          </div>
+          {/* Quick View Button - Always visible on mobile, hover on desktop */}
+          <button
+            onClick={handleQuickView}
+            className="absolute bottom-2 left-2 right-2 bg-[#FB8A38] text-white px-3 py-2 rounded-full font-semibold text-sm opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:bg-[#3A8ECD] hover:scale-105 z-10"
+            aria-label={`Espiar ${title}`}
+          >
+            👁️ Espiar
+          </button>
         </div>
 
         {/* Product Info */}
