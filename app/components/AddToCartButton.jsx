@@ -2,14 +2,6 @@ import {CartForm} from '@shopify/hydrogen';
 import {useEffect, useRef} from 'react';
 import {useAside} from '~/components/Aside';
 
-/**
- * AddToCartButton — submits to /cart action via CartForm.
- *
- * FIX: The old code called open('cart') inside the CartForm render prop,
- * which triggered a state update during render → infinite re-render loop.
- *
- * Solution: Extract an inner component that can use useEffect properly.
- */
 export function AddToCartButton({
   analytics,
   children,
@@ -27,6 +19,7 @@ export function AddToCartButton({
           disabled={disabled}
           className={className}
           onClick={onClick}
+          lines={lines}
         >
           {children}
         </AddToCartInner>
@@ -35,10 +28,6 @@ export function AddToCartButton({
   );
 }
 
-/**
- * Inner component — can use hooks (useEffect) safely.
- * Opens the cart drawer exactly once when the action completes.
- */
 function AddToCartInner({
   fetcher,
   analytics,
@@ -46,21 +35,25 @@ function AddToCartInner({
   disabled,
   className,
   onClick,
+  lines,
 }) {
-  const {open} = useAside();
+  const {open, setCartData} = useAside();
   const prevState = useRef(fetcher.state);
 
   useEffect(() => {
-    // Only open cart when transitioning FROM submitting/loading TO idle WITH data
     if (
       prevState.current !== 'idle' &&
       fetcher.state === 'idle' &&
       fetcher.data
     ) {
+      // Pass the fresh cart data from the action response to the drawer
+      if (fetcher.data.cart) {
+        setCartData(fetcher.data.cart);
+      }
       open('cart');
     }
     prevState.current = fetcher.state;
-  }, [fetcher.state, fetcher.data, open]);
+  }, [fetcher.state, fetcher.data, open, setCartData]);
 
   const isAdding = fetcher.state !== 'idle';
 
