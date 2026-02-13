@@ -223,8 +223,14 @@ export async function loader({context, params, request}) {
     });
   }
 
+  // ✅ FIX: Adicionar variáveis country e language para @inContext
   const {collection} = await storefront.query(COLLECTION_QUERY, {
-    variables: {handle, ...paginationVariables},
+    variables: {
+      handle,
+      country: 'BR',
+      language: 'PT',
+      ...paginationVariables
+    },
   });
 
   if (!collection) {

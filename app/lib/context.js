@@ -19,6 +19,7 @@ export async function createHydrogenRouterContext(
   // Garante que as variáveis críticas existem
   const storeDomain = environment.PUBLIC_STORE_DOMAIN || 'brinqueteando.myshopify.com';
   const storefrontToken = environment.PUBLIC_STOREFRONT_API_TOKEN || 'f4519cf3a3a10b4fccca0df4b0a464e1';
+  const apiVersion = '2024-10';
 
   let cache, session;
   try {
@@ -37,11 +38,12 @@ export async function createHydrogenRouterContext(
       get: () => null,
       set: () => {},
       unset: () => {},
-      commit: () => '',
+      commit: async () => '',
       isPending: false,
     };
   }
 
+  // ✅ FIX: Configuração completa do Hydrogen Context
   const hydrogenContext = createHydrogenContext({
     env: {
       ...environment,
@@ -52,13 +54,41 @@ export async function createHydrogenRouterContext(
     cache,
     waitUntil,
     session,
+    // ✅ FIX: Configuração explícita do storefront
+    storefront: {
+      storeDomain,
+      storefrontToken,
+      storefrontApiVersion: apiVersion,
+    },
   });
 
-  const cart = createCartHandler({
-    storefront: hydrogenContext.storefront,
-    getCartId: hydrogenContext.session.get,
-    cartFragment: CART_FRAGMENT,
-  });
+  // ✅ FIX: Verificar se storefront existe antes de criar cart handler
+  let cart;
+  try {
+    if (hydrogenContext?.storefront) {
+      cart = createCartHandler({
+        storefront: hydrogenContext.storefront,
+        getCartId: hydrogenContext.session.get,
+        cartFragment: CART_FRAGMENT,
+      });
+    } else {
+      // Fallback cart handler
+      cart = {
+        get: async () => null,
+        add: async () => null,
+        update: async () => null,
+        remove: async () => null,
+      };
+    }
+  } catch (e) {
+    console.error('Cart handler error:', e);
+    cart = {
+      get: async () => null,
+      add: async () => null,
+      update: async () => null,
+      remove: async () => null,
+    };
+  }
 
   return {
     ...hydrogenContext,

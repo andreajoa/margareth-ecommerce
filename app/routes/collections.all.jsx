@@ -7,8 +7,13 @@ export async function loader({context, request}) {
   const {storefront, cart} = context;
   const paginationVariables = getPaginationVariables(request, {pageBy: 12});
 
+  // ✅ FIX: Adicionar variáveis country e language para @inContext
   const {products} = await storefront.query(CATALOG_QUERY, {
-    variables: {...paginationVariables},
+    variables: {
+      country: 'BR',
+      language: 'PT',
+      ...paginationVariables
+    },
   });
 
   return data({

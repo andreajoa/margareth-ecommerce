@@ -11,7 +11,7 @@ export default defineConfig(() => {
       storefrontToken: 'f4519cf3a3a10b4fccca0df4b0a464e1',
       storefrontApiVersion: '2024-10',
       country: 'BR',
-      language: 'PT_BR',
+      language: 'PT', // ✅ FIX: Código de idioma correto para Shopify
     },
     logger: {
       mode: 'production',

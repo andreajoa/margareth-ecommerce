@@ -24,13 +24,19 @@ export async function loader({context}) {
   let collections = {nodes: []};
   let products = {nodes: []};
   
+  // ✅ FIX: Variáveis obrigatórias para as queries GraphQL com @inContext
+  const variables = {
+    country: 'BR',
+    language: 'PT'
+  };
+  
   try {
     const [collectionsResult, productsResult] = await Promise.all([
-      storefront.query(FEATURED_COLLECTIONS_QUERY).catch(e => {
+      storefront.query(FEATURED_COLLECTIONS_QUERY, {variables}).catch(e => {
         console.error('Error fetching collections:', e);
         return {collections: {nodes: []}};
       }),
-      storefront.query(FEATURED_PRODUCTS_QUERY).catch(e => {
+      storefront.query(FEATURED_PRODUCTS_QUERY, {variables}).catch(e => {
         console.error('Error fetching products:', e);
         return {products: {nodes: []}};
       })
