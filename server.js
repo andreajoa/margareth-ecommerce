@@ -56,14 +56,16 @@ export default {
       const response = await handleRequest(request);
 
       if (hydrogenContext?.session?.isPending) {
+        console.log('[DEBUG] Session isPending is TRUE, committing...');
         try {
-          response.headers.set(
-            'Set-Cookie',
-            await hydrogenContext.session.commit(),
-          );
+          const cookie = await hydrogenContext.session.commit();
+          console.log('[DEBUG] Session committed, cookie length:', cookie.length);
+          response.headers.set('Set-Cookie', cookie);
         } catch (e) {
           console.error('Session commit error:', e);
         }
+      } else {
+        console.log('[DEBUG] Session isPending is false, skipping commit');
       }
 
       return response;

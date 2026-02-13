@@ -1,100 +1,55 @@
-import {createHydrogenContext, createCartHandler} from '@shopify/hydrogen';
+import {createHydrogenContext} from '@shopify/hydrogen';
 import {AppSession} from './session';
 import {CART_FRAGMENT} from './queries';
 
+/**
+ * Creates the Hydrogen context for every request.
+ * 
+ * FIXED:
+ *  - Removed invalid `storefront` option (was overwriting the real client)
+ *  - Cart is configured inside createHydrogenContext
+ *  - Session uses proper class with isPending tracking
+ */
 export async function createHydrogenRouterContext(
   request,
   env,
   executionContext,
 ) {
-  // Security: Ensure env exists with default values
-  const environment = env || {};
-  const waitUntil = executionContext?.waitUntil?.bind(executionContext) || (() => {});
-  
-  // Secrets with emergency fallback to not break the store
-  const secrets = environment.SESSION_SECRET 
-    ? [environment.SESSION_SECRET] 
-    : ['temp-secret-key-fix-deploy'];
+  const waitUntil = executionContext.waitUntil.bind(executionContext);
 
-  // Ensure critical variables exist
-  const storeDomain = environment.PUBLIC_STORE_DOMAIN || 'brinqueteando.myshopify.com';
-  const storefrontToken = environment.PUBLIC_STOREFRONT_API_TOKEN || 'f4519cf3a3a10b4fccca0df4b0a464e1';
-  const apiVersion = '2024-10';
+  /**
+   * Open cache and initialize session in parallel.
+   * SESSION_SECRET comes from Oxygen environment variables.
+   * Fallback ensures the store doesn't crash if it's missing.
+   */
+  const [cache, session] = await Promise.all([
+    caches.open('hydrogen').catch(() => undefined),
+    AppSession.init(request, [
+      env.SESSION_SECRET || 'fallback-secret-please-set-SESSION_SECRET',
+    ]),
+  ]);
 
-  let cache, session;
-  try {
-    console.log('[DEBUG] Opening cache');
-    cache = await caches.open('hydrogen');
-    console.log('[DEBUG] Cache opened successfully');
-  } catch (e) {
-    console.error('Cache error:', e);
-    cache = undefined;
-  }
-
-  try {
-    console.log('[DEBUG] Initializing session with secrets:', secrets ? 'yes' : 'no');
-    session = await AppSession.init(request, secrets);
-    console.log('[DEBUG] Session initialized successfully');
-  } catch (e) {
-    console.error('Session error:', e);
-    // Fallback session
-    session = {
-      get: () => null,
-      set: () => {},
-      unset: () => {},
-      commit: async () => '',
-      isPending: false,
-    };
-  }
-
-  // Create Hydrogen Context
+  /**
+   * createHydrogenContext reads PUBLIC_STORE_DOMAIN and
+   * PUBLIC_STOREFRONT_API_TOKEN from `env` to build the
+   * Storefront API client. Do NOT pass a `storefront` key —
+   * that would overwrite the real client with a plain object.
+   */
+  console.log('[CONTEXT DEBUG] Creating Hydrogen context with env keys:', Object.keys(env).filter(k => k.includes('STORE')));
   const hydrogenContext = createHydrogenContext({
-    env: {
-      ...environment,
-      PUBLIC_STORE_DOMAIN: storeDomain,
-      PUBLIC_STOREFRONT_API_TOKEN: storefrontToken,
-    },
+    env,
     request,
     cache,
     waitUntil,
     session,
-    storefront: {
-      storeDomain,
-      storefrontToken,
-      storefrontApiVersion: apiVersion,
+    cart: {
+      queryFragment: CART_FRAGMENT,
     },
   });
 
-  // Create cart handler if storefront exists
-  let cart;
-  try {
-    if (hydrogenContext?.storefront) {
-      cart = createCartHandler({
-        storefront: hydrogenContext.storefront,
-        getCartId: hydrogenContext.session.get,
-        cartFragment: CART_FRAGMENT,
-      });
-    } else {
-      // Fallback cart handler
-      cart = {
-        get: async () => null,
-        add: async () => null,
-        update: async () => null,
-        remove: async () => null,
-      };
-    }
-  } catch (e) {
-    console.error('Cart handler error:', e);
-    cart = {
-      get: async () => null,
-      add: async () => null,
-      update: async () => null,
-      remove: async () => null,
-    };
-  }
+  console.log('[CONTEXT DEBUG] storefront type:', typeof hydrogenContext.storefront);
+  console.log('[CONTEXT DEBUG] storefront has query:', typeof hydrogenContext.storefront?.query);
+  console.log('[CONTEXT DEBUG] storefront has mutate:', typeof hydrogenContext.storefront?.mutate);
 
-  return {
-    ...hydrogenContext,
-    cart,
-  };
+  return hydrogenContext;
 }
