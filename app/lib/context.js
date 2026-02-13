@@ -23,14 +23,18 @@ export async function createHydrogenRouterContext(
 
   let cache, session;
   try {
+    console.log('[DEBUG] Opening cache');
     cache = await caches.open('hydrogen');
+    console.log('[DEBUG] Cache opened successfully');
   } catch (e) {
     console.error('Cache error:', e);
     cache = undefined;
   }
 
   try {
+    console.log('[DEBUG] Initializing session with secrets:', secrets ? 'yes' : 'no');
     session = await AppSession.init(request, secrets);
+    console.log('[DEBUG] Session initialized successfully');
   } catch (e) {
     console.error('Session error:', e);
     // Fallback session

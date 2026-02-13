@@ -7,6 +7,8 @@ export class AppSession {
       ? secrets 
       : ['s3cr3t-t3mp0r4r10-f4llb4ck']; 
 
+    console.log('[DEBUG] Creating cookie session storage');
+    
     const storage = createCookieSessionStorage({
       cookie: {
         name: 'session',
@@ -17,11 +19,14 @@ export class AppSession {
       },
     });
 
+    console.log('[DEBUG] Getting session from request');
     // Tenta obter a sessão ou cria uma nova se falhar
     let session;
     try {
       session = await storage.getSession(request.headers.get('Cookie'));
+      console.log('[DEBUG] Session obtained successfully');
     } catch {
+      console.log('[DEBUG] Failed to get session, creating new one');
       session = await storage.getSession();
     }
 
