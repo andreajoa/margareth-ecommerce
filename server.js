@@ -14,28 +14,56 @@ export default {
 
       const handleRequest = createRequestHandler({
         build: remixBuild,
-        mode: 'production', // Hardcoded seguro para Oxygen (não use process.env)
+        mode: 'production',
         getLoadContext: () => hydrogenContext,
       });
 
       const response = await handleRequest(request);
 
-      if (hydrogenContext.session.isPending) {
-        response.headers.set(
-          'Set-Cookie',
-          await hydrogenContext.session.commit(),
-        );
-      }
-
-      if (response.status === 404) {
-        // Fallback simplificado para não quebrar se o storefrontRedirect falhar
-        return response;
+      if (hydrogenContext?.session?.isPending) {
+        try {
+          response.headers.set(
+            'Set-Cookie',
+            await hydrogenContext.session.commit(),
+          );
+        } catch (e) {
+          console.error('Session commit error:', e);
+        }
       }
 
       return response;
     } catch (error) {
       console.error('CRITICAL SERVER ERROR:', error);
-      return new Response('Internal Server Error', {status: 500});
+      
+      // Retornar uma página de erro amigável
+      return new Response(`
+        <!DOCTYPE html>
+        <html lang="pt-BR">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>brinqueTEAndo - Erro Temporário</title>
+          <style>
+            body { font-family: system-ui, sans-serif; text-align: center; padding: 2rem; background: #FEFDF8; }
+            .container { max-width: 500px; margin: 0 auto; }
+            h1 { color: #3A8ECD; }
+            p { color: #666; }
+            a { color: #FB8A38; text-decoration: none; }
+            .btn { display: inline-block; margin-top: 1rem; padding: 0.8rem 2rem; background: #3A8ECD; color: white; border-radius: 50px; text-decoration: none; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <h1>😕 Erro Temporário</h1>
+            <p>Estamos passando por uma manutenção rápida. Por favor, tente novamente em alguns segundos.</p>
+            <a href="/" class="btn">Tentar Novamente</a>
+          </div>
+        </body>
+        </html>
+      `, {
+        status: 500,
+        headers: { 'Content-Type': 'text/html; charset=utf-8' }
+      });
     }
   },
 };

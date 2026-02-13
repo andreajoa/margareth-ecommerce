@@ -20,11 +20,27 @@ export const meta = () => {
 export async function loader({context}) {
   const {storefront, cart} = context;
   
-  // Queries Executadas em Paralelo para Performance
-  const [{collections}, {products}] = await Promise.all([
-    storefront.query(FEATURED_COLLECTIONS_QUERY),
-    storefront.query(FEATURED_PRODUCTS_QUERY)
-  ]);
+  // Queries Executadas em Paralelo para Performance com tratamento de erro
+  let collections = {nodes: []};
+  let products = {nodes: []};
+  
+  try {
+    const [collectionsResult, productsResult] = await Promise.all([
+      storefront.query(FEATURED_COLLECTIONS_QUERY).catch(e => {
+        console.error('Error fetching collections:', e);
+        return {collections: {nodes: []}};
+      }),
+      storefront.query(FEATURED_PRODUCTS_QUERY).catch(e => {
+        console.error('Error fetching products:', e);
+        return {products: {nodes: []}};
+      })
+    ]);
+    
+    collections = collectionsResult?.collections || {nodes: []};
+    products = productsResult?.products || {nodes: []};
+  } catch (error) {
+    console.error('Loader error:', error);
+  }
 
   const footerMenu = {
     id: 'custom-footer-manual',

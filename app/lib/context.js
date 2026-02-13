@@ -7,22 +7,47 @@ export async function createHydrogenRouterContext(
   env,
   executionContext,
 ) {
-  // Segurança: Garante que env existe
+  // Segurança: Garante que env existe com valores padrão
   const environment = env || {};
-  const waitUntil = executionContext.waitUntil.bind(executionContext);
+  const waitUntil = executionContext?.waitUntil?.bind(executionContext) || (() => {});
   
   // Segredos com fallback de emergência para não quebrar a loja
   const secrets = environment.SESSION_SECRET 
     ? [environment.SESSION_SECRET] 
     : ['temp-secret-key-fix-deploy'];
 
-  const [cache, session] = await Promise.all([
-    caches.open('hydrogen'),
-    AppSession.init(request, secrets),
-  ]);
+  // Garante que as variáveis críticas existem
+  const storeDomain = environment.PUBLIC_STORE_DOMAIN || 'brinqueteando.myshopify.com';
+  const storefrontToken = environment.PUBLIC_STOREFRONT_API_TOKEN || 'f4519cf3a3a10b4fccca0df4b0a464e1';
+
+  let cache, session;
+  try {
+    cache = await caches.open('hydrogen');
+  } catch (e) {
+    console.error('Cache error:', e);
+    cache = undefined;
+  }
+
+  try {
+    session = await AppSession.init(request, secrets);
+  } catch (e) {
+    console.error('Session error:', e);
+    // Fallback session
+    session = {
+      get: () => null,
+      set: () => {},
+      unset: () => {},
+      commit: () => '',
+      isPending: false,
+    };
+  }
 
   const hydrogenContext = createHydrogenContext({
-    env: environment,
+    env: {
+      ...environment,
+      PUBLIC_STORE_DOMAIN: storeDomain,
+      PUBLIC_STOREFRONT_API_TOKEN: storefrontToken,
+    },
     request,
     cache,
     waitUntil,
