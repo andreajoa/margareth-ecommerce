@@ -21,21 +21,23 @@ export const links = () => {
 };
 
 export async function loader({context}) {
-  // Proteção contra contexto nulo
-  const env = context?.env || {};
+  const {env, cart} = context;
   return {
     env: {
-      PUBLIC_STORE_DOMAIN: env.PUBLIC_STORE_DOMAIN || 'brinqueteando.myshopify.com',
-      PUBLIC_STOREFRONT_API_TOKEN: env.PUBLIC_STOREFRONT_API_TOKEN || 'f4519cf3a3a10b4fccca0df4b0a464e1',
+      PUBLIC_STORE_DOMAIN:
+        env?.PUBLIC_STORE_DOMAIN || 'brinqueteando.myshopify.com',
+      PUBLIC_STOREFRONT_API_TOKEN:
+        env?.PUBLIC_STOREFRONT_API_TOKEN ||
+        'f4519cf3a3a10b4fccca0df4b0a464e1',
     },
     apiVersion: '2024-10',
+    // Deferred — streams in without blocking page render
+    cart: cart.get(),
   };
 }
 
 export default function App() {
-  const data = useLoaderData();
-  const env = data?.env;
-  const apiVersion = data?.apiVersion;
+  const {env, apiVersion, cart} = useLoaderData();
 
   return (
     <html lang="pt-BR">
@@ -54,7 +56,7 @@ export default function App() {
             countryIsoCode="BR"
             languageIsoCode="PT"
           >
-            <Aside />
+            <Aside cart={cart} />
             <Outlet />
           </ShopifyProvider>
         </AsideProvider>
@@ -86,19 +88,30 @@ export function ErrorBoundary() {
         <Links />
       </head>
       <body>
-        <div style={{padding: '2rem', textAlign: 'center', fontFamily: 'sans-serif'}}>
+        <div
+          style={{
+            padding: '2rem',
+            textAlign: 'center',
+            fontFamily: 'sans-serif',
+          }}
+        >
           <h1 style={{fontSize: '3rem', marginBottom: '1rem'}}>😕</h1>
-          <h2 style={{color: '#3A8ECD'}}>Algo deu errado ({errorStatus})</h2>
+          <h2 style={{color: '#3A8ECD'}}>
+            Algo deu errado ({errorStatus})
+          </h2>
           <p>{errorMessage}</p>
           <br />
-          <a href="/" style={{
-            display: 'inline-block', 
-            padding: '10px 20px', 
-            background: '#3A8ECD', 
-            color: 'white', 
-            textDecoration: 'none', 
-            borderRadius: '5px'
-          }}>
+          <a
+            href="/"
+            style={{
+              display: 'inline-block',
+              padding: '10px 20px',
+              background: '#3A8ECD',
+              color: 'white',
+              textDecoration: 'none',
+              borderRadius: '5px',
+            }}
+          >
             Voltar para a Loja
           </a>
         </div>

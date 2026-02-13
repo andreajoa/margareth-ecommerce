@@ -14,6 +14,7 @@ import {AddToCartButton} from '~/components/AddToCartButton';
 
 // 1. Componente Modal Quick View
 function QuickViewModal({ product, onClose }) {
+  console.log('[QUICK VIEW MODAL] Rendering, product:', product?.title);
   const {open} = useAside();
 
   // ✅ FIX: Bloquear scroll do body quando modal aberto
@@ -150,13 +151,17 @@ function ProductCard({product, onQuickView}) {
           />
         )}
         <div
-          className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center cursor-pointer"
-          onClick={(e) => {
-            e.preventDefault();
-            onQuickView(product);
-          }}
+          className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-end justify-center pb-4 cursor-pointer"
         >
-          <button className="opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 bg-white text-[#3A8ECD] font-bold px-6 py-2 rounded-full shadow-lg hover:bg-[#FB8A38] hover:text-white">
+          <button 
+            className="z-50 opacity-100 md:opacity-0 md:group-hover:opacity-100 transform translate-y-4 md:translate-y-0 md:group-hover:translate-y-0 transition-all duration-300 bg-[#FB8A38] text-white font-bold px-4 py-2 rounded-full shadow-lg hover:bg-[#3A8ECD] hover:scale-105"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log('[QUICK VIEW] Button clicked for product:', product.title);
+              onQuickView(product);
+            }}
+          >
             👁️ Espiar
           </button>
         </div>

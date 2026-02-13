@@ -394,7 +394,10 @@ export default function CollectionAll() {
                       
                       {/* Botão Espiar - Sempre visível no mobile, hover no desktop */}
                       <button
-                        onClick={() => setSelectedProduct(product)}
+                        onClick={() => {
+                          console.log('[QUICK VIEW] Button clicked for product:', product.title);
+                          setSelectedProduct(product);
+                        }}
                         className="absolute bottom-2 left-2 right-2 bg-[#FB8A38] text-white px-3 py-2 rounded-full font-semibold text-sm opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 hover:bg-[#3A8ECD] hover:scale-105 z-10"
                         aria-label={`Espiar ${product.title}`}
                       >

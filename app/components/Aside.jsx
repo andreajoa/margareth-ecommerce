@@ -5,37 +5,44 @@ const AsideContext = createContext(null);
 
 export function AsideProvider({children}) {
   const [type, setType] = useState('closed');
-  const [cartData, setCartData] = useState(null); // Cache global do carrinho
 
-  const open = (mode, cart = null) => {
-    if (cart) setCartData(cart); // Atualiza cache se fornecido
-    setType(mode);
-  }
-  const close = () => setType('closed');
-  const toggle = () => setType((prev) => (prev === 'closed' ? 'menu' : 'closed'));
-  const value = useMemo(() => ({type, open, close, toggle, cartData, setCartData}), [type, cartData]);
-  return <AsideContext.Provider value={value}>{children}</AsideContext.Provider>;
+  const value = useMemo(() => ({
+    type,
+    open: (mode) => setType(mode),
+    close: () => setType('closed'),
+  }), [type]);
+
+  return (
+    <AsideContext.Provider value={value}>
+      {children}
+    </AsideContext.Provider>
+  );
 }
 
 export function useAside() {
   const ctx = useContext(AsideContext);
-  if (!ctx) return {type: 'closed', open: () => {}, close: () => {}, toggle: () => {}};
+  if (!ctx) return {type: 'closed', open: () => {}, close: () => {}};
   return ctx;
 }
 
-export function Aside({ cart }) {
-  const {type, close, cartData} = useAside();
-  const isOpen = type !== 'closed';
+/**
+ * Aside drawer — renders cart or menu overlay.
+ * `cart` comes from the root loader as a deferred Promise.
+ * CartDrawer uses <Await> to resolve it.
+ */
+export function Aside({cart}) {
+  const {type, close} = useAside();
 
-  if (!isOpen) return null;
-
-  // Usa cartData do cache se disponível, senão usa o cart do prop
-  const cartToUse = cartData || cart;
+  if (type === 'closed') return null;
 
   return (
     <div
       className="fixed inset-0 z-[9999]"
-      style={{background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)'}}
+      style={{
+        background: 'rgba(0,0,0,0.6)',
+        backdropFilter: 'blur(4px)',
+        WebkitBackdropFilter: 'blur(4px)',
+      }}
       onClick={close}
     >
       <div
@@ -43,6 +50,7 @@ export function Aside({ cart }) {
         onClick={(e) => e.stopPropagation()}
         style={{borderLeft: '4px solid #D4AF69'}}
       >
+        {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-[#D4AF69] bg-[#E9E2D2] flex-shrink-0">
           <h2 className="text-xl font-black text-[#0A3D2F] tracking-wide uppercase">
             {type === 'cart' ? 'Seu Carrinho' : 'Menu'}
@@ -56,8 +64,9 @@ export function Aside({ cart }) {
           </button>
         </div>
 
+        {/* Content */}
         <div className="flex-1 overflow-hidden relative">
-          {type === 'cart' && <CartDrawer cart={cartToUse} close={close} />}
+          {type === 'cart' && <CartDrawer cart={cart} close={close} />}
           {type === 'menu' && <div className="p-4">Menu Mobile</div>}
         </div>
       </div>

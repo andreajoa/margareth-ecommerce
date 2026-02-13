@@ -1,8 +1,8 @@
 import {createCookieSessionStorage} from 'react-router';
 
 /**
- * Session class that properly tracks mutations via isPending.
- * Uses private class fields so Hydrogen can detect when to send Set-Cookie.
+ * Session class with proper isPending tracking.
+ * Hydrogen checks isPending to know when to send Set-Cookie headers.
  */
 export class AppSession {
   isPending = false;
@@ -29,7 +29,6 @@ export class AppSession {
     try {
       session = await storage.getSession(request.headers.get('Cookie'));
     } catch {
-      // If the cookie is corrupted, start fresh
       session = await storage.getSession();
     }
 
@@ -43,13 +42,11 @@ export class AppSession {
   set(key, value) {
     this.#session.set(key, value);
     this.isPending = true;
-    console.log('[SESSION DEBUG] set() called, isPending now:', this.isPending, 'key:', key);
   }
 
   unset(key) {
     this.#session.unset(key);
     this.isPending = true;
-    console.log('[SESSION DEBUG] unset() called, isPending now:', this.isPending, 'key:', key);
   }
 
   commit() {
