@@ -1,22 +1,14 @@
-import React, {createContext, useContext, useState, useMemo} from 'react';
+import React, {createContext, useContext, useState, useMemo, useCallback} from 'react';
 import {CartDrawer} from '~/components/CartDrawer';
 
 const AsideContext = createContext(null);
 
 export function AsideProvider({children}) {
   const [type, setType] = useState('closed');
-
-  const value = useMemo(() => ({
-    type,
-    open: (mode) => setType(mode),
-    close: () => setType('closed'),
-  }), [type]);
-
-  return (
-    <AsideContext.Provider value={value}>
-      {children}
-    </AsideContext.Provider>
-  );
+  const open = useCallback((mode) => setType(mode), []);
+  const close = useCallback(() => setType('closed'), []);
+  const value = useMemo(() => ({type, open, close}), [type, open, close]);
+  return <AsideContext.Provider value={value}>{children}</AsideContext.Provider>;
 }
 
 export function useAside() {
@@ -25,24 +17,14 @@ export function useAside() {
   return ctx;
 }
 
-/**
- * Aside drawer — renders cart or menu overlay.
- * `cart` comes from the root loader as a deferred Promise.
- * CartDrawer uses <Await> to resolve it.
- */
 export function Aside({cart}) {
   const {type, close} = useAside();
-
   if (type === 'closed') return null;
 
   return (
     <div
       className="fixed inset-0 z-[9999]"
-      style={{
-        background: 'rgba(0,0,0,0.6)',
-        backdropFilter: 'blur(4px)',
-        WebkitBackdropFilter: 'blur(4px)',
-      }}
+      style={{background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)'}}
       onClick={close}
     >
       <div
@@ -50,21 +32,14 @@ export function Aside({cart}) {
         onClick={(e) => e.stopPropagation()}
         style={{borderLeft: '4px solid #D4AF69'}}
       >
-        {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-[#D4AF69] bg-[#E9E2D2] flex-shrink-0">
           <h2 className="text-xl font-black text-[#0A3D2F] tracking-wide uppercase">
             {type === 'cart' ? 'Seu Carrinho' : 'Menu'}
           </h2>
-          <button
-            onClick={close}
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-[#0A3D2F] shadow hover:scale-110 transition-transform cursor-pointer border-none"
-            aria-label="Fechar"
-          >
+          <button onClick={close} className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-[#0A3D2F] shadow hover:scale-110 transition-transform cursor-pointer border-none" aria-label="Fechar">
             ✕
           </button>
         </div>
-
-        {/* Content */}
         <div className="flex-1 overflow-hidden relative">
           {type === 'cart' && <CartDrawer cart={cart} close={close} />}
           {type === 'menu' && <div className="p-4">Menu Mobile</div>}

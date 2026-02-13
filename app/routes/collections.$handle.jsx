@@ -53,8 +53,8 @@ function QuickViewModal({ product, onClose }) {
 
   if (!product) return null;
 
-  const variantId = product.variants?.edges?.[0]?.node?.id;
-  const availableForSale = product.variants?.edges?.[0]?.node?.availableForSale ?? true;
+  const variantId = product.variants?.nodes?.[0]?.id;
+  const availableForSale = product.variants?.nodes?.[0]?.availableForSale ?? true;
 
   return (
     <div
@@ -136,8 +136,8 @@ function QuickViewModal({ product, onClose }) {
 function ProductCard({product, onQuickView}) {
   const {open} = useAside();
 
-  const variantId = product.variants?.edges?.[0]?.node?.id;
-  const availableForSale = product.variants?.edges?.[0]?.node?.availableForSale ?? true;
+  const variantId = product.variants?.nodes?.[0]?.id;
+  const availableForSale = product.variants?.nodes?.[0]?.availableForSale ?? true;
 
   return (
     <div className="group bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-xl hover:border-[#3A8ECD]/30 transition-all duration-300 flex flex-col">
