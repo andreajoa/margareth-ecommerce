@@ -41,21 +41,27 @@ export async function action({request, context}) {
 
   const cartId = result?.cart?.id;
   const headers = cartId ? cart.setCartId(result.cart.id) : new Headers();
-
-  headers.set('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0');
+  headers.set('Cache-Control', 'no-cache, no-store, must-revalidate');
 
   const {cart: cartResult, errors, warnings} = result;
 
+  // If the mutation response doesn't include full cart data with lines,
+  // fetch the complete cart
+  let fullCart = cartResult;
+  if (cartResult && (!cartResult.lines || !cartResult.lines.nodes?.length) && cartResult.totalQuantity > 0) {
+    try {
+      fullCart = await cart.get();
+    } catch (e) {
+      console.error('Failed to fetch full cart:', e);
+    }
+  }
+
   return data(
-    {cart: cartResult, errors, warnings, analytics: {cartId}},
+    {cart: fullCart, errors, warnings, analytics: {cartId}},
     {headers},
   );
 }
 
-/**
- * If someone navigates directly to /cart, redirect to homepage.
- * The cart is a drawer, not a page.
- */
 export async function loader() {
   return redirect('/');
 }

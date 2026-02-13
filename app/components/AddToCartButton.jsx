@@ -1,5 +1,6 @@
 import {CartForm} from '@shopify/hydrogen';
 import {useEffect, useRef} from 'react';
+import {useFetcher} from 'react-router';
 import {useAside} from '~/components/Aside';
 
 export function AddToCartButton({
@@ -39,6 +40,9 @@ function AddToCartInner({
 }) {
   const {open, setCartData} = useAside();
   const prevState = useRef(fetcher.state);
+  
+  // Secondary fetcher to load full cart data after adding
+  const cartFetcher = useFetcher();
 
   useEffect(() => {
     if (
@@ -46,24 +50,37 @@ function AddToCartInner({
       fetcher.state === 'idle' &&
       fetcher.data
     ) {
-      // Pass the fresh cart data from the action response to the drawer
-      if (fetcher.data.cart) {
-        setCartData(fetcher.data.cart);
+      const cartData = fetcher.data.cart;
+      
+      if (cartData?.lines?.nodes?.length > 0) {
+        // Action returned full cart with line items — use directly
+        setCartData(cartData);
+        open('cart');
+      } else if (cartData?.id) {
+        // Cart exists but lines are empty in response — fetch full cart
+        // Use a GET to the root loader which calls cart.get()
+        cartFetcher.load('/cart?_data=root');
+        open('cart');
+      } else {
+        // Still open cart even if data is weird
+        open('cart');
       }
-      open('cart');
     }
     prevState.current = fetcher.state;
   }, [fetcher.state, fetcher.data, open, setCartData]);
+
+  // When the secondary fetch completes, update cart data
+  useEffect(() => {
+    if (cartFetcher.state === 'idle' && cartFetcher.data?.cart) {
+      setCartData(cartFetcher.data.cart);
+    }
+  }, [cartFetcher.state, cartFetcher.data, setCartData]);
 
   const isAdding = fetcher.state !== 'idle';
 
   return (
     <>
-      <input
-        name="analytics"
-        type="hidden"
-        value={JSON.stringify(analytics)}
-      />
+      <input name="analytics" type="hidden" value={JSON.stringify(analytics)} />
       <button
         type="submit"
         disabled={disabled ?? isAdding}
