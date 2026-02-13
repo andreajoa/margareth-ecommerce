@@ -5,6 +5,16 @@ import * as remixBuild from 'virtual:react-router/server-build';
 
 export default {
   async fetch(request, env, executionContext) {
+    const url = new URL(request.url);
+    
+    // Handle favicon.ico explicitly to avoid 500 errors
+    if (url.pathname === '/favicon.ico') {
+      return new Response(null, {
+        status: 204,
+        headers: { 'Content-Type': 'image/x-icon' }
+      });
+    }
+    
     try {
       const hydrogenContext = await createHydrogenRouterContext(
         request,
@@ -35,7 +45,7 @@ export default {
     } catch (error) {
       console.error('CRITICAL SERVER ERROR:', error);
       
-      // Retornar uma página de erro amigável
+      // Return a user-friendly error page
       return new Response(`
         <!DOCTYPE html>
         <html lang="pt-BR">

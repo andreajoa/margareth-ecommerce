@@ -7,16 +7,16 @@ export async function createHydrogenRouterContext(
   env,
   executionContext,
 ) {
-  // Segurança: Garante que env existe com valores padrão
+  // Security: Ensure env exists with default values
   const environment = env || {};
   const waitUntil = executionContext?.waitUntil?.bind(executionContext) || (() => {});
   
-  // Segredos com fallback de emergência para não quebrar a loja
+  // Secrets with emergency fallback to not break the store
   const secrets = environment.SESSION_SECRET 
     ? [environment.SESSION_SECRET] 
     : ['temp-secret-key-fix-deploy'];
 
-  // Garante que as variáveis críticas existem
+  // Ensure critical variables exist
   const storeDomain = environment.PUBLIC_STORE_DOMAIN || 'brinqueteando.myshopify.com';
   const storefrontToken = environment.PUBLIC_STOREFRONT_API_TOKEN || 'f4519cf3a3a10b4fccca0df4b0a464e1';
   const apiVersion = '2024-10';
@@ -43,7 +43,7 @@ export async function createHydrogenRouterContext(
     };
   }
 
-  // ✅ FIX: Configuração completa do Hydrogen Context
+  // Create Hydrogen Context
   const hydrogenContext = createHydrogenContext({
     env: {
       ...environment,
@@ -54,7 +54,6 @@ export async function createHydrogenRouterContext(
     cache,
     waitUntil,
     session,
-    // ✅ FIX: Configuração explícita do storefront
     storefront: {
       storeDomain,
       storefrontToken,
@@ -62,7 +61,7 @@ export async function createHydrogenRouterContext(
     },
   });
 
-  // ✅ FIX: Verificar se storefront existe antes de criar cart handler
+  // Create cart handler if storefront exists
   let cart;
   try {
     if (hydrogenContext?.storefront) {
