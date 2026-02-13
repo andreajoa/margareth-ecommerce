@@ -9,7 +9,7 @@ export default defineConfig(() => {
     shopify: {
       storeDomain: 'brinqueteando.myshopify.com',
       storefrontToken: 'f4519cf3a3a10b4fccca0df4b0a464e1',
-      storefrontApiVersion: '2024-10',
+      storefrontApiVersion: '2025-07',
       country: 'BR',
       language: 'PT', // ✅ FIX: Código de idioma correto para Shopify
     },

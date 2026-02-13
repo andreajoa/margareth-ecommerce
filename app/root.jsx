@@ -29,7 +29,7 @@ export async function loader({context}) {
       PUBLIC_STORE_DOMAIN: env?.PUBLIC_STORE_DOMAIN || 'brinqueteando.myshopify.com',
       PUBLIC_STOREFRONT_API_TOKEN: env?.PUBLIC_STOREFRONT_API_TOKEN || 'f4519cf3a3a10b4fccca0df4b0a464e1',
     },
-    apiVersion: '2024-10',
+    apiVersion: '2025-07',
     cart: cartData,
   };
 }
