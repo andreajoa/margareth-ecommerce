@@ -1,16 +1,26 @@
 import {createHydrogenContext} from '@shopify/hydrogen';
-import {createAppSession} from './session';
+import {AppSession} from './session';
+import {CART_QUERY_FRAGMENT} from './fragments';
 
 export async function createHydrogenRouterContext(request, env, executionContext) {
-  const session = await createAppSession(
-    request, 
-    env?.SESSION_SECRET ? [env.SESSION_SECRET] : ['fallback-secret']
-  );
+  const waitUntil = executionContext.waitUntil.bind(executionContext);
+  
+  const [cache, session] = await Promise.all([
+    caches.open('hydrogen'),
+    AppSession.init(request, env?.SESSION_SECRET ? [env.SESSION_SECRET] : ['fallback-secret']),
+  ]);
 
-  return createHydrogenContext({
+  const hydrogenContext = createHydrogenContext({
     env: env || {},
     request,
+    cache,
+    waitUntil,
     session,
-    waitUntil: executionContext?.waitUntil?.bind(executionContext),
+    i18n: {language: 'PT', country: 'BR'},
+    cart: {
+      queryFragment: CART_QUERY_FRAGMENT,
+    },
   });
+
+  return hydrogenContext;
 }

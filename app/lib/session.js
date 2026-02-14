@@ -1,23 +1,61 @@
 import {createCookieSessionStorage} from 'react-router';
 
-export async function createAppSession(request, secrets) {
-  const storage = createCookieSessionStorage({
-    cookie: {
-      name: 'session',
-      httpOnly: true,
-      path: '/',
-      sameSite: 'lax',
-      secrets: secrets || ['fallback-secret'],
-    },
-  });
+export class AppSession {
+  isPending = false;
+  #sessionStorage;
+  #session;
 
-  const session = await storage.getSession(request.headers.get('Cookie'));
+  constructor(sessionStorage, session) {
+    this.#sessionStorage = sessionStorage;
+    this.#session = session;
+  }
 
-  return {
-    isPending: false,
-    get: (key) => session.get(key),
-    set: (key, value) => session.set(key, value),
-    unset: (key) => session.unset(key),
-    commit: () => storage.commitSession(session),
-  };
+  static async init(request, secrets) {
+    const storage = createCookieSessionStorage({
+      cookie: {
+        name: 'session',
+        httpOnly: true,
+        path: '/',
+        sameSite: 'lax',
+        secrets: secrets || ['fallback-secret'],
+      },
+    });
+
+    const session = await storage
+      .getSession(request.headers.get('Cookie'))
+      .catch(() => storage.getSession());
+
+    return new AppSession(storage, session);
+  }
+
+  get has() {
+    return this.#session.has;
+  }
+
+  get get() {
+    return this.#session.get;
+  }
+
+  get flash() {
+    return this.#session.flash;
+  }
+
+  get unset() {
+    this.isPending = true;
+    return this.#session.unset;
+  }
+
+  get set() {
+    this.isPending = true;
+    return this.#session.set;
+  }
+
+  destroy() {
+    return this.#sessionStorage.destroySession(this.#session);
+  }
+
+  commit() {
+    this.isPending = false;
+    return this.#sessionStorage.commitSession(this.#session);
+  }
 }
