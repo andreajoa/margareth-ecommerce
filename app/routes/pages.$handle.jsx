@@ -16,7 +16,17 @@ export async function loader({params, context}) {
     throw new Response('Página não encontrada', {status: 404});
   }
 
-  return {page};
+  // Limpa o HTML da Shopify
+  let cleanBody = page.body || '';
+  cleanBody = cleanBody.replace(/^[\s\S]*?<body[^>]*>/i, '');
+  cleanBody = cleanBody.replace(/<\/body>[\s\S]*$/i, '');
+  cleanBody = cleanBody.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '');
+  cleanBody = cleanBody.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
+  cleanBody = cleanBody.replace(/<meta[^>]*>/gi, '');
+  cleanBody = cleanBody.replace(/<link[^>]*>/gi, '');
+  cleanBody = cleanBody.replace(/<title[^>]*>[\s\S]*?<\/title>/gi, '');
+
+  return {page: {...page, body: cleanBody.trim()}};
 }
 
 export const meta = ({data}) => {
@@ -66,8 +76,7 @@ export default function Page() {
   ];
 
   return (
-    <div className="bg-[#FEFDF8] flex flex-col min-h-screen w-full overflow-x-hidden">
-      {/* HEADER */}
+    <div className="bg-[#FEFDF8] flex flex-col min-h-screen w-full">
       <nav className="bg-white shadow-sm sticky top-0 z-50 w-full border-b-4 border-[#3A8ECD]">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link to="/" className="flex items-center group flex-shrink-0">
@@ -88,30 +97,10 @@ export default function Page() {
         </div>
       </nav>
 
-      {/* CONTEÚDO */}
-      <main className="flex-grow w-full bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
-          <nav className="mb-6 text-sm text-gray-400">
-            <Link to="/" className="hover:text-[#3A8ECD]">Início</Link>
-            <span className="mx-2">›</span>
-            <span className="text-gray-600">{page.title}</span>
-          </nav>
-
-          <header className="mb-8 text-center sm:text-left">
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#0A3D2F] mb-3">
-              {page.title}
-            </h1>
-            <div className="h-1.5 w-20 bg-[#FB8A38] rounded-full mx-auto sm:mx-0"></div>
-          </header>
-
-          <div
-            className="shopify-content"
-            dangerouslySetInnerHTML={{__html: page.body}}
-          />
-        </div>
+      <main className="flex-grow w-full">
+        <div className="w-full" dangerouslySetInnerHTML={{__html: page.body}} />
       </main>
 
-      {/* FOOTER */}
       <footer className="bg-[#FEFDF8] pt-16 pb-8 border-t-4 border-[#3A8ECD] w-full">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {footerMenu.map((group, idx) => (
