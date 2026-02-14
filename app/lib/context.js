@@ -10,35 +10,35 @@ export async function createHydrogenRouterContext(
   const environment = env || {};
   const waitUntil = executionContext?.waitUntil?.bind(executionContext) || (() => {});
 
-  // Secrets para sessão
   const secrets = environment.SESSION_SECRET
     ? [environment.SESSION_SECRET]
-    : ['fallback-secret-key-for-development'];
+    : ['s3cr3t-fallback-key-2024'];
 
-  // Variáveis de ambiente com fallback
   const storeDomain = environment.PUBLIC_STORE_DOMAIN || 'brinqueteando.myshopify.com';
   const storefrontToken = environment.PUBLIC_STOREFRONT_API_TOKEN || 'f4519cf3a3a10b4fccca0df4b0a464e1';
 
-  // Cache
   let cache;
   try {
     cache = await caches.open('hydrogen');
   } catch (e) {
-    console.error('Cache error:', e);
     cache = undefined;
   }
 
-  // Session
   let session;
   try {
     session = await AppSession.init(request, secrets);
   } catch (e) {
-    console.error('Session error:', e);
-    session = new AppSession();
+    console.error('Session init error:', e);
+    // Fallback session object
+    session = {
+      get: () => null,
+      set: () => {},
+      unset: () => {},
+      commit: async () => '',
+      isPending: false,
+    };
   }
 
-  // ✅ FIX: Criar contexto SEM a opção storefront inválida
-  // createHydrogenContext usa env.PUBLIC_STORE_DOMAIN e env.PUBLIC_STOREFRONT_API_TOKEN automaticamente
   const hydrogenContext = createHydrogenContext({
     env: {
       ...environment,
@@ -51,18 +51,23 @@ export async function createHydrogenRouterContext(
     session,
   });
 
-  // ✅ FIX: Criar cart handler com getCartId correto
-  const cart = createCartHandler({
-    storefront: hydrogenContext.storefront,
-    getCartId: () => {
-      const cartId = session.get('cartId');
-      return cartId;
-    },
-    setCartId: (cartId) => {
-      session.set('cartId', cartId);
-    },
-    cartFragment: CART_FRAGMENT,
-  });
+  let cart;
+  try {
+    cart = createCartHandler({
+      storefront: hydrogenContext.storefront,
+      getCartId: () => session.get('cartId'),
+      setCartId: (cartId) => session.set('cartId', cartId),
+      cartFragment: CART_FRAGMENT,
+    });
+  } catch (e) {
+    console.error('Cart handler error:', e);
+    cart = {
+      get: async () => null,
+      addLines: async () => ({}),
+      updateLines: async () => ({}),
+      removeLines: async () => ({}),
+    };
+  }
 
   return {
     ...hydrogenContext,

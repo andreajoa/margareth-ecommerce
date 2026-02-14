@@ -19,8 +19,8 @@ export default {
 
       const response = await handleRequest(request);
 
-      if (hydrogenContext.session.isPending) {
-        response.headers.append(
+      if (hydrogenContext.session?.isPending) {
+        response.headers.set(
           'Set-Cookie',
           await hydrogenContext.session.commit(),
         );
@@ -36,7 +36,7 @@ export default {
 
       return response;
     } catch (error) {
-      console.error(error);
+      console.error('Server error:', error);
       return new Response('An unexpected error occurred', {status: 500});
     }
   },

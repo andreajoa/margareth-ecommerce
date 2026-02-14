@@ -1,8 +1,5 @@
 import {createCookieSessionStorage} from 'react-router';
 
-/**
- * Session class que rastreia mudanças pendentes
- */
 export class AppSession {
   #session;
   #storage;
@@ -16,7 +13,7 @@ export class AppSession {
   static async init(request, secrets) {
     const validSecrets = Array.isArray(secrets) && secrets.length > 0 && secrets[0]
       ? secrets
-      : ['fallback-secret-key-for-development'];
+      : ['s3cr3t-fallback-key-2024'];
 
     const storage = createCookieSessionStorage({
       cookie: {
@@ -25,7 +22,6 @@ export class AppSession {
         path: '/',
         sameSite: 'lax',
         secrets: validSecrets,
-        secure: process.env.NODE_ENV === 'production',
       },
     });
 
@@ -49,12 +45,12 @@ export class AppSession {
 
   set(key, value) {
     this.#session.set(key, value);
-    this.#isPending = true;  // ✅ Marca como pendente quando algo muda
+    this.#isPending = true;
   }
 
   unset(key) {
     this.#session.unset(key);
-    this.#isPending = true;  // ✅ Marca como pendente quando algo muda
+    this.#isPending = true;
   }
 
   async commit() {
