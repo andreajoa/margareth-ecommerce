@@ -1,6 +1,5 @@
 import {CartForm} from '@shopify/hydrogen';
 import {useEffect, useRef} from 'react';
-import {useFetcher} from 'react-router';
 import {useAside} from '~/components/Aside';
 
 export function AddToCartButton({
@@ -12,7 +11,12 @@ export function AddToCartButton({
   className,
 }) {
   return (
-    <CartForm route="/cart" inputs={{lines}} action={CartForm.ACTIONS.LinesAdd}>
+    <CartForm
+      route="/cart"
+      inputs={{lines}}
+      action={CartForm.ACTIONS.LinesAdd}
+      fetcherKey={`add-to-cart-${Date.now()}`}
+    >
       {(fetcher) => (
         <AddToCartInner
           fetcher={fetcher}
@@ -39,42 +43,24 @@ function AddToCartInner({
   lines,
 }) {
   const {open, setCartData} = useAside();
-  const prevState = useRef(fetcher.state);
-  
-  // Secondary fetcher to load full cart data after adding
-  const cartFetcher = useFetcher();
+  const openedRef = useRef(false);
 
   useEffect(() => {
-    if (
-      prevState.current !== 'idle' &&
-      fetcher.state === 'idle' &&
-      fetcher.data
-    ) {
-      const cartData = fetcher.data.cart;
-      
-      if (cartData?.lines?.nodes?.length > 0) {
-        // Action returned full cart with line items — use directly
-        setCartData(cartData);
-        open('cart');
-      } else if (cartData?.id) {
-        // Cart exists but lines are empty in response — fetch full cart
-        // Use a GET to the root loader which calls cart.get()
-        cartFetcher.load('/cart?_data=root');
-        open('cart');
-      } else {
-        // Still open cart even if data is weird
-        open('cart');
+    // When fetcher completes (idle) and has data, open cart with fresh data
+    if (fetcher.state === 'idle' && fetcher.data && !openedRef.current) {
+      openedRef.current = true;
+
+      if (fetcher.data.cart) {
+        setCartData(fetcher.data.cart);
       }
+      open('cart');
     }
-    prevState.current = fetcher.state;
-  }, [fetcher.state, fetcher.data, open, setCartData]);
 
-  // When the secondary fetch completes, update cart data
-  useEffect(() => {
-    if (cartFetcher.state === 'idle' && cartFetcher.data?.cart) {
-      setCartData(cartFetcher.data.cart);
+    // Reset when a new submission starts
+    if (fetcher.state === 'submitting') {
+      openedRef.current = false;
     }
-  }, [cartFetcher.state, cartFetcher.data, setCartData]);
+  }, [fetcher.state, fetcher.data, open, setCartData]);
 
   const isAdding = fetcher.state !== 'idle';
 
@@ -98,7 +84,13 @@ function AddToCartInner({
           if (onClick) onClick(e);
         }}
       >
-        {isAdding ? 'Adicionando...' : children}
+        {isAdding ? (
+          <span className="flex items-center justify-center gap-2">
+            <span className="animate-spin">⏳</span> Adicionando...
+          </span>
+        ) : (
+          children
+        )}
       </button>
     </>
   );

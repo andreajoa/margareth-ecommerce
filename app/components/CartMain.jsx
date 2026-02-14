@@ -1,24 +1,19 @@
 import {CartLineItem} from '~/components/CartLineItem';
 import {CartSummary} from '~/components/CartSummary';
 import {Link} from 'react-router';
-import {useAside} from '~/components/Aside';
 
-export function CartMain({cart, layout, close}) {
-  // Recebe 'close' como prop para evitar ciclo, ou usa hook apenas dentro de eventos
-  
-  // Estrutura segura do carrinho
+export function CartMain({cart, close}) {
   const safeCart = cart || {
     id: 'empty-cart',
-    lines: { nodes: [] },
+    lines: {nodes: []},
     totalQuantity: 0,
     cost: {
-      subtotalAmount: { amount: '0', currencyCode: 'BRL' },
-      totalAmount: { amount: '0', currencyCode: 'BRL' }
+      subtotalAmount: {amount: '0', currencyCode: 'BRL'},
+      totalAmount: {amount: '0', currencyCode: 'BRL'},
     },
     checkoutUrl: '',
   };
 
-  // Normaliza linhas (Hydrogen v2025 retorna .nodes para conexões)
   const lines = safeCart.lines?.nodes || safeCart.lines || [];
   const hasItems = lines.length > 0;
 
@@ -37,10 +32,10 @@ export function CartMain({cart, layout, close}) {
           </div>
           <div style={{
             flexShrink: 0,
-            borderTop: '4px solid #D4AF69',
-            background: '#E9E2D2',
+            borderTop: '3px solid #3A8ECD',
+            background: '#f0f7fc',
             padding: '1.5rem',
-            boxShadow: '0 -4px 20px rgba(0,0,0,0.1)'
+            boxShadow: '0 -4px 20px rgba(58,142,205,0.1)',
           }}>
             <CartSummary cart={safeCart} />
           </div>
@@ -59,26 +54,31 @@ function CartEmpty({close}) {
       alignItems: 'center',
       justifyContent: 'center',
       padding: '2rem',
-      textAlign: 'center'
+      textAlign: 'center',
     }}>
       <div style={{fontSize: '4rem', marginBottom: '1rem'}}>🛒</div>
       <h3 style={{fontSize: '1.5rem', fontWeight: '800', color: '#0A3D2F', marginBottom: '0.5rem'}}>
         Seu carrinho está vazio
       </h3>
+      <p style={{color: '#6b7280', marginBottom: '1.5rem', fontSize: '0.9rem'}}>
+        Explore nossos brinquedos educativos!
+      </p>
       <Link
         to="/collections/all"
         onClick={close}
         style={{
-          background: '#0A3D2F',
+          background: '#3A8ECD',
           color: 'white',
           padding: '0.8rem 2rem',
           borderRadius: '50px',
           textDecoration: 'none',
           fontWeight: 'bold',
-          marginTop: '1rem'
+          fontSize: '0.9rem',
+          boxShadow: '0 4px 12px rgba(58,142,205,0.3)',
+          transition: 'all 0.3s',
         }}
       >
-        Ver Brinquedos
+        🧸 Ver Brinquedos
       </Link>
     </div>
   );

@@ -1,5 +1,5 @@
 import {CartForm} from '@shopify/hydrogen';
-import {data, redirect} from 'react-router';
+import {data} from 'react-router';
 
 export const headers = () => ({
   'Cache-Control': 'no-cache, no-store, must-revalidate, max-age=0',
@@ -26,12 +26,13 @@ export async function action({request, context}) {
     case CartForm.ACTIONS.LinesRemove:
       result = await cart.removeLines(inputs.lineIds);
       break;
-    case CartForm.ACTIONS.DiscountCodesUpdate:
+    case CartForm.ACTIONS.DiscountCodesUpdate: {
       const codes = inputs.discountCodes
         ? inputs.discountCodes.filter(Boolean).map((c) => c.toUpperCase())
         : [];
       result = await cart.updateDiscountCodes(codes);
       break;
+    }
     case CartForm.ACTIONS.BuyerIdentityUpdate:
       result = await cart.updateBuyerIdentity(inputs.buyerIdentity);
       break;
@@ -43,25 +44,29 @@ export async function action({request, context}) {
   const headers = cartId ? cart.setCartId(result.cart.id) : new Headers();
   headers.set('Cache-Control', 'no-cache, no-store, must-revalidate');
 
-  const {cart: cartResult, errors, warnings} = result;
-
-  // If the mutation response doesn't include full cart data with lines,
-  // fetch the complete cart
-  let fullCart = cartResult;
-  if (cartResult && (!cartResult.lines || !cartResult.lines.nodes?.length) && cartResult.totalQuantity > 0) {
+  // After mutation, fetch fresh cart with all line items
+  let fullCart = result?.cart;
+  if (cartId && (!fullCart?.lines?.nodes?.length)) {
     try {
       fullCart = await cart.get();
     } catch (e) {
-      console.error('Failed to fetch full cart:', e);
+      // keep mutation result
     }
   }
 
   return data(
-    {cart: fullCart, errors, warnings, analytics: {cartId}},
+    {
+      cart: fullCart,
+      errors: result?.errors,
+      warnings: result?.warnings,
+      analytics: {cartId},
+    },
     {headers},
   );
 }
 
+// DO NOT redirect — that causes the page to navigate away
+// Just return null for GET requests to /cart
 export async function loader() {
-  return redirect('/');
+  return null;
 }

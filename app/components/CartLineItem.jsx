@@ -10,96 +10,107 @@ export function CartLineItem({line}) {
   if (!product) return null;
 
   return (
-    <li className="flex gap-3 py-4 border-b-2 border-[#E9E2D2]">
-      {/* Product Image */}
-      <div className="flex-shrink-0 w-20 h-20 bg-white rounded-xl overflow-hidden border-2 border-[#3A8ECD] shadow-md">
+    <li style={{
+      display: 'flex',
+      gap: '0.75rem',
+      padding: '1rem 0',
+      borderBottom: '2px solid rgba(58,142,205,0.1)',
+    }}>
+      <div style={{
+        flexShrink: 0,
+        width: '85px',
+        height: '85px',
+        background: '#fff',
+        borderRadius: '12px',
+        overflow: 'hidden',
+        border: '2px solid #3A8ECD',
+        boxShadow: '0 2px 8px rgba(58,142,205,0.15)',
+      }}>
         {image ? (
           <Image
             data={image}
-            width={80}
-            height={80}
-            className="w-full h-full object-contain"
+            width={85}
+            height={85}
+            style={{width: '100%', height: '100%', objectFit: 'contain', padding: '4px'}}
             alt={title || product.title}
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-4xl bg-[#f0f7fc]">
-            🧸
-          </div>
+          <div style={{
+            width: '100%', height: '100%',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: '2rem', background: '#f0f7fc',
+          }}>🧸</div>
         )}
       </div>
 
-      {/* Product Info */}
-      <div className="flex-1 flex flex-col gap-1">
-        <div className="flex justify-between items-start">
+      <div style={{flex: 1, display: 'flex', flexDirection: 'column', gap: '0.2rem'}}>
+        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}>
           <Link
             to={`/products/${product.handle}`}
-            className="text-sm font-bold text-[#0A3D2F] no-underline leading-tight flex-1 mr-2"
+            style={{
+              fontSize: '0.85rem', fontWeight: '700', color: '#0A3D2F',
+              textDecoration: 'none', lineHeight: '1.3', flex: 1, marginRight: '0.5rem',
+            }}
           >
             {product.title}
           </Link>
-          <div className="text-sm font-extrabold text-[#3A8ECD] whitespace-nowrap">
+          <div style={{fontSize: '0.9rem', fontWeight: '800', color: '#3A8ECD', whiteSpace: 'nowrap'}}>
             {cost?.totalAmount && <Money data={cost.totalAmount} />}
           </div>
         </div>
 
-        {/* Variant Options */}
-        {selectedOptions?.length > 0 && (
-          <div className="text-xs text-gray-500 flex flex-wrap gap-1">
+        {selectedOptions?.length > 0 && selectedOptions[0]?.value !== 'Default Title' && (
+          <div style={{fontSize: '0.7rem', display: 'flex', flexWrap: 'wrap', gap: '4px'}}>
             {selectedOptions.map((option) => (
-              <span
-                key={option.name}
-                className="bg-[#E9E2D2] px-2 py-0.5 rounded-full text-[#0A3D2F] font-semibold text-xs"
-              >
+              <span key={option.name} style={{
+                background: '#f0f7fc', padding: '2px 8px', borderRadius: '12px',
+                color: '#3A8ECD', fontWeight: '600', border: '1px solid rgba(58,142,205,0.2)',
+              }}>
                 {option.name}: {option.value}
               </span>
             ))}
           </div>
         )}
 
-        {/* Quantity Controls */}
-        <div className="flex items-center justify-between mt-auto pt-2">
-          <div className="flex items-center border-2 border-[#3A8ECD] rounded-lg bg-white overflow-hidden">
-            <CartForm
-              route="/cart"
-              action={CartForm.ACTIONS.LinesUpdate}
-              inputs={{lines: [{id, quantity: Math.max(0, quantity - 1)}]}}
-            >
-              <button
-                type="submit"
-                disabled={quantity <= 1}
-                className="px-3 h-8 border-none bg-gray-50 cursor-pointer font-bold text-[#3A8ECD] text-lg"
-              >
-                −
-              </button>
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          marginTop: 'auto', paddingTop: '0.4rem',
+        }}>
+          <div style={{
+            display: 'flex', alignItems: 'center',
+            border: '2px solid #3A8ECD', borderRadius: '8px',
+            background: 'white', overflow: 'hidden',
+          }}>
+            <CartForm route="/cart" action={CartForm.ACTIONS.LinesUpdate}
+              inputs={{lines: [{id, quantity: Math.max(0, quantity - 1)}]}}>
+              <button type="submit" disabled={quantity <= 1} style={{
+                padding: '0 10px', height: '30px', border: 'none',
+                background: quantity <= 1 ? '#f3f4f6' : '#f0f7fc',
+                cursor: quantity <= 1 ? 'default' : 'pointer',
+                fontWeight: '700', color: '#3A8ECD', fontSize: '1rem',
+              }}>−</button>
             </CartForm>
-            <span className="text-sm px-2 font-bold min-w-6 text-center text-[#0A3D2F]">
-              {quantity}
-            </span>
-            <CartForm
-              route="/cart"
-              action={CartForm.ACTIONS.LinesUpdate}
-              inputs={{lines: [{id, quantity: quantity + 1}]}}
-            >
-              <button
-                type="submit"
-                className="px-3 h-8 border-none bg-[#f0f7fc] cursor-pointer font-bold text-[#3A8ECD] text-lg"
-              >
-                +
-              </button>
+            <span style={{
+              fontSize: '0.9rem', padding: '0 8px', fontWeight: '700',
+              minWidth: '24px', textAlign: 'center', color: '#0A3D2F',
+            }}>{quantity}</span>
+            <CartForm route="/cart" action={CartForm.ACTIONS.LinesUpdate}
+              inputs={{lines: [{id, quantity: quantity + 1}]}}>
+              <button type="submit" style={{
+                padding: '0 10px', height: '30px', border: 'none',
+                background: '#f0f7fc', cursor: 'pointer',
+                fontWeight: '700', color: '#3A8ECD', fontSize: '1rem',
+              }}>+</button>
             </CartForm>
           </div>
 
-          <CartForm
-            route="/cart"
-            action={CartForm.ACTIONS.LinesRemove}
-            inputs={{lineIds: [id]}}
-          >
-            <button
-              type="submit"
-              className="text-xs text-[#FB8A38] border-none bg-transparent cursor-pointer font-bold underline"
-            >
-              Remover
-            </button>
+          <CartForm route="/cart" action={CartForm.ACTIONS.LinesRemove}
+            inputs={{lineIds: [id]}}>
+            <button type="submit" style={{
+              fontSize: '0.75rem', color: '#FB8A38', border: 'none',
+              background: 'transparent', cursor: 'pointer',
+              fontWeight: '700', textDecoration: 'underline',
+            }}>Remover</button>
           </CartForm>
         </div>
       </div>
