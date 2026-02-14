@@ -67,7 +67,6 @@ export default function Page() {
 
   return (
     <div className="bg-[#FEFDF8] flex flex-col min-h-screen w-full overflow-x-hidden">
-
       {/* HEADER */}
       <nav className="bg-white shadow-sm sticky top-0 z-50 w-full border-b-4 border-[#3A8ECD]">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -75,7 +74,7 @@ export default function Page() {
             <img
               src="https://cdn.shopify.com/s/files/1/0973/7116/0942/files/ChatGPT_Image_Jan_5__2026__01_21_24_PM-removebg-preview_96f44aed-45b5-43f6-86b1-9b1039d9e94b.png?v=1769926918"
               alt="brinqueTEAando"
-              className="h-16 sm:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              className="h-16 sm:h-20 w-auto object-contain"
             />
           </Link>
           <div className="flex items-center gap-4">
@@ -89,18 +88,15 @@ export default function Page() {
         </div>
       </nav>
 
-      {/* CONTEÚDO PRINCIPAL */}
+      {/* CONTEÚDO */}
       <main className="flex-grow w-full bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
-
-          {/* Breadcrumb */}
           <nav className="mb-6 text-sm text-gray-400">
-            <Link to="/" className="hover:text-[#3A8ECD] transition-colors">Início</Link>
+            <Link to="/" className="hover:text-[#3A8ECD]">Início</Link>
             <span className="mx-2">›</span>
             <span className="text-gray-600">{page.title}</span>
           </nav>
 
-          {/* Título */}
           <header className="mb-8 text-center sm:text-left">
             <h1 className="text-2xl sm:text-3xl font-bold text-[#0A3D2F] mb-3">
               {page.title}
@@ -108,9 +104,8 @@ export default function Page() {
             <div className="h-1.5 w-20 bg-[#FB8A38] rounded-full mx-auto sm:mx-0"></div>
           </header>
 
-          {/* Corpo da Página */}
           <div
-            className="policy-content"
+            className="shopify-content"
             dangerouslySetInnerHTML={{__html: page.body}}
           />
         </div>
@@ -121,16 +116,13 @@ export default function Page() {
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {footerMenu.map((group, idx) => (
             <div key={idx} className="text-center sm:text-left">
-              <h3 className="font-bold text-[#0A3D2F] text-sm tracking-widest uppercase mb-4 pb-2 border-b-2 border-transparent hover:border-[#FB8A38] transition-all duration-300 inline-block">
+              <h3 className="font-bold text-[#0A3D2F] text-sm tracking-widest uppercase mb-4 pb-2 border-b-2 border-transparent hover:border-[#FB8A38] transition-all inline-block">
                 {group.title}
               </h3>
               <ul className="flex flex-col gap-3 text-sm text-gray-500">
                 {group.items.map((link, i) => (
                   <li key={i}>
-                    <Link
-                      to={link.url}
-                      className="hover:text-[#FB8A38] transition-colors"
-                    >
+                    <Link to={link.url} className="hover:text-[#FB8A38] transition-colors">
                       {link.title}
                     </Link>
                   </li>
@@ -143,66 +135,6 @@ export default function Page() {
           <p>&copy; {new Date().getFullYear()} brinqueTEAndo. Todos os direitos reservados.</p>
         </div>
       </footer>
-
-      {/* CSS para renderizar HTML da Shopify */}
-      <style dangerouslySetInnerHTML={{__html: `
-        .policy-content {
-          color: #374151;
-          font-size: 1rem;
-          line-height: 1.75;
-          word-wrap: break-word;
-          overflow-wrap: break-word;
-        }
-        .policy-content h1, .policy-content h2, .policy-content h3,
-        .policy-content h4, .policy-content h5, .policy-content h6 {
-          color: #3A8ECD;
-          font-weight: 700;
-          margin-top: 1.5em;
-          margin-bottom: 0.75em;
-          line-height: 1.3;
-        }
-        .policy-content h1 { font-size: 1.75rem; }
-        .policy-content h2 { font-size: 1.5rem; }
-        .policy-content h3 { font-size: 1.25rem; }
-        .policy-content h4 { font-size: 1.125rem; }
-        .policy-content p { margin-bottom: 1em; line-height: 1.75; }
-        .policy-content a { color: #FB8A38; text-decoration: underline; }
-        .policy-content a:hover { color: #3A8ECD; }
-        .policy-content ul, .policy-content ol {
-          margin-left: 1.5em; margin-bottom: 1em; padding-left: 1em;
-        }
-        .policy-content ul { list-style-type: disc; }
-        .policy-content ol { list-style-type: decimal; }
-        .policy-content li { margin-bottom: 0.5em; line-height: 1.6; }
-        .policy-content strong, .policy-content b { font-weight: 700; color: #0A3D2F; }
-        .policy-content em, .policy-content i { font-style: italic; }
-        .policy-content table {
-          width: 100%; border-collapse: collapse; margin: 1.5em 0;
-          font-size: 0.875rem; display: block; overflow-x: auto;
-        }
-        .policy-content thead { background-color: #3A8ECD; color: white; }
-        .policy-content th { padding: 0.75rem 1rem; text-align: left; font-weight: 600; }
-        .policy-content td { padding: 0.75rem 1rem; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
-        .policy-content tbody tr:nth-child(even) { background-color: #f9fafb; }
-        .policy-content tbody tr:hover { background-color: #f0f7ff; }
-        .policy-content img { max-width: 100%; height: auto; border-radius: 8px; margin: 1em 0; }
-        .policy-content blockquote {
-          border-left: 4px solid #FB8A38; padding: 0.75em 1.25em;
-          margin: 1.5em 0; background-color: #FFF8F0; border-radius: 0 8px 8px 0;
-          color: #555; font-style: italic;
-        }
-        .policy-content hr { border: none; border-top: 2px solid #e5e7eb; margin: 2em 0; }
-        .policy-content [style] { max-width: 100% !important; }
-        .policy-content iframe { max-width: 100%; border-radius: 8px; margin: 1em 0; }
-        @media (max-width: 640px) {
-          .policy-content { font-size: 0.9375rem; }
-          .policy-content h1 { font-size: 1.5rem; }
-          .policy-content h2 { font-size: 1.25rem; }
-          .policy-content h3 { font-size: 1.125rem; }
-          .policy-content table { font-size: 0.8125rem; }
-          .policy-content th, .policy-content td { padding: 0.5rem 0.75rem; }
-        }
-      `}} />
     </div>
   );
 }

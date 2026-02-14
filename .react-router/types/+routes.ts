@@ -51,21 +51,12 @@ type Pages = {
   "/cart": {
     params: {};
   };
-  "/graphiql": {
-    params: {};
-  };
-  "/subrequest-profiler": {
-    params: {};
-  };
-  "/.well-known/appspecific/com.chrome.devtools.json": {
-    params: {};
-  };
 };
 
 type RouteFiles = {
   "root.jsx": {
     id: "root";
-    page: "/" | "/api/affiliate/register" | "/collections/:handle" | "/collections" | "/account/affiliate" | "/policies/:handle" | "/products/:handle" | "/collections/all" | "/pages/:handle" | "/login" | "/cart" | "/graphiql" | "/subrequest-profiler" | "/.well-known/appspecific/com.chrome.devtools.json";
+    page: "/" | "/api/affiliate/register" | "/collections/:handle" | "/collections" | "/account/affiliate" | "/policies/:handle" | "/products/:handle" | "/collections/all" | "/pages/:handle" | "/login" | "/cart";
   };
   "routes/api.affiliate.register.jsx": {
     id: "routes/api.affiliate.register";
@@ -110,25 +101,5 @@ type RouteFiles = {
   "routes/cart.jsx": {
     id: "routes/cart";
     page: "/cart";
-  };
-  "../node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout.jsx": {
-    id: "/Users/andrealmeida/Downloads/margareth-ecommerce/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout";
-    page: "/graphiql" | "/subrequest-profiler" | "/.well-known/appspecific/com.chrome.devtools.json" | "/";
-  };
-  "../node_modules/@shopify/hydrogen/dist/vite/virtual-routes/routes/graphiql.jsx": {
-    id: "vite/virtual-routes/routes/graphiql";
-    page: "/graphiql";
-  };
-  "../node_modules/@shopify/hydrogen/dist/vite/virtual-routes/routes/subrequest-profiler.jsx": {
-    id: "vite/virtual-routes/routes/subrequest-profiler";
-    page: "/subrequest-profiler";
-  };
-  "../node_modules/@shopify/hydrogen/dist/vite/virtual-routes/routes/[.]well-known.appspecific.com[.]chrome[.]devtools[.]json.jsx": {
-    id: "vite/virtual-routes/routes/[.]well-known.appspecific.com[.]chrome[.]devtools[.]json";
-    page: "/.well-known/appspecific/com.chrome.devtools.json";
-  };
-  "../node_modules/@shopify/hydrogen/dist/vite/virtual-routes/routes/index.jsx": {
-    id: "vite/virtual-routes/routes/index";
-    page: "/";
   };
 };

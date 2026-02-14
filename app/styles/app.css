@@ -1,1 +1,220 @@
 @import "tailwindcss";
+
+/* ===================================================================
+   SHOPIFY HTML CONTENT - Estilização para páginas e políticas
+   Precisa de !important para sobrescrever o reset do Tailwind v4
+   =================================================================== */
+
+.shopify-content {
+  color: #374151 !important;
+  font-size: 1rem !important;
+  line-height: 1.75 !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Headings */
+.shopify-content h1,
+.shopify-content h2,
+.shopify-content h3,
+.shopify-content h4,
+.shopify-content h5,
+.shopify-content h6 {
+  color: #3A8ECD !important;
+  font-weight: 700 !important;
+  margin-top: 1.5em !important;
+  margin-bottom: 0.75em !important;
+  line-height: 1.3 !important;
+}
+.shopify-content h1 { font-size: 1.75rem !important; }
+.shopify-content h2 { font-size: 1.5rem !important; }
+.shopify-content h3 { font-size: 1.25rem !important; }
+.shopify-content h4 { font-size: 1.125rem !important; }
+.shopify-content h5 { font-size: 1rem !important; }
+.shopify-content h6 { font-size: 0.875rem !important; }
+
+/* Parágrafos */
+.shopify-content p {
+  margin-bottom: 1em !important;
+  line-height: 1.75 !important;
+}
+
+/* Links */
+.shopify-content a {
+  color: #FB8A38 !important;
+  text-decoration: underline !important;
+  transition: color 0.2s !important;
+}
+.shopify-content a:hover {
+  color: #3A8ECD !important;
+}
+
+/* Listas - CRÍTICO: Tailwind remove list-style */
+.shopify-content ul {
+  list-style-type: disc !important;
+  margin-left: 1.5em !important;
+  margin-bottom: 1em !important;
+  padding-left: 1em !important;
+}
+.shopify-content ol {
+  list-style-type: decimal !important;
+  margin-left: 1.5em !important;
+  margin-bottom: 1em !important;
+  padding-left: 1em !important;
+}
+.shopify-content li {
+  margin-bottom: 0.5em !important;
+  line-height: 1.6 !important;
+  display: list-item !important;
+}
+.shopify-content li ul {
+  margin-top: 0.5em !important;
+  list-style-type: circle !important;
+}
+.shopify-content li ol {
+  margin-top: 0.5em !important;
+}
+
+/* Negrito e itálico */
+.shopify-content strong,
+.shopify-content b {
+  font-weight: 700 !important;
+  color: #0A3D2F !important;
+}
+.shopify-content em,
+.shopify-content i {
+  font-style: italic !important;
+}
+
+/* Tabelas */
+.shopify-content table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin: 1.5em 0 !important;
+  font-size: 0.875rem !important;
+  display: table !important;
+  overflow-x: auto !important;
+}
+.shopify-content thead {
+  background-color: #3A8ECD !important;
+  color: white !important;
+}
+.shopify-content th {
+  padding: 0.75rem 1rem !important;
+  text-align: left !important;
+  font-weight: 600 !important;
+  border: 1px solid #e5e7eb !important;
+  color: white !important;
+}
+.shopify-content td {
+  padding: 0.75rem 1rem !important;
+  border: 1px solid #e5e7eb !important;
+  vertical-align: top !important;
+}
+.shopify-content tbody tr:nth-child(even) {
+  background-color: #f9fafb !important;
+}
+.shopify-content tbody tr:hover {
+  background-color: #f0f7ff !important;
+}
+.shopify-content tr {
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+/* Wrapper responsivo para tabelas */
+.shopify-content-table-wrapper {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  margin: 1em 0 !important;
+}
+
+/* Imagens */
+.shopify-content img {
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 8px !important;
+  margin: 1em 0 !important;
+}
+
+/* Blockquotes */
+.shopify-content blockquote {
+  border-left: 4px solid #FB8A38 !important;
+  padding: 0.75em 1.25em !important;
+  margin: 1.5em 0 !important;
+  background-color: #FFF8F0 !important;
+  border-radius: 0 8px 8px 0 !important;
+  color: #555 !important;
+  font-style: italic !important;
+}
+
+/* HR */
+.shopify-content hr {
+  border: none !important;
+  border-top: 2px solid #e5e7eb !important;
+  margin: 2em 0 !important;
+  height: 0 !important;
+}
+
+/* Código */
+.shopify-content code {
+  background-color: #f3f4f6 !important;
+  padding: 0.15em 0.4em !important;
+  border-radius: 4px !important;
+  font-size: 0.875em !important;
+}
+.shopify-content pre {
+  background-color: #1f2937 !important;
+  color: #f9fafb !important;
+  padding: 1em !important;
+  border-radius: 8px !important;
+  overflow-x: auto !important;
+  margin: 1.5em 0 !important;
+}
+.shopify-content pre code {
+  background: none !important;
+  padding: 0 !important;
+  color: inherit !important;
+}
+
+/* Override estilos inline da Shopify */
+.shopify-content [style] {
+  max-width: 100% !important;
+}
+.shopify-content div[style*="overflow"] {
+  overflow-x: auto !important;
+}
+
+/* iFrames */
+.shopify-content iframe {
+  max-width: 100% !important;
+  border-radius: 8px !important;
+  margin: 1em 0 !important;
+}
+
+/* Spans com estilos inline da Shopify */
+.shopify-content span {
+  line-height: inherit !important;
+}
+
+/* Divs aninhadas da Shopify */
+.shopify-content div {
+  max-width: 100% !important;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .shopify-content {
+    font-size: 0.9375rem !important;
+  }
+  .shopify-content h1 { font-size: 1.5rem !important; }
+  .shopify-content h2 { font-size: 1.25rem !important; }
+  .shopify-content h3 { font-size: 1.125rem !important; }
+  .shopify-content table {
+    font-size: 0.8125rem !important;
+    display: block !important;
+  }
+  .shopify-content th,
+  .shopify-content td {
+    padding: 0.5rem 0.75rem !important;
+  }
+}
