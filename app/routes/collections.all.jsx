@@ -196,12 +196,12 @@ export default function CollectionAll() {
 
     const difference = nextHoliday.date.getTime() - now.getTime();
     if (difference > 0) {
-      setCurrentHoliday({
-        name: nextHoliday.name,
-        emoji: nextHoliday.emoji,
-        message: nextHoliday.message
-      });
       return {
+        holiday: {
+          name: nextHoliday.name,
+          emoji: nextHoliday.emoji,
+          message: nextHoliday.message
+        },
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
         minutes: Math.floor((difference / 1000 / 60) % 60),
@@ -213,9 +213,13 @@ export default function CollectionAll() {
 
   useEffect(() => {
     setIsMounted(true);
-    setTimeLeft(calculateHolidayCountdown());
+    const _r = calculateHolidayCountdown();
+    setTimeLeft(_r);
+    if (_r.holiday) setCurrentHoliday(_r.holiday);
     const countdownInterval = setInterval(() => {
-      setTimeLeft(calculateHolidayCountdown());
+      const _r2 = calculateHolidayCountdown();
+      setTimeLeft(_r2);
+      if (_r2.holiday) setCurrentHoliday(_r2.holiday);
     }, 1000);
     return () => clearInterval(countdownInterval);
   }, []);

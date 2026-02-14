@@ -38,7 +38,6 @@ export const meta = () => {
     {tagName: 'link', rel: 'alternate', hreflang: 'x-default', href: 'https://brinqueteaando.online'},
     {tagName: 'link', rel: 'preconnect', href: 'https://cdn.shopify.com'},
     {tagName: 'link', rel: 'dns-prefetch', href: 'https://cdn.shopify.com'},
-    {tagName: 'link', rel: 'preload', as: 'video', href: 'https://cdn.shopify.com/videos/c/o/v/9788927ebacf4e3ca19449cafd11fc55.mp4'},
   ];
 };
 
@@ -169,29 +168,33 @@ export default function Homepage() {
     upcomingHolidays.sort((a, b) => a.date - b.date);
     const nextHoliday = upcomingHolidays[0];
     
-    if (!nextHoliday) return {days: 0, hours: 0, minutes: 0, seconds: 0};
+    if (!nextHoliday) return {days: 0, hours: 0, minutes: 0, seconds: 0, holiday: null};
 
     const difference = nextHoliday.date.getTime() - now.getTime();
     if (difference > 0) {
-      setCurrentHoliday({
-        name: nextHoliday.name,
-        emoji: nextHoliday.emoji,
-        message: nextHoliday.message
-      });
       return {
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
         minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60)
+        seconds: Math.floor((difference / 1000) % 60),
+        holiday: {
+          name: nextHoliday.name,
+          emoji: nextHoliday.emoji,
+          message: nextHoliday.message
+        }
       };
     }
-    return {days: 0, hours: 0, minutes: 0, seconds: 0};
+    return {days: 0, hours: 0, minutes: 0, seconds: 0, holiday: null};
   };
 
   useEffect(() => {
-    setTimeLeft(calculateHolidayCountdown());
+    const result = calculateHolidayCountdown();
+    setTimeLeft(result);
+    if (result.holiday) setCurrentHoliday(result.holiday);
     const countdownInterval = setInterval(() => {
-      setTimeLeft(calculateHolidayCountdown());
+      const r = calculateHolidayCountdown();
+      setTimeLeft(r);
+      if (r.holiday) setCurrentHoliday(r.holiday);
     }, 1000);
     return () => clearInterval(countdownInterval);
   }, []);
