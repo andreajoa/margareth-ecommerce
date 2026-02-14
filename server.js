@@ -12,9 +12,16 @@ export default {
         getLoadContext: () => context,
       });
 
-      return await handleRequest(request);
+      const response = await handleRequest(request);
+
+      // Salvar session cookie se houver mudanças (ex: cartId)
+      if (context.session && context.session.isPending) {
+        response.headers.append('Set-Cookie', await context.session.commit());
+      }
+
+      return response;
     } catch (error) {
-      console.error(error);
+      console.error('Server error:', error);
       return new Response('Error: ' + error.message, {status: 500});
     }
   },
