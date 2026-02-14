@@ -1,27 +1,31 @@
 import {createCookieSessionStorage} from 'react-router';
 
 /**
- * Session class with proper isPending tracking.
- * Hydrogen checks isPending to know when to send Set-Cookie headers.
+ * Session class que rastreia mudanças pendentes
  */
 export class AppSession {
-  isPending = false;
-  #sessionStorage;
   #session;
+  #storage;
+  #isPending = false;
 
-  constructor(sessionStorage, session) {
-    this.#sessionStorage = sessionStorage;
+  constructor(storage, session) {
+    this.#storage = storage;
     this.#session = session;
   }
 
   static async init(request, secrets) {
+    const validSecrets = Array.isArray(secrets) && secrets.length > 0 && secrets[0]
+      ? secrets
+      : ['fallback-secret-key-for-development'];
+
     const storage = createCookieSessionStorage({
       cookie: {
         name: 'session',
         httpOnly: true,
         path: '/',
         sameSite: 'lax',
-        secrets,
+        secrets: validSecrets,
+        secure: process.env.NODE_ENV === 'production',
       },
     });
 
@@ -35,21 +39,26 @@ export class AppSession {
     return new AppSession(storage, session);
   }
 
+  get isPending() {
+    return this.#isPending;
+  }
+
   get(key) {
     return this.#session.get(key);
   }
 
   set(key, value) {
     this.#session.set(key, value);
-    this.isPending = true;
+    this.#isPending = true;  // ✅ Marca como pendente quando algo muda
   }
 
   unset(key) {
     this.#session.unset(key);
-    this.isPending = true;
+    this.#isPending = true;  // ✅ Marca como pendente quando algo muda
   }
 
-  commit() {
-    return this.#sessionStorage.commitSession(this.#session);
+  async commit() {
+    this.#isPending = false;
+    return this.#storage.commitSession(this.#session);
   }
 }
