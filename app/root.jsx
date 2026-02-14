@@ -7,6 +7,7 @@ import {
   useLoaderData,
   useRouteError,
   isRouteErrorResponse,
+  useRouteLoaderData,
 } from 'react-router';
 import {ShopifyProvider} from '@shopify/hydrogen-react';
 import {AsideProvider, Aside} from '~/components/Aside';
@@ -21,21 +22,20 @@ export const links = () => [
 export async function loader({context}) {
   const {env, cart} = context;
   
-  // Await the cart so it's resolved data, not a Promise
-  const cartData = await cart.get();
-  
   return {
     env: {
       PUBLIC_STORE_DOMAIN: env?.PUBLIC_STORE_DOMAIN || 'brinqueteando.myshopify.com',
       PUBLIC_STOREFRONT_API_TOKEN: env?.PUBLIC_STOREFRONT_API_TOKEN || 'f4519cf3a3a10b4fccca0df4b0a464e1',
     },
-    apiVersion: '2025-07',
-    cart: cartData,
+    apiVersion: '2024-10',
+    cart: cart.get(),
   };
 }
 
 export default function App() {
-  const {env, apiVersion, cart} = useLoaderData();
+  const data = useLoaderData();
+  const env = data?.env;
+  const apiVersion = data?.apiVersion;
 
   return (
     <html lang="pt-BR">
@@ -54,7 +54,7 @@ export default function App() {
             countryIsoCode="BR"
             languageIsoCode="PT"
           >
-            <Aside cart={cart} />
+            <Aside cart={data.cart} />
             <Outlet />
           </ShopifyProvider>
         </AsideProvider>
