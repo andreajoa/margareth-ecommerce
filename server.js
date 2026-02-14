@@ -1,40 +1,21 @@
-import {storefrontRedirect} from '@shopify/hydrogen';
 import {createRequestHandler} from '@shopify/hydrogen/oxygen';
 import {createHydrogenRouterContext} from './app/lib/context';
 
 export default {
   async fetch(request, env, executionContext) {
     try {
-      const hydrogenContext = await createHydrogenRouterContext(
-        request,
-        env,
-        executionContext,
-      );
+      const context = await createHydrogenRouterContext(request, env, executionContext);
 
       const handleRequest = createRequestHandler({
         build: await import('virtual:react-router/server-build'),
         mode: process.env.NODE_ENV,
-        getLoadContext: () => hydrogenContext,
+        getLoadContext: () => context,
       });
 
-      const response = await handleRequest(request);
-
-      if (hydrogenContext.session && hydrogenContext.session.isPending) {
-        response.headers.set('Set-Cookie', await hydrogenContext.session.commit());
-      }
-
-      if (response.status === 404) {
-        return storefrontRedirect({
-          request,
-          response,
-          storefront: hydrogenContext.storefront,
-        });
-      }
-
-      return response;
+      return await handleRequest(request);
     } catch (error) {
-      console.error('Server error:', error);
-      return new Response('An unexpected error occurred', {status: 500});
+      console.error(error);
+      return new Response('Error: ' + error.message, {status: 500});
     }
   },
 };
