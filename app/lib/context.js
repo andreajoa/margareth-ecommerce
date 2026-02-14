@@ -7,15 +7,10 @@ export async function createHydrogenRouterContext(request, env, executionContext
     env?.SESSION_SECRET ? [env.SESSION_SECRET] : ['fallback-secret']
   );
 
-  const hydrogenContext = createHydrogenContext({
+  return createHydrogenContext({
     env: env || {},
     request,
     session,
     waitUntil: executionContext?.waitUntil?.bind(executionContext),
   });
-
-  return {
-    ...hydrogenContext,
-    session,
-  };
 }

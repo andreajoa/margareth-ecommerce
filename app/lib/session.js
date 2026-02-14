@@ -12,13 +12,12 @@ export async function createAppSession(request, secrets) {
   });
 
   const session = await storage.getSession(request.headers.get('Cookie'));
-  let pending = false;
 
   return {
-    get isPending() { return pending; },
+    isPending: false,
     get: (key) => session.get(key),
-    set: (key, value) => { session.set(key, value); pending = true; },
-    unset: (key) => { session.unset(key); pending = true; },
+    set: (key, value) => session.set(key, value),
+    unset: (key) => session.unset(key),
     commit: () => storage.commitSession(session),
   };
 }
