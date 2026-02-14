@@ -99,8 +99,9 @@ export default function Homepage() {
   const {collections, products, footerMenu, cart} = useLoaderData();
   const [currentPromo, setCurrentPromo] = useState(0);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const [timeLeft, setTimeLeft] = useState({days: 0, hours: 0, minutes: 0, seconds: 0});
+    const [timeLeft, setTimeLeft] = useState({days: 0, hours: 0, minutes: 0, seconds: 0});
   const [currentHoliday, setCurrentHoliday] = useState({name: 'Holiday', emoji: '🎉', message: 'COUNTDOWN'});
+  const [isMounted, setIsMounted] = useState(false);
   const {open} = useAside(); // Hook para abrir o carrinho
 
   // Ahrefs Analytics Script
@@ -188,14 +189,14 @@ export default function Homepage() {
   };
 
   useEffect(() => {
-    const result = calculateHolidayCountdown();
-    setTimeLeft(result);
-    if (result.holiday) setCurrentHoliday(result.holiday);
-    const countdownInterval = setInterval(() => {
+    setIsMounted(true);
+    const update = () => {
       const r = calculateHolidayCountdown();
-      setTimeLeft(r);
+      setTimeLeft({days: r.days, hours: r.hours, minutes: r.minutes, seconds: r.seconds});
       if (r.holiday) setCurrentHoliday(r.holiday);
-    }, 1000);
+    };
+    update();
+    const countdownInterval = setInterval(update, 1000);
     return () => clearInterval(countdownInterval);
   }, []);
 

@@ -213,14 +213,13 @@ export default function CollectionAll() {
 
   useEffect(() => {
     setIsMounted(true);
-    const _r = calculateHolidayCountdown();
-    setTimeLeft(_r);
-    if (_r.holiday) setCurrentHoliday(_r.holiday);
-    const countdownInterval = setInterval(() => {
-      const _r2 = calculateHolidayCountdown();
-      setTimeLeft(_r2);
-      if (_r2.holiday) setCurrentHoliday(_r2.holiday);
-    }, 1000);
+    const update = () => {
+      const r = calculateHolidayCountdown();
+      setTimeLeft({days: r.days, hours: r.hours, minutes: r.minutes, seconds: r.seconds});
+      if (r.holiday) setCurrentHoliday(r.holiday);
+    };
+    update();
+    const countdownInterval = setInterval(update, 1000);
     return () => clearInterval(countdownInterval);
   }, []);
 
