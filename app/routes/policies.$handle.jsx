@@ -37,23 +37,28 @@ export const meta = ({data}) => {
 export default function Policy() {
   const {policy} = useLoaderData();
 
-  // Force styles on client-side
   useEffect(() => {
     const style = document.createElement('style');
     style.textContent = `
-      .shopify-content { color: #374151 !important; font-size: 1rem !important; line-height: 1.75 !important; }
-      .shopify-content h1, .shopify-content h2, .shopify-content h3 { color: #3A8ECD !important; font-weight: 700 !important; margin: 1.5em 0 0.75em 0 !important; }
+      .shopify-content { color: #374151 !important; font-size: 1rem !important; line-height: 1.75 !important; word-wrap: break-word !important; }
+      .shopify-content h1, .shopify-content h2, .shopify-content h3, .shopify-content h4 { color: #3A8ECD !important; font-weight: 700 !important; margin: 1.5em 0 0.75em 0 !important; line-height: 1.3 !important; }
       .shopify-content h1 { font-size: 1.75rem !important; }
       .shopify-content h2 { font-size: 1.5rem !important; }
       .shopify-content h3 { font-size: 1.25rem !important; }
-      .shopify-content p { margin-bottom: 1em !important; }
+      .shopify-content h4 { font-size: 1.125rem !important; }
+      .shopify-content p { margin-bottom: 1em !important; line-height: 1.75 !important; }
       .shopify-content ul { list-style-type: disc !important; margin-left: 1.5em !important; padding-left: 1em !important; margin-bottom: 1em !important; }
       .shopify-content ol { list-style-type: decimal !important; margin-left: 1.5em !important; padding-left: 1em !important; margin-bottom: 1em !important; }
-      .shopify-content li { margin-bottom: 0.5em !important; display: list-item !important; }
+      .shopify-content li { margin-bottom: 0.5em !important; display: list-item !important; line-height: 1.6 !important; }
       .shopify-content strong, .shopify-content b { font-weight: 700 !important; color: #0A3D2F !important; }
+      .shopify-content em, .shopify-content i { font-style: italic !important; }
       .shopify-content a { color: #FB8A38 !important; text-decoration: underline !important; }
       .shopify-content table { width: 100% !important; border-collapse: collapse !important; margin: 1.5em 0 !important; }
-      .shopify-content th, .shopify-content td { padding: 0.75rem 1rem !important; border: 1px solid #e5e7eb !important; }
+      .shopify-content th { padding: 0.75rem 1rem !important; border: 1px solid #e5e7eb !important; background-color: #3A8ECD !important; color: white !important; }
+      .shopify-content td { padding: 0.75rem 1rem !important; border: 1px solid #e5e7eb !important; }
+      .shopify-content img { max-width: 100% !important; height: auto !important; border-radius: 8px !important; margin: 1em 0 !important; }
+      .shopify-content blockquote { border-left: 4px solid #FB8A38 !important; padding: 0.75em 1.25em !important; margin: 1.5em 0 !important; background-color: #FFF8F0 !important; }
+      .shopify-content hr { border: none !important; border-top: 2px solid #e5e7eb !important; margin: 2em 0 !important; }
     `;
     document.head.appendChild(style);
     return () => style.remove();
@@ -95,7 +100,7 @@ export default function Policy() {
   ];
 
   return (
-    <div className="bg-[#FEFDF8] flex flex-col min-h-screen w-full overflow-x-hidden">
+    <div className="bg-[#FEFDF8] flex flex-col min-h-screen w-full">
       {/* HEADER */}
       <nav className="bg-white shadow-sm sticky top-0 z-50 w-full border-b-4 border-[#3A8ECD]">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -119,24 +124,26 @@ export default function Policy() {
 
       {/* CONTEÚDO */}
       <main className="flex-grow w-full bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
           <nav className="mb-6 text-sm text-gray-400">
             <Link to="/" className="hover:text-[#3A8ECD]">Início</Link>
             <span className="mx-2">›</span>
             <span className="text-gray-600">{policy.title}</span>
           </nav>
 
-          <header className="mb-8 text-center sm:text-left">
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#0A3D2F] mb-3">
+          <header className="mb-8 text-center">
+            <h1 className="text-3xl sm:text-4xl font-bold text-[#0A3D2F] mb-4">
               {policy.title}
             </h1>
-            <div className="h-1.5 w-20 bg-[#FB8A38] rounded-full mx-auto sm:mx-0"></div>
+            <div className="h-1.5 w-20 bg-[#FB8A38] rounded-full mx-auto"></div>
           </header>
 
-          <div
-            className="shopify-content"
-            dangerouslySetInnerHTML={{__html: policy.body}}
-          />
+          <div className="w-full max-w-4xl mx-auto">
+            <div
+              className="shopify-content"
+              dangerouslySetInnerHTML={{__html: policy.body}}
+            />
+          </div>
         </div>
       </main>
 
