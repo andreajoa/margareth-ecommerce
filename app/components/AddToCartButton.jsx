@@ -15,7 +15,6 @@ export function AddToCartButton({
       route="/cart"
       inputs={{lines}}
       action={CartForm.ACTIONS.LinesAdd}
-      fetcherKey={`add-to-cart-${Date.now()}`}
     >
       {(fetcher) => (
         <AddToCartInner
@@ -43,23 +42,21 @@ function AddToCartInner({
   lines,
 }) {
   const {open, setCartData} = useAside();
-  const openedRef = useRef(false);
+  const prevStateRef = useRef('idle');
 
   useEffect(() => {
-    // When fetcher completes (idle) and has data, open cart with fresh data
-    if (fetcher.state === 'idle' && fetcher.data && !openedRef.current) {
-      openedRef.current = true;
+    const wasSubmitting = prevStateRef.current !== 'idle';
+    const isNowIdle = fetcher.state === 'idle';
+    const hasData = !!fetcher.data;
 
+    if (wasSubmitting && isNowIdle && hasData) {
       if (fetcher.data.cart) {
         setCartData(fetcher.data.cart);
       }
       open('cart');
     }
 
-    // Reset when a new submission starts
-    if (fetcher.state === 'submitting') {
-      openedRef.current = false;
-    }
+    prevStateRef.current = fetcher.state;
   }, [fetcher.state, fetcher.data, open, setCartData]);
 
   const isAdding = fetcher.state !== 'idle';
@@ -84,13 +81,7 @@ function AddToCartInner({
           if (onClick) onClick(e);
         }}
       >
-        {isAdding ? (
-          <span className="flex items-center justify-center gap-2">
-            <span className="animate-spin">⏳</span> Adicionando...
-          </span>
-        ) : (
-          children
-        )}
+        {isAdding ? '⏳ Adicionando...' : children}
       </button>
     </>
   );
