@@ -1,6 +1,5 @@
 import {createHydrogenContext, createCartHandler} from '@shopify/hydrogen';
 import {createAppSession} from './session';
-import {CART_FRAGMENT} from './queries';
 
 export async function createHydrogenRouterContext(request, env, executionContext) {
   const session = await createAppSession(
@@ -17,18 +16,13 @@ export async function createHydrogenRouterContext(request, env, executionContext
 
   const cart = createCartHandler({
     storefront: hydrogenContext.storefront,
-    getCartId: () => {
-      const cartId = session.get('cartId');
-      return cartId;
-    },
-    setCartId: (cartId) => {
-      session.set('cartId', cartId);
-    },
-    cartFragment: CART_FRAGMENT,
+    getCartId: () => session.get('cartId'),
+    setCartId: (cartId) => session.set('cartId', cartId),
   });
 
   return {
     ...hydrogenContext,
     cart,
+    session,
   };
 }
