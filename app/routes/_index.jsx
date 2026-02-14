@@ -38,6 +38,13 @@ export const meta = () => {
     {tagName: 'link', rel: 'alternate', hreflang: 'x-default', href: 'https://brinqueteaando.online'},
     {tagName: 'link', rel: 'preconnect', href: 'https://cdn.shopify.com'},
     {tagName: 'link', rel: 'dns-prefetch', href: 'https://cdn.shopify.com'},
+    {'script:ld+json': {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      'name': 'brinqueTEAndo',
+      'url': 'https://brinqueteaando.online',
+      'description': 'Loja especializada em brinquedos sensoriais e educativos para crianças com Autismo e TDAH.',
+    }},
   ];
 };
 
@@ -104,14 +111,15 @@ export default function Homepage() {
   const [isMounted, setIsMounted] = useState(false);
   const {open} = useAside(); // Hook para abrir o carrinho
 
-  // Ahrefs Analytics Script
+  // Ahrefs Analytics - loaded via useEffect safely
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://analytics.ahrefs.com/analytics.js';
-    script.async = true;
-    script.setAttribute('data-key', 'ffWKXpflS652BvLv6vtybg');
-    document.body.appendChild(script);
-    return () => {};
+    try {
+      const s = document.createElement('script');
+      s.src = 'https://analytics.ahrefs.com/analytics.js';
+      s.async = true;
+      s.dataset.key = 'ffWKXpflS652BvLv6vtybg';
+      document.head.appendChild(s);
+    } catch (e) {}
   }, []);
 
   const schemaOrgJSON = [
@@ -210,40 +218,17 @@ export default function Homepage() {
     return () => clearInterval(testimonialTimer);
   }, []);
 
-  // FORCE VIDEO AUTOPLAY ON MOBILE - RESPECT ACCESSIBILITY
+  // Video autoplay - safe version
   useEffect(() => {
-    if (typeof document !== 'undefined') {
-      if (document.documentElement.classList.contains('neurodivergent')) return;
-    }
-    const video = document.getElementById('hero-video');
-    if (video) {
-      const playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(err => {
-          const forcePlay = () => {
-            if (!document.documentElement.classList.contains('neurodivergent')) {
-              video.play();
-            }
-            document.removeEventListener('touchstart', forcePlay);
-            document.removeEventListener('click', forcePlay);
-            document.removeEventListener('scroll', forcePlay);
-          };
-          document.addEventListener('touchstart', forcePlay, { once: true });
-          document.addEventListener('click', forcePlay, { once: true });
-          document.addEventListener('scroll', forcePlay, { once: true });
-        });
-      }
-      setTimeout(() => {
-        if (!document.documentElement.classList.contains('neurodivergent')) {
-          video.play().catch(() => {});
-        }
-      }, 100);
-    }
+    try {
+      const video = document.getElementById('hero-video');
+      if (video) video.play().catch(() => {});
+    } catch (e) {}
   }, []);
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(schemaOrgJSON)}} />
+{/* Schema moved to meta tags */}
       
       <style>{`
         header { display: none !important; }
@@ -429,7 +414,7 @@ export default function Homepage() {
                         {cart?.totalQuantity || 0}
                       </span>
                   </button>
-                  <button onClick={() => { const menu = document.getElementById('mobile-menu'); menu.classList.toggle('hidden'); }} className="lg:hidden text-[#3A8ECD] p-2" aria-label="Toggle menu">
+                  <button onClick={() => { const m = document.getElementById('mobile-menu'); if(m) m.classList.toggle('hidden'); }} className="lg:hidden text-[#3A8ECD] p-2" aria-label="Toggle menu">
                     <span className="text-2xl">☰</span>
                   </button>
                 </div>
@@ -447,7 +432,7 @@ export default function Homepage() {
                     {name: 'Apoio aos Pais', href: '/collections/apoio-aos-pais'},
                     {name: 'CONTATO', href: '/pages/contact'}
                   ].map(item => (
-                    <Link key={item.name} to={item.href} className="text-[#3A8ECD] text-sm font-semibold tracking-wide hover:text-[#FB8A38] transition-colors py-2 border-b border-gray-200 uppercase" onClick={() => { const menu = document.getElementById('mobile-menu'); menu.classList.add('hidden'); }}>
+                    <Link key={item.name} to={item.href} className="text-[#3A8ECD] text-sm font-semibold tracking-wide hover:text-[#FB8A38] transition-colors py-2 border-b border-gray-200 uppercase" onClick={() => { const m = document.getElementById('mobile-menu'); if(m) m.classList.add('hidden'); }}>
                       {item.name}
                     </Link>
                   ))}
