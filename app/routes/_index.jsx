@@ -274,10 +274,10 @@ export default function Homepage() {
                 {currentHoliday?.emoji} {currentHoliday?.message} {currentHoliday?.emoji}
               </span>
               <div className="flex items-center gap-2 border-2 border-white px-4 py-1 bg-white/20">
-                <span className="text-2xl font-bold">{String(timeLeft.days).padStart(2, '0')}</span><span className="text-xs">D</span>
-                <span className="text-2xl font-bold">{String(timeLeft.hours).padStart(2, '0')}</span><span className="text-xs">H</span>
-                <span className="text-2xl font-bold">{String(timeLeft.minutes).padStart(2, '0')}</span><span className="text-xs">M</span>
-                <span className="text-2xl font-bold">{String(timeLeft.seconds).padStart(2, '0')}</span><span className="text-xs">S</span>
+                <span className="text-2xl font-bold" suppressHydrationWarning>{isMounted ? String(timeLeft.days).padStart(2, '0') : '00'}</span><span className="text-xs">D</span>
+                <span className="text-2xl font-bold" suppressHydrationWarning>{isMounted ? String(timeLeft.hours).padStart(2, '0') : '00'}</span><span className="text-xs">H</span>
+                <span className="text-2xl font-bold" suppressHydrationWarning>{isMounted ? String(timeLeft.minutes).padStart(2, '0') : '00'}</span><span className="text-xs">M</span>
+                <span className="text-2xl font-bold" suppressHydrationWarning>{isMounted ? String(timeLeft.seconds).padStart(2, '0') : '00'}</span><span className="text-xs">S</span>
               </div>
             </div>
           </div>
