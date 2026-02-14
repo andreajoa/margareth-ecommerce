@@ -1,4 +1,4 @@
-import {createHydrogenContext} from '@shopify/hydrogen';
+import {createHydrogenContext, createCartHandler} from '@shopify/hydrogen';
 import {createAppSession} from './session';
 
 export async function createHydrogenRouterContext(request, env, executionContext) {
@@ -7,10 +7,22 @@ export async function createHydrogenRouterContext(request, env, executionContext
     env?.SESSION_SECRET ? [env.SESSION_SECRET] : ['fallback-secret']
   );
 
-  return createHydrogenContext({
+  const hydrogenContext = createHydrogenContext({
     env: env || {},
     request,
     session,
     waitUntil: executionContext?.waitUntil?.bind(executionContext),
   });
+
+  const cart = createCartHandler({
+    storefront: hydrogenContext.storefront,
+    getCartId: () => session.get('cartId'),
+    setCartId: (cartId) => session.set('cartId', cartId),
+  });
+
+  return {
+    ...hydrogenContext,
+    cart,
+    session,
+  };
 }
