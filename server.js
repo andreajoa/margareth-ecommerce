@@ -19,11 +19,8 @@ export default {
 
       const response = await handleRequest(request);
 
-      if (hydrogenContext.session?.isPending) {
-        response.headers.set(
-          'Set-Cookie',
-          await hydrogenContext.session.commit(),
-        );
+      if (hydrogenContext.session && hydrogenContext.session.isPending) {
+        response.headers.set('Set-Cookie', await hydrogenContext.session.commit());
       }
 
       if (response.status === 404) {
