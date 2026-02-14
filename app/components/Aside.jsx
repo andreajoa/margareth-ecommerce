@@ -1,5 +1,5 @@
 import React, {createContext, useContext, useState, useMemo, useCallback, useEffect} from 'react';
-import {useFetchers} from 'react-router';
+import {useFetcher, useFetchers} from 'react-router';
 import {CartDrawer} from '~/components/CartDrawer';
 
 const AsideContext = createContext(null);
@@ -18,27 +18,35 @@ export function useAside() {
   return ctx;
 }
 
-export function Aside({cart: initialCart}) {
+export function Aside() {
   const {type, close} = useAside();
-  const [cart, setCart] = useState(initialCart);
-  const fetchers = useFetchers();
-  
-  // Atualiza o cart quando qualquer fetcher do /cart completa
+  const fetcher = useFetcher();
+  const allFetchers = useFetchers();
+  const [cart, setCart] = useState(null);
+
+  // Busca o cart quando abre o drawer
   useEffect(() => {
-    const cartFetcher = fetchers.find(
+    if (type === 'cart') {
+      fetcher.load('/cart');
+    }
+  }, [type]);
+
+  // Atualiza cart do fetcher.load
+  useEffect(() => {
+    if (fetcher.data?.cart) {
+      setCart(fetcher.data.cart);
+    }
+  }, [fetcher.data]);
+
+  // Atualiza cart quando qualquer action do /cart completa
+  useEffect(() => {
+    const cartFetcher = allFetchers.find(
       (f) => f.formAction === '/cart' && f.state === 'idle' && f.data?.cart
     );
     if (cartFetcher?.data?.cart) {
       setCart(cartFetcher.data.cart);
     }
-  }, [fetchers]);
-
-  // Também atualiza quando o initialCart muda
-  useEffect(() => {
-    if (initialCart) {
-      setCart(initialCart);
-    }
-  }, [initialCart]);
+  }, [allFetchers]);
 
   if (type === 'closed') return null;
 
@@ -55,7 +63,7 @@ export function Aside({cart: initialCart}) {
       >
         <div className="flex items-center justify-between px-6 py-4 border-b-2 border-[#3A8ECD] bg-[#f0f7fc] flex-shrink-0">
           <h2 className="text-xl font-black text-[#0A3D2F] tracking-wide uppercase">
-            {type === 'cart' ? '🛒 Seu Carrinho' : 'Menu'}
+            🛒 Seu Carrinho
           </h2>
           <button 
             onClick={close} 
@@ -67,7 +75,6 @@ export function Aside({cart: initialCart}) {
         </div>
         <div className="flex-1 overflow-hidden relative">
           {type === 'cart' && <CartDrawer cart={cart} close={close} />}
-          {type === 'menu' && <div className="p-4">Menu Mobile</div>}
         </div>
       </div>
     </div>
