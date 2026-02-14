@@ -8,65 +8,56 @@ export const headers = () => ({
 export async function action({request, context}) {
   const {cart} = context;
   const formData = await request.formData();
-  const {action: cartAction, inputs} = CartForm.getFormInput(formData);
 
-  if (!cartAction) {
-    throw new Error('No cart action defined');
+  let cartAction, inputs;
+
+  const manualAction = formData.get('cartAction');
+  if (manualAction) {
+    if (manualAction === 'LinesAdd') {
+      cartAction = 'LinesAdd';
+      inputs = {lines: JSON.parse(formData.get('lines'))};
+    } else if (manualAction === 'LinesUpdate') {
+      cartAction = 'LinesUpdate';
+      inputs = {lines: JSON.parse(formData.get('lines'))};
+    } else if (manualAction === 'LinesRemove') {
+      cartAction = 'LinesRemove';
+      inputs = {lineIds: JSON.parse(formData.get('lineIds'))};
+    }
+  } else {
+    const parsed = CartForm.getFormInput(formData);
+    cartAction = parsed.action;
+    inputs = parsed.inputs;
   }
+
+  if (!cartAction) throw new Error('No cart action');
 
   let result;
 
-  switch (cartAction) {
-    case CartForm.ACTIONS.LinesAdd:
-      result = await cart.addLines(inputs.lines);
-      break;
-    case CartForm.ACTIONS.LinesUpdate:
-      result = await cart.updateLines(inputs.lines);
-      break;
-    case CartForm.ACTIONS.LinesRemove:
-      result = await cart.removeLines(inputs.lineIds);
-      break;
-    case CartForm.ACTIONS.DiscountCodesUpdate: {
-      const codes = inputs.discountCodes
-        ? inputs.discountCodes.filter(Boolean).map((c) => c.toUpperCase())
-        : [];
-      result = await cart.updateDiscountCodes(codes);
-      break;
-    }
-    case CartForm.ACTIONS.BuyerIdentityUpdate:
-      result = await cart.updateBuyerIdentity(inputs.buyerIdentity);
-      break;
-    default:
-      throw new Error(`${cartAction} cart action is not defined`);
+  if (cartAction === 'LinesAdd' || cartAction === CartForm.ACTIONS.LinesAdd) {
+    result = await cart.addLines(inputs.lines);
+  } else if (cartAction === 'LinesUpdate' || cartAction === CartForm.ACTIONS.LinesUpdate) {
+    result = await cart.updateLines(inputs.lines);
+  } else if (cartAction === 'LinesRemove' || cartAction === CartForm.ACTIONS.LinesRemove) {
+    result = await cart.removeLines(inputs.lineIds);
+  } else if (cartAction === CartForm.ACTIONS.DiscountCodesUpdate) {
+    result = await cart.updateDiscountCodes(inputs.discountCodes || []);
+  } else if (cartAction === CartForm.ACTIONS.BuyerIdentityUpdate) {
+    result = await cart.updateBuyerIdentity(inputs.buyerIdentity);
   }
 
   const cartId = result?.cart?.id;
   const headers = cartId ? cart.setCartId(result.cart.id) : new Headers();
   headers.set('Cache-Control', 'no-cache, no-store, must-revalidate');
 
-  // After mutation, fetch fresh cart with all line items
   let fullCart = result?.cart;
-  if (cartId && (!fullCart?.lines?.nodes?.length)) {
-    try {
-      fullCart = await cart.get();
-    } catch (e) {
-      // keep mutation result
-    }
-  }
+  try {
+    const fresh = await cart.get();
+    if (fresh?.lines) fullCart = fresh;
+  } catch (e) {}
 
-  return data(
-    {
-      cart: fullCart,
-      errors: result?.errors,
-      warnings: result?.warnings,
-      analytics: {cartId},
-    },
-    {headers},
-  );
+  return data({cart: fullCart, errors: result?.errors, analytics: {cartId}}, {headers});
 }
 
-// DO NOT redirect — that causes the page to navigate away
-// Just return null for GET requests to /cart
 export async function loader() {
   return null;
 }
