@@ -20,7 +20,6 @@ export default {
       const response = await handleRequest(request);
 
       if (hydrogenContext.session.isPending) {
-        // CRITICAL: Use append, not set — preserves cart cookies
         response.headers.append(
           'Set-Cookie',
           await hydrogenContext.session.commit(),

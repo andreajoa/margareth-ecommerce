@@ -1,15 +1,6 @@
 import {createHydrogenContext} from '@shopify/hydrogen';
 import {AppSession} from './session';
-import {CART_FRAGMENT} from './queries';
 
-/**
- * Creates the Hydrogen context for every request.
- *
- * FIXES:
- *  - Removed invalid `storefront` option (was overwriting the real Storefront client)
- *  - Cart configured via built-in `cart` option (proper getCartId/setCartId)
- *  - Session uses class with isPending tracking
- */
 export async function createHydrogenRouterContext(
   request,
   env,
@@ -25,14 +16,6 @@ export async function createHydrogenRouterContext(
     ]),
   ]);
 
-  /**
-   * createHydrogenContext reads PUBLIC_STORE_DOMAIN and
-   * PUBLIC_STOREFRONT_API_TOKEN from `env` to build the
-   * Storefront API client automatically.
-   *
-   * Do NOT pass a `storefront` key — that overwrites the
-   * real client (which has .query()/.mutate()) with a plain object.
-   */
   const hydrogenContext = createHydrogenContext({
     env: {
       ...env,
@@ -46,9 +29,9 @@ export async function createHydrogenRouterContext(
     cache,
     waitUntil,
     session,
-    cart: {
-      queryFragment: CART_FRAGMENT,
-    },
+    // NO custom cart fragment - Hydrogen's default works perfectly
+    // The custom CartFragment was causing silent mutation errors
+    // because Hydrogen expects "CartApiQuery" and "CartApiMutation" names
   });
 
   return hydrogenContext;
