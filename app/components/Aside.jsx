@@ -1,5 +1,5 @@
-import React, {createContext, useContext, useState, useMemo, useCallback} from 'react';
-import {useFetcher} from 'react-router';
+import React, {createContext, useContext, useState, useMemo, useCallback, useEffect} from 'react';
+import {useFetchers} from 'react-router';
 import {CartDrawer} from '~/components/CartDrawer';
 
 const AsideContext = createContext(null);
@@ -20,19 +20,27 @@ export function useAside() {
 
 export function Aside({cart: initialCart}) {
   const {type, close} = useAside();
-  const fetcher = useFetcher();
+  const [cart, setCart] = useState(initialCart);
+  const fetchers = useFetchers();
   
-  // Busca o cart atualizado quando o drawer abre
-  React.useEffect(() => {
-    if (type === 'cart') {
-      fetcher.load('/cart');
+  // Atualiza o cart quando qualquer fetcher do /cart completa
+  useEffect(() => {
+    const cartFetcher = fetchers.find(
+      (f) => f.formAction === '/cart' && f.state === 'idle' && f.data?.cart
+    );
+    if (cartFetcher?.data?.cart) {
+      setCart(cartFetcher.data.cart);
     }
-  }, [type]);
+  }, [fetchers]);
+
+  // Também atualiza quando o initialCart muda
+  useEffect(() => {
+    if (initialCart) {
+      setCart(initialCart);
+    }
+  }, [initialCart]);
 
   if (type === 'closed') return null;
-
-  // Usa o cart do fetcher se disponível, senão usa o inicial
-  const cart = fetcher.data || initialCart;
 
   return (
     <div 
