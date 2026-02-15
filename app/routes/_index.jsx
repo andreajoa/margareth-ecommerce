@@ -514,47 +514,66 @@ export default function Homepage() {
             </div>
           </section>
 
-          {/* Rewards */}
+          {/* Programa de Afiliados/Revendedores */}
           <section className="max-w-7xl mx-auto px-4 sm:px-6 mb-20 w-full">
-            <div className="bg-gradient-to-r from-[#0A3D2F] to-[#0F5447] rounded-[10px] shadow-2xl overflow-hidden">
+            <div className="bg-gradient-to-r from-[#3A8ECD] to-[#21388D] rounded-[10px] shadow-2xl overflow-hidden">
               <div className="grid md:grid-cols-2 gap-0">
-                <div className="bg-gradient-to-br from-[#0A3D2F] to-[#051F1A] p-8 sm:p-12 flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#D4AF69] via-[#FEFDF8] to-[#1a5757]"></div>
-                  <div className="absolute bottom-0 right-0 w-full h-1 bg-gradient-to-l from-[#D4AF69] via-[#FEFDF8] to-[#1a5757]"></div>
-                  <div className="relative z-10 transform -rotate-6 hover:rotate-0 transition-transform duration-500 w-full max-w-[340px] sm:max-w-[400px]">
-                    <div className="bg-gradient-to-br from-[#8B1A1A] to-[#4A0E0E] rounded-xl p-5 sm:p-6 shadow-2xl border-2 border-[#D4AF69] w-full aspect-[1.586/1] flex flex-col justify-between">
+                <div className="bg-gradient-to-br from-[#3A8ECD] to-[#21388D] p-8 sm:p-12 flex items-center justify-center relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FB8A38] via-[#DEC91F] to-[#FB8A38]"></div>
+                  <div className="absolute bottom-0 right-0 w-full h-1 bg-gradient-to-l from-[#FB8A38] via-[#DEC91F] to-[#FB8A38]"></div>
+                  <div className="relative z-10 w-full max-w-[340px] sm:max-w-[400px]">
+                    <div className="bg-gradient-to-br from-white to-[#f0f9ff] rounded-xl p-5 sm:p-6 shadow-2xl border-2 border-[#FB8A38] w-full aspect-[1.586/1] flex flex-col justify-between">
                       <div className="flex items-center gap-2 sm:gap-3">
-                        <svg className="w-6 h-6 sm:w-8 sm:h-8 text-[#D4AF69] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                        <h3 className="text-white text-base sm:text-xl font-bold tracking-wider">brinqueTEAando REWARDS</h3>
+                        <span className="text-3xl sm:text-4xl">💰</span>
+                        <h3 className="text-[#3A8ECD] text-base sm:text-xl font-bold tracking-wider">PROGRAMA DE AFILIADOS</h3>
                       </div>
-                      <div className="space-y-1 my-3 sm:my-4">
-                        <p className="text-white text-xs sm:text-sm tracking-widest">•••• •••• •••• 0000</p>
-                        <p className="text-[#D4AF69] text-xs">MEMBER SINCE 2024</p>
-                      </div>
-                      <div className="flex justify-between items-end">
-                        <div>
-                          <p className="text-[#D4AF69] text-xs uppercase">CARDHOLDER</p>
-                          <p className="text-white font-semibold text-sm sm:text-base">YOUR NAME</p>
+                      <div className="space-y-3 my-3 sm:my-4">
+                        <div className="bg-gradient-to-r from-[#3A8ECD] to-[#21388D] rounded-lg p-3">
+                          <p className="text-white text-center text-lg sm:text-2xl font-bold">15% DE COMISSÃO</p>
+                          <p className="text-[#DEC91F] text-center text-xs sm:text-sm">em cada venda</p>
                         </div>
-                        <div className="text-right">
-                          <p className="text-[#D4AF69] text-xs uppercase">POINTS</p>
-                          <p className="text-white font-bold text-xl sm:text-2xl">∞</p>
+                      </div>
+                      <div className="grid grid-cols-3 gap-2 text-center">
+                        <div className="bg-[#f0f9ff] rounded-lg p-2">
+                          <p className="text-[#3A8ECD] text-xs">📱</p>
+                          <p className="text-gray-600 text-[10px] sm:text-xs font-medium">Link Próprio</p>
+                        </div>
+                        <div className="bg-[#f0f9ff] rounded-lg p-2">
+                          <p className="text-[#FB8A38] text-xs">💳</p>
+                          <p className="text-gray-600 text-[10px] sm:text-xs font-medium">PIX Rápido</p>
+                        </div>
+                        <div className="bg-[#f0f9ff] rounded-lg p-2">
+                          <p className="text-[#DEC91F] text-xs">📊</p>
+                          <p className="text-gray-600 text-[10px] sm:text-xs font-medium">Painel</p>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="p-8 sm:p-12 flex flex-col justify-center bg-gradient-to-br from-[#1a5757] to-[#2a2a2a]">
-                  <div className="inline-block bg-[#D4AF69] text-[#0A3D2F] px-4 py-1 rounded-full text-xs font-bold mb-4 w-fit">Até 25% OFF</div>
-                  <h2 className="text-white text-3xl sm:text-4xl md:text-5xl font-light mb-4 sm:mb-6 tracking-wide">Ganhe <span className="text-[#D4AF69] font-semibold">25% OFF</span></h2>
-                  <p className="text-gray-300 text-lg sm:text-xl mb-4 sm:mb-6">em brinquedos sensoriais e educativos para TEA e TDAH</p>
-                  <div className="bg-[#D4AF69] text-[#0A3D2F] px-4 sm:px-6 py-3 rounded-lg inline-block mb-4 sm:mb-6 w-fit">
-                    <p className="text-xs sm:text-sm mb-1 font-semibold">Use code:</p>
-                    <p className="text-2xl sm:text-3xl font-bold tracking-wider">TEA25</p>
+                <div className="p-8 sm:p-12 flex flex-col justify-center bg-gradient-to-br from-[#21388D] to-[#3A8ECD]">
+                  <div className="inline-block bg-[#FB8A38] text-white px-4 py-1 rounded-full text-xs font-bold mb-4 w-fit">💰 Ganhe Dinheiro</div>
+                  <h2 className="text-white text-3xl sm:text-4xl md:text-5xl font-light mb-4 sm:mb-6 tracking-wide">Seja um <span className="text-[#DEC91F] font-semibold">Afiliado</span></h2>
+                  <p className="text-gray-100 text-lg sm:text-xl mb-4 sm:mb-6">Divulgue nossos brinquedos e ganhe <strong className="text-[#DEC91F]">15% de comissão</strong> em cada venda</p>
+                  <div className="space-y-3 mb-6">
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl">✅</span>
+                      <p className="text-white text-sm">Cadastro 100% gratuito</p>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl">⚡</span>
+                      <p className="text-white text-sm">Pagamento via PIX em 15 dias úteis</p>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl">📊</span>
+                      <p className="text-white text-sm">Acompanhe vendas em tempo real</p>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl">🎯</span>
+                      <p className="text-white text-sm">Material de divulgação pronto</p>
+                    </div>
                   </div>
-                  <p className="text-gray-400 text-sm mb-4 sm:mb-6">Ao entrar no brinqueTEAndo Rewards. Desconto aplicado no checkout.</p>
-                  <Link to="/rewards" className="bg-[#D4AF69] text-[#0A3D2F] px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-[#F4D03F] hover:scale-105 transition-all text-center w-fit text-sm sm:text-base">Start Earning Rewards</Link>
-                  <p className="text-xs text-gray-400 mt-3">More for your money.</p>
+                  <Link to="/pages/seja-revendedor-brinqueteando" className="bg-[#FB8A38] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-[#DEC91F] hover:scale-105 transition-all text-center w-fit text-sm sm:text-base shadow-lg">Quero Ser Afiliado 🚀</Link>
+                  <p className="text-xs text-gray-300 mt-3">Ajude famílias e ganhe dinheiro ao mesmo tempo</p>
                 </div>
               </div>
             </div>
