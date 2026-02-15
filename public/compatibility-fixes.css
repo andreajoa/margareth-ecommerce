@@ -1,0 +1,65 @@
+/* Fallbacks para navegadores antigos */
+
+/* Aspect Ratio Fallback */
+@supports not (aspect-ratio: 1/1) {
+  [style*="aspect-ratio"] {
+    position: relative;
+    padding-bottom: 100%;
+  }
+  [style*="aspect-ratio"] > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Backdrop Filter Fallback */
+@supports not (backdrop-filter: blur(10px)) {
+  [style*="backdrop-filter"] {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+  }
+}
+
+/* Grid Fallback */
+@supports not (display: grid) {
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .grid > * {
+    flex: 1 1 300px;
+    margin: 10px;
+  }
+}
+
+/* Safari iOS Video Fix */
+video {
+  -webkit-playsinline: true;
+  playsinline: true;
+}
+
+/* Touch Action para melhor scrolling mobile */
+* {
+  -webkit-overflow-scrolling: touch;
+  touch-action: manipulation;
+}
+
+/* Remove tap highlight azul no mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Fix para inputs em iOS */
+input, textarea, select {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Fix para overflow em mobile */
+body, html {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
