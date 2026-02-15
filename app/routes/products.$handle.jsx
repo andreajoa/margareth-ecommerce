@@ -336,10 +336,55 @@ export default function Product() {
   };
 
   const baseReviews = [
-    { initial: 'MC', name: 'Maria Clara', video: 'https://cdn.shopify.com/videos/c/o/v/bedc8a64449e432b8c018f4ae4e4eb99.mp4', review: 'Meu filho com TEA adorou! Ajudou muito na coordenação motora dele. Recomendo demais!', location: 'Santos, SP' },
-    { initial: 'JS', name: 'João Silva', video: 'https://cdn.shopify.com/videos/c/o/v/26ccc97133a44d8fa6fa0ea44a711de4.mp4', review: 'Produto excelente! Minha filha com TDAH está muito mais focada depois que começou a brincar.', location: 'São Paulo, SP' },
-    { initial: 'AP', name: 'Ana Paula', video: 'https://cdn.shopify.com/videos/c/o/v/32f5d47288514f01ba501ba6406468e2.mp4', review: 'Brinquedo sensorial incrível! Nota 10 para a qualidade e entrega rápida.', location: 'Praia Grande, SP' },
-    { initial: 'RC', name: 'Roberto Costa', video: 'https://cdn.shopify.com/videos/c/o/v/80044545817c46bcb26b2ef8c913b1a6.mp4', review: 'Excepcional! Meu sobrinho autista não larga. Desenvolvimento visível.', location: 'Guarujá, SP' },
+    { 
+      initial: 'JM', 
+      name: 'Juliana Martins', 
+      video: 'https://cdn.shopify.com/videos/c/o/v/4783cfb0db084fc8baea9fef9b508357.mp4', 
+      review: 'Minha filha com TEA sempre teve dificuldade com texturas, mas desde que descobrimos os brinquedos sensoriais da BrinqueTEAndo, ela está muito mais aberta a explorar. Não é só sobre o brinquedo, é sobre dar a ela ferramentas para se sentir segura no mundo. Estou muito emocionada com o progresso!', 
+      location: 'Santos, SP' 
+    },
+    { 
+      initial: 'CF', 
+      name: 'Carolina Ferreira', 
+      video: 'https://cdn.shopify.com/videos/c/o/v/153f3f9af62a4f36a2be1ebf99d7aafb.mp4', 
+      review: 'Meu filho com TDAH sempre foi muito agitado, e encontrar algo que o ajudasse a focar parecia impossível. Os brinquedos daqui não são milagrosos, mas são pensados com tanto carinho que realmente fazem diferença. Ele consegue se concentrar mais nas tarefas, e isso mudou nossa rotina. Gratidão!', 
+      location: 'São Paulo, SP' 
+    },
+    { 
+      initial: 'RA', 
+      name: 'Renata Alves', 
+      video: 'https://cdn.shopify.com/videos/c/o/v/7c1f4f1e45114779bab1702502379142.mp4', 
+      review: 'Como mãe de uma criança autista, você aprende a valorizar cada pequena conquista. Ver minha filha interagindo com os brinquedos, criando suas próprias brincadeiras, me enche de esperança. A BrinqueTEAndo entende que não se trata só de entreter, mas de desenvolver. Recomendo de coração!', 
+      location: 'Praia Grande, SP' 
+    },
+    { 
+      initial: 'PM', 
+      name: 'Patricia Moreira', 
+      video: 'https://cdn.shopify.com/videos/c/o/v/1de606cdf183419c85381cc5f28fe1bf.mp4', 
+      review: 'Eu sempre busquei coisas que ajudassem meu filho a lidar com a ansiedade do TDAH. Quando conheci a BrinqueTEAndo, percebi que tinham produtos feitos por quem realmente entende. O atendimento foi incrível, e o resultado foi melhor ainda. Ele está mais calmo e consegue brincar por mais tempo. Mudou nossa dinâmica!', 
+      location: 'Guarujá, SP' 
+    },
+    { 
+      initial: 'LB', 
+      name: 'Luciana Barbosa', 
+      video: 'https://cdn.shopify.com/videos/c/o/v/ee2e4b4a2aff414baa7f08df7db54fce.mp4', 
+      review: 'Minha jornada como mãe de uma criança com TEA tem sido cheia de desafios, mas também de descobertas lindas. Os brinquedos da BrinqueTEAndo ajudaram muito no desenvolvimento sensorial dela. Não é só diversão, é terapia disfarçada de brincadeira. Ver ela sorrindo enquanto aprende não tem preço!', 
+      location: 'São Vicente, SP' 
+    },
+    { 
+      initial: 'BC', 
+      name: 'Beatriz Costa', 
+      video: 'https://cdn.shopify.com/videos/c/o/v/725d5d576f8b40d58efc4e2c702b7475.mp4', 
+      review: 'Eu estava perdida, sem saber como ajudar meu filho com TDAH a canalizar a energia dele. A BrinqueTEAndo não só oferece produtos incríveis, mas também acolhimento. Sinto que estou sendo vista e compreendida. Os brinquedos ajudaram muito na coordenação motora dele, e hoje ele está muito mais confiante!', 
+      location: 'Campinas, SP' 
+    },
+    { 
+      initial: 'FS', 
+      name: 'Fernanda Santos', 
+      video: 'https://cdn.shopify.com/videos/c/o/v/af6aabd4e1b34c5ba086300f058742e4.mp4', 
+      review: 'Quando você é mãe de uma criança neurodivergente, cada recurso que ajuda é uma bênção. Os brinquedos da BrinqueTEAndo são mais do que produtos, são aliados na nossa jornada. Minha filha está se comunicando melhor, brincando mais, e isso me deixa muito feliz. Obrigada por existirem!', 
+      location: 'Ribeirão Preto, SP' 
+    },
   ];
 
   const reviewsData = [...baseReviews, ...baseReviews.map(r => ({...r, name: r.name + ' (Verificado)'}))];
