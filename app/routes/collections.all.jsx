@@ -4,7 +4,19 @@ import {Image, Money, getPaginationVariables, Pagination} from '@shopify/hydroge
 import {useAside} from '~/components/Aside';
 import {AddToCartButton} from '~/components/AddToCartButton';
 
-export async function loader({context, request}) {
+export async function cleanDesc(desc) {
+  if (!desc) return "Veja detalhes na pagina do produto.";
+  var c = desc;
+  c = c.replace(/.[a-zA-Z][w-]*s*{[^}]*}/g, '');
+  c = c.replace(/@[^{]*{[^}]*}/g, '');
+  c = c.replace(/[w-]+s*:s*[^;}{]+;/g, '');
+  c = c.replace(/[{}]/g, '');
+  c = c.replace(/s+/g, ' ').trim();
+  if (c.length < 20) return "Veja detalhes na pagina do produto.";
+  return c.substring(0, 250) + "...";
+}
+
+function loader({context, request}) {
   const {storefront, cart} = context;
   const paginationVariables = getPaginationVariables(request, {pageBy: 12});
 
@@ -114,9 +126,7 @@ function QuickViewModal({ product, onClose }) {
             </div>
             <div className="h-px bg-gray-200 w-full mb-4"></div>
             <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Descricao Resumida:</h3>
-            <p className="text-gray-600 text-sm leading-relaxed mb-6">
-            <p className="text-gray-600 text-sm leading-relaxed mb-6">{(product.description || "Descricao detalhada disponivel na pagina do produto.").substring(0, 200)}...</p>
-            </p>
+            <p className="text-gray-600 text-sm leading-relaxed mb-6">{cleanDesc(product.description)}</p>
             <div className="flex flex-wrap gap-2 mb-6">
               <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">✓ Em Estoque</span>
               <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold">⚡ Envio Imediato</span>
