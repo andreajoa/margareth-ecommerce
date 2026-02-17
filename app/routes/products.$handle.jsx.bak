@@ -462,7 +462,7 @@ export default function Product() {
             <div key={i} className="flex items-center mx-8 whitespace-nowrap">
               <span className="text-2xl mr-3 filter drop-shadow-md">🎭</span>
               <span className="text-[#FEFDF8] font-serif italic text-xl tracking-widest font-medium uppercase drop-shadow-md" style={{textShadow: '0 1px 2px rgba(0,0,0,0.5)'}}>
-                             🧩 III Jornada Autismo Baixada Santista - 29/03 em Santos! 🎪 ExpoTEA 2025 em Novembro - SP! 🎤 Congresso Vozes do Autismo - Datas em Breve Disponível
+                             🧩 III Jornada Autismo Baixada Santista - 29/03 em Santos! 🎪 ExpoTEA 2025 em Novembro - SP!
               </span>
               <span className="text-2xl ml-3 filter drop-shadow-md">🎪</span>
               <div className="ml-8 flex items-center gap-2 opacity-70">
