@@ -99,7 +99,7 @@ function QuickViewModal({ product, onClose }) {
             <div className="h-px bg-gray-200 w-full mb-4"></div>
             <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Descrição Resumida:</h3>
             <p className="text-gray-600 text-sm leading-relaxed mb-6">
-              {product.description || "Descrição detalhada disponível na página do produto."}
+              <div className="prose prose-sm max-w-none text-gray-600 [&_style]:hidden" dangerouslySetInnerHTML={{__html: (product.descriptionHtml || product.description || "Descrição detalhada disponível na página do produto.").replace(/<style[^>]*>[sS]*?</style>/gi, "")}} />
             </p>
             <div className="flex flex-wrap gap-2 mb-6">
                <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">✓ Em Estoque</span>
