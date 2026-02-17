@@ -4,7 +4,6 @@ import {Image, Money, getPaginationVariables, Pagination} from '@shopify/hydroge
 import {useAside} from '~/components/Aside';
 import {AddToCartButton} from '~/components/AddToCartButton';
 
-/g, '');
 
 export async function loader({context, request}) {
   const {storefront, cart} = context;
