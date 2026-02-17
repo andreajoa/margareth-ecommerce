@@ -13,9 +13,6 @@ import {AddToCartButton} from '~/components/AddToCartButton';
 // --- COMPONENTES AUXILIARES ---
 
 // 1. Componente Modal Quick View
-/g, '');
-  c = c.replace(/\s+/g, ' ').trim();
-
 function QuickViewModal({ product, onClose }) {
   console.log('[QUICK VIEW MODAL] Rendering, product:', product?.title);
   const {open} = useAside();
