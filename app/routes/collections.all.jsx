@@ -6,14 +6,7 @@ import {AddToCartButton} from '~/components/AddToCartButton';
 
 
 /g, '');
-  c = c.replace(/@[^{]*\{[^}]*\}/g, '');
-  c = c.replace(/[a-zA-Z][\w-]*\s*:\s*[^;{}]+;/g, '');
-  c = c.replace(/\{[^}]*\}/g, '');
-  c = c.replace(/[{}]/g, '');
   c = c.replace(/\s+/g, ' ').trim();
-  if (c.length < 20) return "Veja detalhes na pagina do produto.";
-  return c.substring(0, 250) + "...";
-}
 
 export async function loader({context, request}) {
   const {storefront, cart} = context;

@@ -14,14 +14,7 @@ import {AddToCartButton} from '~/components/AddToCartButton';
 
 // 1. Componente Modal Quick View
 /g, '');
-  c = c.replace(/@[^{]*\{[^}]*\}/g, '');
-  c = c.replace(/[a-zA-Z][\w-]*\s*:\s*[^;{}]+;/g, '');
-  c = c.replace(/\{[^}]*\}/g, '');
-  c = c.replace(/[{}]/g, '');
   c = c.replace(/\s+/g, ' ').trim();
-  if (c.length < 20) return "Veja detalhes na pagina do produto.";
-  return c.substring(0, 250) + "...";
-}
 
 function QuickViewModal({ product, onClose }) {
   console.log('[QUICK VIEW MODAL] Rendering, product:', product?.title);
