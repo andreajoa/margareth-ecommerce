@@ -523,7 +523,7 @@ export default function Product() {
               <button type="button"
                 onClick={() => {
                   const menu = document.getElementById('mobile-menu');
-                  menu.classList.toggle('hidden');
+                  if (menu) menu.classList.toggle('hidden');
                 }}
                 className="lg:hidden text-[#3A8ECD] p-2"
                 aria-label="Toggle menu"
@@ -549,7 +549,7 @@ export default function Product() {
                   className="text-[#3A8ECD] text-sm font-semibold tracking-wide hover:text-[#FB8A38] transition-colors py-2 border-b border-gray-200 uppercase"
                   onClick={() => {
                     const menu = document.getElementById('mobile-menu');
-                    menu.classList.add('hidden');
+                    if (menu) menu.classList.add('hidden');
                   }}
                 >
                   {item.name}
@@ -733,7 +733,6 @@ export default function Product() {
               </AddToCartButton>
 
               <button type="button"
-                type="button"
                 onClick={(event) => {
                   event.preventDefault();
                   event.stopPropagation();

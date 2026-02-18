@@ -1,9 +1,11 @@
 import {useState, useEffect, useRef} from 'react';
 
 /**
- * Hook cross-browser para countdown com correção de timezone
- * ✅ Funciona em: Chrome, Safari, Firefox, Edge, Mobile browsers
- * ✅ Suporta SSR (Server-Side Rendering)
+ * Hook cross-browser para countdown
+ * ✅ Chrome, Safari, Firefox, Edge, iOS Safari, Android
+ * ✅ SSR safe (Shopify Hydrogen/Oxygen)
+ * ✅ Funciona em background tabs
+ * ✅ Sem dependência de performance.now() problemático no iOS
  */
 export function useCountdown() {
   const [timeLeft, setTimeLeft] = useState({
@@ -20,125 +22,109 @@ export function useCountdown() {
     }
   });
   const [isMounted, setIsMounted] = useState(false);
-  const rafRef = useRef(null);
-  const lastUpdateRef = useRef(0);
+  const intervalRef = useRef(null);
 
-  // ✅ FIX: Corrigir meses (JavaScript usa 0-11) e suporte SSR
-  const calculateHolidayCountdown = () => {
-    if (typeof window === "undefined") {
-      // SSR fallback
-      return {
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
-        holiday: {
-          name: 'III Jornada sobre Aprendizagem e Autismo - Baixada Santista',
-          month: 2,
-          day: 29,
-          emoji: '🧩',
-          message: 'III JORNADA AUTISMO BAIXADA SANTISTA - 29/03'
-        }
-      };
-    }
+  const calculateTimeLeft = () => {
+    // SSR guard
+    if (typeof window === 'undefined') return null;
 
     const now = new Date();
-    const currentYear = now.getFullYear();
+    const year = now.getFullYear();
 
+    // Holidays - meses em JS são 0-indexed (0=Jan, 2=Mar, 3=Apr, 9=Oct)
     const holidays = [
-      {name: 'III Jornada sobre Aprendizagem e Autismo - Baixada Santista', month: 2, day: 29, emoji: '🧩', message: 'III JORNADA AUTISMO BAIXADA SANTISTA - 29/03'},
-      {name: 'Dia Mundial do Autismo', month: 3, day: 2, emoji: '💙', message: 'DIA MUNDIAL DO AUTISMO - 02/04'},
-      {name: 'ExpoTEA 2025 - Maior Feira de Autismo do Mundo', month: 9, day: 28, emoji: '🎪', message: 'EXPOTEA 2025 - MAIOR FEIRA DE AUTISMO DO MUNDO!'},
+      {
+        name: 'III Jornada sobre Aprendizagem e Autismo - Baixada Santista',
+        month: 2,   // Março
+        day: 29,
+        emoji: '🧩',
+        message: 'III JORNADA AUTISMO BAIXADA SANTISTA - 29/03'
+      },
+      {
+        name: 'Dia Mundial do Autismo',
+        month: 3,   // Abril
+        day: 2,
+        emoji: '💙',
+        message: 'DIA MUNDIAL DO AUTISMO - 02/04'
+      },
+      {
+        name: 'ExpoTEA 2025',
+        month: 9,   // Outubro
+        day: 28,
+        emoji: '🎪',
+        message: 'EXPOTEA 2025 - MAIOR FEIRA DE AUTISMO DO MUNDO!'
+      },
     ];
 
-    const upcomingHolidays = holidays.map(holiday => {
-      // ✅ FIX: Usar mês correto (JS months: 0=Jan, 1=Fev, 2=Mar...)
-      let holidayDate = new Date(currentYear, holiday.month, holiday.day, 23, 59, 59);
+    // Encontra próximo evento
+    const upcoming = holidays
+      .map(h => {
+        let date = new Date(year, h.month, h.day, 23, 59, 59);
+        if (date.getTime() <= now.getTime()) {
+          date = new Date(year + 1, h.month, h.day, 23, 59, 59);
+        }
+        return { ...h, date };
+      })
+      .sort((a, b) => a.date - b.date);
 
-      if (holidayDate.getTime() < now.getTime()) {
-        holidayDate = new Date(currentYear + 1, holiday.month, holiday.day, 23, 59, 59);
-      }
+    const next = upcoming[0];
+    if (!next) return null;
 
-      return { ...holiday, date: holidayDate };
-    });
+    const diff = next.date.getTime() - now.getTime();
 
-    upcomingHolidays.sort((a, b) => a.date.getTime() - b.date.getTime());
-    const nextHoliday = upcomingHolidays[0];
-
-    if (!nextHoliday) {
-      return {days: 0, hours: 0, minutes: 0, seconds: 0, holiday: null};
+    if (diff <= 0) {
+      return { days: 0, hours: 0, minutes: 0, seconds: 0, holiday: next };
     }
 
-    const difference = nextHoliday.date.getTime() - now.getTime();
-
-    if (difference > 0) {
-      return {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60),
-        holiday: nextHoliday
-      };
-    }
-
-    return {days: 0, hours: 0, minutes: 0, seconds: 0, holiday: null};
+    return {
+      days:    Math.floor(diff / 86400000),
+      hours:   Math.floor((diff % 86400000) / 3600000),
+      minutes: Math.floor((diff % 3600000) / 60000),
+      seconds: Math.floor((diff % 60000) / 1000),
+      holiday: next,
+    };
   };
 
   useEffect(() => {
+    // Calcula imediatamente ao montar
+    const initial = calculateTimeLeft();
+    if (initial) {
+      setTimeLeft(initial);
+    }
     setIsMounted(true);
-    setTimeLeft(calculateHolidayCountdown());
 
-    // ✅ FIX CROSS-BROWSER: Usar requestAnimationFrame para performance
-    const tick = () => {
-      const now = performance.now();
-
-      // Atualizar apenas a cada 1 segundo
-      if (now - lastUpdateRef.current >= 1000) {
-        setTimeLeft(calculateHolidayCountdown());
-        lastUpdateRef.current = now;
+    // Usa setInterval simples - mais confiável que RAF para timers
+    // RAF pausa em background tabs, setInterval não
+    intervalRef.current = setInterval(() => {
+      const result = calculateTimeLeft();
+      if (result) {
+        setTimeLeft(result);
       }
+    }, 1000);
 
-      rafRef.current = requestAnimationFrame(tick);
-    };
-
-    rafRef.current = requestAnimationFrame(tick);
-
+    // Cleanup
     return () => {
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
       }
     };
-  }, []);
+  }, []); // Sem dependências - roda só uma vez
 
-  return {timeLeft, isMounted};
+  return { timeLeft, isMounted };
 }
 
 /**
- * Hook para mensagens rotativas com RAF
+ * Hook para mensagens rotativas
  */
 export function useRotatingMessages(messages, intervalMs = 4000) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const lastRotateRef = useRef(0);
-  const rafRef = useRef(null);
 
   useEffect(() => {
     if (!messages || messages.length === 0) return;
-
-    const tick = (timestamp) => {
-      if (timestamp - lastRotateRef.current >= intervalMs) {
-        setCurrentIndex((prev) => (prev + 1) % messages.length);
-        lastRotateRef.current = timestamp;
-      }
-      rafRef.current = requestAnimationFrame(tick);
-    };
-
-    rafRef.current = requestAnimationFrame(tick);
-
-    return () => {
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
-      }
-    };
+    const id = setInterval(() => {
+      setCurrentIndex(prev => (prev + 1) % messages.length);
+    }, intervalMs);
+    return () => clearInterval(id);
   }, [messages, intervalMs]);
 
   return currentIndex;
@@ -150,34 +136,18 @@ export function useRotatingMessages(messages, intervalMs = 4000) {
 export function useFadeAnimation(intervalMs = 3500, fadeMs = 500) {
   const [fadeClass, setFadeClass] = useState('opacity-100');
   const [currentIndex, setCurrentIndex] = useState(0);
-  const lastAnimateRef = useRef(0);
-  const rafRef = useRef(null);
-
-  const totalItems = useRef(4);
+  const total = useRef(4);
 
   useEffect(() => {
-    const tick = (timestamp) => {
-      if (timestamp - lastAnimateRef.current >= intervalMs) {
-        setFadeClass('opacity-0');
-        
-        setTimeout(() => {
-          setCurrentIndex((prev) => (prev + 1) % totalItems.current);
-          setFadeClass('opacity-100');
-        }, fadeMs);
-        
-        lastAnimateRef.current = timestamp;
-      }
-      rafRef.current = requestAnimationFrame(tick);
-    };
-
-    rafRef.current = requestAnimationFrame(tick);
-
-    return () => {
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
-      }
-    };
+    const id = setInterval(() => {
+      setFadeClass('opacity-0');
+      setTimeout(() => {
+        setCurrentIndex(prev => (prev + 1) % total.current);
+        setFadeClass('opacity-100');
+      }, fadeMs);
+    }, intervalMs);
+    return () => clearInterval(id);
   }, [intervalMs, fadeMs]);
 
-  return {fadeClass, currentIndex, setCurrentIndex};
+  return { fadeClass, currentIndex, setCurrentIndex };
 }

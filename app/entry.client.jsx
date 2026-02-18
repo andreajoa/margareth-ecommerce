@@ -7,8 +7,15 @@ startTransition(() => {
     document,
     <HydratedRouter />,
     {
-      onRecoverableError(error) {
-        // Suppress hydration warnings silently
+      onRecoverableError(error, errorInfo) {
+        // Log apenas erros reais, não warnings de hydration esperados
+        if (
+          error?.message?.includes('Minified React error') ||
+          error?.message?.includes('hydrat')
+        ) {
+          return; // Ignora hydration mismatches esperados (SSR vs client)
+        }
+        console.error('[App Error]', error);
       },
     }
   );

@@ -11,9 +11,11 @@ import {
 import {ShopifyProvider} from '@shopify/hydrogen-react';
 import {AsideProvider, Aside} from '~/components/Aside';
 import styles from './styles/app.css?url';
+import compatStyles from '../public/compatibility-fixes.css?url';
 
 export const links = () => [
   {rel: 'stylesheet', href: styles},
+  {rel: 'stylesheet', href: compatStyles},
   {rel: 'preconnect', href: 'https://cdn.shopify.com'},
   {rel: 'preconnect', href: 'https://shop.app'},
 ];
