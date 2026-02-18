@@ -218,3 +218,71 @@
     padding: 0.5rem 0.75rem !important;
   }
 }
+
+
+/* ============================================
+   ANIMATIONS & LAYOUT - Moved from inline styles for CSP
+   ============================================ */
+
+/* Hide default Hydrogen header (custom header in each page) */
+header:not(.custom-header) {
+  display: none !important;
+}
+
+/* Marquee animation */
+@keyframes marquee-christmas {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee-christmas {
+  display: flex;
+  width: fit-content;
+  animation: marquee-christmas 60s linear infinite;
+}
+.animate-marquee-christmas:hover {
+  animation-play-state: paused;
+}
+
+/* Float animation for decorative items */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+.float-item {
+  position: absolute;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+/* Quick view modal animation */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-up {
+  animation: fade-up 0.3s ease-out;
+}
+
+/* Ensure proper overflow handling */
+body, html {
+  overflow-x: hidden;
+}
+main {
+  overflow-x: hidden;
+}
+
+/* Button cursor fix for all browsers */
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+}

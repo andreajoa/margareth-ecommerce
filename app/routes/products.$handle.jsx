@@ -391,31 +391,7 @@ export default function Product() {
 
   return (
     <div className="flex flex-col min-h-screen bg-[#FEFDF8] w-full overflow-x-hidden relative">
-      <style>{`
-          @keyframes marquee-christmas {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-          .animate-marquee-christmas {
-            display: flex;
-            width: fit-content;
-            animation: marquee-christmas 60s linear infinite;
-          }
-          .animate-marquee-christmas:hover {
-            animation-play-state: paused;
-          }
-          @keyframes float-slow {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-          }
-          .float-item {
-            position: absolute;
-            opacity: 0.08;
-            pointer-events: none;
-            z-index: 0;
-            animation: float-slow 6s ease-in-out infinite;
-          }
-        `}</style>
+{/* Styles moved to app.css for CSP compliance */}
 
       {/* OBJETOS FLUTUANTES */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none h-full w-full z-0">

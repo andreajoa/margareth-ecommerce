@@ -15,6 +15,49 @@ export default async function handleRequest(
       checkoutDomain: loadContext.env?.PUBLIC_CHECKOUT_DOMAIN || 'checkout.shopify.com',
       storeDomain: loadContext.env?.PUBLIC_STORE_DOMAIN || 'brinqueteando.myshopify.com',
     },
+    styleSrc: [
+      "'self'",
+      "'unsafe-inline'",
+      "https://cdn.shopify.com",
+      "https://fonts.googleapis.com",
+    ],
+    scriptSrc: [
+      "'self'",
+      "'unsafe-inline'",
+      "https://cdn.shopify.com",
+      "https://analytics.ahrefs.com",
+      "https://shop.app",
+    ],
+    imgSrc: [
+      "'self'",
+      "data:",
+      "https://cdn.shopify.com",
+      "https://shopify.com",
+      "https://*.myshopify.com",
+    ],
+    mediaSrc: [
+      "'self'",
+      "https://cdn.shopify.com",
+      "https://*.shopify.com",
+    ],
+    connectSrc: [
+      "'self'",
+      "https://monorail-edge.shopifysvc.com",
+      "https://*.shopify.com",
+      "https://*.myshopify.com",
+      "https://shop.app",
+      "https://analytics.ahrefs.com",
+    ],
+    fontSrc: [
+      "'self'",
+      "https://fonts.gstatic.com",
+      "https://cdn.shopify.com",
+    ],
+    frameSrc: [
+      "'self'",
+      "https://shop.app",
+      "https://*.shopify.com",
+    ],
   });
 
   const body = await renderToReadableStream(

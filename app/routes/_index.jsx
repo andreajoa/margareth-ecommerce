@@ -184,39 +184,7 @@ export default function Homepage() {
     <>
 {/* Schema moved to meta tags */}
       
-      <style>{`
-        header { display: none !important; }
-        [class*="Header"] { display: none !important; }
-        div[data-testid="header"] { display: none !important; }
-        nav[data-testid="header-nav"] { display: none !important; }
-        
-        * { box-sizing: border-box; }
-        body, html {
-          overflow-x: hidden !important;
-          width: 100% !important;
-          margin: 0 !important;
-          padding: 0 !important;
-        }
-        main {
-          width: 100% !important;
-          max-width: 100% !important;
-          overflow-x: hidden !important;
-          margin: 0 !important;
-          padding: 0 !important;
-        }
-        @keyframes marquee-christmas {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee-christmas {
-          display: flex;
-          width: fit-content;
-          animation: marquee-christmas 60s linear infinite;
-        }
-        .animate-marquee-christmas:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
+{/* Styles moved to app.css for CSP compliance */}
 
       <main role="main" aria-label="brinqueTEAando - Brinquedos Educativos e Sensoriais" className="bg-[#FEFDF8] flex flex-col min-h-screen w-full overflow-x-hidden">
         <div className="flex-grow w-full">
