@@ -70,6 +70,7 @@ function QuickViewModal({ product, onClose }) {
 
       <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden flex flex-col md:flex-row animate-fade-up max-h-[90vh] md:max-h-[80vh] overflow-y-auto">
         <button
+          type="button"
           onClick={onClose}
           className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full text-gray-500 hover:bg-[#FB8A38] hover:text-white transition-colors"
           aria-label="Fechar"
@@ -152,6 +153,7 @@ function ProductCard({product, onQuickView}) {
           className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-end justify-center pb-4 cursor-pointer"
         >
           <button 
+            type="button"
             className="z-50 opacity-100 md:opacity-0 md:group-hover:opacity-100 transform translate-y-4 md:translate-y-0 md:group-hover:translate-y-0 transition-all duration-300 bg-[#FB8A38] text-white font-bold px-4 py-2 rounded-full shadow-lg hover:bg-[#3A8ECD] hover:scale-105"
             onClick={(e) => {
               e.preventDefault();
@@ -409,16 +411,17 @@ export default function Collection() {
                 {/* Cart & Mobile Toggle */}
                 <div className="flex items-center gap-4">
                    <Link to="/account" className="text-[#3A8ECD] hover:text-[#FB8A38] text-[10px] sm:text-xs font-medium whitespace-nowrap transition-colors px-1 sm:px-2">Entrar</Link>
-                   <button onClick={() => open('cart')} className="relative group">
+                   <button type="button" onClick={() => open('cart')} className="relative group">
                       <span className="text-2xl">🛒</span>
                       <span className="absolute -top-2 -right-2 bg-[#FB8A38] text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white group-hover:scale-110 transition-transform">
                         {cart?.totalQuantity || 0}
                       </span>
                    </button>
                    <button 
+                    type="button"
                     onClick={() => {
                       const menu = document.getElementById('mobile-menu');
-                      menu.classList.toggle('hidden');
+                      if (menu) menu.classList.toggle('hidden');
                     }}
                     className="lg:hidden text-[#3A8ECD] p-2"
                     aria-label="Toggle menu"
@@ -446,7 +449,7 @@ export default function Collection() {
                        className="text-[#3A8ECD] text-sm font-semibold tracking-wide hover:text-[#FB8A38] transition-colors py-2 border-b border-gray-200 uppercase"
                        onClick={() => {
                          const menu = document.getElementById('mobile-menu');
-                         menu.classList.add('hidden');
+                         if (menu) menu.classList.add('hidden');
                        }}
                      >
                        {item.name}

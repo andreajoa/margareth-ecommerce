@@ -66,6 +66,7 @@ export function Aside() {
             🛒 Seu Carrinho
           </h2>
           <button 
+            type="button"
             onClick={close} 
             className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-[#0A3D2F] shadow hover:scale-110 transition-transform cursor-pointer border-2 border-[#3A8ECD]" 
             aria-label="Fechar"

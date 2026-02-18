@@ -3,7 +3,8 @@
 import {useLoaderData, Link} from 'react-router';
 import {useState, useEffect} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
-import {useAside} from '~/components/Aside'; // Adicionado para abrir carrinho
+import {useAside} from '~/components/Aside';
+import {useCountdown} from '~/lib/useCountdown'; // Adicionado para abrir carrinho
 
 export const meta = () => {
   return [
@@ -106,9 +107,8 @@ export default function Homepage() {
   const {collections, products, footerMenu, cart} = useLoaderData();
   const [currentPromo, setCurrentPromo] = useState(0);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
-    const [timeLeft, setTimeLeft] = useState({days: 0, hours: 0, minutes: 0, seconds: 0});
-  const [currentHoliday, setCurrentHoliday] = useState({name: 'Holiday', emoji: '🎉', message: 'COUNTDOWN'});
-  const [isMounted, setIsMounted] = useState(false);
+  const {timeLeft, isMounted} = useCountdown();
+  const currentHoliday = timeLeft.holiday;
   const {open} = useAside(); // Hook para abrir o carrinho
 
   // Ahrefs Analytics - loaded via useEffect safely
@@ -157,56 +157,10 @@ export default function Homepage() {
     {name: "Emily K.", text: "Produtos maravilhosos, meu sobrinho não larga o pop-it.", rating: 5, image: "https://cdn.shopify.com/s/files/1/0778/2921/0327/files/3.jpg?v=1765938975"}
   ];
 
-  const calculateHolidayCountdown = () => {
-    const now = new Date();
-    const currentYear = now.getFullYear();
-    const holidays = [
-      {name: 'III Jornada sobre Aprendizagem e Autismo - Baixada Santista', month: 2, day: 29, emoji: '🧩', message: 'III JORNADA AUTISMO BAIXADA SANTISTA - 29/03'},
-      {name: 'ExpoTEA 2025 - Maior Feira de Autismo do Mundo', month: 10, day: 28, emoji: '🎪', message: 'EXPOTEA 2025 - MAIOR FEIRA DE AUTISMO DO MUNDO!'},
-      {name: 'Dia Mundial do Autismo', month: 3, day: 2, emoji: '💙', message: 'DIA MUNDIAL DO AUTISMO - 02/04'},
-    ];
+  // Countdown handled by useCountdown hook
 
-    const upcomingHolidays = holidays.map(holiday => {
-      let holidayDate = new Date(currentYear, holiday.month, holiday.day, 23, 59, 59);
-      if (holidayDate.getTime() < now.getTime()) {
-        holidayDate = new Date(currentYear + 1, holiday.month, holiday.day, 23, 59, 59);
-      }
-      return { ...holiday, date: holidayDate };
-    });
 
-    upcomingHolidays.sort((a, b) => a.date - b.date);
-    const nextHoliday = upcomingHolidays[0];
-    
-    if (!nextHoliday) return {days: 0, hours: 0, minutes: 0, seconds: 0, holiday: null};
-
-    const difference = nextHoliday.date.getTime() - now.getTime();
-    if (difference > 0) {
-      return {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60),
-        holiday: {
-          name: nextHoliday.name,
-          emoji: nextHoliday.emoji,
-          message: nextHoliday.message
-        }
-      };
-    }
-    return {days: 0, hours: 0, minutes: 0, seconds: 0, holiday: null};
-  };
-
-  useEffect(() => {
-    setIsMounted(true);
-    const update = () => {
-      const r = calculateHolidayCountdown();
-      setTimeLeft({days: r.days, hours: r.hours, minutes: r.minutes, seconds: r.seconds});
-      if (r.holiday) setCurrentHoliday(r.holiday);
-    };
-    update();
-    const countdownInterval = setInterval(update, 1000);
-    return () => clearInterval(countdownInterval);
-  }, []);
+  // Countdown effect handled by useCountdown hook
 
   useEffect(() => {
     const promoTimer = setInterval(() => setCurrentPromo((p) => (p + 1) % promoMessages.length), 4000);
@@ -273,12 +227,21 @@ export default function Homepage() {
               <span className="text-sm md:text-base font-bold tracking-wide">
                 {currentHoliday?.emoji} {currentHoliday?.message} {currentHoliday?.emoji}
               </span>
-              <div className="flex items-center gap-2 border-2 border-white px-4 py-1 bg-white/20">
-                <span className="text-2xl font-bold" suppressHydrationWarning>{isMounted ? String(timeLeft.days).padStart(2, '0') : '00'}</span><span className="text-xs">D</span>
-                <span className="text-2xl font-bold" suppressHydrationWarning>{isMounted ? String(timeLeft.hours).padStart(2, '0') : '00'}</span><span className="text-xs">H</span>
-                <span className="text-2xl font-bold" suppressHydrationWarning>{isMounted ? String(timeLeft.minutes).padStart(2, '0') : '00'}</span><span className="text-xs">M</span>
-                <span className="text-2xl font-bold" suppressHydrationWarning>{isMounted ? String(timeLeft.seconds).padStart(2, '0') : '00'}</span><span className="text-xs">S</span>
-              </div>
+              {isMounted ? (
+                <div className="flex items-center gap-2 border-2 border-white px-4 py-1 bg-white/20">
+                  <span className="text-2xl font-bold">{String(timeLeft.days).padStart(2, '0')}</span><span className="text-xs">D</span>
+                  <span className="text-2xl font-bold">{String(timeLeft.hours).padStart(2, '0')}</span><span className="text-xs">H</span>
+                  <span className="text-2xl font-bold">{String(timeLeft.minutes).padStart(2, '0')}</span><span className="text-xs">M</span>
+                  <span className="text-2xl font-bold">{String(timeLeft.seconds).padStart(2, '0')}</span><span className="text-xs">S</span>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2 border-2 border-white px-4 py-1 bg-white/20 opacity-50">
+                  <span className="text-2xl font-bold">--</span><span className="text-xs">D</span>
+                  <span className="text-2xl font-bold">--</span><span className="text-xs">H</span>
+                  <span className="text-2xl font-bold">--</span><span className="text-xs">M</span>
+                  <span className="text-2xl font-bold">--</span><span className="text-xs">S</span>
+                </div>
+              )}
             </div>
           </div>
 
@@ -408,13 +371,13 @@ export default function Homepage() {
                 {/* Cart & Mobile Toggle */}
                 <div className="flex items-center gap-4">
                   <Link to="/account" className="text-[#3A8ECD] hover:text-[#FB8A38] text-[10px] sm:text-xs font-medium whitespace-nowrap transition-colors px-1 sm:px-2">Entrar</Link>
-                  <button onClick={() => open('cart')} className="relative group">
+                  <button type="button" onClick={() => open('cart')} className="relative group">
                       <span className="text-2xl">🛒</span>
                       <span className="absolute -top-2 -right-2 bg-[#FB8A38] text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white group-hover:scale-110 transition-transform">
                         {cart?.totalQuantity || 0}
                       </span>
                   </button>
-                  <button onClick={() => { const m = document.getElementById('mobile-menu'); if(m) m.classList.toggle('hidden'); }} className="lg:hidden text-[#3A8ECD] p-2" aria-label="Toggle menu">
+                  <button type="button" onClick={() => { const m = document.getElementById('mobile-menu'); if(m) m.classList.toggle('hidden'); }} className="lg:hidden text-[#3A8ECD] p-2" aria-label="Toggle menu">
                     <span className="text-2xl">☰</span>
                   </button>
                 </div>
@@ -606,7 +569,7 @@ export default function Homepage() {
               </div>
               <div className="flex justify-center gap-2 mt-6 sm:mt-8">
                 {testimonials.map((_, idx) => (
-                  <button key={idx} onClick={() => setCurrentTestimonial(idx)} className={`h-2 rounded-full transition-all ${idx === currentTestimonial ? 'bg-[#D4AF69] w-8' : 'bg-[#9d8b7c]/30 w-2'}`} aria-label={`View testimonial ${idx + 1}`}/>
+                  <button type="button" key={idx} onClick={() => setCurrentTestimonial(idx)} className={`h-2 rounded-full transition-all ${idx === currentTestimonial ? 'bg-[#D4AF69] w-8' : 'bg-[#9d8b7c]/30 w-2'}`} aria-label={`View testimonial ${idx + 1}`}/>
                 ))}
               </div>
             </div>
