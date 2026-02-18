@@ -514,13 +514,13 @@ export default function Product() {
               ))}
             </div>
             <div className="flex items-center gap-4">
-              <button onClick={() => open('cart')} className="relative group">
+              <button type="button" onClick={() => open('cart')} className="relative group">
                 <span className="text-2xl">🛒</span>
                 <span className="absolute -top-2 -right-2 bg-[#FB8A38] text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white group-hover:scale-110 transition-transform">
                   {cart?.totalQuantity || 0}
                 </span>
               </button>
-              <button
+              <button type="button"
                 onClick={() => {
                   const menu = document.getElementById('mobile-menu');
                   menu.classList.toggle('hidden');
@@ -582,7 +582,7 @@ export default function Product() {
             {images.length > 1 && (
               <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
                 {images.slice(0, 6).map((edge, idx) => (
-                  <button
+                  <button type="button"
                     key={idx}
                     onClick={() => setSelectedImage(idx)}
                     className={`aspect-square w-20 flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all ${
@@ -684,16 +684,16 @@ export default function Product() {
               <div className="flex items-center justify-between mb-4">
                 <span className="font-bold text-gray-700">Quantidade</span>
                 <div className="flex items-center gap-4">
-                  <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="w-8 h-8 rounded-full border border-gray-300 text-gray-500 hover:bg-gray-100">-</button>
+                  <button type="button" onClick={() => setQuantity(Math.max(1, quantity - 1))} className="w-8 h-8 rounded-full border border-gray-300 text-gray-500 hover:bg-gray-100">-</button>
                   <span className="font-bold text-lg">{quantity}</span>
-                  <button onClick={() => setQuantity(quantity + 1)} className="w-8 h-8 rounded-full border border-gray-300 text-gray-500 hover:bg-gray-100">+</button>
+                  <button type="button" onClick={() => setQuantity(quantity + 1)} className="w-8 h-8 rounded-full border border-gray-300 text-gray-500 hover:bg-gray-100">+</button>
                 </div>
               </div>
 
               {/* Gift Wrap */}
               {upgrades.length > 0 && (
                 <div className="mb-6 border border-[#FB8A38]/30 rounded-lg overflow-hidden">
-                  <button onClick={() => setExpandedUpgrades(!expandedUpgrades)} className="w-full p-3 flex items-center justify-between bg-[#FFF8F0] text-[#FB8A38] font-bold text-sm">
+                  <button type="button" onClick={() => setExpandedUpgrades(!expandedUpgrades)} className="w-full p-3 flex items-center justify-between bg-[#FFF8F0] text-[#FB8A38] font-bold text-sm">
                     <span className="flex items-center gap-2">🎁 Frequentemente comprados juntos</span>
                     <span>{expandedUpgrades ? '▼' : '▲'}</span>
                   </button>
@@ -732,7 +732,7 @@ export default function Product() {
                 Adicionar ao Carrinho
               </AddToCartButton>
 
-              <button
+              <button type="button"
                 type="button"
                 onClick={(event) => {
                   event.preventDefault();
@@ -777,7 +777,7 @@ export default function Product() {
               {q: 'Qual a garantia dos produtos?', a: 'Todos os brinquedos incluem garantia contra defeitos de fabricação.'}
             ].map((faq, idx) => (
               <div key={idx} className="border border-gray-200 rounded-lg overflow-hidden bg-white/90 backdrop-blur-sm">
-                <button
+                <button type="button"
                   onClick={() => setExpandedFaq(expandedFaq === idx ? null : idx)}
                   className={`w-full p-4 text-left font-semibold flex justify-between items-center ${expandedFaq === idx ? 'bg-[#3A8ECD] text-white' : 'bg-white text-[#3A8ECD]'}`}
                 >
