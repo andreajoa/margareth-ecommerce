@@ -31,21 +31,21 @@ export function useCountdown() {
       const holidays = [
         {
           name: 'III Jornada sobre Aprendizagem e Autismo - Baixada Santista',
-          date: new Date(2025, 2, 29, 23, 59, 59),  // 29 de Março de 2025
+          date: new Date(year, 2, 29, 23, 59, 59),  // 29 de Março
           emoji: '🧩',
           message: 'III JORNADA AUTISMO BAIXADA SANTISTA - 29/03'
         },
         {
-          name: 'Dia Mundial do Autismo',
-          date: new Date(2025, 3, 2, 23, 59, 59),   // 2 de Abril de 2025
+          name: 'Dia Mundial de Conscientização do Autismo',
+          date: new Date(year, 3, 2, 23, 59, 59),   // 2 de Abril
           emoji: '💙',
-          message: 'DIA MUNDIAL DO AUTISMO - 02/04'
+          message: 'DIA MUNDIAL DE CONSCIENTIZAÇÃO DO AUTISMO - 02/04'
         },
         {
-          name: 'ExpoTEA 2025',
-          date: new Date(2025, 10, 28, 23, 59, 59),  // 28 de Novembro de 2025
+          name: 'ExpoTEA',
+          date: new Date(year, 10, 28, 23, 59, 59),  // 28 de Novembro
           emoji: '🎪',
-          message: 'EXPOTEA 2025 - MAIOR FEIRA DE AUTISMO DO MUNDO!'
+          message: 'EXPOTEA - MAIOR FEIRA DE AUTISMO DO MUNDO!'
         },
       ];
 
@@ -54,14 +54,14 @@ export function useCountdown() {
         .filter(h => h.date.getTime() > now.getTime())
         .sort((a, b) => a.date - b.date);
 
-      // Se não tem eventos futuros em 2025, adiciona para 2026
+      // Se não tem eventos futuros este ano, adiciona para 2026
       if (future.length === 0) {
         const nextYear = [
           {
-            name: 'Dia Mundial do Autismo',
+            name: 'Dia Mundial de Conscientização do Autismo',
             date: new Date(year + 1, 3, 2, 23, 59, 59),
             emoji: '💙',
-            message: 'DIA MUNDIAL DO AUTISMO - 02/04'
+            message: 'DIA MUNDIAL DE CONSCIENTIZAÇÃO DO AUTISMO - 02/04'
           },
         ];
         future.push(...nextYear);
