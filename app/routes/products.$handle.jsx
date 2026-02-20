@@ -822,6 +822,7 @@ export default function Product() {
               <h3 className="font-bold text-[#2a2a2a] text-xl">Conteúdos</h3>
             </div>
             <ul className="space-y-2 text-sm text-gray-600">
+              <li><Link to="/blogs/blog" className="hover:text-[#FB8A38]">📝 Blog</Link></li>
               <li><Link to="/pages/how-to-choose" className="hover:text-[#FB8A38]">Como escolher brinquedos</Link></li>
               <li><Link to="/pages/tips-tdah-tea" className="hover:text-[#FB8A38]">Dicas para TDAH e TEA</Link></li>
               <li><Link to="/pages/faq" className="hover:text-[#FB8A38]">FAQ</Link></li>

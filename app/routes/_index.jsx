@@ -72,7 +72,8 @@ export async function loader({context}) {
         id: 'group-2',
         title: '💡 Conteúdos',
         items: [
-          { id: 'l5', title: 'Como escolher brinquedos', url: '/pages/como-escolher-brinquedos' },
+          { id: "l0", title: "📝 Blog", url: "/blogs/blog" },
+          { id: "l5", title: "Como escolher brinquedos", url: "/pages/como-escolher-brinquedos" },
           { id: 'l6', title: 'Dicas para TDAH e TEA', url: '/pages/dicas-para-tdah-e-tea' },
           { id: 'l7', title: 'FAQ', url: '/pages/faq' },
         ]
