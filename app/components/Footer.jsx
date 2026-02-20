@@ -32,6 +32,7 @@ export default function Footer() {
         <div>
           <strong>💡 Conteúdos</strong>
           <ul style={groupStyle}>
+            <li><a href="https://brinqueteando.online/blogs/blog" style={aStyle}>📝 Blog</a></li>
             <li><a href="https://brinqueteando.online/pages/como-escolher-brinquedos" style={aStyle}>Como escolher brinquedos</a></li>
             <li><a href="https://brinqueteando.online/pages/dicas-para-tdah-e-tea" style={aStyle}>Dicas para TDAH e TEA</a></li>
             <li><a href="https://brinqueteando.online/pages/faq" style={aStyle}>FAQ</a></li>
