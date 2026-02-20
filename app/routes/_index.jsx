@@ -389,7 +389,7 @@ export default function Homepage() {
                 </video>
                 <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/20 z-10"></div>
                 <div className="absolute inset-0 z-20 flex flex-col justify-center px-6 sm:px-8 md:px-16">
-                  <h1 className="text-white text-2xl sm:text-4xl md:text-6xl font-light tracking-widest mb-2 sm:mb-4"></h1>
+                  <h1 className="text-white text-2xl sm:text-4xl md:text-6xl font-light tracking-widest mb-2 sm:mb-4">Brinquedos Educativos para Autismo e TDAH</h1>
                   <p className="text-[#FB8A38] text-sm sm:text-lg md:text-xl tracking-wider mb-2 sm:mb-4">Brinquedos Educativos e Sensoriais para TEA e TDAH</p>
                   <Link to="/collections/all" className="inline-block border-2 border-[#FB8A38] bg-[#3A8ECD] text-white px-6 sm:px-10 py-2 sm:py-3 rounded-full hover:bg-[#FB8A38] hover:text-white hover:border-[#FB8A38] transition-all font-semibold tracking-wider w-fit mt-2 sm:mt-4 text-xs sm:text-base">EXPLORAR PRODUTOS</Link>
                 </div>
