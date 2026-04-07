@@ -1,3 +1,5 @@
+import {hydrogenPreset} from '@shopify/hydrogen/react-router-preset';
+
 export default {
-  ssr: true,
+  presets: [hydrogenPreset({middleware: false})],
 };
