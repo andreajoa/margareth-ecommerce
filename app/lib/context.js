@@ -7,6 +7,10 @@ export async function createHydrogenRouterContext(
   env,
   executionContext,
 ) {
+  if (!env?.SESSION_SECRET) {
+    throw new Error('SESSION_SECRET environment variable is not set');
+  }
+
   const waitUntil = executionContext.waitUntil.bind(executionContext);
   const [cache, session] = await Promise.all([
     caches.open('hydrogen'),
@@ -19,6 +23,9 @@ export async function createHydrogenRouterContext(
     cache,
     waitUntil,
     session,
+    cart: {
+      queryFragment: CART_FRAGMENT,
+    },
   });
 
   const cart = createCartHandler({
