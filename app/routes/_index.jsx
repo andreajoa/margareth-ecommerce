@@ -242,13 +242,15 @@ export default function Homepage() {
           <div className="bg-[#3A8ECD] text-white py-3 text-center w-full">
             <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-4 flex-wrap">
               <span className="text-sm md:text-base font-bold tracking-wide">
-                {timeLeft.holiday?.emoji ?? '🧩'} {timeLeft.holiday?.message ?? 'EVENTO ESPECIAL'} {timeLeft.holiday?.emoji ?? '🧩'}
+                {isMounted
+                  ? `${timeLeft.holiday?.emoji || '🧩'} ${timeLeft.holiday?.message || 'III JORNADA AUTISMO BAIXADA SANTISTA - 29/03'} ${timeLeft.holiday?.emoji || '🧩'}`
+                  : '🧩 III JORNADA AUTISMO BAIXADA SANTISTA - 29/03 🧩'}
               </span>
               <div className="flex items-center gap-2 border-2 border-white px-4 py-1 bg-white/20">
-                <span className="text-2xl font-bold">{String(timeLeft.days).padStart(2, '0')}</span><span className="text-xs">D</span>
-                <span className="text-2xl font-bold">{String(timeLeft.hours).padStart(2, '0')}</span><span className="text-xs">H</span>
-                <span className="text-2xl font-bold">{String(timeLeft.minutes).padStart(2, '0')}</span><span className="text-xs">M</span>
-                <span className="text-2xl font-bold">{String(timeLeft.seconds).padStart(2, '0')}</span><span className="text-xs">S</span>
+                <span className="text-2xl font-bold">{isMounted ? String(timeLeft.days).padStart(2, '0') : '00'}</span><span className="text-xs">D</span>
+                <span className="text-2xl font-bold">{isMounted ? String(timeLeft.hours).padStart(2, '0') : '00'}</span><span className="text-xs">H</span>
+                <span className="text-2xl font-bold">{isMounted ? String(timeLeft.minutes).padStart(2, '0') : '00'}</span><span className="text-xs">M</span>
+                <span className="text-2xl font-bold">{isMounted ? String(timeLeft.seconds).padStart(2, '0') : '00'}</span><span className="text-xs">S</span>
               </div>
             </div>
           </div>
@@ -259,11 +261,20 @@ export default function Homepage() {
             <div className="animate-marquee-christmas flex items-center">
               {[...Array(12)].map((_, i) => (
                 <div key={i} className="flex items-center mx-8 whitespace-nowrap">
-                  <span className="text-2xl mr-3 filter drop-shadow-md">🎭</span>
-                  <span className="text-[#FEFDF8] font-serif italic text-xl tracking-widest font-medium uppercase drop-shadow-md" style={{textShadow: '0 1px 2px rgba(0,0,0,0.5)'}}>
-                     🧩 III Jornada Autismo Baixada Santista - 29/03 em Santos! 🎪 ExpoTEA 2025 em Novembro - SP!
+                  <span className="text-2xl mr-3 filter drop-shadow-md">
+                    {timeLeft.holiday?.emoji || '🧩'}
                   </span>
-                  <span className="text-2xl ml-3 filter drop-shadow-md">🎪</span>
+                  <span className="text-[#FEFDF8] font-serif italic text-xl tracking-widest font-medium uppercase drop-shadow-md" style={{textShadow: '0 1px 2px rgba(0,0,0,0.5)'}}>
+                    {(timeLeft.holiday?.emoji || '🧩')}{' '}
+                    {timeLeft.holiday?.message || 'III JORNADA AUTISMO BAIXADA SANTISTA - 29/03'}{' '}
+                    • FALTAM{' '}
+                    {isMounted ? String(timeLeft.days).padStart(2, '0') : '00'}D{' '}
+                    {isMounted ? String(timeLeft.hours).padStart(2, '0') : '00'}H{' '}
+                    {isMounted ? String(timeLeft.minutes).padStart(2, '0') : '00'}M{' '}
+                    {isMounted ? String(timeLeft.seconds).padStart(2, '0') : '00'}S{' '}
+                    • GARANTA SUA PARTICIPAÇÃO
+                  </span>
+                  <span className="text-2xl ml-3 filter drop-shadow-md">⏳</span>
                   <div className="ml-8 flex items-center gap-2 opacity-70">
                     <span className="text-[#FB8A38] text-xs">✦</span>
                     <span className="w-16 h-[1px] bg-[#FB8A38]"></span>
