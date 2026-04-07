@@ -1,33 +1,44 @@
 import {storefrontRedirect} from '@shopify/hydrogen';
 import {createRequestHandler} from '@shopify/hydrogen/oxygen';
-import {createHydrogenRouterContext} from './app/lib/context';
+import {createreateCartHandler} from '@shopify/hydrogen';
+import {AppSession} from './app/lib/session';
+import {CART_FRAGMENT} from './app/lib/queries';
 
 export default {
   async fetch(request, env, executionContext) {
     try {
-      const hydrogenContext = await createHydrogenRouterContext(
-        request,
+      const waitUntil = executionContext.waitUntil.bind(executionContext);
+      const [cache, session] = await Promise.all([
+        caches.open('hydrogen'),
+        AppSession.init(request, [env.SESSION_SECRET]),
+      ]);
+
+      const hydrogenContext = createHydrogenContext({
         env,
-        executionContext,
-      );
+        request,
+        cache,
+        waitUntil,
+        session,
+      });
+
+      const cart = createCartHandler({
+        storefront: hydrogenContext.storefront,
+        getCartId: session.get,
+        cartFragment: CART_FRAGMENT,
+      });
 
       const handleRequest = createRequestHandler({
         build: await import('virtual:react-router/server-build'),
         mode: process.env.NODE_ENV,
-        getLoadContext: (args) => {
-          if (args?.context?.unstable_getContext) {
-            return args.context.unstable_getContext(hydrogenContext);
-          }
-          return hydrogenContext;
-        },
+        getLoadContext: () => ({...hydrogenContext, cart}),
       });
 
       const response = await handleRequest(request);
 
-      if (hydrogenContext.session.isPending) {
+      if (session.isPending) {
         response.headers.set(
           'Set-Cookie',
-          await hydrogenContext.session.commit(),
+          await session.commit(),
         );
       }
 
