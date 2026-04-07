@@ -8,7 +8,7 @@ import {useState, useEffect} from 'react';
 const EVENT_DATE = new Date('2026-04-25T08:00:00');
 
 export default function EventoDestaque() {
-  const [timeLeft, setTimeLeft] = useState(calcTimeLeft());
+  const [timeLeft, setTimeLeft] = useState({days: 0, hours: 0, minutes: 0, seconds: 0});
 
   useEffect(() => {
     const timer = setInterval(() => {
