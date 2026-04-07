@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
 import {useAside} from '~/components/Aside'; // Adicionado para abrir carrinho
 import {useCountdown} from '~/lib/useCountdown'; // ✅ FIX: Importar hook otimizado
+import EventoDestaque from '~/components/EventoDestaque';
 
 export const meta = () => {
   return [
@@ -197,6 +198,7 @@ export default function Homepage() {
 
   return (
     <>
+      <EventoDestaque />
       <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(schemaOrgJSON)}} />
       
       <style>{`
