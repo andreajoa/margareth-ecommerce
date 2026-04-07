@@ -699,17 +699,8 @@ export default function Product() {
           </div>
         </div>
 
-        {/* Reviews */}
-        <div className="mb-16 relative z-20">
-          <h2 className="text-2xl font-bold text-center text-[#3A8ECD] mb-8">Avaliações de Famílias Satisfeitas</h2>
-          <div className="flex overflow-x-auto gap-6 pb-8 snap-x">
-            {reviewsData.map((review, i) => (
-              <div key={i} className="snap-center">
-                <VideoReviewCard review={review} />
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Reviews removidas temporariamente */}
+
 
         {/* FAQ */}
         <div className="max-w-2xl mx-auto mb-16 relative z-20">
