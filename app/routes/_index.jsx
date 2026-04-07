@@ -242,7 +242,7 @@ export default function Homepage() {
           <div className="bg-[#3A8ECD] text-white py-3 text-center w-full">
             <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-4 flex-wrap">
               <span className="text-sm md:text-base font-bold tracking-wide">
-                {timeLeft.holiday?.emoji} {timeLeft.holiday?.message} {timeLeft.holiday?.emoji}
+                {timeLeft.holiday?.emoji ?? '🧩'} {timeLeft.holiday?.message ?? 'EVENTO ESPECIAL'} {timeLeft.holiday?.emoji ?? '🧩'}
               </span>
               <div className="flex items-center gap-2 border-2 border-white px-4 py-1 bg-white/20">
                 <span className="text-2xl font-bold">{String(timeLeft.days).padStart(2, '0')}</span><span className="text-xs">D</span>
