@@ -27,7 +27,7 @@ export async function loader({context}) {
   const {env, cart} = context;
   
   // ✅ FIX: Buscar cart atual no root loader
-  const cartData = await cart.get();
+  const cartData = await cart.get().catch(() => null);
   
   return {
     env: {
