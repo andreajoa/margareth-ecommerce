@@ -1,5 +1,8 @@
 import {hydrogenPreset} from '@shopify/hydrogen/react-router-preset';
 
 export default {
-  presets: [hydrogenPreset({middleware: false})],
+  presets: [hydrogenPreset()],
+  future: {
+    v8_middleware: false,
+  },
 };
