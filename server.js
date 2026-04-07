@@ -1,11 +1,7 @@
-// Virtual entry point for the app
 import {storefrontRedirect} from '@shopify/hydrogen';
 import {createRequestHandler} from '@shopify/hydrogen/oxygen';
 import {createHydrogenRouterContext} from './app/lib/context';
 
-/**
- * Export a fetch handler in module format.
- */
 export default {
   async fetch(request, env, executionContext) {
     try {
@@ -18,7 +14,12 @@ export default {
       const handleRequest = createRequestHandler({
         build: await import('virtual:react-router/server-build'),
         mode: process.env.NODE_ENV,
-        getLoadContext: () => hydrogenContext,
+        getLoadContext: (args) => {
+          if (args?.context?.unstable_getContext) {
+            return args.context.unstable_getContext(hydrogenContext);
+          }
+          return hydrogenContext;
+        },
       });
 
       const response = await handleRequest(request);
@@ -45,4 +46,3 @@ export default {
     }
   },
 };
-
