@@ -16,7 +16,7 @@ export function useCountdown() {
       month: 2,
       day: 29,
       emoji: '🧩',
-      message: 'III JORNADA AUTISMO BAIXADA SANTISTA - 29/03'
+      message: 'DIA DOS PAIS BRINQUETEANDO'
     }
   });
   const [isMounted, setIsMounted] = useState(false);
@@ -37,7 +37,7 @@ export function useCountdown() {
           month: 2,
           day: 29,
           emoji: '🧩',
-          message: 'III JORNADA AUTISMO BAIXADA SANTISTA - 29/03'
+          message: 'DIA DOS PAIS BRINQUETEANDO'
         }
       };
     }
@@ -46,7 +46,7 @@ export function useCountdown() {
     const currentYear = now.getFullYear();
 
     const holidays = [
-      {name: 'III Jornada sobre Aprendizagem e Autismo - Baixada Santista', month: 2, day: 29, emoji: '🧩', message: 'III JORNADA AUTISMO BAIXADA SANTISTA - 29/03'},
+      {name: 'Dia dos Pais BrinqueTEAndo', month: 7, day: 9, emoji: '💙', message: 'DIA DOS PAIS BRINQUETEANDO'},
       {name: 'Dia Mundial do Autismo', month: 3, day: 2, emoji: '💙', message: 'DIA MUNDIAL DO AUTISMO - 02/04'},
       {name: 'ExpoTEA 2025 - Maior Feira de Autismo do Mundo', month: 9, day: 28, emoji: '🎪', message: 'EXPOTEA 2025 - MAIOR FEIRA DE AUTISMO DO MUNDO!'},
     ];

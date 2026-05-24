@@ -241,8 +241,8 @@ export default function Homepage() {
             <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-4 flex-wrap">
               <span className="text-sm md:text-base font-bold tracking-wide">
                 {isMounted
-                  ? `${timeLeft.holiday?.emoji || '🧩'} ${timeLeft.holiday?.message || 'III JORNADA AUTISMO BAIXADA SANTISTA - 29/03'} ${timeLeft.holiday?.emoji || '🧩'}`
-                  : '🧩 III JORNADA AUTISMO BAIXADA SANTISTA - 29/03 🧩'}
+                  ? `${timeLeft.holiday?.emoji || '💙'} ${timeLeft.holiday?.message || 'DIA DOS PAIS BRINQUETEANDO'} ${timeLeft.holiday?.emoji || '💙'}`
+                  : '💙 DIA DOS PAIS BRINQUETEANDO 💙'}
               </span>
               <div className="flex items-center gap-2 border-2 border-white px-4 py-1 bg-white/20">
                 <span className="text-2xl font-bold">{isMounted ? String(timeLeft.days).padStart(2, '0') : '00'}</span><span className="text-xs">D</span>
@@ -260,17 +260,17 @@ export default function Homepage() {
               {[...Array(12)].map((_, i) => (
                 <div key={i} className="flex items-center mx-8 whitespace-nowrap">
                   <span className="text-2xl mr-3 filter drop-shadow-md">
-                    {timeLeft.holiday?.emoji || '🧩'}
+                    {timeLeft.holiday?.emoji || '💙'}
                   </span>
                   <span className="text-[#FEFDF8] font-serif italic text-xl tracking-widest font-medium uppercase drop-shadow-md" style={{textShadow: '0 1px 2px rgba(0,0,0,0.5)'}}>
-                    {(timeLeft.holiday?.emoji || '🧩')}{' '}
-                    {timeLeft.holiday?.message || 'III JORNADA AUTISMO BAIXADA SANTISTA - 29/03'}{' '}
+                    {(timeLeft.holiday?.emoji || '💙')}{' '}
+                    {timeLeft.holiday?.message || 'DIA DOS PAIS BRINQUETEANDO'}{' '}
                     • FALTAM{' '}
                     {isMounted ? String(timeLeft.days).padStart(2, '0') : '00'}D{' '}
                     {isMounted ? String(timeLeft.hours).padStart(2, '0') : '00'}H{' '}
                     {isMounted ? String(timeLeft.minutes).padStart(2, '0') : '00'}M{' '}
                     {isMounted ? String(timeLeft.seconds).padStart(2, '0') : '00'}S{' '}
-                    • GARANTA SUA PARTICIPAÇÃO
+                    • NESTE DIA DOS PAIS, QUEM GANHA É O SEU FILHO: MAIS CONEXÃO, DESENVOLVIMENTO E BRINCADEIRAS COM PROPÓSITO
                   </span>
                   <span className="text-2xl ml-3 filter drop-shadow-md">⏳</span>
                   <div className="ml-8 flex items-center gap-2 opacity-70">
