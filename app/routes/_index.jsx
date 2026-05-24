@@ -18,8 +18,8 @@ export const meta = () => {
     {property: 'og:title', content: 'brinqueTEAndo | Brinquedos Educativos e Sensoriais'},
     {property: 'og:description', content: 'Loja especializada em brinquedos para Autismo e TDAH. Desenvolvimento com diversão.'},
     {property: 'og:type', content: 'website'},
-    {property: 'og:url', content: 'https://brinqueteaando.online'},
-    {property: 'og:image', content: 'https://brinqueteaando.online/logo.svg'},
+    {property: 'og:url', content: 'https://brinqueteando.online'},
+    {property: 'og:image', content: 'https://brinqueteando.online/og-image.webp'},
     {property: 'og:image:width', content: '1200'},
     {property: 'og:image:height', content: '630'},
     {property: 'og:site_name', content: 'brinqueTEAndo'},
@@ -27,16 +27,16 @@ export const meta = () => {
     {name: 'twitter:card', content: 'summary_large_image'},
     {name: 'twitter:title', content: 'brinqueTEAndo | Brinquedos Educativos e Sensoriais'},
     {name: 'twitter:description', content: 'Brinquedos selecionados para desenvolvimento de crianças com TEA e TDAH.'},
-    {name: 'twitter:image', content: 'https://brinqueteaando.online/logo.svg'},
+    {name: 'twitter:image', content: 'https://brinqueteando.online/og-image.webp'},
     {name: 'robots', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'},
     {name: 'googlebot', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'},
     {name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=5'},
     {name: 'mobile-web-app-capable', content: 'yes'},
     {name: 'apple-mobile-web-app-capable', content: 'yes'},
     {name: 'theme-color', content: '#87CEEB'},
-    {tagName: 'link', rel: 'canonical', href: 'https://brinqueteaando.online'},
-    {tagName: 'link', rel: 'alternate', hreflang: 'pt-br', href: 'https://brinqueteaando.online'},
-    {tagName: 'link', rel: 'alternate', hreflang: 'x-default', href: 'https://brinqueteaando.online'},
+    {tagName: 'link', rel: 'canonical', href: 'https://brinqueteando.online'},
+    {tagName: 'link', rel: 'alternate', hreflang: 'pt-br', href: 'https://brinqueteando.online'},
+    {tagName: 'link', rel: 'alternate', hreflang: 'x-default', href: 'https://brinqueteando.online'},
     {tagName: 'link', rel: 'preconnect', href: 'https://cdn.shopify.com'},
     {tagName: 'link', rel: 'dns-prefetch', href: 'https://cdn.shopify.com'},
     {tagName: 'link', rel: 'preload', as: 'video', href: 'https://cdn.shopify.com/videos/c/o/v/9788927ebacf4e3ca19449cafd11fc55.mp4'},
@@ -123,8 +123,8 @@ export default function Homepage() {
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "brinqueTEAndo",
-      "url": "https://brinqueteaando.online",
-      "logo": "https://brinqueteaando.online/logo.svg",
+      "url": "https://brinqueteando.online",
+      "logo": "https://brinqueteando.online/og-image.webp",
       "description": "Loja especializada em brinquedos sensoriais e educativos para crianças com Autismo e TDAH.",
       "contactPoint": { "@type": "ContactPoint", "telephone": "+55-13-99189-9708", "contactType": "Customer Service", "areaServed": ["BR"], "availableLanguage": ["Portuguese"] }
     },
@@ -132,8 +132,8 @@ export default function Homepage() {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "brinqueTEAndo",
-      "url": "https://brinqueteaando.online",
-      "potentialAction": { "@type": "SearchAction", "target": "https://brinqueteaando.online/search?q={search_term_string}", "query-input": "required name=search_term_string" }
+      "url": "https://brinqueteando.online",
+      "potentialAction": { "@type": "SearchAction", "target": "https://brinqueteando.online/search?q={search_term_string}", "query-input": "required name=search_term_string" }
     }
   ];
 
