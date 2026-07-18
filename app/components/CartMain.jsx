@@ -35,7 +35,9 @@ export function CartMain({cart, layout}) {
 
   // ✅ FIX CORRIGIDO: Extrai linhas diretamente de lines (array)
   // O Hydrogen retorna lines como Array<CartLine>, não como {nodes: [...]}
-  const lines = Array.isArray(safeCart.lines) ? safeCart.lines : [];
+  const lines = Array.isArray(safeCart.lines?.nodes)
+    ? safeCart.lines.nodes
+    : (Array.isArray(safeCart.lines) ? safeCart.lines : []);
 
   // Fallback: tenta merchandiseLines se lines estiver vazio
   const finalLines = lines.length > 0 ? lines : (safeCart.merchandiseLines || []);
