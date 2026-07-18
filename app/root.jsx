@@ -12,6 +12,7 @@ import {
 } from 'react-router';
 import {useEffect} from 'react';
 import {ShopifyProvider} from '@shopify/hydrogen-react';
+import {useNonce} from '@shopify/hydrogen';
 import {AsideProvider, Aside} from '~/components/Aside';
 import styles from './styles/app.css?url';
 
@@ -43,6 +44,7 @@ export async function loader({context}) {
 export default function App() {
   const data = useLoaderData();
   const revalidator = useRevalidator();
+  const nonce = useNonce();
     
   // Expõe revalidator globalmente para AddToCartButton
   useEffect(() => {
@@ -81,13 +83,14 @@ export default function App() {
         </AsideProvider>
                 
         <ScrollRestoration />
-        <Scripts />
+        <Scripts nonce={nonce} />
       </body>
     </html>
   );
 }
 
 export function ErrorBoundary() {
+  const nonce = useNonce();
   const error = useRouteError();
   let errorMessage = 'Erro desconhecido';
   let errorStatus = 500;
@@ -124,7 +127,7 @@ export function ErrorBoundary() {
             Voltar para a Loja
           </a>
         </div>
-        <Scripts />
+        <Scripts nonce={nonce} />
       </body>
     </html>
   );
