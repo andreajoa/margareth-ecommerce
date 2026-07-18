@@ -38,7 +38,8 @@ export async function createHydrogenRouterContext(
     storefront: hydrogenContext.storefront,
     getCartId: cartGetIdDefault(request.headers),
     setCartId: cartSetIdDefault(),
-    cartFragment: CART_FRAGMENT,
+    cartQueryFragment: CART_FRAGMENT,
+    cartMutateFragment: CART_FRAGMENT,
   });
 
   const loadContext = {
