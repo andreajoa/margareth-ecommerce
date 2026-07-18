@@ -1,7 +1,7 @@
 import {QuickView} from "~/components/QuickView";
 import {useLoaderData, Link} from 'react-router';
 import {useState, useEffect} from 'react';
-import {Image, Money} from '@shopify/hydrogen';
+import {Image, Money, useNonce} from '@shopify/hydrogen';
 import {useAside} from '~/components/Aside'; // Adicionado para abrir carrinho
 import {useCountdown} from '~/lib/useCountdown'; // ✅ FIX: Importar hook otimizado
 
@@ -98,6 +98,7 @@ export async function loader({context}) {
 
 export default function Homepage() {
   const {collections, products, footerMenu, cart} = useLoaderData();
+  const nonce = useNonce();
   const [currentPromo, setCurrentPromo] = useState(0);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [quickViewProduct, setQuickViewProduct] = useState(null);
@@ -197,7 +198,7 @@ export default function Homepage() {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(schemaOrgJSON)}} />
+      <script type="application/ld+json" nonce={nonce} dangerouslySetInnerHTML={{__html: JSON.stringify(schemaOrgJSON)}} />
       
       <style>{`
         header { display: none !important; }
