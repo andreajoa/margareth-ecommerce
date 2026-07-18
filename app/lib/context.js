@@ -6,7 +6,7 @@ import {
 } from '@shopify/hydrogen';
 import {RouterContextProvider} from 'react-router';
 import {AppSession} from './session';
-import {CART_FRAGMENT} from './queries';
+import {CART_QUERY_FRAGMENT, CART_MUTATE_FRAGMENT} from './queries';
 
 export async function createHydrogenRouterContext(
   request,
@@ -30,7 +30,7 @@ export async function createHydrogenRouterContext(
     waitUntil,
     session,
     cart: {
-      queryFragment: CART_FRAGMENT,
+      queryFragment: CART_QUERY_FRAGMENT,
     },
   });
 
@@ -38,8 +38,8 @@ export async function createHydrogenRouterContext(
     storefront: hydrogenContext.storefront,
     getCartId: cartGetIdDefault(request.headers),
     setCartId: cartSetIdDefault(),
-    cartQueryFragment: CART_FRAGMENT,
-    cartMutateFragment: CART_FRAGMENT,
+    cartQueryFragment: CART_QUERY_FRAGMENT,
+    cartMutateFragment: CART_MUTATE_FRAGMENT,
   });
 
   const loadContext = {

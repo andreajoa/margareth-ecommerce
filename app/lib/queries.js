@@ -1,8 +1,8 @@
 // GraphQL Queries for Shopify Storefront API
 
 // ✅ FIX: Fragment completo do Cart com linhas, imagens e preços
-export const CART_FRAGMENT = `
-  fragment CartFragment on Cart {
+export const CART_QUERY_FRAGMENT = `
+  fragment CartApiQuery on Cart {
     id
     checkoutUrl
     totalQuantity
@@ -108,6 +108,14 @@ export const CART_FRAGMENT = `
       key
       value
     }
+  }
+`;
+
+export const CART_MUTATE_FRAGMENT = `
+  fragment CartApiMutation on Cart {
+    id
+    checkoutUrl
+    totalQuantity
   }
 `;
 
