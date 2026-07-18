@@ -96,7 +96,6 @@ export const CART_QUERY_FRAGMENT = `
     buyerIdentity {
       email
       phone
-      country
       countryCode
     }
     discountCodes {
@@ -206,7 +205,6 @@ export const CART_MUTATE_FRAGMENT = `
     buyerIdentity {
       email
       phone
-      country
       countryCode
     }
     discountCodes {
