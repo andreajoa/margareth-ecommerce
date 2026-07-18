@@ -39,17 +39,17 @@ export function Aside({ cart }) {
       onClick={close}
     >
       <div
-        className="absolute right-0 top-0 h-full w-full max-w-md bg-[#FEFDF8] shadow-2xl flex flex-col"
+        className="absolute right-0 top-0 h-full w-full max-w-md bg-[#FFFFFF] shadow-2xl flex flex-col"
         onClick={(e) => e.stopPropagation()}
-        style={{borderLeft: '4px solid #D4AF69'}}
+        style={{borderLeft: '4px solid #FB8A38'}}
       >
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#D4AF69] bg-[#E9E2D2] flex-shrink-0">
-          <h2 className="text-xl font-black text-[#0A3D2F] tracking-wide uppercase">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#FB8A38] bg-[#EAF3FB] flex-shrink-0">
+          <h2 className="text-xl font-black text-[#3A8ECD] tracking-wide uppercase">
             {type === 'cart' ? 'Seu Carrinho' : 'Menu'}
           </h2>
           <button
             onClick={close}
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-[#0A3D2F] shadow hover:scale-110 transition-transform cursor-pointer border-none"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-[#3A8ECD] shadow hover:scale-110 transition-transform cursor-pointer border-none"
             aria-label="Fechar"
           >
             ✕

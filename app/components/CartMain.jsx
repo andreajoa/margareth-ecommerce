@@ -45,7 +45,7 @@ export function CartMain({cart, layout}) {
   console.log('🛒 Linhas extraídas:', finalLines, 'Has items:', hasItems);
 
   return (
-    <div style={{height: '100%', display: 'flex', flexDirection: 'column', background: '#FEFDF8'}}>
+    <div style={{height: '100%', display: 'flex', flexDirection: 'column', background: '#FFFFFF'}}>
       {!hasItems ? (
         <CartEmpty />
       ) : (
@@ -62,8 +62,8 @@ export function CartMain({cart, layout}) {
           {/* CHECKOUT E RESUMO */}
           <div style={{
             flexShrink: 0,
-            borderTop: '4px solid #D4AF69',
-            background: '#E9E2D2',
+            borderTop: '4px solid #FB8A38',
+            background: '#EAF3FB',
             padding: '1.5rem',
             boxShadow: '0 -4px 20px rgba(0,0,0,0.1)'
           }}>
@@ -88,7 +88,7 @@ function CartEmpty() {
       textAlign: 'center'
     }}>
       <div style={{fontSize: '4rem', marginBottom: '1rem'}}>🛒</div>
-      <h3 style={{fontSize: '1.5rem', fontWeight: '800', color: '#0A3D2F', marginBottom: '0.5rem'}}>
+      <h3 style={{fontSize: '1.5rem', fontWeight: '800', color: '#3A8ECD', marginBottom: '0.5rem'}}>
         Seu carrinho está vazio
       </h3>
       <p style={{color: '#6b7280', marginBottom: '2rem'}}>
@@ -98,7 +98,7 @@ function CartEmpty() {
         to="/collections/all"
         onClick={close}
         style={{
-          background: '#0A3D2F',
+          background: '#3A8ECD',
           color: 'white',
           padding: '0.8rem 2rem',
           borderRadius: '50px',

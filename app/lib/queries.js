@@ -9,8 +9,7 @@ export const CART_FRAGMENT = `
     createdAt
     updatedAt
     lines(first: 100) {
-      edges {
-        node {
+      nodes {
           id
           quantity
           merchandise {
@@ -78,7 +77,6 @@ export const CART_FRAGMENT = `
               currencyCode
             }
           }
-        }
       }
     }
     cost {

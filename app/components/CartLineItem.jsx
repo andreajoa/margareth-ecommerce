@@ -35,11 +35,11 @@ export function CartLineItem({line}) {
           <Link 
             to={`/products/${product.handle}`}
             onClick={close}
-            style={{fontSize: '0.9rem', fontWeight: 'bold', color: '#0A3D2F', textDecoration: 'none', lineHeight: '1.3', flex: 1, marginRight: '0.5rem'}}
+            style={{fontSize: '0.9rem', fontWeight: 'bold', color: '#3A8ECD', textDecoration: 'none', lineHeight: '1.3', flex: 1, marginRight: '0.5rem'}}
           >
             {product.title}
           </Link>
-          <div style={{fontSize: '0.9rem', fontWeight: 'bold', color: '#0A3D2F'}}>
+          <div style={{fontSize: '0.9rem', fontWeight: 'bold', color: '#3A8ECD'}}>
             <Money data={line.cost.totalAmount} />
           </div>
         </div>
@@ -57,11 +57,11 @@ export function CartLineItem({line}) {
         <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 'auto', paddingTop: '0.5rem'}}>
           <div style={{display: 'flex', alignItems: 'center', border: '1px solid #d1d5db', borderRadius: '4px', background: 'white'}}>
             <CartForm route="/cart" action={CartForm.ACTIONS.LinesUpdate} inputs={{lines: [{id, quantity: quantity - 1}]}}>
-              <button disabled={quantity <= 1} style={{padding: '0 10px', height: '30px', border: 'none', background: 'transparent', cursor: quantity <= 1 ? 'default' : 'pointer', color: '#0A3D2F', fontSize: '1.2rem', lineHeight: 1}}>-</button>
+              <button disabled={quantity <= 1} style={{padding: '0 10px', height: '30px', border: 'none', background: 'transparent', cursor: quantity <= 1 ? 'default' : 'pointer', color: '#3A8ECD', fontSize: '1.2rem', lineHeight: 1}}>-</button>
             </CartForm>
             <span style={{fontSize: '0.9rem', padding: '0 4px', fontWeight: '600', minWidth: '20px', textAlign: 'center'}}>{quantity}</span>
             <CartForm route="/cart" action={CartForm.ACTIONS.LinesUpdate} inputs={{lines: [{id, quantity: quantity + 1}]}}>
-              <button style={{padding: '0 10px', height: '30px', border: 'none', background: 'transparent', cursor: 'pointer', color: '#0A3D2F', fontSize: '1rem'}}>+</button>
+              <button style={{padding: '0 10px', height: '30px', border: 'none', background: 'transparent', cursor: 'pointer', color: '#3A8ECD', fontSize: '1rem'}}>+</button>
             </CartForm>
           </div>
 
